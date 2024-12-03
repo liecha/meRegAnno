@@ -1,0 +1,2521 @@
+livsmedel,calorie,protein,carb,fat
+Nöt talg,656.0,7.0,0.0,71.0
+Gris späck,763.0,2.8,0.0,85.0
+Gris ister,884.0,0.0,0.0,100.0
+Kokosfett,884.0,0.0,0.0,100.0
+Matfettsblandning havssaltat fett 80% berikad typ Bregott,712.0,0.5,0.5,80.0
+Matfettsblandning fett 60% berikad typ Bregott mellan,534.0,0.4,0.5,60.0
+Flytande margarin fett 82% berikad typ Milda culinesse,725.0,0.0,0.0,82.0
+Hushållsmargarin fett 80% berikad typ Melba,710.0,0.1,0.4,80.0
+Hushållsmargarin fett 80% berikad typ Milda,712.0,0.5,0.5,80.0
+Lättmargarin fett 38% berikad typ Becel,348.0,0.0,3.0,38.0
+Lättmargarin fett 40% berikad typ Lätt & lagom,381.0,0.5,6.2,40.0
+Majonnäs fett 90% hemlagad,782.0,1.5,0.4,87.6
+Sesamsås m. grädde,361.0,2.3,3.9,37.8
+Gravlaxsås hovmästarsås hemlagad,438.0,2.1,13.3,42.4
+Gravlaxsås kylvara,555.0,1.6,13.1,56.0
+Remouladsås,706.0,1.4,1.1,78.6
+Dressing vinägrett fett 45%,407.0,0.7,3.1,44.2
+Smör fett 80%,729.0,0.4,0.5,82.0
+Smör extrasaltat fett 80%,728.0,0.6,0.5,81.8
+Smör osaltat fett 80%,728.0,0.6,0.5,81.8
+Druvkärnolja,884.0,0.0,0.0,100.0
+Majsolja,884.0,0.0,0.0,100.0
+Olivolja,884.0,0.0,0.0,100.0
+Tistelolja,884.0,0.0,0.0,100.0
+Sesamolja,884.0,0.0,0.0,100.0
+Sojaolja,884.0,0.0,0.0,100.0
+Solrosolja,884.0,0.0,0.0,100.0
+Vetegroddsolja,884.0,0.0,0.0,100.0
+Dressing konserv. fett ca 25%,262.0,0.5,9.7,25.0
+Dressing till sallad m. majonnäs fett ca 25% kylvara,303.0,0.5,19.7,25.0
+Dressing fett 0%,60.0,1.6,13.1,0.0
+Majonnäs fett 80%,666.0,1.3,5.0,72.4
+Gurkmajonnäs gurksallad gatukök,333.0,0.8,10.9,32.0
+Räkmajonnäs räksallad gatukök,457.0,5.2,2.9,48.0
+Majonnäs lätt fett 30%,323.0,1.5,10.7,30.9
+Mimosasallad,147.0,0.8,9.1,11.7
+Rödbetssallad m. gräddfil hemlagad,66.0,1.2,9.9,2.0
+Sallad m. skaldjur majonnäsdressing,110.0,5.8,2.4,8.5
+Bearnaisesås hemlagad,509.0,2.6,1.2,55.9
+Hollandaisesås hemlagad,500.0,3.0,0.7,54.8
+Rhode Islandsås hemlagad,358.0,2.0,6.4,36.6
+Dressing vinägrett fett 65%,586.0,0.6,2.2,65.0
+Bearnaisesås tillagad frysvara el. pulver,224.0,2.6,6.7,21.0
+Hollandaisesås tillagad frysvara el. pulver,232.0,2.6,6.6,22.0
+Mesost fett ca 30%,460.0,11.0,39.0,29.0
+Messmör fett 5% berikad,260.0,7.0,46.0,5.0
+Messmör fett 2% berikad,245.0,7.0,49.0,2.0
+Färskost cottage cheese naturell fett 4%,100.0,13.4,1.9,4.3
+Färskost cottage cheese m. frukt fett 3%,105.0,10.3,9.1,2.8
+"Färskost cottage cheese m. grönsaker fett 3,5-5%",94.0,12.2,0.9,4.2
+Färskost m. filmjölk fett ca 8%,119.0,8.0,2.9,8.4
+Färskost m. filmjölk gräddfil fett ca 14% hemlagad,178.0,9.7,3.1,14.2
+Kvarg färskost fett 1%,75.0,12.7,3.6,1.0
+Kvarg färskost fett 10%,152.0,12.7,2.9,10.0
+Ost hårdost fett 10%,226.0,32.4,1.5,10.0
+Ost hårdost fett 23%,325.0,29.2,0.8,23.0
+Ost hårdost fett 26%,337.0,24.9,1.4,26.0
+Ost hårdost fett 38%,421.0,19.8,1.2,38.0
+Vitmögelost camembert fett 23%,286.0,21.5,0.0,22.5
+Ädelost grönmögelost fett 30%,363.0,21.5,1.5,30.5
+Mjukost smältost fett 8%,158.0,18.1,3.5,8.0
+Mjukost smältost fett 10%,173.0,15.2,5.4,10.1
+Mjukost smältost fett ca 20%,253.0,10.3,6.7,20.8
+Mjukost smältost fett ca 16%,208.0,16.0,1.5,15.5
+Mjukost smältost fett 4%,117.0,14.3,5.7,4.0
+Vitmögelost brie fett 34%,378.0,17.0,2.1,34.0
+Ädelost grönmögelost fett 17%,315.0,31.4,0.9,20.8
+Salladsost fett 22%,272.0,16.7,2.1,22.1
+Ost hårdost fett 17%,280.0,30.3,1.5,17.0
+Ost hårdost fett 28%,358.0,26.2,3.0,27.1
+Ost hårdost fett 31%,392.0,25.2,3.3,31.2
+Vitmögelost brie fett 30%,348.0,17.0,2.8,30.2
+Ost halloumi rå fett 22%,292.0,22.3,1.9,21.9
+Färskost fett 33%,343.0,10.2,2.4,33.0
+Ädelost grönmögelost fett 43%,429.0,9.6,2.5,43.0
+Ost hårdost parmesan fett 30%,410.0,36.2,0.0,29.7
+Färskost m. vitlök fett 35%,340.0,4.0,3.5,35.0
+Vitmögelost camembert fett 11%,185.0,21.4,0.2,11.0
+Mjukost smältost fett ca 22%,273.0,10.3,8.2,22.4
+Färskost cream cheese fett 27%,276.0,6.1,2.4,27.3
+Färskost cream cheese lätt fett 15%,187.0,7.8,3.4,16.0
+Färskost cream cheese extra light fett 5%,116.0,12.2,4.7,5.3
+Vitmögelost camembert friterad,324.0,17.6,14.9,21.4
+Vitmögelost getost chèvre fett 25%,345.0,20.6,1.4,29.0
+Bröstmjölk humanmjölk,68.0,1.3,8.7,3.1
+Filmjölk fett 3% berikad,57.0,3.3,4.6,2.8
+Kondenserad mjölk konserv. fett ca 8%,136.0,6.8,10.0,7.6
+Kondenserad mjölk konserv. konc. m. socker fett ca 9%,334.0,8.9,55.4,8.2
+Mjölkpulver fett 1%,365.0,36.2,52.0,0.8
+Filmjölk långfil fett 3% berikad,60.0,3.4,4.8,3.0
+"Lättfil fett 0,5% berikad",39.0,3.5,5.0,0.5
+Milkshake choklad jordgubb,84.0,2.0,10.9,3.6
+Mjölk fett 3% berikad,60.0,3.5,4.7,3.0
+Yoghurt naturell fett 3% berikad,56.0,3.4,4.5,2.7
+"Fruktyoghurt fett 2,5%",97.0,3.3,15.0,2.5
+"Fruktyoghurt lätt fett 0,5% berikad",76.0,3.0,14.3,0.5
+"Mjölk fett 4,2% typ lantmjölk",70.0,3.4,4.8,4.2
+Filmjölk A-fil fett 3% berikad,60.0,3.4,4.8,3.0
+"Mellanfil fett 1,5% berikad",48.0,3.5,5.0,1.5
+"Mjölkdryck jordgubb fett 1,5% berikad",50.0,3.3,5.2,1.7
+"Yoghurt naturell lätt fett 0,5% berikad",42.0,3.9,5.5,0.5
+Fruktyoghurt fett 2%,93.0,3.3,15.0,2.0
+Fruktyoghurt delikatessyoghurt fett 7%,129.0,2.5,14.0,7.0
+"Fruktyoghurt lätt fett<0,05% berikad",52.0,3.8,8.8,0.0
+Fruktyoghurt fett 5%,127.0,5.6,14.6,5.1
+"Fruktyoghurt fett 1,3% berikad",93.0,7.0,13.0,1.4
+Kefir fett 3% berikad,60.0,3.4,4.8,3.0
+"Yoghurt mild vanilj lätt fett 0,5% berikad",61.0,4.1,9.9,0.5
+"Mellanmjölk fett 1,5% berikad",47.0,3.6,4.8,1.5
+"Lättmjölk fett 0,5% berikad",39.0,3.6,4.8,0.5
+Vassle flytande,25.0,0.8,5.1,0.1
+Filbunke m. grädde,66.0,3.6,4.8,3.6
+Varm choklad m. mjölk fett 3%,85.0,3.8,10.4,3.1
+"Varm choklad m. mjölk fett 1,5%",72.0,3.9,10.5,1.7
+"Varm choklad m. mjölk fett 0,5%",65.0,3.9,10.5,0.7
+Smoothie m. yoghurt bär banan juice,57.0,2.7,8.5,1.1
+"Hårt bröd fullkorn råg fibrer 15,5% typ Husman",354.0,10.0,64.4,2.5
+Hårt bröd fullkorn råg fibrer ca 18% typ Ryvita mörkt,349.0,14.6,57.6,2.5
+"Hårt bröd fullkorn vete m. vallmofrö fibrer 5,5%",398.0,11.1,68.9,7.1
+"Hårt bröd fullkorn råg fibrer 14,5% typ Vika",345.0,9.6,63.3,2.4
+Hårt bröd fullkorn råg fibrer 16% typ Finn crisp,348.0,11.1,62.8,2.0
+Hårt bröd fullkorn råg fibrer ca 15% typ flatbröd,362.0,9.5,68.0,2.0
+Hårt bröd glutenfritt fibrer ca 7%,346.0,6.3,71.1,2.0
+Hårt bröd fullkorn råg fibrer ca 13%,353.0,9.3,65.7,2.6
+Hårt bröd fullkorn råg kli fibrer ca 15%,349.0,9.5,63.9,2.5
+Hårt bröd fullkorn råg fibrer ca 14% typ rutknäcke,356.0,10.0,65.3,2.6
+"Hårt bröd fullkorn råg fibrer 15,5% typ brungräddat",350.0,10.0,63.5,2.4
+Hårt bröd fullkorn råg fibrer ca 16% typ sport,341.0,10.0,62.1,1.9
+Hårt bröd fullkorn råg m. sesamfrö vetekli vetegroddar fibrer 24%,355.0,13.0,45.3,8.2
+"Hårt bröd fullkorn råg fibrer 15,5% typ delikatess",351.0,10.0,64.7,2.0
+Hårt bröd fullkorn havre vete råg m. mjölk fibrer 8%,379.0,13.0,61.7,6.8
+Hårt bröd vete m. vallmofrö fibrer 6% typ frukost,406.0,11.0,67.7,8.5
+Hårt bröd vete m. socker kanel fibrer ca 7%,398.0,10.0,67.7,7.8
+Hårt bröd glutenfritt fibrer ca 3%,385.0,10.0,69.1,6.5
+"Hårt bröd fullkorn vete havre kli m. socker örtkryddor fibrer 10,5%",390.0,12.0,60.9,8.4
+Bröd fullkorn korn fibrer 3%,239.0,6.4,40.2,5.0
+Bröd vitt fullkorn graham typ scones,285.0,6.3,38.1,10.8
+Bröd fullkorn råg fibrer ca 10% typ pumpernickel,221.0,5.4,40.8,1.6
+Ströbröd malt hårt bröd fullkorn vete råg socker fibrer ca 5%,402.0,10.3,65.6,8.6
+Hårt bröd fullkorn råg fibrer ca 14% typ normalgräddat,349.0,9.1,66.0,2.0
+Hårt bröd fullkorn råg vete majs m. surdeg fibrer 15% typ spisbröd,335.0,8.3,63.4,1.8
+"Bröd vitt vete vatten fibrer ca 3,5% typ pitabröd",274.0,8.6,53.6,1.6
+Korvbröd,285.0,8.1,51.2,4.1
+Hårt bröd fullkorn råg fibrer ca 14% typ brungräddat,354.0,9.1,65.5,2.6
+"Bröd vitt osötat fibrer ca 2,5% typ italienskt",256.0,8.6,50.2,1.4
+"Bröd vitt vete fibrer ca 2,5% typ baguette",270.0,8.5,53.2,1.7
+"Bröd vitt fullkorn surdeg fibrer 4,4% bakad i butik typ grov baguette",260.0,7.6,51.7,1.2
+"Bröd vitt fibrer 3,5%",284.0,8.0,46.0,6.4
+Bröd vitt mjölk fibrer ca 3% typ Hönökaka,293.0,7.4,56.7,3.1
+Bröd vitt vete typ scones,287.0,6.5,38.1,11.1
+Bröd vitt vete ojäst fibrer 3% typ chapati,257.0,5.6,44.3,5.3
+Bröd fullkorn rågsikt fibrer ca 7% typ kavring,270.0,5.5,47.3,4.7
+"Bröd osötat rågsikt fibrer ca 3,5%",261.0,8.4,47.3,3.2
+Bröd rågsikt fibrer ca 4%,266.0,7.1,51.4,2.3
+Bröd fullkorn graham m. mjölk fibrer ca 5%,279.0,8.9,46.1,5.2
+Bröd fullkorn råg typ rallarhalvor,246.0,5.9,46.1,2.1
+Bröd fullkorn råg osötat fibrer ca 5%,239.0,7.1,46.1,1.6
+Hårt bröd tunnbröd fullkorn vete råg korn havre,353.0,10.1,68.9,2.5
+Bröd vitt mjukt m. mjölk fibrer ca 4% typ tunnbröd,280.0,8.0,52.4,3.1
+Bröd fullkorn råg m. potatis fibrer ca 5% ,258.0,5.7,52.4,1.4
+Bröd vitt vatten fibrer ca 3% typ ostfralla,274.0,11.5,47.2,3.4
+Riskaka fullkorn solrosfrön majs fett 4% ,394.0,7.9,77.4,4.4
+Riskaka fullkorn smaksatt fett 18% ,461.0,7.0,65.8,18.1
+Bröd vitt glutenfritt,238.0,1.8,47.3,3.6
+Bröd mörkt glutenfritt,269.0,2.6,46.2,6.8
+Bröd vitt typ croissant fransk giffel,363.0,5.1,36.5,21.6
+Potatis höst rå,81.0,1.8,16.8,0.1
+Potatis höst kokt m. salt,85.0,1.9,17.8,0.1
+Potatis m. skal bakad u. salt,91.0,1.7,19.4,0.1
+Potatis m. skal bakad u. salt i aluminiumfolie ,89.0,1.5,18.1,0.6
+Potatis tärnad frysvara,81.0,1.7,17.3,0.1
+Potatis konserv. u. lag,60.0,1.3,12.2,0.1
+Klyftpotatis u. skal ugnsstekt m. rapsolja,120.0,2.2,23.1,1.6
+Potatis råstekt,141.0,2.2,20.7,4.7
+Potatis kokt stekt m. salt,145.0,2.3,21.8,4.7
+Pommes frites friterad potatis värmd i ugn fett ca 7% frysvara,216.0,3.2,32.0,7.6
+Pommes frites friterad potatis fett ca 11% frysvara,243.0,3.0,30.6,11.4
+Pommes frites friterad potatis fett ca 17% tillagad på restaurang,352.0,3.7,43.4,17.5
+Kroppkakor el. potatispalt m. fläsk,169.0,5.7,22.8,5.7
+Sjömansbiff hemlagad,90.0,6.8,9.2,2.6
+Lapskojs,110.0,4.9,12.5,4.1
+Pitepalt,180.0,4.8,25.1,6.0
+Bakad potatis m. kycklingcurryröra sallad,156.0,3.3,7.1,12.2
+Pytt i panna tillagad frysvara,196.0,4.5,23.3,8.8
+Sjömansbiff frysvara,84.0,6.7,8.6,2.3
+Janssons frestelse,161.0,3.6,14.2,9.6
+Laxpudding,111.0,8.2,9.5,4.1
+Sillpudding,125.0,7.6,9.1,6.2
+Bakad potatis m. skagenröra sallad,159.0,3.1,11.2,10.8
+Potatissallad m. gräddfil majonnäs,155.0,1.9,14.2,9.7
+Potatissoppa m. purjolök,49.0,1.0,6.6,1.8
+Pytt i panna m. rotfrukt svamp veg.,82.0,1.8,10.0,3.1
+Potatissallad m. vinägrettsås,112.0,1.8,14.5,4.8
+Potatismospulver berikad,362.0,8.2,68.2,4.3
+Potatispalt,141.0,4.8,23.8,1.7
+Potatis råstuvad hemlagad,78.0,2.2,14.0,1.2
+Potatisgratäng m. mjölk kaffegrädde ost hemlagad,139.0,5.7,15.0,5.9
+Raggmunk potatisplätt potatispannkaka hemlagad,149.0,4.2,20.0,5.5
+Potatis stuvad,95.0,2.7,14.4,2.5
+Potatisbullar stekta,167.0,4.0,22.1,6.3
+Potatismos hemlagad,89.0,2.3,14.1,2.3
+Potatisgratäng m. mjölk ost hemlagad,106.0,5.0,13.5,3.1
+Potatisgratäng m. vispgrädde ost,214.0,4.5,12.9,15.9
+Potatismos m. lättmjölk,86.0,2.3,14.1,1.9
+Potatisgratäng m. lättmjölk ost mager hemlagad,96.0,5.4,13.5,1.8
+Bakad potatis m. färskoströra paprika veg.,93.0,4.0,15.8,0.9
+Schweizisk potatiskaka rösti värmd frysvara,214.0,2.4,23.4,11.4
+Potatiskrokett värmd frysvara,177.0,2.8,23.9,7.0
+Potatismos pulver tillagat berikad,66.0,1.5,12.5,0.8
+Potatisgratäng m. grädde ost värmd frysvara,158.0,4.6,13.2,9.4
+Grönsaksblandning m. morot palsternacka purjolök rotselleri frysvara,36.0,1.2,5.3,0.5
+Jordärtskocka,67.0,1.9,12.8,0.4
+Kålrot,37.0,1.4,6.1,0.1
+Morot,36.0,0.7,6.6,0.2
+Palsternacka,71.0,1.7,12.6,0.6
+Pepparrot,70.0,3.1,9.5,0.3
+Rotselleri,32.0,1.0,4.4,0.5
+Rädisa,11.0,0.7,0.7,0.4
+Rödbeta,51.0,1.2,9.8,0.1
+Rättika,18.0,1.0,2.5,0.1
+Rotpersilja,61.0,2.3,10.7,0.6
+Majrova,35.0,1.1,6.0,0.3
+Svartrot,75.0,1.4,14.2,0.4
+Morot konserv. m. lag,23.0,0.6,3.9,0.2
+Morot konserv. u. lag,23.0,0.6,4.0,0.2
+Morotsjuice,34.0,0.7,6.3,0.4
+Rotmos hemlagad,52.0,1.0,8.2,1.3
+Jordärtskockssoppa veg. ,78.0,1.1,4.9,5.6
+Morot kokt m. salt,36.0,0.7,6.6,0.2
+Morot stuvad,82.0,1.9,7.1,4.9
+Morotssoppa veg. ,35.0,0.7,4.1,1.5
+Ärtsoppa m. morot veg. ,69.0,4.3,10.8,0.3
+Jordärtskocka kokt m. salt,67.0,1.9,12.7,0.4
+Rotfrukter stekta glacerade m. honung,94.0,1.3,10.4,4.7
+Grönsaksbiff rotfruktsbiff stekt veg.,115.0,6.1,5.1,7.5
+Rödbeta kokt u. salt,51.0,1.2,9.8,0.1
+Borsjtj rödbetssoppa,30.0,0.7,4.0,1.0
+Rödbeta inlagd u. lag,58.0,1.3,12.0,0.1
+Avokado,197.0,1.9,1.7,19.6
+Stjälkselleri,13.0,0.7,1.5,0.1
+Blomkål,24.0,1.9,2.6,0.2
+Blomkål frysvara,24.0,2.0,2.3,0.3
+Bondbönor färska kokta u. salt,102.0,9.0,9.7,1.0
+Broccoli,40.0,4.3,2.3,0.6
+Broccoli frysvara,24.0,2.4,1.8,0.3
+Brysselkål,44.0,3.4,4.7,0.3
+Brysselkål frysvara,41.0,3.8,3.4,0.4
+Mungbönsgroddar,34.0,3.0,3.2,0.4
+Sojabönsgroddar,146.0,13.1,7.0,6.7
+Gröna bönor,27.0,2.1,2.1,0.4
+Gröna bönor frysvara,35.0,2.2,4.5,0.2
+Champinjon,27.0,2.4,2.7,0.2
+Friséesallat,17.0,1.8,1.0,0.2
+Endivesallat,14.0,1.0,1.1,0.1
+Fänkål,28.0,2.8,1.8,0.4
+Grönkål,40.0,3.4,3.2,0.7
+Grönkål frysvara,30.0,2.7,2.3,0.5
+Gurka,13.0,0.8,2.3,0.0
+Isbergssallat,14.0,0.8,2.5,0.1
+Kronärtskocka,52.0,2.7,7.3,0.2
+Kålrabbi,29.0,1.7,4.4,0.1
+Lök gul,39.0,1.2,7.3,0.1
+Majskolv,125.0,3.9,22.1,1.6
+Majskolv frysvara,111.0,3.3,21.5,0.8
+Majskorn frysvara,99.0,3.0,15.6,1.5
+Mangold,21.0,1.8,2.6,0.2
+Nässlor förvällda,30.0,4.1,0.6,0.7
+Paprika grön,18.0,0.5,3.0,0.1
+Paprika röd,22.0,0.5,4.1,0.2
+Persilja blad,35.0,2.2,4.4,0.3
+Pumpa,26.0,1.0,4.4,0.1
+Purjolök,30.0,1.6,4.1,0.2
+Rödkål,31.0,1.1,4.7,0.3
+Savojkål,28.0,2.0,3.6,0.1
+Salladskål,21.0,1.3,2.7,0.1
+Sockerärtor,37.0,3.4,4.3,0.2
+Spenat frysvara,20.0,2.2,0.5,0.6
+Squash,14.0,0.0,2.5,0.1
+Tomat,18.0,0.8,2.6,0.1
+Tomat torkad m. olja,190.0,5.0,8.7,12.5
+Trädgårdskrasse,37.0,2.6,4.3,0.7
+Vattenkrasse,15.0,1.9,0.5,0.3
+Vaxbönor,32.0,1.8,4.7,0.1
+Vaxbönor frysvara,29.0,1.8,3.8,0.1
+Vitkål,30.0,1.1,4.7,0.1
+Vitlök,160.0,6.4,31.1,0.5
+Aubergine,19.0,1.1,2.2,0.1
+Gröna ärtor frysvara,69.0,5.2,8.9,0.4
+Alfalfagroddar,32.0,4.0,0.9,0.7
+Dill färsk,58.0,3.7,7.4,0.8
+Gräslök,28.0,2.8,1.7,0.6
+Basilika färsk,25.0,2.5,0.4,0.6
+Chilipeppar färsk,47.0,2.0,9.2,0.2
+Paprika gul,24.0,0.5,4.3,0.2
+Paprika grön röd frysvara,26.0,1.0,3.0,0.4
+Champinjon skivad frysvara,19.0,2.0,0.8,0.4
+Linsgroddar,125.0,9.0,19.1,0.6
+Lök gul frysvara,28.0,1.5,4.1,0.0
+Grönsaksblandning m. ärtor bönor majs morot typ amerikansk frysvara,68.0,3.3,11.1,0.5
+Grönsaksblandning m. ärtor bönor morot blomkål typ sommargrönsaker frysvara,38.0,2.4,4.5,0.5
+Grönsaksblandning m. ärtor morot frysvara,60.0,3.7,9.0,0.5
+Grönsaksblandning m. ärtor majs paprika frysvara,66.0,4.2,8.7,0.5
+Sallad m. grönsallat gurka tomat u. dressing,16.0,0.9,2.4,0.1
+Paprika grön gul röd,22.0,0.5,4.0,0.2
+Bambuskott konserv. u. lag,24.0,2.7,1.7,0.2
+Gröna bönor konserv. u. lag,21.0,1.2,3.0,0.1
+Champinjon konserv. m. lag,15.0,1.9,0.9,0.1
+Majskorn konserv. u. lag,80.0,2.1,12.9,1.5
+Oliver gröna m. paprikafyllning avrunna,128.0,0.6,1.1,13.1
+Oliver svarta m. olja avrunna,142.0,0.8,1.8,14.1
+Grönsaksblandning el. pickels sockrad inlagd u. lag,116.0,1.5,26.1,0.1
+Sparris vit konserv. u. lag,15.0,0.9,0.5,0.7
+Sparrissoppa tillagad redd konserv. veg.,35.0,0.9,3.7,1.7
+Surkål konserv. m. lag,17.0,0.9,2.0,0.2
+Tomat hel konserv. m. lag,25.0,1.1,4.4,0.1
+Tomatjuice konserv. drickf.,18.0,0.8,2.7,0.1
+Tomatpuré konc. konserv.,84.0,4.4,13.5,0.2
+Vaxbönor konserv. u. lag,24.0,1.4,2.5,0.3
+Gröna ärtor konserv. m. lag,63.0,3.5,10.5,0.3
+Gröna ärtor konserv. u. lag,60.0,4.4,7.3,0.4
+Mungbönsgroddar konserv. u. lag,16.0,1.4,0.8,0.1
+Sojabönsgroddar konserv. u. lag,16.0,1.6,0.6,0.2
+Paprikasallad inlagd u. lag,31.0,1.0,4.3,0.4
+Ajvar relish,70.0,1.2,6.9,3.5
+Svamp konserv. u. lag,23.0,2.5,0.9,0.5
+Kantarell konserv. u. lag,36.0,1.4,4.8,0.7
+Syltlök inlagd,83.0,0.9,18.7,0.1
+Tomater gröna syltade,86.0,1.2,18.6,0.2
+Tomat krossad konserv. m. lag,22.0,0.8,3.7,0.2
+Fefferoni konserv. inlagd,19.0,0.7,1.7,0.1
+Wokgrönsaker Asiatiska wokade m. rapsolja,49.0,1.4,5.7,1.3
+Wokgrönsaker Classic wokade m. rapsolja,47.0,1.8,4.9,1.6
+Grönsaksblandning ärtor morot konserv. m. lag,41.0,2.2,6.1,0.3
+Grönsaksjuice konserv. el. pastöriserad drickf.,19.0,0.6,3.7,0.1
+Champinjon konserv. u. lag,18.0,2.4,0.3,0.3
+Pumpasallad m. paprika inlagd sockrad u. lag,64.0,0.9,13.5,0.2
+Grönsakssoppa klar veg. ,23.0,0.9,3.9,0.2
+Spenatsoppa veg. hemlagad,36.0,1.9,2.2,2.0
+Vitkål stuvad hemlagad,69.0,2.3,6.8,3.3
+Blomkål gratinerad,92.0,5.1,6.2,4.9
+Blomkål kokt m. salt,24.0,1.9,2.6,0.2
+Blomkål stuvad,60.0,2.8,5.5,2.7
+Gröna bönor stuvade,56.0,2.4,5.8,2.1
+Grönkålssoppa,32.0,1.2,2.1,1.9
+Grönsakssoppa redd ängamat veg. ,48.0,2.0,2.9,3.0
+Grönsaksbiff stekt veg.,117.0,4.7,10.3,5.4
+Grönsallat m. vinägrettsås,130.0,0.9,2.6,12.9
+Sallad m. grönsallat gurka tomat vinägrettsås,113.0,0.8,2.6,11.0
+Grönsallat m. gräddfilsås,175.0,1.7,4.1,17.1
+Sallad m. grönsallat gurka tomat gräddfilsås,159.0,1.5,3.9,15.3
+Sallad m. grönsallat gurka tomat paprika u. dressing,17.0,0.8,2.6,0.1
+Gurka inlagd m. lag hemlagad,42.0,0.7,9.5,0.0
+Lök stekt m. olja el. flytande margarin salt,53.0,1.4,8.2,1.2
+Löksås,115.0,1.1,10.7,7.4
+Lök gul kokt m. salt,39.0,1.2,7.3,0.1
+Nässelsoppa,38.0,1.3,1.7,2.7
+Paprika förvälld,28.0,0.6,5.0,0.2
+Purjolök kokt m. salt,30.0,1.6,4.1,0.1
+Rödkål tillagad,61.0,0.8,8.3,2.2
+Sparris stuvad,59.0,2.8,5.0,2.7
+Spenat fräst m. olja el. flytande margarin salt,28.0,2.8,0.6,1.0
+Spenat stuvad,54.0,2.5,2.3,3.6
+Champinjon stekt m. salt,45.0,3.0,3.4,1.5
+Champinjon stuvad,166.0,3.4,5.9,14.3
+Champinjonsås hemlagad,129.0,2.1,4.7,11.2
+Tomatsallad m. vinägrett,54.0,0.8,2.7,4.2
+Tomatsås italiensk,93.0,1.1,4.9,7.4
+Tomatsalsa kall,22.0,1.0,3.4,0.1
+Vitkålssoppa tillagad veg.,32.0,0.8,2.6,1.8
+Vitkål kokt m. salt,30.0,1.1,4.7,0.1
+Brunkål,48.0,1.3,7.0,1.0
+Vitkålssallad pizzasallad,88.0,0.9,4.1,7.2
+Vitkålssallad m. lingonsylt,61.0,0.9,12.8,0.1
+Aubergine kokt m. salt,24.0,1.4,2.8,0.1
+Aubergine stekt m. olja el. flytande margarin salt,74.0,1.3,2.6,6.0
+Ärtor morot kokta m. salt,52.0,2.9,7.7,0.3
+Ärtor morot stuvade,67.0,2.9,7.8,2.2
+Ärtpurésoppa gröna ärtor tillagad veg. ,50.0,1.4,3.1,2.9
+Gryta kikärtsgryta grönsaksgryta veg. ,61.0,2.4,6.6,1.9
+Gratäng m. grönsaker rotfrukter veg.,94.0,3.7,8.8,4.5
+Grönsakssoppa m. pasta tillagad pulver,30.0,0.9,4.2,0.8
+Löksoppa fransk tillagad pulver m. vatten,25.0,0.4,5.2,0.2
+Grönsakssoppa tillagad klar konserv.,15.0,0.6,2.3,0.1
+Grönsakssoppa tillagad redd pulver m. vatten mjölk,49.0,1.7,5.1,2.2
+Grönsakssoppa tillagad redd pulver,45.0,0.5,5.3,2.2
+Gurka inlagd,59.0,0.7,11.4,0.7
+Bostongurka,78.0,1.0,16.6,0.4
+Gurka fermenterad u. lag,9.0,1.0,1.0,0.0
+Saltgurka u. lag,15.0,0.9,1.4,0.2
+Ättiksgurka u. lag,43.0,0.9,8.2,0.3
+Kronärtskocka kokt,52.0,2.8,9.4,0.2
+Champinjonsoppa tillagad pulver m. vatten mjölk,56.0,1.6,6.5,2.6
+Champinjonsoppa tillagad redd m. mjölk konserv.,64.0,2.2,5.5,3.7
+Majskolv kokt,100.0,3.3,17.3,1.0
+Blomkålssoppa tillagad pulver m. vatten mjölk,51.0,1.6,5.9,2.2
+Tomatsoppa tillagad pulver m. vatten,32.0,1.0,4.6,0.8
+Tomatsoppa tillagad konserv. m. vatten mjölk,45.0,1.2,6.3,1.4
+Sparrissoppa tillagad pulver m. vatten mjölk veg.,50.0,1.4,5.9,2.3
+Rödkål konserv.,72.0,1.5,15.0,0.2
+Champinjonsås tillagad pulver m. mjölk smör,113.0,3.6,7.6,7.5
+Grönsaker blandade fermenterade,15.0,1.2,1.1,0.1
+Grönsaksjuice fermenterad,22.0,1.5,3.5,0.1
+Kåldolmar råa u. sås frysvara,88.0,5.0,5.2,5.0
+Vitkålssoppa m. fläskkorv hemlagad,47.0,2.2,1.6,3.4
+Minestronesoppa,50.0,2.0,5.3,2.1
+Vitkålssoppa m. frikadeller,60.0,3.1,2.8,3.9
+Gryta får i kål,54.0,6.6,2.1,1.8
+Kåldolmar stekta hemlagade,107.0,5.2,8.0,5.7
+Kålpudding,117.0,7.3,9.5,5.2
+Sallad Caesarsallad el. kycklingsallad m. dressing,301.0,12.3,9.5,23.8
+Moussaka ugnsstekt,117.0,6.8,4.7,7.7
+Wokgrönsaker m. nudlar kyckling,101.0,5.6,8.6,4.6
+Kycklingsallad m. ananas paprika vitlöksdressing,75.0,4.4,2.4,5.2
+Granatäpple,56.0,0.7,7.0,0.6
+Grapefrukt,43.0,0.9,8.3,0.5
+Guava,33.0,0.6,4.8,0.1
+Hallon,34.0,1.2,4.1,0.6
+Hallon m. socker frysvara,82.0,0.7,17.6,0.2
+Hjortron,48.0,1.5,5.1,1.1
+Jordgubbar,41.0,0.5,8.3,0.2
+Jordgubbar hela m. socker frysvara,86.0,0.5,19.7,0.1
+Gratäng broccoligratäng veg. ,100.0,6.2,3.4,6.5
+Sallad grekisk m. salladsost oliver,87.0,2.7,3.2,6.8
+Grönsakssufflé,118.0,7.2,6.6,6.7
+Gratäng grönsaksgratäng veg.,88.0,4.1,5.9,5.0
+Grekisk sallad m. fetaost,77.0,2.9,2.0,6.1
+Grönsaksbuljong pasta el. pulver storhushåll,238.0,14.9,24.6,8.8
+Agar torkad,165.0,0.2,2.6,0.3
+Svampprotein färs bitar filé kylvara el. frysvara,99.0,15.7,2.2,1.8
+Gratäng broccoligratäng m. skinka,95.0,9.2,3.6,4.5
+Wokgrönsaker m. nudlar veg.,81.0,1.7,8.1,4.1
+Pastej veg.,249.0,7.6,9.1,20.0
+Grönsaksbuljong ätf.,5.0,0.4,0.4,0.2
+Honungsmelon,33.0,0.5,7.0,0.1
+Nätmelon,37.0,0.9,7.1,0.3
+Rabarber tillagad u. socker,12.0,0.4,0.4,0.2
+Vattenmelon,34.0,0.6,7.5,0.0
+Ananas,52.0,0.5,11.5,0.1
+Apelsin,50.0,0.8,10.4,0.2
+Aprikos,51.0,1.4,9.3,0.4
+Banan,95.0,1.1,21.3,0.1
+Björnbär,43.0,1.1,7.5,0.2
+Blåbär,53.0,0.7,9.1,0.8
+Blåbär frysvara,43.0,0.5,7.6,0.5
+Blåbär m. socker frysvara,83.0,0.4,18.3,0.1
+Cherimoya,84.0,1.2,17.7,0.3
+Citron,50.0,0.9,7.6,0.7
+Småcitrus clementin mandarin tangerin satsumas,54.0,0.8,11.4,0.2
+Fikon,58.0,0.8,11.7,0.3
+Fläderbär,67.0,0.7,11.4,0.5
+Jordgubbar skivade m. socker frysvara,102.0,0.5,23.8,0.1
+Kaktusfikon,39.0,0.7,6.7,0.5
+Kiwi grön,55.0,0.8,9.6,0.9
+Krusbär,38.0,0.8,5.7,0.6
+Physalis,57.0,1.8,8.9,0.6
+Kumquat,69.0,0.5,12.9,0.7
+Kvitten,63.0,0.4,13.1,0.1
+Surkörsbär,61.0,0.9,13.3,0.1
+Sötkörsbär,69.0,1.1,14.7,0.1
+Lime,47.0,0.7,10.3,0.2
+Lingon,56.0,0.5,10.7,0.7
+Mango,56.0,0.7,11.3,0.6
+Banan kokbanan,136.0,1.3,30.4,0.4
+Nektarin,53.0,0.9,10.9,0.3
+Papaya,48.0,0.8,8.9,0.6
+Paradisäpple,81.0,0.4,17.9,0.3
+Passionsfrukt,87.0,2.2,12.9,0.7
+Persika nektarin,43.0,0.7,8.6,0.1
+Sharon,65.0,0.4,14.3,0.2
+Plommon,47.0,0.5,10.2,0.0
+Päron,54.0,0.3,11.5,0.1
+Tranbär,46.0,0.4,8.9,0.2
+Vinbär röda,48.0,1.2,8.7,0.2
+Vinbär svarta,68.0,1.4,10.2,1.1
+Vindruvor,70.0,0.6,15.6,0.2
+Äpple m. skal,48.0,0.0,10.6,0.0
+Äpple u. skal ,57.0,0.0,13.4,0.1
+Hallon frysvara,38.0,1.0,5.4,0.5
+Björnbär frysvara,58.0,1.0,8.8,0.5
+Björnbär m. socker frysvara,69.0,1.0,12.0,0.5
+Jordgubbar frysvara,33.0,0.5,6.4,0.3
+Hallon blåbär frysvara,44.0,1.0,6.6,0.7
+Apelsinskal,104.0,1.5,21.8,0.2
+Aprikos torkad,190.0,2.2,41.0,0.5
+Banan torkad,374.0,3.9,80.8,1.8
+Blåbär torkade,303.0,1.7,63.8,2.4
+Citronskal,64.0,1.5,11.9,0.3
+Dadlar torkade,321.0,2.4,71.9,0.6
+Fikon torkade,269.0,3.1,55.9,1.2
+Katrinplommon torkade,219.0,2.3,48.6,0.3
+Nypon torkat u. frön,328.0,3.7,68.4,1.4
+Nyponsoppapulver berikad,384.0,0.7,91.1,0.2
+Persika torkad,252.0,3.6,52.9,0.8
+Päron torkade,282.0,1.9,63.4,0.6
+Russin,285.0,1.9,64.4,0.5
+Äpple torkat,257.0,0.9,57.2,0.3
+Frukt torkad,266.0,3.3,56.8,0.5
+Papaya torkad,263.0,3.4,57.6,0.6
+Ananas konserv. m. juice,62.0,0.4,14.2,0.1
+Ananas konserv. m. sockerlag,86.0,0.4,20.2,0.1
+Aprikos konserv. m. juice,52.0,0.6,11.4,0.0
+Aprikos konserv. m. sockerlag,118.0,0.5,27.7,0.1
+Körsbär surkörsbär konserv. m. sockerlag,94.0,0.7,21.5,0.1
+Persika konserv. m. sockerlag,83.0,0.4,19.5,0.1
+Plommon konserv. m. sockerlag,94.0,0.4,21.8,0.1
+Päron konserv. m. lättsockrad lag,60.0,0.2,13.8,0.0
+Päron konserv. m. sockerlag,77.0,0.2,17.6,0.1
+Äpple konserv.,69.0,0.2,14.9,0.5
+Grapefrukt konserv. m. lättsockrad lag,63.0,0.6,14.6,0.1
+Fruktcocktail konserv. m. sockerlag,81.0,0.4,18.9,0.0
+Mandarin konserv. m. lättsockrad lag,65.0,0.4,14.6,0.1
+Mango konserv. m. sockerlag,99.0,0.3,23.3,0.1
+Apelsinsallad,109.0,1.5,14.3,4.7
+Frukt bär konserv. osötad el. sötningsm.,35.0,0.4,7.6,0.1
+Fruktsallad,56.0,0.6,11.8,0.3
+Apelsinjuice färskpressad,48.0,0.7,10.6,0.2
+Apelsinjuice konc. frysvara,165.0,2.4,37.5,0.2
+Apelsinjuice drickf.,39.0,0.7,8.6,0.1
+Citronjuice färskpressad,29.0,0.6,6.5,0.0
+Citronjuice konc. konserv.,32.0,0.4,6.8,0.3
+Småcitrusjuice färskpressad,44.0,0.5,9.9,0.2
+Grapefruktjuice färskpressad,45.0,0.6,10.2,0.1
+Limejuice färskpressad,40.0,0.4,9.1,0.1
+Risgrynsgröt lättmjölk fett ca 1%,79.0,3.2,13.3,1.3
+Risgrynsgröt,86.0,3.2,13.3,2.1
+Limejuice konc. konserv.,28.0,0.2,6.2,0.2
+Druvjuice konserv. drickf.,63.0,0.6,14.6,0.0
+Äppeljuice drickf.,40.0,0.2,9.7,0.0
+Ananasjuice konserv. drickf.,55.0,0.3,12.8,0.1
+Apelsinjuice pastöriserad drickf.,43.0,0.6,9.8,0.1
+Juice,40.0,0.6,8.9,0.1
+Aprikosnektar pastöriserad drickf.,58.0,0.3,13.1,0.1
+Persikonektar pastöriserad drickf.,55.0,0.3,13.0,0.0
+Katrinplommondryck konserv. drickf.,70.0,0.6,15.5,0.0
+"Havredryck choklad fett 1,5%  berikad",71.0,1.2,12.3,1.6
+Bovetegröt m. russin,106.0,2.0,22.2,0.6
+Grahamsgröt,75.0,2.4,13.6,0.4
+Havregrynsgröt fullkorn,66.0,1.7,11.3,1.2
+Molinogröt grahamsmjöl m. torkad frukt linfrö,89.0,2.4,12.4,2.5
+Frukostflingor ris puffat rostat osötat,383.0,6.0,86.0,0.9
+Rågkross ångprep. fullkorn,326.0,9.0,57.2,2.5
+Kornmjölsgröt,63.0,1.7,11.9,0.6
+Mannagrynsgröt,79.0,4.3,11.1,1.8
+Kruskagröt fullkorn m. havregryn vetekli russin,66.0,1.5,11.7,0.8
+Rågmjölsgröt,75.0,1.9,13.6,0.4
+Stuvning vit,101.0,4.3,8.3,5.6
+Välling fullkorn berikad,70.0,3.6,9.2,1.9
+Havrevälling hemlagad,78.0,2.9,12.7,1.5
+Mannagrynsvälling hemlagad,68.0,3.8,9.2,1.7
+Välling berikad,64.0,3.3,8.6,1.7
+"Havredryck fett 1,5% berikad",48.0,1.0,7.1,1.5
+Havregryn fullkorn,375.0,9.5,64.1,7.0
+Fiberhavregryn fullkorn havre m. vetekli,371.0,10.0,60.5,7.3
+Havrekli,356.0,15.1,48.4,7.4
+Korngryn ångprep. fullkorn,351.0,9.2,65.4,3.1
+Frukostflingor majs osötad berikad typ cornflakes,380.0,8.0,82.5,0.9
+Vetekross ångprep. fullkorn,328.0,10.2,61.0,2.0
+Vetegroddar,349.0,27.5,31.4,9.4
+Vetekli,277.0,14.9,25.5,4.6
+Frukostflingor vete fullkorn typ Weetabix,366.0,11.3,68.4,2.5
+Kruskakli grovt vetekli,269.0,12.7,24.9,5.0
+Frukostflingor flingblandning fullkorn typ basmüsli,367.0,9.3,67.6,4.1
+Frukostflingor ris puffat m. socker berikad,385.0,5.4,86.3,1.2
+Frukostflingor vetekli rostat m. kornmalt,367.0,10.3,65.5,3.6
+Frukostflingor ris puffat rostat m. socker kakao,393.0,4.6,85.2,2.6
+Frukostflingor müsli fullkorn m. frukt bär,370.0,8.2,64.8,6.6
+Frukostflingor müsli flingblandning fullkorn m. frukt nötter m. socker el. honung,369.0,8.0,70.6,3.8
+Frukostflingor vetekli fullkorn berikad,364.0,9.9,66.8,2.8
+Frukostflingor fullkorn typ Specialflingor,384.0,9.0,78.9,2.2
+Frukostflingor vete puffat m. honung berikad,388.0,8.3,76.9,3.0
+Frukostflingor majs m. socker,382.0,4.3,86.4,0.9
+Frukostflingor fullkorn m. socker berikad typ ringar,379.0,7.7,75.5,3.2
+Pannkaka tunn hemlagad,186.0,6.5,25.9,5.8
+Fattiga riddare,273.0,7.2,30.8,13.0
+Pannkaka tunn lättmjölk,157.0,6.6,17.5,6.4
+Ugnspannkaka lättmjölk,152.0,6.1,15.2,7.2
+Ugnspannkaka mellanmjölk,159.0,6.1,15.2,8.0
+Våffla m. ägg,286.0,5.5,21.8,19.6
+Våffla u. ägg,322.0,3.3,21.4,24.8
+Fläskpannkaka,196.0,7.5,12.5,12.9
+Räkcrêpe m. mellanmjölk vispgrädde fyllning 44% hemlagad,149.0,8.0,11.3,7.8
+Räkcrêpe värmd fyllning 37% frysvara,175.0,6.5,18.9,8.0
+Champinjoncrêpe m. mellanmjölk vispgrädde veg. hemlagad,166.0,6.5,12.4,9.9
+Baguette m. salami brieost soltorkad tomat sallad,240.0,9.3,19.7,13.4
+Ciabatta m. mozzarella soltorkad tomat sallad,191.0,7.9,25.1,5.9
+Bagel m. rökt lax färskost sallad,212.0,9.0,26.8,7.0
+Champinjoncrêpe värmd veg. frysvara,163.0,5.4,19.0,6.8
+Crêpefyllning m. spenat färskost fetaost skinka,130.0,10.2,1.7,9.1
+Crêpes pannkaka tunn fylld,175.0,8.4,14.9,8.8
+Vårrulle värmd frysvara,217.0,6.9,22.4,10.8
+Vårrulle värmd tillagad på restaurang,316.0,6.6,18.7,23.8
+Deg matpaj gräddad,445.0,4.6,38.0,30.3
+Pirog u. fyllning gräddad,450.0,5.4,37.7,30.7
+Deg smulpaj gräddad,481.0,4.7,52.2,27.8
+Paj m. köttfärs,236.0,11.2,12.3,15.6
+Paj m. kyckling bacon,226.0,9.4,12.1,15.4
+Pirog m. köttfärs,243.0,9.6,19.9,13.1
+Pizza m. skinka champinjoner lök sardeller hemlagad,209.0,9.4,22.3,8.7
+Paj m. köttfärs värmd frysvara,344.0,9.9,26.1,22.1
+Pirog m. kött värmd frysvara,295.0,8.8,33.5,13.6
+Pizza Capricciosa m. rökt skinka värmd kylvara el. frysvara,248.0,11.5,27.0,10.1
+Pizza Capricciosa m. rökt skinka champinjon restaurang,267.0,11.0,25.0,13.4
+Pizza Pepperoni m. rökt korv värmd frysvara,235.0,9.1,30.5,7.8
+Pizza pan pizza m. rökt griskött värmd frysvara,280.0,13.1,26.5,13.2
+Pizza pan pizza m. rökt griskött restaurang,238.0,11.4,26.3,9.2
+Paj m. ost skinka värmd frysvara,296.0,11.5,20.5,18.7
+Paj m. lax spenat,178.0,8.3,13.5,9.9
+Pizza m. räkor musslor hemlagad,237.0,10.7,22.6,11.1
+Vol-au-vent m. räkstuvning,249.0,6.3,24.0,14.0
+Paj m. skaldjur värmd frysvara,306.0,10.4,22.0,19.6
+Pizza Marinara m. skaldjur restaurang,258.0,12.9,22.2,12.7
+Pizza veg. hemlagad,179.0,6.4,19.1,8.0
+Pizza Margherita m. ost tomatsås hemlagad,246.0,9.0,27.6,10.4
+Kycklingburgare m. bröd tillbehör,228.0,10.7,22.8,10.1
+Fiskburgare m. bröd tillbehör,280.0,12.4,27.3,13.1
+Baguette m. rostbiff potatissallad sallad,197.0,6.6,28.4,5.6
+Baguette grov m. skaldjur tonfisk smögenröra sallad,189.0,5.7,26.2,6.1
+Baguette grov m. ost skinka sallad lättmajonnäs,184.0,7.7,25.9,4.6
+Bagel m. salami färskost sallad oliv,166.0,5.9,17.2,7.5
+Sandwich m. räkor ägg sallad majonnäs,295.0,7.3,21.6,19.7
+Sandwich m. rökt kalkon färskost soltorkad tomat sallad,180.0,10.3,21.2,5.3
+Sandwich m. salami färskost sallad,164.0,9.1,16.2,6.4
+Tunnbrödsrulle m. pastrami potatis sallad majonnäs,159.0,5.4,15.6,7.8
+Wrap vetetortilla m. ris köttfärs majs ost,142.0,7.9,19.3,3.3
+Wrap vetetortilla fajitas m. kyckling gräddfil sallad,136.0,5.7,11.1,7.1
+Wrap vetetortilla enchilada m. köttfärs majschips ost sallad paprika tomat tomatsås,170.0,6.7,11.7,10.2
+Falafel m. pitabröd sallad sesamsås pepperoni,150.0,5.2,17.3,5.7
+Paj m. ost skinka mellanmjölk matlagningsgrädde hemlagad,286.0,11.4,15.0,19.8
+Wrap vetetortilla m. fetaost oliver sallad vitlöksdressing,175.0,5.1,20.1,7.5
+Matmuffins grov fullkorn m. getost fårost broccoli spenat soltorkade tomater,292.0,9.5,26.0,16.0
+Pizzapålägg m. tomatsås skinka champinjoner hårdost,153.0,10.8,5.4,9.5
+Paj m. ost skinka mellanmjölk hemlagad,235.0,10.0,13.3,15.6
+Smörgåstårta el. landgång,237.0,8.7,15.1,15.5
+Råris kokt m. salt,107.0,2.5,21.3,0.9
+Rismjöl vitt,358.0,5.8,80.2,0.5
+Risdiet flingor,371.0,7.0,80.9,1.1
+Ris kinesiskt asiatiskt kokt u. salt tillagad på restaurang,144.0,2.7,30.1,1.2
+Ris vildris okokt,360.0,14.7,68.7,1.1
+Ris vildris kokt m. salt,102.0,4.0,19.5,0.3
+Nudlar glasnudlar okokta,350.0,0.2,85.6,0.1
+Vinbladsdolma m. ris konserv. veg.,162.0,2.5,11.5,11.3
+Bovete hela el. krossade korn,353.0,9.6,70.0,2.5
+Durra el. andra sorghumarter mjöl fullkorn,351.0,10.3,61.4,4.7
+Hirs hela el. krossade korn fullkorn,352.0,10.5,68.4,2.9
+Mannagryn,351.0,10.1,72.1,1.3
+Bulgur,353.0,12.3,68.2,1.3
+Bulgur kokt,129.0,4.3,23.1,1.2
+Couscous,361.0,12.8,72.4,0.6
+Couscous tillagad,108.0,3.8,21.8,0.2
+Korngryn ångprep. fullkorn kokt m. salt,80.0,1.8,13.6,0.4
+Hirs kokt m. salt fullkorn,97.0,2.9,18.9,0.8
+Majsgryn polenta kokt m. salt,68.0,1.7,13.4,0.4
+Apelsinris,95.0,2.0,12.9,3.7
+Ris à la Malta m. grädde fett 40%,132.0,2.9,15.7,6.3
+Risgrynskaka risgrynspudding,142.0,4.1,14.5,7.5
+Rismål fett 6%,154.0,2.8,20.8,6.4
+"Rismål lätt fett 1,5%",103.0,2.1,19.9,1.5
+Paella,146.0,11.0,11.9,6.0
+Nudelsoppa m. risnudlar curry sesamolja,52.0,0.7,10.3,0.7
+Pasta okokt,358.0,11.9,71.5,1.3
+Pasta kokt u. salt,128.0,4.2,25.8,0.5
+Pasta fullkorn okokt,345.0,11.0,66.6,1.5
+Pasta färsk m. ägg kokt u. salt,132.0,5.3,22.8,1.6
+Stuvade makaroner,124.0,5.3,18.8,2.7
+Pastagratäng makaronipudding,129.0,7.9,13.4,4.6
+Spagetti m. köttfärssås,128.0,6.7,17.0,3.3
+Ravioli m. sås frysvara el. konserv.,106.0,3.8,14.7,3.5
+Tortellini m. kött,157.0,5.6,22.2,4.3
+Lasagne m. spenat chèvre veg. ,144.0,6.7,12.2,7.1
+Pastagratäng makaronipudding veg.,123.0,6.3,15.0,3.9
+Lasagne värmd frysvara,140.0,6.6,14.4,5.9
+Nudlar äggnudlar okokta,377.0,14.0,68.2,4.2
+Tortellini m. ostfyllning veg.,186.0,7.2,25.7,5.3
+Nudelsoppa olika smaker kryddad,81.0,1.9,9.4,3.4
+Bondbönor torkade,318.0,25.0,41.9,1.7
+Bruna bönor torkade,317.0,22.0,45.1,1.5
+Röda bönor torkade,324.0,22.0,48.0,1.5
+Röda bönor torkade kokta u. salt,108.0,7.8,14.5,0.5
+Vita bönor torkade,319.0,22.0,45.7,1.6
+Vita bönor torkade kokta u. salt,108.0,7.8,14.2,0.6
+Kikärtor torkade,352.0,20.5,51.0,4.8
+Mungbönor torkade kokta u. salt,112.0,8.6,14.5,0.7
+Mungbönor torkade,320.0,24.0,44.5,1.3
+Sojabönor torkade,398.0,34.0,18.3,17.7
+Sojabönor torkade kokta u. salt,128.0,11.0,5.8,5.7
+Vignabönor svartögda bönor torkade,336.0,23.0,52.1,1.5
+Vignabönor svartögda bönor torkade kokta u. salt,69.0,5.1,9.1,0.3
+Gröna el. gula ärtor torkade,317.0,21.5,49.2,1.0
+Ärtsoppa m. fläsk hemlagad,85.0,6.4,8.9,2.1
+Gryta chili con carne,103.0,7.5,7.8,3.9
+Ärtsoppa fläsk tillagad konserv. m. vatten,85.0,6.1,7.1,2.3
+Vita bönor m. tomatsås konserv.,95.0,5.1,15.0,0.5
+Bönsoppa vita bönor m. tomat veg. ,51.0,2.5,4.9,1.7
+Linssoppa veg. ,63.0,3.8,8.1,1.0
+Ärtsoppa veg.,78.0,5.1,12.0,0.3
+Tofu fast,70.0,6.6,1.2,4.2
+Sojamjöl fett ca 20%,446.0,37.0,16.0,23.5
+Sojadryck,34.0,3.1,1.9,1.5
+Miso sojabönspasta fermenterad,208.0,9.7,15.5,10.5
+Sojasås,57.0,7.5,6.6,0.0
+Sojasås söt,193.0,4.3,38.5,2.1
+Korv veg. sojakorv konserv. fett 15%,199.0,12.0,3.5,15.0
+Glass sojaglass mjölkfri fett 11%,216.0,2.2,27.0,11.0
+Sojabönsbiff stekt,180.0,7.2,15.6,9.2
+Korv veg. soja- och veteprotein tillagad typ grillkorv,128.0,16.3,9.3,1.7
+Falafel kikärtsbiff friterad hemlagad,157.0,6.7,11.6,7.2
+Lamm bog rå,134.0,20.1,0.0,5.9
+Lamm kotlett rå,230.0,19.0,0.0,17.3
+Lamm lägg rå,137.0,24.5,0.0,4.2
+Lamm rygg el. hals rå,177.0,17.6,0.0,11.9
+Lamm stek rå,108.0,20.9,0.0,2.6
+Lamm färs rå fett 20%,245.0,17.4,0.0,19.7
+Lamm tunnbringa rå,184.0,17.8,0.0,12.6
+Lamm kotlett rå fett bortskuret,103.0,20.0,0.0,2.5
+Hare kött rå,115.0,21.5,0.0,3.1
+Hjort dovhjort bog rå,106.0,22.5,0.0,1.6
+Hjort dovhjort stek rå,98.0,22.0,0.0,1.0
+Hjort ryggbiff rå,102.0,22.6,0.0,1.2
+Häst kött rå,166.0,19.0,0.0,10.0
+Kalv bog rå,106.0,19.9,0.0,2.8
+Kalv bringa rå,186.0,18.1,0.0,12.7
+Kalv filé rå,105.0,20.0,0.0,2.7
+Kalv fransyska rå,108.0,19.9,0.0,3.1
+Kalv innanlår rå,107.0,21.0,0.0,2.5
+Kalv kotlett rå,122.0,20.5,0.0,4.4
+Kalv lägg rå,98.0,20.0,0.0,1.9
+Kalv ytterlår rå,117.0,21.2,0.0,3.5
+Kalv tunnbringa rå,173.0,18.7,0.0,11.0
+Kalv högrev rå,135.0,19.2,0.0,6.4
+Kanin kött rå,125.0,22.0,0.0,4.0
+Nöt clubstek biff rå m. ben,162.0,19.7,0.0,9.3
+Nöt ryggbiff rå,123.0,21.8,0.0,3.8
+Nöt oxbringa rå,205.0,17.6,0.0,15.1
+Nöt oxbringa rimmad rå,205.0,17.6,0.0,15.1
+Nöt oxfilé rå,124.0,21.7,0.0,4.1
+Nöt fransyska rå,116.0,20.8,0.0,3.5
+Nöt färs rå fett 10%,182.0,20.1,0.0,11.3
+Nöt högrev rå fett bortskuret,145.0,20.6,0.0,6.9
+Nöt innanlår rå,111.0,23.8,0.0,1.6
+Nöt lägg rå,108.0,20.5,0.0,2.8
+Nöt bog el. märgpipa rå,118.0,21.0,0.0,3.7
+Nöt rostbiff rå,121.0,22.7,0.0,3.2
+Nöt rulle rimmad rå,103.0,21.5,0.0,1.8
+Nöt ytterlår rå,111.0,21.3,0.0,2.8
+Nöt entrecôte rå,142.0,21.7,0.0,6.1
+Nöt grytbitar rå,145.0,20.6,0.0,6.9
+Nöt kött hackebiff rå frysvara,159.0,20.0,0.0,8.8
+Nöt färs rå fett 15%,211.0,19.4,0.0,15.0
+Ren stek rå,108.0,22.6,0.0,1.8
+Ren bog rå,109.0,23.3,0.0,1.6
+Ren skav rå frysvara,126.0,20.3,0.0,4.9
+Rådjur kött rå,108.0,24.0,0.0,1.2
+Gris bog rå,137.0,18.5,0.0,7.0
+Gris fläskfilé rå,107.0,20.6,0.0,2.6
+Gris fläskkotlett rå fettkant 5 mm,185.0,19.4,0.0,12.0
+Gris revbensspjäll rå,193.0,17.7,0.0,13.7
+Gris fötter rå,207.0,23.5,0.0,12.6
+Gris skinka julskinka rimmad rå fett ca 3%,108.0,20.1,0.0,3.0
+Gris fläskben rå,193.0,17.7,0.0,13.7
+Gris picnicbog rå,121.0,19.5,0.0,4.7
+Gris grytbitar rå,164.0,19.3,0.0,9.7
+Gris fläskkarré rå,171.0,17.8,0.0,11.2
+Gris färs rå fett 20%,242.0,16.0,0.0,20.0
+Gris bogbladsstek rå,137.0,18.5,0.0,7.0
+Gris fläskkotlett rå fett bortskuret,103.0,21.6,0.0,1.7
+Gris fläskkotlett rå fettkant 2 mm,134.0,20.0,0.0,6.0
+Gris lägg putsad rå u. svål,126.0,19.7,0.0,5.2
+Gris sidfläsk bit rå m. svål,268.0,17.2,0.0,22.4
+Gris stekfläsk sida skiva rå m. svål,252.0,17.1,0.0,20.7
+Gris flintastek rå m. svål,191.0,18.8,0.0,13.0
+Gris skinka innanlår rå,100.0,20.8,0.0,1.8
+Gris skinka fransyska rå,101.0,19.8,0.0,2.3
+Gris skinka ytterlår rå,123.0,19.7,0.0,4.9
+Gris sidfläsk el. stekfläsk skivor rimmat rå,353.0,11.6,0.0,34.6
+Gris färs rå fett 8%,144.0,18.0,0.0,8.0
+Älg skav rå frysvara,123.0,19.8,0.0,4.8
+Nöt oxsvans rå fett bortskuret,171.0,20.0,0.0,10.1
+Gris svål rå,277.0,23.5,0.0,20.5
+Häst hamburgerkött rökt,100.0,21.0,0.0,1.7
+Nöt saltkött rimmat kokt,110.0,22.5,0.0,2.1
+Nöt kött rökt,106.0,20.0,0.0,2.8
+Ren stek varmrökt,123.0,23.1,0.1,3.2
+Ren kött torkat,330.0,40.0,3.0,17.6
+Gris bacon rå,344.0,13.4,0.0,32.8
+Gris bacon stekt,412.0,17.0,0.0,38.8
+Gris bog konserv. gelé 6-8%,116.0,16.6,0.2,5.4
+Gris kassler kotlettrad rökt,106.0,20.7,0.5,2.2
+Gris skinka konserv. gelé 8-11%,101.0,18.3,0.0,3.0
+Gris skinka lufttorkad italiensk,245.0,31.9,1.5,12.4
+Gris skinka rökt fett 6%,138.0,21.0,0.0,6.0
+Gris skinka skivad rökt fett 1-3%,99.0,18.4,1.3,2.2
+Gris sidfläsk rökt,394.0,15.4,0.0,37.5
+Nöt kött konserv.,218.0,27.0,0.4,12.1
+Nöt flankstek rå,134.0,22.0,0.0,5.1
+Nöt ryggbiff stekt,144.0,25.5,0.0,4.5
+Nöt entrecôte stekt,165.0,25.2,0.0,7.1
+Gris bog stekt,163.0,22.0,0.0,8.3
+Gris kött kokt m. salt,179.0,22.7,0.0,9.8
+Gris fläskben kokt m. salt,225.0,20.6,0.0,15.9
+Gris fläskfilé skiva stekt,128.0,24.6,0.0,3.1
+Gris fläskkarré skiva stekt,202.0,21.0,0.0,13.2
+Gris fläskkotlett stekt,217.0,22.7,0.0,14.1
+Gris lägg kokt m. salt u. svål,149.0,23.3,0.0,6.2
+Gris kött grillat,179.0,22.7,0.0,9.9
+Rullsylta,246.0,19.2,0.0,19.0
+Gris fötter kokta m. salt,238.0,27.0,0.0,14.5
+Hare stek stekt,141.0,26.4,0.0,3.8
+Kalv filé stekt,123.0,23.5,0.0,3.2
+Kalv kotlett stekt,143.0,24.0,0.0,5.1
+Kalv kött kokt m. salt,186.0,24.1,0.0,9.8
+Kalv stek stekt,126.0,24.6,0.0,2.9
+Lamm kotlett stekt,231.0,22.1,0.0,16.1
+Lamm stek stekt,119.0,24.0,0.0,2.4
+Nöt högrev kokt m. salt,184.0,26.1,0.0,8.8
+Nöt stek el. grytstek kokt m. salt,149.0,26.7,0.0,4.5
+Nöt oxbringa rimmad kokt u. salt,252.0,21.6,0.0,18.6
+Oxrullad nöt stekt,137.0,24.3,0.9,3.8
+Nöt rostbiff ugnsstekt,141.0,26.4,0.0,3.7
+Gris revbensspjäll ugnsstekt grillat,294.0,16.9,2.2,24.4
+Rådjur kött ugnsstekt,132.0,29.4,0.0,1.5
+Ren kött kokt m. salt,133.0,28.2,0.0,2.1
+Ren kött ugnsstekt,132.0,27.7,0.0,2.2
+Älg stek ugnsstekt el. grillad,132.0,27.0,1.8,1.6
+Gris fläskkarré tillagad u. sky,224.0,18.0,0.0,17.1
+Gris skinkstek stekt u. sky frysvara,164.0,26.5,0.0,6.4
+Nöt stek stekt u. sky frysvara,135.0,25.5,0.0,3.6
+Nöt rostbiff tillagad ugnsrostad u. salt,124.0,24.0,0.0,3.0
+Gris revbensspjäll tillagad u. sky,283.0,18.0,0.0,23.7
+Gryta dillkött nöt m. sås,114.0,8.2,4.9,6.8
+Biff stroganoff nöt,151.0,13.1,2.1,10.0
+Rimmat sidfläsk el. stekfläsk stekt m. löksås,199.0,6.5,7.0,16.2
+Rimmat sidfläsk panerat stekt,373.0,14.1,7.8,32.0
+Fläskkotlett panerad stekt,267.0,19.2,6.7,18.1
+Schnitzel gris stekt,212.0,19.6,9.7,10.2
+Gryta gulasch nöt,75.0,8.3,3.6,2.8
+Gryta osso buco kalvläggsgryta ,85.0,7.8,4.1,3.6
+Köttsoppa nöt,39.0,4.5,2.3,1.1
+Gryta lamm m. lök tomat,99.0,8.4,3.6,4.9
+Pepparrotskött nöt m. lök morot sås,134.0,13.7,2.0,7.8
+Renskav brynt m. matfett salt,213.0,22.3,0.0,13.8
+Gryta renskavsgryta,138.0,8.2,8.7,7.6
+Skinksås,118.0,8.4,6.4,6.6
+Gryta kalops nöt hemlagad,77.0,7.2,3.0,3.8
+Biff stroganoff nöt frysvara,108.0,11.9,4.8,4.4
+Gryta dillkött nöt m. sås frysvara,101.0,11.0,2.7,5.0
+Kinesisk rätt gris friterat m. grönsaker,185.0,6.8,18.0,9.4
+Gryta chop suey fläskfilé tillagad på restaurang,96.0,7.2,3.1,5.7
+Nasi Goreng gris tillagad på restaurang,176.0,7.9,18.8,7.2
+Frikassé kalv frysvara,126.0,14.8,2.5,6.2
+Gryta kalops nöt frysvara,123.0,14.2,2.8,6.0
+Köttsoppa nöt tillagad konserv. m. vatten,16.0,1.5,1.0,0.4
+Kycklingburgare rå fett ca 7% frysvara,168.0,15.0,11.0,7.0
+Köttbullar kyckling stekta fett 12% frysvara,224.0,16.0,13.0,12.0
+Hamburgare nöt rå frysvara,221.0,14.7,2.0,17.3
+Köttbullar frysvara,217.0,12.3,6.5,15.6
+Pannbiff rå frysvara,204.0,13.2,5.6,14.4
+Burgare veg. soja- och veteprotein tillagad,172.0,16.3,6.7,7.7
+Biff à la Lindström stekt hemlagad,148.0,12.3,6.1,8.1
+Köttbullar blandfärs stekta hemlagade,177.0,15.8,5.8,10.0
+Köttfärslimpa ugnsstekt hemlagad,142.0,14.0,4.0,7.7
+Köttfärssås i gjutjärn hemlagad,100.0,8.3,4.7,5.1
+Pannbiff gris stekt,219.0,14.1,4.3,16.2
+Hamburgare nöt stekt fett 10%,225.0,25.0,0.0,14.0
+Hamburgare nöt stekt fett 15%,251.0,23.8,0.0,17.5
+Järpar blandfärs stekta,193.0,13.4,5.2,13.1
+Frikadeller kalv,153.0,17.6,4.5,7.0
+Wallenbergare kalv stekt,245.0,16.6,6.9,16.7
+Köttfärssås nöt,116.0,9.2,4.7,6.5
+Köttfärssoppa,49.0,4.4,2.3,2.2
+Köttbullar nöt stekta,171.0,16.6,4.1,9.7
+Köttbullar gris stekta,213.0,13.3,5.8,15.2
+Köttfärssås gris,137.0,7.6,4.6,9.7
+Nöt färs stekt tacokryddad hemlagad kryddning,245.0,22.2,0.9,16.9
+Pannbiff lamm stekt,215.0,15.0,4.3,15.4
+Köttfärslimpa gris ugnsstekt hemlagad,210.0,13.5,4.2,15.5
+Köttfärslimpa blandfärs ugnsstekt hemlagad,191.0,15.0,4.2,12.6
+Pannbiff nöt stekt,179.0,17.2,4.4,10.2
+Pannbiff blandfärs stekt,199.0,15.7,4.4,13.2
+Parisersmörgås,184.0,11.4,12.7,9.4
+Pannbiff älg stekt,114.0,17.9,4.1,2.6
+Köttfärssås älg,82.0,9.9,4.5,2.5
+Taco tacoskal m. köttfärs grönsaker ost,148.0,7.9,6.7,9.8
+Biff à la Lindström stekt frysvara,192.0,12.8,5.8,12.7
+Gryta biff m. bambuskott tillagad på restaurang,97.0,8.2,2.4,5.8
+Hamburgare nöt stekt frysvara,260.0,14.0,5.4,20.3
+Kålpudding m. vitkål köttfärs,96.0,6.6,5.7,5.0
+Köttfärssås frysvara el. konserv.,101.0,6.1,5.7,5.8
+Kåldolmar stekta u. sås frysvara,99.0,6.0,4.6,5.9
+Kåldolmar stekta värmda m. sås frysvara,93.0,4.8,6.4,5.1
+Köttbullar stekta m. sås frysvara,145.0,8.0,5.9,10.0
+Pannbiff stekt frysvara,213.0,14.0,7.6,14.1
+Anka bröst rå,119.0,19.9,0.0,4.3
+Anka rå m. skinn,396.0,11.5,0.0,39.5
+Duva rå,137.0,17.5,0.0,7.5
+Duva rå m. skinn,287.0,18.5,0.0,24.0
+Fasan rå,127.0,23.5,0.0,3.6
+Fasan rå m. skinn,174.0,22.5,0.0,9.3
+Gås rå,156.0,23.0,0.0,7.1
+Gås rå m. skinn,362.0,15.9,0.0,33.6
+Höna rå,141.0,21.0,0.0,6.3
+Höna rå m. skinn,262.0,18.7,0.0,21.0
+Kalkon filé rå,106.0,24.1,0.0,0.9
+Kalkon rå m. skinn,126.0,21.0,0.0,4.6
+Kyckling kött rå u. skinn,115.0,21.5,0.0,3.1
+Kyckling kött rå m. skinn,170.0,18.0,0.0,11.0
+Kyckling bröstfilé rå m. skinn,148.0,21.5,0.0,6.9
+Kyckling lår rå m. skinn,196.0,18.9,0.0,13.5
+Kyckling vinge rå m. skinn,186.0,19.2,0.0,12.2
+Ripa rå,113.0,23.5,0.0,2.0
+Kyckling bröstfilé färsk stekt u. skinn,116.0,23.0,0.0,2.5
+Kyckling ben rå m. skinn,198.0,19.3,0.0,13.5
+Kyckling bröstfilé strimlad wokad u. skinn m. rapsolja,164.0,29.4,0.0,5.0
+Kyckling bröstfilé rå u. skinn,104.0,23.1,0.0,1.2
+Kyckling lår rå u. skinn,114.0,19.6,0.0,3.9
+Kyckling delar marinerade m. skinn,175.0,17.0,0.0,12.0
+Struts filé rå,109.0,23.0,0.0,1.7
+Struts filé stekt,170.0,30.0,0.6,5.1
+Kalkon kokt,139.0,22.0,0.0,5.6
+Duva m. skinn stekt m. salt,344.0,22.2,0.0,28.7
+Kyckling kokt m. salt,171.0,32.0,0.0,4.6
+Kyckling grillad m. skinn,214.0,22.6,0.0,13.8
+Fasan stekt m. skinn,189.0,28.9,0.0,8.1
+Gås stekt m. skinn,324.0,25.9,0.0,24.7
+Höna kokt m. salt,206.0,30.7,0.0,9.2
+Kalkon stekt m. skinn,161.0,26.8,0.0,5.9
+Kyckling bröstfilé m. skinn stekt m. salt,187.0,27.1,0.0,8.7
+Ripa stekt,144.0,30.0,0.0,2.6
+Kyckling kött kokt stekt grillat,168.0,24.6,0.0,7.8
+Kalkon rökt,133.0,24.0,0.0,4.0
+Kyckling marinerad grillad m. skinn,167.0,19.7,0.0,9.8
+Kyckling friterad m. frityrsmet,310.0,22.5,5.8,21.9
+Ostsufflé,170.0,10.9,6.7,11.1
+Bondomelett,122.0,6.7,8.8,6.5
+Braxen rå,103.0,16.7,0.0,4.0
+Regnbågslax rå,160.0,18.6,0.0,9.6
+Sej rå,82.0,19.1,0.0,0.5
+Hälleflundra vild rå,139.0,15.5,0.0,8.6
+Kycklingsoppa thailändsk,70.0,7.8,1.5,3.5
+Kyckling nugget friterad tillagad på restaurang,221.0,16.8,14.2,10.4
+Kycklingsoppa tillagad redd pulver m. vatten mjölk,51.0,1.9,5.1,2.4
+Kycklingsoppa tillagad redd pulver m. vatten,40.0,0.6,5.8,1.3
+Kalvbuljong pasta el. pulver storhushåll,222.0,18.8,18.5,8.0
+Kalvbuljong pasta el. pulver lågsalt storhushåll,292.0,25.0,35.0,5.5
+Köttbuljong pasta el. pulver storhushåll,201.0,15.2,23.4,5.0
+Köttbuljong pasta el. pulver lågsalt storhushåll,239.0,10.0,39.0,4.5
+Skinkbuljong pasta el. pulver storhushåll,249.0,19.5,13.5,13.0
+Hönsbuljong pasta el. pulver lågsalt storhushåll,320.0,14.0,32.0,15.0
+Hönsbuljong pasta el. pulver storhushåll,238.0,14.7,16.2,12.7
+Köttbuljong pulver tärning,128.0,20.0,5.0,3.0
+Köttbuljong konserv. ätf.,7.0,1.2,0.0,0.2
+Gelatinblad el. gelatinpulver,350.0,86.0,0.0,0.1
+Köttbuljong tärning ätf.,4.0,0.3,0.5,0.1
+Köttbuljong ätf.,8.0,0.4,1.2,0.2
+Hönsbuljong ätf.,5.0,0.3,0.2,0.3
+Ägg rått,137.0,12.2,0.4,9.7
+Äggula rå,319.0,15.6,0.6,28.6
+Äggvita rå,45.0,10.8,0.2,0.0
+Fransk omelett m. grädde,237.0,10.5,1.2,21.5
+Fransk omelett m. vatten,173.0,10.1,0.3,14.8
+Sufflé gräddad u. fyllning veg.,171.0,11.1,6.0,11.4
+Äggakaka,125.0,6.9,9.9,6.4
+Ägg stekt,194.0,13.3,0.4,15.7
+Skinklåda m. mjölk ost,93.0,7.3,7.2,3.6
+Torsksufflé,128.0,20.2,4.6,3.2
+Kolja rå,79.0,19.4,0.0,0.0
+Kummel rå,71.0,16.5,0.0,0.4
+Siklöja rå,135.0,19.0,0.0,6.5
+Sill rå,148.0,16.7,0.0,9.0
+Flundra rå,94.0,18.3,0.0,2.2
+Strömming rå,108.0,18.0,0.0,4.0
+Röding rå,151.0,19.9,0.0,7.9
+Torsk rå,78.0,18.2,0.0,0.5
+Vitling rå,80.0,18.3,0.0,0.6
+Ål rå,369.0,17.3,2.8,32.5
+Öring odlad rå,166.0,19.0,0.0,10.0
+Pinklax rå,105.0,21.4,0.0,2.0
+Piggvar rå,83.0,16.7,0.0,1.7
+Sik urtagen varmrökt,132.0,21.8,0.0,5.0
+Abborre rå,86.0,19.8,0.0,0.6
+Lax odlad Norge fjordlax rå,210.0,20.2,0.7,14.1
+Öring Sverige rå,115.0,22.0,0.0,2.9
+Lake rå,71.0,16.5,0.0,0.4
+Rödspätta rå,91.0,21.1,0.0,0.6
+Sik rå,90.0,20.9,0.0,0.6
+Makrill rå,290.0,17.0,0.0,25.0
+Regnbågslax odlad rå,106.0,18.1,0.4,3.5
+Gädda rå,84.0,20.2,0.0,0.2
+Gös rå,84.0,20.2,0.0,0.2
+Ansjovis skarpsill konserv. ,215.0,12.5,11.8,13.1
+Böckling varmrökt,199.0,21.2,0.0,12.8
+Fisk torkad,333.0,79.0,0.0,1.4
+Lax kallrökt,173.0,20.0,1.3,9.8
+Sardeller konserv.,170.0,19.2,0.3,10.3
+Sardiner i olja konserv.,284.0,24.0,0.0,21.1
+Sardiner i tomatsås konserv.,217.0,20.5,0.6,14.8
+Saltsill rå,245.0,19.0,0.0,19.0
+Saltströmming rå,162.0,23.5,0.0,7.5
+Tonfisk i olja konserv. avrunnen,189.0,24.9,0.0,9.9
+Ål varmrökt rundrökt,347.0,19.1,0.0,30.5
+Tonfisk i vatten konserv. avrunnen,106.0,24.1,0.0,1.0
+Makrill urtagen varmrökt,296.0,19.4,0.0,24.5
+Lutfisk rå frysvara,28.0,6.3,0.0,0.3
+Sill matjessill konserv.,314.0,16.0,12.1,22.6
+Marulk rå,65.0,15.8,0.0,0.1
+Makrill filé i olja konserv.,324.0,18.9,0.0,28.0
+Saltsill urvattnad konserv.,208.0,16.5,0.0,16.0
+Lax gravad,166.0,18.8,3.1,8.7
+Lax rimmad,148.0,18.8,0.0,8.1
+Böckling dubbelfilé varmrökt,261.0,19.0,0.0,20.8
+Lax varmrökt urtagen,220.0,21.9,0.1,14.8
+Makrill filé varmrökt,327.0,20.1,0.0,27.7
+Regnbågslax kallrökt,190.0,20.4,0.0,12.1
+Regnbågslax urtagen varmrökt,157.0,21.9,0.0,7.7
+Röding urtagen varmrökt,163.0,21.4,0.0,8.6
+Ål varmrökt flatrökt,428.0,17.8,0.0,40.2
+Fiskpinnar stekta,223.0,11.7,16.8,12.1
+Makrill filé i tomatsås konserv.,186.0,11.7,3.9,13.9
+Surströmming,82.0,11.8,0.0,3.9
+Lutfisk kokt,28.0,5.9,0.0,0.5
+Saltsill panerad stekt hemlagad,289.0,14.1,4.0,24.2
+Strömmingsflundra panerad stekt hemlagad,249.0,15.2,4.1,19.2
+Torsk filé panerad stekt hemlagad,143.0,17.6,4.5,6.0
+Ål inkokt hemlagad,382.0,15.8,0.0,36.0
+Ål ugnsstekt hemlagad,437.0,16.1,3.2,40.5
+Abborre kokt m. salt,140.0,32.3,0.0,1.0
+Abborre filé panerad stekt,195.0,22.3,6.3,8.8
+Fisk friterad,213.0,15.6,12.0,11.3
+Regnbågslax inkokt m. salt,191.0,22.2,0.0,11.5
+Regnbågslax panerad stekt,230.0,19.1,5.7,14.6
+Gädda kokt m. salt,137.0,32.9,0.0,0.4
+Gädda panerad stekt,193.0,22.6,6.3,8.4
+Hälleflundra kokt m. salt,168.0,18.8,0.0,10.3
+Hälleflundra panerad stekt,214.0,16.3,5.7,13.9
+Kolja kokt m. salt,130.0,31.9,0.0,0.0
+Kolja panerad stekt m. salt,189.0,21.9,6.3,8.2
+Lax stekt m. salt,221.0,24.1,0.8,13.5
+Lax kokt m. salt,246.0,23.7,0.8,16.6
+Makrill kokt m. salt,332.0,19.4,0.0,28.6
+Makrill panerad stekt,324.0,17.5,5.7,25.9
+Makrill stekt m. salt,295.0,20.4,0.0,24.0
+Piggvar kokt m. salt,137.0,27.6,0.0,2.8
+Rödspätta filé kokt m. salt,147.0,34.0,0.0,1.0
+Rödspätta filé panerad stekt m. salt,199.0,23.5,6.3,8.8
+Rödspätta filé stekt m. salt,124.0,28.7,0.0,0.8
+Sik kokt m. salt,145.0,33.7,0.0,1.0
+Sik panerad stekt,198.0,23.3,6.3,8.8
+Saltsill kokt,246.0,19.5,0.0,19.0
+Sill panerad stekt m. salt,219.0,17.4,6.0,13.7
+Strömming kokt m. salt,131.0,21.8,0.0,4.9
+Ättikströmming,220.0,12.2,8.4,15.2
+Kräftströmming,104.0,16.5,1.0,3.7
+Strömming filé stekt m. salt,122.0,21.6,0.0,3.9
+Tonfisk stekt m. salt,154.0,27.7,0.0,4.7
+Torsk filé kokt m. salt,130.0,30.3,0.0,0.8
+Torsk panerad stekt,189.0,20.8,6.3,8.8
+Torsk stekt,108.0,25.2,0.0,0.7
+Vitling kokt m. salt,132.0,30.2,0.0,1.0
+Vitling filé panerad stekt,190.0,20.8,6.3,8.9
+Fisk varmrökt,226.0,21.7,0.1,15.5
+Fiskbullar konserv. u. buljong,72.0,6.9,5.8,2.3
+Fiskbullar m. hummersås konserv. tillagad,88.0,4.8,7.4,4.4
+Laxpastej lättrökt,355.0,12.0,10.0,30.0
+Böcklingpastej,364.0,13.0,9.0,31.0
+Fiskpudding m. ris hemlagad,114.0,11.4,4.5,5.6
+Fiskgratäng u. potatismos hemlagad,114.0,11.4,4.5,5.6
+Böcklinglåda m. äggstanning,158.0,15.3,2.1,9.8
+Fiskbullar panerade stekta,164.0,5.7,11.5,10.5
+Fisksoppa bouillabaisse,72.0,8.6,1.5,3.2
+Fiskpaté m. räkor,206.0,15.7,3.4,14.5
+Fiskfärs kokt,117.0,15.8,8.5,2.1
+Fiskgratäng m. dillsås,154.0,10.5,5.3,10.1
+Fiskgratäng m. räkor u. potatismos,144.0,11.5,4.6,8.8
+Laxmousse,232.0,11.3,2.5,19.8
+Sillbullar,193.0,9.0,13.7,11.0
+Sillsallad,94.0,4.3,10.3,3.5
+Sushi nigiri m. lax,179.0,9.5,21.8,5.7
+Sushi nigiri m. hälleflundra,153.0,7.1,23.0,3.2
+Sushi nigiri m. tonfisk,154.0,8.2,25.7,1.6
+Sushi rulle m. crabfish gurka,135.0,4.1,27.9,0.4
+Sallad m. tonfisk potatis bönor tomat sallad u. dressing,97.0,8.7,5.9,4.0
+Fisk m. mandel ströbröd frysvara,177.0,14.0,5.3,11.0
+Fiskgratäng m. potatismos dillsås tillagad frysvara,141.0,7.4,11.3,7.4
+Laxpaté,221.0,13.1,0.9,18.1
+Fiskgratäng m. potatismos räksås tillagad frysvara,133.0,7.1,10.5,6.8
+Sushi olika sorter 7 bitar,159.0,6.1,29.0,1.7
+Fiskrom torsk sill rå,120.0,24.5,0.0,2.3
+Påläggskaviar orökt,187.0,15.3,23.6,3.3
+Påläggskaviar original,414.0,8.8,15.2,35.8
+Påläggskaviar lätt,270.0,9.0,23.0,15.8
+Stenbitsrom,84.0,10.6,2.5,3.4
+Löjrom saltad,126.0,24.5,1.5,2.3
+Bläckfisk rå,83.0,15.4,1.4,1.7
+Blåmussla kokt m. vin avrunnen,113.0,18.5,2.3,3.3
+Ostron,55.0,9.3,0.0,2.4
+Snigel vinbergssnäcka,87.0,16.1,2.2,1.4
+Groda lår rått frysvara,69.0,16.4,0.0,0.3
+Mussla konserv. m. lag,51.0,7.9,3.1,0.7
+Mussla konserv. u. lag,108.0,16.9,4.7,2.3
+Ostron konserv. m. lag,58.0,9.5,0.0,2.2
+Krabba Blå krabba kokt,83.0,18.0,0.0,1.1
+Hummer kokt,85.0,19.0,0.0,0.9
+Kräfta kokt,71.0,15.6,0.2,0.8
+Räka kokt,77.0,17.6,0.0,0.6
+Hummer kokt el. konserv.,90.0,18.7,0.1,1.5
+Krabba kokt,125.0,19.7,2.2,4.0
+Krabba konserv.,98.0,17.4,1.3,2.5
+Räka konserv. m. lag,77.0,16.2,1.0,0.8
+Räka konserv. u. lag,73.0,16.2,1.2,0.3
+Havskräfta kokt,106.0,24.0,0.0,0.9
+Räka friterad,287.0,10.6,27.8,14.8
+Räka friterad tillagad på restaurang,387.0,6.9,24.7,29.1
+Bläckfisk friterad panerad,292.0,18.6,15.2,17.4
+Bläckfisk friterad panerad tillagad på restaurang,280.0,11.2,19.1,17.8
+Sallad m. räkor sparris tomat champinjoner ägg,70.0,6.2,1.4,4.3
+Räka stuvad,129.0,6.8,4.2,9.5
+Räksoppa ätf.,82.0,4.8,2.7,5.6
+Västkustsallad m. musslor räkor champinjon dressing hemlagad,102.0,6.2,2.7,7.2
+Västkustsallad m. musslor räkor champinjon hemlagad,49.0,7.2,2.3,0.9
+Medelhavssallad m. tonfisk skaldjur majonnäsdressing sallad tomat,126.0,7.4,2.5,9.5
+Skaldjurspaté,151.0,11.7,2.3,10.2
+Räksoppa tillagad pulver m. vatten mjölk,51.0,2.1,5.8,2.1
+Fiskbuljong pasta el. pulver storhushåll,216.0,25.0,17.5,4.9
+Fiskbuljong pasta el. pulver lågsalt storhushåll,267.0,35.0,23.0,3.5
+Fisk och skaldjurssås tillagad pulver m. mjölk vatten smör typ Smögen,112.0,2.7,8.2,7.6
+Fiskbuljong ätf.,4.0,0.3,0.3,0.2
+Gris blod rått,73.0,16.6,0.4,0.4
+Nöt blod rått,70.0,16.4,0.0,0.4
+Hårt bröd blodbröd fullkorn,366.0,17.7,65.5,1.9
+Blodpudding blodkorv fett 19%,301.0,10.6,21.0,19.0
+Blodpalt,170.0,8.6,21.9,4.2
+Blodpudding blodkorv fett 14%,254.0,11.0,20.0,14.0
+Blodbröd paltbröd frysvara,286.0,14.4,47.8,2.8
+Blodpudding blodkorv fett 10%,202.0,12.0,17.3,9.0
+Blodpudding blodkorv stekt fett 13%,261.0,11.3,20.5,14.4
+Blodpudding blodkorv stekt fett 8%,208.0,12.4,17.8,9.3
+Blodbröd paltbröd kokt m. salt,112.0,5.6,18.6,1.1
+Lamm bräss rå,131.0,15.3,0.0,7.8
+Lamm hjärta rå,119.0,17.1,0.0,5.6
+Lamm lever rå,149.0,22.0,3.2,5.3
+Lamm njure rå,96.0,16.2,0.0,3.4
+Lamm tunga rå,191.0,15.3,0.0,14.6
+Kalv bräss rå,96.0,16.9,0.0,3.1
+Kalv lever rå,119.0,19.4,2.8,3.3
+Kalv njure rå,116.0,15.3,0.7,5.8
+Kalv tunga rå,152.0,16.2,0.0,9.8
+Nöt kalv hjärta,138.0,16.6,0.0,8.0
+Nöt lever rå,127.0,20.0,4.4,3.1
+Nöt njure rå,113.0,15.8,0.9,5.1
+Nöt oxtunga rå,176.0,16.2,0.0,12.4
+Gris hjärta rå,119.0,16.5,0.0,5.9
+Gris lever rå,132.0,22.0,3.0,3.4
+Gris njure rå,103.0,16.7,0.3,3.8
+Gris tunga rå,167.0,16.5,0.4,11.1
+Kyckling hjärta rå,147.0,15.6,0.3,9.3
+Kyckling lever rå,115.0,19.4,0.7,3.8
+Kyckling mage rå,111.0,18.2,0.0,4.2
+Ren lever rå,129.0,22.0,1.8,3.7
+Nöt oxtunga rimmad rå,220.0,15.7,0.4,17.5
+Kyckling lever stekt,149.0,25.2,0.9,4.9
+Nöt lever panerad stekt,212.0,22.9,11.5,8.0
+Nöt lever stekt,162.0,25.5,5.6,4.0
+Nöt oxtunga rimmad kokt,292.0,19.5,0.0,24.0
+Lever stuvad hemlagad,140.0,11.4,6.6,7.5
+Gryta m. kalvhjärta grönsaker,86.0,6.8,3.5,4.7
+Korvkaka,118.0,6.9,15.1,3.0
+Leversauté kyckling,140.0,10.6,3.5,9.2
+Gryta levergryta nöt,151.0,12.0,6.8,8.3
+Njursauté,127.0,9.1,3.3,8.4
+Leverbiff mald lever stekt frysvara,223.0,15.2,8.1,14.4
+Gryta levergryta m. grönsaker frysvara,103.0,8.1,7.0,4.4
+Gåsleverpastej konserv. rökt,454.0,11.4,4.6,44.0
+Leverpalt,225.0,9.9,22.8,9.9
+Njurpalt,153.0,8.3,24.6,1.7
+Leverbiff mald lever rå frysvara,211.0,13.0,7.0,14.5
+Leverpastej bredbar fett ca 24%,292.0,9.5,9.0,24.5
+Leverpastej skivbar fett 14%,212.0,12.0,9.8,14.0
+Leverpastej bredbar fett ca 10%,183.0,12.0,13.5,9.0
+"Leverpastej bredbar fett 3-3,5%",132.0,10.6,12.9,3.6
+Leverbiff mald lever stekt hemlagad,146.0,12.8,8.9,6.4
+Paté älgfärs kycklinglever,175.0,14.1,4.0,11.3
+Lantpaté,402.0,12.1,4.7,37.4
+Grönpepparpaté,299.0,15.2,1.1,26.0
+Korv kycklingkorv mager,155.0,11.5,6.5,9.1
+Korv kycklingkorv halal,203.0,12.2,3.5,15.5
+Korv falukorv fett 19% kött 58%,254.0,12.7,7.9,19.3
+Korv falukorv kött 58%,240.0,9.1,5.1,20.6
+Korv fläskkorv kokt kött 48%,234.0,9.1,3.8,20.5
+Korv frukostkorv fett 23% kött 52%,257.0,9.9,3.2,23.0
+Påläggskorv medvurst fett 23%,256.0,9.9,4.1,22.5
+Påläggskorv medvurst rökt fett 35%,386.0,14.2,5.4,34.6
+Påläggskorv salami rökt,430.0,16.1,0.2,41.2
+Korv varmkorv kött 51-54%,274.0,12.1,8.5,21.5
+Korv varmkorv kokt kött ca 53%,273.0,9.9,7.8,22.6
+Korv wienerkorv kött 73%,259.0,9.8,3.9,23.0
+Korv grillkorv kött 32-35%,215.0,11.0,9.2,15.0
+Korv isterband fermenterad kött 59%,278.0,11.0,4.6,24.0
+Korv middagskorv fett ca 15%  kött 52%,189.0,9.5,5.7,14.4
+Korv wienerkorv mager kött 73%,196.0,10.0,5.7,15.0
+Korv chorizo stekt kött 73%,286.0,14.3,4.1,23.8
+Korv kabanoss stekt kött 80%,372.0,18.4,1.2,33.0
+Korv prinskorv kött 61%,268.0,10.0,3.8,24.0
+Korv salsiccia rå kött 73%,270.0,21.8,4.7,18.3
+Korv salsiccia stekt u. fett kött 73%,299.0,21.8,7.7,20.2
+Korv värmlandskorv rå kött 45%,231.0,6.1,8.9,19.1
+Korv värmlandskorv kokt kött 45%,223.0,6.5,8.5,18.2
+Gris bacon stekt mager,142.0,26.6,1.4,3.1
+Gris bacon rå mager,114.0,19.4,1.0,3.5
+Korv frukostkorv kokt fett 23% kött 52%,272.0,10.5,3.4,24.3
+Korv falukorv stekt fett 19% kött 58%,268.0,13.4,8.3,20.3
+Korv falukorv skivad kokt,254.0,9.6,5.4,21.8
+Korv frukostkorv stekt,272.0,10.5,3.4,24.3
+Korv isterband fermenterad stekt kött 59%,293.0,11.6,4.8,25.3
+Korv varmkorv kokt,273.0,9.9,7.8,22.6
+Korv varmkorv stekt,288.0,12.7,8.9,22.6
+Korv wienerkorv stekt,274.0,10.4,4.1,24.3
+Korv falukorv ugnsstekt,179.0,8.1,7.1,13.1
+Korv wienerkorv kokt,274.0,10.4,4.1,24.3
+Pölsa stekt värmd,235.0,17.5,9.0,14.2
+Pölsa,188.0,14.0,7.2,11.3
+Korv stroganoff hemlagad i gjutjärnsstekpanna,242.0,7.2,7.5,20.5
+Gryta korvgryta m. chorizo rotfrukter,121.0,5.2,5.2,8.7
+Tunnbrödrulle m. korv potatismos räk- gurksallad,187.0,4.4,16.3,11.3
+Kalvsylta,100.0,12.0,0.1,5.7
+Pressylta,305.0,17.5,0.0,26.5
+Hushållssylta,143.0,11.9,0.3,10.6
+Cashewnötter rostade u. salt,597.0,18.0,19.1,48.7
+Hasselnötter,658.0,13.2,0.5,64.6
+Jordnötssmör,615.0,22.6,14.3,51.0
+Jordnötter torkade,586.0,25.7,8.2,49.0
+Jordnötter rostade,605.0,22.4,9.3,51.3
+Jordnötter rostade saltade,605.0,22.4,9.3,51.3
+Kastanjer,201.0,2.4,39.0,2.2
+Kokosflingor,690.0,6.2,13.1,67.2
+Kokosnöt,352.0,3.4,6.1,33.5
+Kokosmjölk fett ca 6%,80.0,0.6,3.0,7.1
+Linfrö hela,522.0,18.7,0.0,43.8
+Paranötter,683.0,14.2,0.0,67.8
+Pekannötter,714.0,8.5,1.5,73.3
+Pistaschnötter,606.0,20.5,21.7,48.5
+Pumpafrö,573.0,29.8,2.4,48.0
+Sesamfrö m. skal,606.0,19.9,4.4,54.8
+Sesamfrö u. skal,644.0,20.9,2.7,59.7
+Solrosfrö,618.0,20.6,3.9,56.1
+Sötmandel,592.0,20.7,0.5,53.2
+Valnötter,680.0,13.8,8.3,64.8
+Kastanjer rostade,230.0,3.2,45.0,2.2
+Kikärtor snacks torkade m. salt,376.0,23.3,47.8,6.6
+Jordnötsbågar jordnötsringar,488.0,11.4,51.4,25.0
+Chips majs tortilla ,461.0,7.1,63.6,17.9
+Ostbågar,550.0,8.5,48.2,35.5
+Chips potatis m. havssalt,523.0,5.2,52.4,31.5
+Salta pinnar,391.0,11.5,69.6,5.6
+Popcorn mikropopcorn poppade fett ca 22%,440.0,9.6,55.9,16.9
+Chips potatis smaksatta fett ca 33%,526.0,5.9,50.0,32.6
+Chips potatis light fett 25%,495.0,4.1,63.0,24.3
+Japanmix blandade snacks m. inbakade nötter riscracker,403.0,9.4,75.5,5.6
+Kokosmjölk fett ca 24%,239.0,2.3,3.5,24.0
+Vatten kokosvatten,18.0,0.0,4.5,0.0
+Sesamdryck vattenextrakt av frön m. skal,68.0,1.8,0.6,6.4
+Sesamdryck vattenextrakt av frön u. skal,72.0,2.2,1.4,6.4
+Sött vetebröd kanelbulle hembakad,321.0,5.8,45.5,12.3
+Skorpor råg,379.0,9.0,51.9,10.8
+Skorpor vete osötade,476.0,9.9,66.2,18.2
+Sött vetebröd,356.0,8.2,54.4,10.9
+Sött vetebröd slätt,329.0,8.7,50.3,9.5
+Sött vetebröd sötat m. fruktsocker,289.0,7.2,45.6,8.0
+Vetebröd osötat,286.0,7.6,44.6,7.8
+Sött vetebröd m. fyllning bulle längd,350.0,6.5,56.1,10.3
+Skorpor vete,419.0,10.3,70.7,9.2
+Skorpor fullkorn osötade,387.0,12.9,64.1,6.2
+Mandelkubb,397.0,6.1,61.3,13.6
+Munk u. fyllning,425.0,5.0,42.7,25.8
+Munk fylld m. äppelmos vaniljkräm,313.0,5.9,41.4,13.2
+Wienerbröd m. vaniljkräm sylt florsocker,456.0,6.4,45.4,27.3
+Sött vetebröd bakpulver,315.0,5.5,45.6,11.8
+Sött vetebröd saffransbröd hembakad,290.0,5.9,46.4,8.4
+Kex cream crackers,484.0,7.8,60.3,22.5
+Kex rån m. cremefyllning smaksatt,538.0,4.0,62.3,29.9
+Kex havrekex fullkorn,470.0,8.8,59.1,20.6
+Kex Mariekex,449.0,6.6,74.7,12.8
+Kex mördegskex,480.0,5.4,71.8,18.4
+Kex m. syltfyllning,474.0,4.0,70.9,18.9
+Kex m. nougatfyllning,490.0,5.6,62.6,23.2
+Maräng m. choklad,389.0,3.2,91.0,0.7
+Småkakor olika sorter,492.0,4.7,68.8,21.4
+Jitterbugg m. mördeg maräng,515.0,6.7,52.8,30.5
+Cookie amerikansk m. choklad,486.0,5.2,63.3,22.9
+Kex smörgåskex,462.0,7.0,63.1,18.1
+Pepparkaka,453.0,4.9,72.1,15.4
+Spettekaka,427.0,11.8,71.4,9.8
+Maräng,395.0,1.9,95.3,0.0
+Kex m. fyllning,489.0,5.4,60.7,24.5
+Kex ostkex,492.0,10.1,54.1,25.3
+Kex salta,509.0,8.7,55.3,27.0
+Kex salta m. mjölk,512.0,7.7,57.6,27.2
+Kex u. socker,444.0,6.0,76.1,12.0
+Pepparkaka u. socker,504.0,8.0,63.2,24.0
+Kex smörgåsrån,400.0,8.8,75.8,4.9
+Glasstrut våffla ofylld,416.0,6.3,80.8,6.4
+Småkakor u. socker,546.0,7.0,54.6,33.0
+Mandelbiskvi,421.0,10.2,46.6,20.8
+Deg mördeg gräddad,503.0,4.7,44.1,34.1
+Deg smördeg gräddad,429.0,5.6,53.8,20.8
+Deg smördeg frysvara,395.0,5.0,31.8,27.5
+Deg filodeg kylvara el. frysvara,289.0,8.0,57.9,1.9
+Gräddtårta,294.0,3.0,27.7,19.0
+Toscabit m. mazarinmassa mandel choklad,487.0,6.6,42.6,31.4
+Bärtårta m. grädde vaniljkräm sylt gele,245.0,3.2,31.4,11.0
+Prinsesstårta m. grädde vaniljkräm hallonsylt marsipan,295.0,4.3,37.3,13.8
+Chokladtårta Sachertårta,443.0,5.6,46.8,25.3
+Napoleonbakelse m. grädde vaniljkräm hallonsylt glasyr,349.0,3.2,37.2,20.6
+Frukttårta m. hallonsylt vaniljkräm mandelmassa frukt gele,249.0,5.1,37.4,7.5
+Chokladbiskvi m. mandelbotten smörkräm choklad,494.0,5.6,50.9,28.6
+Mazariner m. mördegsbotten mazarinfyllning glasyr,436.0,6.7,55.0,20.6
+Mjuk kaka drömtårta chokladrulltårta,390.0,6.1,53.2,16.5
+Mjuk kaka rulltårta m. sylt,380.0,3.0,57.4,14.9
+Punschrulle,453.0,5.0,61.2,20.2
+Chokladboll,508.0,4.9,49.1,31.5
+Gräddtårta m. jordgubb banan hemlagad,209.0,3.0,22.0,11.7
+Potatisbakelse m. vaniljkräm smörkräm marsipan,405.0,4.8,56.8,16.8
+Äppelkaka m. ströbröd,219.0,1.3,27.6,10.8
+Mjuk kaka drömtårta chokladrulltårta hemlagad,355.0,5.3,43.0,17.6
+Semla vetebulle fylld m. mandelmassa vispad grädde,333.0,5.4,39.7,16.3
+Mjuk kaka chokladruta m. chokladglasyr riven kokos,420.0,4.2,47.7,23.2
+Mjuk kaka ambrosiakaka sockerkaka m. glasyr,377.0,3.5,53.8,16.2
+Arraksboll,445.0,3.2,58.0,21.8
+Petit-choux u. fyllning,201.0,5.9,17.9,11.7
+Semla vetebulle fylld m. mandelmassa vispad grädde hemlagad,296.0,6.1,38.0,12.9
+Mjuk kaka fransk äppelkaka,233.0,3.0,19.5,15.2
+Mjuk kaka toscakaka,404.0,6.7,43.9,21.8
+Mjuk kaka chokladkaka,339.0,5.3,39.7,17.2
+Muffins amerikansk,431.0,5.8,46.8,24.2
+Mjuk kaka sockerkaka pepparkaka,374.0,3.9,56.0,14.1
+Mjuk kaka tårtbotten,301.0,5.9,58.7,4.2
+Mjuk kaka sockerkaka fin,397.0,4.3,48.3,20.5
+Mjuk kaka pepparkaka,335.0,4.7,45.3,14.7
+Mjuk kaka nötkaka,441.0,9.5,29.4,30.6
+Mjuk kaka sockerkaka fin mager,292.0,4.3,49.0,8.3
+Mjuk kaka sockerkaka saftig,319.0,5.2,53.0,9.1
+Kex digestive fullkorn 23%,476.0,6.4,66.1,19.8
+Mjuk kaka fruktkaka,387.0,5.0,42.9,21.1
+Glass gräddglass fett 12%,196.0,3.2,25.1,9.2
+Glass vaniljsmak fett ca 8%,177.0,2.5,27.0,6.5
+Glass fett ca 10%,193.0,3.3,23.1,9.7
+Glass glasstrut fett ca 15%,271.0,4.0,29.2,15.3
+Glass lättglass m. sötningsm. fett ca 6%,139.0,4.3,17.5,5.7
+Glass glasstrut våffla m. vaniljglass daimbitar chokladöverdrag,345.0,3.7,35.1,20.8
+Glass vaniljglass m. chokladkex,266.0,4.7,37.4,10.4
+Glass gräddglass fett 15%,222.0,3.7,19.6,14.4
+Glass fett 12%,200.0,3.8,19.3,12.0
+Glass lättglass fett ca 5%,167.0,4.3,26.6,4.7
+Glass glasspinne fett ca 25%,348.0,4.6,26.0,25.3
+Glass glasspinne m. kakaoöverdrag fett 20%,307.0,3.8,28.0,20.1
+Glass glasspinne el. split m. isöverdrag fett ca 6%,150.0,1.7,22.3,6.0
+Glass glasstrut fett ca 10%,244.0,3.6,34.0,10.3
+Glass mjukglass bägare,154.0,3.1,19.7,7.0
+Glass glasstårta fett 17%,261.0,4.4,22.2,17.0
+Glass m. maräng fett 10%,234.0,4.0,25.8,12.8
+Glass havreglass m. vanilji fett 13%,218.0,0.5,25.3,12.6
+Glass parfait m. bär,239.0,2.4,9.2,21.4
+Matlagningsbas m. havre fett 13%,145.0,0.7,6.7,12.8
+Gräddfil fett 12%,137.0,3.1,4.4,12.0
+Kaffegrädde fett 12%,137.0,3.1,4.4,12.0
+Vispgrädde fett 40%,374.0,2.1,3.0,40.0
+Mellangrädde fett 27%,264.0,2.6,3.6,27.0
+Matlagningsgrädde fett 15%,162.0,3.0,4.2,15.0
+Crème fraiche fett 34%,323.0,2.3,3.3,34.0
+Crème fraiche lätt fett 15%,162.0,3.0,4.3,15.0
+Gräddersättning pulver fett 35%,556.0,4.8,54.9,35.5
+Gräddfilssås m. kryddgrönt,125.0,3.1,4.4,10.6
+Gräddfilssås fett 9%,85.0,2.8,6.7,5.1
+Gräddfilssås m. crème fraiche,147.0,2.6,6.4,12.3
+Rabarberkräm,57.0,0.2,12.7,0.1
+Rabarbersoppa,52.0,0.2,11.7,0.1
+Apelsinsoppa,46.0,0.4,10.6,0.1
+Blåbärssoppa hemlagad,47.0,0.2,10.4,0.3
+Svartvinbärskräm,69.0,0.5,14.7,0.4
+Äppelkompott,65.0,0.0,15.0,0.0
+Äppelkräm,60.0,0.0,13.9,0.0
+Äppelsoppa,49.0,0.0,11.2,0.0
+Kräm m. bär el. frukt,64.0,0.2,14.4,0.2
+Pajfyllning bär m. socker,107.0,0.8,23.5,0.4
+Saftkräm,116.0,0.0,28.4,0.0
+Saftsoppa,86.0,0.0,21.1,0.0
+Saftsås,117.0,0.0,28.8,0.0
+Fruktdryck blåbär berikad,48.0,0.8,10.6,0.1
+Fruktsoppa pastöriserad ätf. blandad torkad frukt berikad,54.0,0.2,12.9,0.0
+Nyponsoppa ätf. pastöriserad el. pulver berikad ,52.0,0.2,12.1,0.1
+Nyponsoppa ätf. pulver osötad berikad,20.0,0.2,4.3,0.1
+Mjuk kaka m. katrinplommon,172.0,5.4,24.2,5.2
+Kalvdans m. mjölkpulver ägg,120.0,8.9,13.0,3.5
+Ostkaka m. cottage cheese,168.0,10.1,10.5,9.3
+Marängsviss hovdessert,354.0,4.5,37.4,20.0
+Brylépudding,129.0,4.9,19.6,3.3
+Vaniljsås m. mellanmjölk matlagningsgrädde vispgrädde hemlagad,192.0,3.8,11.8,14.6
+Chokladpudding,126.0,4.8,19.1,3.0
+Chokladpudding m. vispad grädde fett 40%,172.0,4.3,16.1,9.8
+Chokladmousse,297.0,5.8,28.7,17.8
+Fromage apelsin el. citron hemlagad,276.0,5.3,18.2,20.4
+Glassås choklad hemlagad,249.0,4.5,44.8,4.1
+Glassås kolasås,288.0,2.3,28.7,18.3
+Vaniljpudding,154.0,3.7,16.0,8.4
+Vaniljsås m. grädde mjölk,302.0,3.4,10.5,27.7
+Ostkaka lätt osötad fett 3%,111.0,12.0,8.6,3.0
+Fromage citron,173.0,2.4,16.2,11.0
+Vaniljsås m. havre fett 11%,154.0,0.6,16.1,9.6
+Vaniljsås tillagad pulver m. mjölk,106.0,3.1,16.1,3.2
+Glassås choklad,352.0,3.1,69.5,5.5
+Glassås frukt,316.0,0.1,77.8,0.0
+Rabarberpaj,274.0,2.6,34.6,13.3
+Äppelpaj m. lock,286.0,3.0,32.3,15.7
+Cheesecake m. digestivebotten bär fryst,262.0,4.1,17.0,19.7
+Cheesecake m. digestivebotten,292.0,5.5,20.0,21.3
+Mannagrynskaka mannagrynspudding,104.0,4.9,15.2,2.4
+Äppelsmulpaj,241.0,1.8,32.5,10.9
+Katrinplommonsufflé,62.0,1.9,12.4,0.2
+Äppelpaj friterad,303.0,2.6,35.1,16.6
+Banan friterad,176.0,2.2,27.3,6.0
+Äpple ugnsstekt m. olja el. flytande margarin socker mandelmassa valnötter,322.0,3.1,24.8,22.9
+Banan friterad m. glass tillagad på restaurang,253.0,2.4,30.3,13.2
+Apelsinmarmelad,233.0,0.2,56.9,0.0
+Gelé röda vinbär,280.0,0.2,68.4,0.0
+Gelé svarta vinbär,265.0,0.2,64.7,0.0
+Apelsinmarmelad lättsockrad lag,185.0,0.5,44.5,0.1
+Marmelad olika smaker,238.0,0.3,57.7,0.1
+Lingonsylt,148.0,0.2,35.3,0.2
+Lingonsylt sötningsm.,43.0,0.4,8.8,0.4
+Jordgubbssylt,171.0,0.2,41.1,0.1
+Björnbärssylt,174.0,0.2,41.2,0.1
+Blåbärssylt,148.0,0.2,34.9,0.3
+Hallonsylt,184.0,0.4,43.6,0.2
+Hjortronsylt,181.0,0.5,42.0,0.3
+Krusbärssylt,163.0,0.3,38.5,0.2
+Körsbärssylt,181.0,0.7,42.6,0.3
+Äppelmos,233.0,0.2,56.9,0.0
+Äppelmos lättsockrad,128.0,0.2,30.9,0.0
+Äppelmos osötad el. sötningsm.,48.0,0.2,11.3,0.0
+Cumberlandsås,214.0,0.6,48.0,0.3
+Apelsinsaft konc. berikad,194.0,0.3,47.5,0.0
+Apelsinsaft drickf. berikad,30.0,0.0,7.5,0.0
+Saft lättsockrad konc.,213.0,0.0,52.4,0.0
+Måltidsdryck drickf.,36.0,0.0,8.8,0.0
+Saft konc.,213.0,0.0,52.4,0.0
+Saft drickf.,36.0,0.0,8.8,0.0
+Svartvinbärssaft konc. berikad,174.0,0.4,42.3,0.0
+Saft sötningsm. konc.,93.0,0.5,22.5,0.0
+Fruktdryck m. kolsyra,40.0,0.0,9.9,0.0
+Fruktdryck u. kolsyra,48.0,0.0,11.9,0.0
+Läsk,36.0,0.0,8.8,0.0
+Läsk cola,43.0,0.0,10.5,0.0
+Läsk light,1.0,0.0,0.3,0.0
+Läsk cola light,0.0,0.0,0.1,0.0
+Sportdryck drickf.,29.0,0.0,7.2,0.0
+Saft sötningsm. drickf.,9.0,0.0,2.2,0.0
+Hallonsaft drickf.,37.0,0.0,9.0,0.0
+Svartvinbärssaft drickf. berikad,32.0,0.0,8.0,0.0
+Lingondricka drickf. berikad,28.0,0.0,7.0,0.0
+Äppeldricka drickf. berikad,32.0,0.0,7.9,0.0
+Saft sötningsm. drickf. berikad,17.0,0.0,4.2,0.0
+Glass isglass,95.0,0.1,23.2,0.0
+Glass sorbet,132.0,0.8,30.5,0.6
+Glass isglass saftis,97.0,0.0,20.5,1.5
+Chokladdryck m. vatten,47.0,3.1,7.6,0.3
+Chokladdryck drickf.,68.0,3.5,9.8,1.5
+Mjölkchoklad m. hackade hasselnötter,545.0,8.7,55.6,31.8
+Mjölkchoklad fylld m. mandelkrokant,539.0,4.1,60.1,31.1
+Mjölkchoklad m. mjuk kolafyllning,484.0,4.5,62.6,23.4
+Kex m. mjölkchokladöverdrag,521.0,6.1,58.7,28.6
+Kex m. kola mjölkchokladöverdrag,494.0,5.0,64.1,23.6
+Mjuk nougat m. kolasås jordnötter mjölkchokladöverdrag,507.0,7.6,54.4,28.2
+Mjuk chokladmaräng m. kola mjölkchokladöverdrag,442.0,4.2,70.7,15.3
+Choklad chokladpraliner,547.0,7.4,53.7,33.7
+Chokladpralin,540.0,6.6,53.3,33.5
+Mjuk kokos m. mjölkchokladöverdrag,478.0,3.6,56.1,25.7
+Nötkräm chokladkräm,542.0,5.5,55.4,32.5
+Choklad sötningsm.,577.0,10.0,46.9,39.0
+Gelékgodis,350.0,4.7,81.3,0.0
+Karameller,395.0,0.0,97.2,0.0
+Kola,456.0,4.1,68.9,18.0
+Marmeladkonfekt,336.0,0.0,82.6,0.0
+Skumgodis,350.0,4.7,81.3,0.0
+Polkagris,399.0,0.0,98.1,0.0
+Tuggummi,378.0,0.4,92.7,0.0
+Klubba chokladkola karamell,436.0,2.5,80.6,11.1
+Chokladkola mörk m. chokladöverdrag,470.0,4.3,71.7,18.2
+Kex rån m. chokladfyllning,500.0,9.7,58.5,24.6
+Fruktkola,394.0,0.7,96.3,0.0
+Skumboll m. chokladöverdrag kokos,412.0,5.0,52.6,20.0
+Skumboll m. chokladöverdrag,396.0,5.0,59.6,15.0
+Bar energibar m. choklad nötter,419.0,7.1,69.6,11.2
+Karameller sockerfria,169.0,6.1,5.6,0.5
+Tuggummi sockerfritt,153.0,0.6,86.1,0.0
+Mandelmassa,460.0,9.9,51.5,23.0
+Kakaopulver fett 20-22%,394.0,23.5,10.6,21.5
+"Chokladdryckspulver m. socker fett 2,5%",402.0,5.1,87.7,2.9
+Chokladboll hemlagad,450.0,3.5,52.4,24.5
+Måltidsersättning pulver chokladsmak berikad,376.0,35.0,32.6,9.0
+Socker,405.0,0.0,99.6,0.0
+Brun farin,388.0,0.0,95.5,0.0
+Ljus sirap,323.0,0.0,79.6,0.0
+Honung,332.0,0.3,81.5,0.0
+Druvsocker,370.0,0.0,91.1,0.0
+Fruktsocker,373.0,0.0,91.7,0.0
+Sorbitol m. sackarin,235.0,0.0,98.5,0.0
+"Svagdricka vol. % 2,3",29.0,0.2,3.8,0.0
+"Öl lättöl vol. % 2,3",29.0,0.2,3.8,0.0
+"Öl pilsner folköl vol. % 3,5",40.0,0.4,4.6,0.0
+Cider vol. % 1,47.0,0.0,10.1,0.0
+Vin vitt vol. % 1,17.0,0.0,2.8,0.0
+Vin rött el. rosé vol. % 1,17.0,0.0,2.8,0.0
+"Öl starköl el. exportöl vol. % 5,4",42.0,0.0,3.0,0.0
+Vin rött vol. % 14,79.0,0.0,1.0,0.0
+Vin vitt vol. % 12,70.0,0.0,1.0,0.0
+Vin vitt el. rhenvin vol. % 10,71.0,0.1,3.8,0.0
+Glögg vin vol. % 10,124.0,0.0,17.0,0.0
+Starkvin vol. % 18 typ Madeira,129.0,0.0,7.9,0.0
+Starkvin vitt rött vol. % 20 typ Portvin,150.0,0.0,9.5,0.0
+Starkvin halvtorr vol. % 17 typ Sherry,125.0,0.0,3.4,0.0
+Glögg starkvin vol. % 16,179.0,0.0,22.3,0.0
+Brännvin renat el. vodka vol. % 40,222.0,0.0,0.0,0.0
+Likör söt vol. % 24,266.0,0.0,33.0,0.0
+Likör Kaptenlöjtnant vol. % 38,321.0,0.0,27.0,0.0
+Konjak el. brandy vol. % 40,225.0,0.0,0.8,0.0
+Punsch vol. % 26,244.0,0.0,26.0,0.0
+Rom vol. % 40,223.0,0.0,0.3,0.0
+Brännvin kryddat vol. % 40 ,226.0,0.0,1.1,0.0
+Gin vol. % 40,222.0,0.0,0.0,0.0
+Whisky vol. % 40,222.0,0.0,0.0,0.0
+Likör mindre söt vol. % 24,232.0,0.0,24.7,0.0
+Kaffedrink Irish coffee m.whiskey vispad grädde,80.0,0.1,4.2,2.7
+Bovetemjöl,361.0,13.5,65.1,3.6
+Havremust pulver,361.0,14.0,54.4,7.2
+Kornmjöl fullkorn,341.0,9.2,64.7,3.0
+Majsmjöl gult u. groddar,354.0,6.0,71.5,3.4
+Rågmjöl fullkorn,325.0,8.1,59.3,1.7
+Vetemjöl fullkorn grahamsmjöl,336.0,10.7,61.0,2.0
+Vetediet berikad,388.0,19.0,53.5,8.5
+Vetemjöl bagerivetemjöl,348.0,10.6,70.2,1.6
+Vetemjöl,352.0,8.5,72.4,1.9
+Majsstärkelse,362.0,0.0,87.5,0.7
+Potatismjöl,346.0,0.0,84.3,0.4
+Samarinpulver,0.0,0.0,0.0,0.0
+Samarin drickf.,0.0,0.0,0.0,0.0
+Vatten sodavatten,0.0,0.0,0.0,0.0
+Vatten vichyvatten,0.0,0.0,0.0,0.0
+Vatten mineralvatten,0.0,0.0,0.0,0.0
+Vatten kranvatten,0.0,0.0,0.0,0.0
+Snabbkaffe pulver,305.0,22.5,38.6,0.9
+Snabbkaffe drickf.,2.0,0.1,0.4,0.0
+Kaffe bryggt,2.0,0.0,0.5,0.0
+Kaffe espresso bryggt drickf.,9.0,0.1,1.7,0.2
+Snabbkaffe koffeinfritt drickf.,2.0,0.2,0.3,0.0
+Tepulver,309.0,11.7,61.8,0.4
+Te bryggt,0.0,0.0,0.0,0.0
+Örtte drickf.,1.0,0.0,0.3,0.0
+Nyponte drickf. m. svarta vinbär,3.0,0.0,0.7,0.0
+Ättiksprit ättiksyra 12%,49.0,0.0,12.0,0.0
+Vinäger ättiksyra 7%,30.0,0.4,7.0,0.0
+Äppelcidervinäger ättiksyra 7%,30.0,0.4,7.0,0.0
+Chilisås tomat,81.0,1.5,16.7,0.5
+Ketchup,91.0,1.0,18.5,0.5
+Engelsk brown sauce HP-sås,107.0,1.1,25.2,0.0
+Grillsås,100.0,1.5,8.0,6.9
+Senap svensk,173.0,4.5,23.1,6.8
+Senap fransk,93.0,6.0,5.3,5.0
+Sötsur sås,96.0,0.2,23.3,0.0
+Salt m. jod,0.0,0.0,0.0,0.0
+Salt mineralsalt,0.0,0.0,0.0,0.0
+Salt havssalt u. jod,0.0,0.0,0.0,0.0
+Salt örtsalt,18.0,0.9,2.7,0.1
+Jäst färsk,110.0,12.1,14.1,0.4
+Jäst torkad,360.0,37.0,48.1,1.6
+Bakpulver,174.0,0.1,42.4,0.0
+Béchamelsås m. lättmjölk grädde,108.0,4.3,8.2,6.4
+Ljus sås m. mjölk,109.0,4.7,9.3,5.8
+Ljus sås m. buljong grädde,101.0,1.3,4.9,8.5
+Béchamelsås,122.0,4.3,8.2,8.0
+Gratängsås u. ost hemlagad,121.0,3.9,6.5,8.8
+Ljus sås m. grädde,105.0,1.3,4.9,9.0
+Ostsås,154.0,7.3,7.4,10.6
+Ostsås m. ädelost,161.0,7.7,6.9,11.5
+Ostsås till moussaka,131.0,8.7,7.4,7.4
+Brunsås m. mjölk,139.0,4.5,11.9,8.1
+Sky,29.0,1.2,0.0,2.7
+Brunsås m. buljong grädde,110.0,1.3,7.3,8.5
+Brunsås m. buljong,93.0,1.1,7.5,6.5
+Currysås hemlagad,99.0,1.4,4.6,8.4
+Brunsås m. kaffegrädde,98.0,1.3,7.4,7.1
+Korintsås,70.0,0.8,9.6,3.0
+Brunsås tillagad pulver m. mjölk vatten,56.0,2.2,7.1,2.0
+Gräddsås tillagad pulver m. mjölk vatten smör,117.0,2.7,7.6,8.4
+Tomatsås kryddstark,53.0,1.0,5.9,2.6
+Dillsås,106.0,1.4,7.5,7.8
+Äggsås m. persilja,109.0,3.5,4.0,8.9
+Pesto hemlagad,542.0,11.6,1.2,54.5
+Pesto m. basilika pinjenötter cashewnötter,581.0,4.2,12.6,57.1
+Dippmix pulver olika smaker,307.0,11.4,59.3,1.1
+Sweet chilisås,207.0,0.8,43.4,2.9
+Pastasås m. tomat örtkryddor,106.0,1.9,13.1,4.4
+Pastasås olika märken,51.0,1.6,5.3,2.1
+Sötsur sås m. grönsaker konserv.,107.0,0.4,20.1,2.5
+Orientalisk sås m. grönsaker konserv.,90.0,1.1,10.1,4.8
+Teriyakisås,110.0,3.2,22.2,0.8
+Frukostflingor müsli fullkorn m. frukt,374.0,8.2,69.9,4.5
+Frukostflingor müsli fullkorn m. bär,366.0,8.6,68.9,3.5
+Frukostflingor müsli fullkorn m. socker m. frukt nötter,455.0,9.9,61.2,17.1
+Frukostflingor crunchy fullkorn m. socker m. russin kokos,450.0,7.0,65.5,16.3
+Frukostflingor crunchy naturell m. socker m. kokos,461.0,7.4,64.8,17.7
+Frukostflingor müsli fullkorn m. socker m. frukt kokos,412.0,6.5,67.6,10.9
+Frukostflingor müsli fullkorn m. socker m. frukt bär,466.0,7.4,64.4,18.4
+Frukostflingor müsli flingblandning fullkorn m. frukt nötter  ,378.0,9.4,66.1,6.1
+Frukostflingor müsli fullkorn m. frukt banan,381.0,8.2,65.2,7.0
+Surimi fisk,105.0,0.8,23.5,0.7
+Matlagningsbas fett 15%,155.0,2.0,3.0,15.3
+Matlagningsbas fett 7%,89.0,1.1,5.4,7.1
+Vispgrädde ersättningsprod. mjölk olja fett 20%,206.0,2.8,5.0,19.7
+Kaffegrädde ersättningsprod. mjölk olja fett 10%,118.0,3.0,4.4,9.9
+Vaniljvisp fett 12%,202.0,4.4,19.1,12.1
+Crème fraiche smaksatt fett 13%,156.0,2.9,6.7,13.2
+Crème fraiche smaksatt fett 28%,275.0,2.0,4.4,28.1
+Mini fraiche fett 5%,84.0,3.8,5.7,5.2
+Mjukost smältost fett 13% typ grevé,186.0,14.3,3.4,13.0
+"Filmjölk naturell fett 4,2%",68.0,3.5,4.2,4.1
+"Fruktyoghurt olika smaker fett 3,6%",91.0,3.0,11.5,3.7
+Vit choklad,547.0,5.1,61.6,31.2
+Mörk choklad kakao ≥ 70%,572.0,9.7,50.7,37.0
+Mörk choklad kakao < 70%,536.0,6.3,63.1,28.8
+Bakchoklad mörk,556.0,5.6,59.8,32.8
+Mjölkchoklad,535.0,5.2,58.1,30.8
+Kebabkött frysvara,248.0,14.3,6.2,18.6
+Ris avorio okokt,358.0,6.7,78.1,1.3
+Lök rostad ,607.0,6.4,35.0,48.5
+"Glass glasspinne m. frukt  mjölk fett 5,5%",166.0,3.3,25.5,5.6
+Glass glasspinne fett 10%,199.0,4.1,22.6,10.2
+Bar m. fiber havre vete naturell,446.0,6.9,49.9,20.8
+Knäckemacka vete olika fyllningar,487.0,11.7,52.1,25.0
+Knäckemacka fullkorn råg olika fyllningar,471.0,12.6,45.9,24.5
+Falafel kikärtskroketter frysvara,231.0,8.1,21.2,11.3
+Pytt i panna m. sojaprotein veg.,127.0,5.6,16.3,3.6
+Korv veg. soja- och veteprotein kylvara el. frysvara typ grillkorv,120.0,15.3,8.7,1.6
+Soja- och veteprotein bullar kylvara el. frysvara,179.0,16.7,9.0,7.3
+Sojaprotein färs kylvara el. frysvara,167.0,15.2,4.8,8.6
+Veteprotein grytbitar,232.0,27.4,9.9,9.1
+Matlagningsbas m. soja fett 17%,188.0,2.9,5.2,17.5
+Bar müslibar fullkorn m. röd frukt berikad,393.0,8.4,77.9,4.4
+Bar müslibar m. choklad berikad,398.0,8.1,73.2,6.5
+Jordnötssås,281.0,6.3,8.6,24.2
+Coleslaw hemlagad,88.0,0.9,6.9,5.9
+Löksås m. grädde,151.0,1.5,11.1,11.1
+Nudlar äggnudlar kokta m. salt,130.0,4.8,23.5,1.4
+Nässlor stuvade,62.0,4.1,2.3,3.7
+Kantarell stuvad,169.0,3.5,6.0,14.3
+Gryta ratatouille veg.,52.0,1.0,5.9,2.3
+Potatisgratäng m. matlagningsgrädde ost hemlagad,143.0,4.8,13.4,7.4
+Sjömansbiff,97.0,6.8,10.4,2.8
+Gryta kreolsk gryta,175.0,10.7,4.8,12.5
+Flygande Jakob kyckling m. bacon jordnötter banan,156.0,13.9,6.3,8.2
+Korv prinskorv stekt kött 61%,283.0,10.6,4.0,25.4
+Skinkröra kall,143.0,7.7,3.0,11.2
+Hamburgare blandfärs stekt,260.0,22.3,0.0,19.2
+Köttfärssås blandfärs,97.0,6.0,4.7,5.9
+Nöt färs stekt m. salt fett 10%,225.0,25.0,0.0,14.0
+Nöt el. gris kött stekt,171.0,23.5,0.0,8.6
+Carbonara pastasås,286.0,18.4,0.7,23.6
+Skagenröra hemlagad,163.0,12.7,1.9,11.7
+Fisksoppa m. rotfrukter,74.0,6.4,4.0,3.2
+Havregrynsgröt fullkorn fiberhavregryn,68.0,1.8,11.2,1.3
+Havregrynsgröt kokt m. mjölk,89.0,4.1,12.3,2.3
+Nudlar glasnudlar kokta m. salt,134.0,0.1,32.9,0.0
+Gröt,69.0,2.0,11.5,1.4
+Pannkaka m. sojadryck,158.0,5.9,16.6,7.3
+Paj m. broccoli skinka,206.0,7.8,12.4,13.7
+Pizza m. kebabkött hemlagad,168.0,6.3,18.5,7.3
+Pizza Hawaii m. skinka ananas restaurang,300.0,16.1,20.7,16.3
+Ostsås m. skinka hemlagad,144.0,10.3,6.0,8.8
+Tzatziki,76.0,2.4,4.2,5.5
+Ris à la malta m. lättmjölk mellangrädde fett 27%,115.0,3.0,16.2,4.1
+Rödkålssallad m. äpple,81.0,0.5,18.3,0.1
+Champinjon stekt u. fett,35.0,3.1,3.5,0.3
+Palsternacka kokt m. salt,71.0,1.7,12.5,0.6
+Gratängsås m. ost hemlagad,138.0,5.9,6.5,9.9
+Fänkål kokt m. salt,28.0,2.8,1.8,0.4
+Kroppkakor el. potatispalt m. fläsk hemlagad,156.0,4.6,19.7,6.1
+Currysås m. lätt crème fraiche hemlagad,88.0,1.1,5.3,6.8
+Korv stroganoff mager korv fett 15% grädde fett 15%,186.0,7.2,6.3,14.7
+Ostkaka fett 7%,172.0,10.4,16.6,7.0
+Rapsolja,884.0,0.0,0.0,100.0
+Matfettsblandning fett 75% berikad typ Bregott,667.0,0.5,0.5,75.0
+Lättmargarin fett 40% berikad typ Lätta,368.0,0.5,3.0,40.0
+Äggröra,189.0,11.9,1.0,15.5
+Ägg kokt,137.0,12.2,0.4,9.7
+Aloe vera juice naturell,3.0,0.0,0.5,0.1
+Aloe vera juice m. grönt te,30.0,0.0,6.5,0.4
+Aloe vera-dryck m. tranbär äpple,39.0,0.0,9.1,0.2
+Aloe vera-dryck naturell,19.0,0.0,4.4,0.1
+Toscaglasyr,530.0,8.9,30.5,40.5
+Pasta makaroner spagetti okokt glutenfri,362.0,7.3,77.6,1.3
+Pasta fusilli lasagneplattor okokt glutenfri,361.0,7.4,76.9,1.4
+Pepparkaka glutenfri,460.0,1.5,75.6,16.2
+Kex digestive fullkorn glutenfri,462.0,1.9,75.3,16.1
+"Hårt bröd glutenfritt fibrer ca 7,5% berikad typ grovknäcke",372.0,2.9,79.9,2.3
+Pasta tagliatelle m. ägg okokt glutenfri,384.0,2.6,82.1,4.5
+Pasta okokt majs 100% glutenfri,366.0,6.9,77.7,1.8
+Bearnaisesås fett 8%,112.0,2.3,7.7,8.0
+Klassisk gräddsås fett 6%,88.0,2.0,7.1,5.8
+Ostsås fett 8%,118.0,4.7,7.9,7.6
+Bearnaisesås fett ca 40%,342.0,1.0,5.9,35.5
+"Rödvinssås fett 1,5%",65.0,1.2,12.1,1.2
+Kebabsås vit fett 30%,300.0,1.7,5.0,30.8
+"Svampsås fett 8,5%",119.0,2.7,7.6,8.7
+Korv varmkorv mager fett 7%,170.0,12.0,7.6,9.9
+Korv chorizo mager fett 9%,160.0,14.4,4.8,9.0
+Korv middagskorv fett ca 9% kött ca 55 %,131.0,10.1,6.0,7.0
+Påläggskorv salami mager,174.0,24.4,1.1,8.0
+"Fruktyoghurt lättsockrad fett 0,2% berikad",64.0,3.6,11.5,0.3
+"Fruktyoghurt lättsockrad laktosreducerad fett 0,1% berikad",64.0,3.9,11.2,0.3
+Mintplattor m. mörkchokladöverdrag,448.0,3.7,69.0,16.3
+Ost mozzarella fett 18%,214.0,15.6,0.8,16.6
+Ingefära färsk,29.0,0.9,4.6,0.3
+Kebabkött restaurang,302.0,18.7,4.9,22.9
+Fruktdryck nypon blåbär berikad,48.0,0.8,10.6,0.1
+Energidryck berikad,39.0,0.0,9.6,0.0
+Öl alkoholfri,15.0,0.4,3.1,0.0
+Flytande margarin mjölkfri fett 80% berikad typ Carlshamn,707.0,0.0,0.0,80.0
+Bordsmargarin mjölkfri fett 70% berikad typ Carlshamn,619.0,0.0,0.0,70.0
+Hushållsmargarin mjölkfri fett 80% berikad typ Carlshamn,707.0,0.0,0.0,80.0
+Lamm rygg el. hals kokt m. salt,217.0,21.6,0.0,14.6
+Tilapia rå,87.0,17.9,0.0,1.6
+Lättmargarin fett 28% berikad typ Mini Lätta,272.0,2.0,4.0,28.0
+Flytande margarin fett 79% berikad typ Becel,727.0,0.0,0.5,82.0
+Ris basmati okokt,359.0,9.2,76.7,1.0
+Ris jasmin okokt,354.0,7.5,78.2,0.7
+Ris råris långkornigt okokt fullkorn,365.0,9.4,71.9,3.0
+Ris grötris snabb okokt,364.0,6.4,81.3,0.6
+Ris långkornigt okokt,352.0,7.8,76.9,0.7
+Ris långkornigt parboiled okokt,362.0,7.7,78.0,1.2
+Ris snabbris okokt salt 1%,361.0,7.9,79.7,0.2
+Ris snabbris okokt,365.0,8.5,78.5,0.7
+Ris grötris rundkornigt okokt,361.0,6.4,80.2,0.8
+Bordsmargarin fett 70% berikad typ Becel Gold,623.0,0.4,0.5,70.0
+Blandfärs rå nöt 70% gris 30%,201.0,18.8,0.0,14.1
+Blandfärs rå nöt 50% gris 50% ,213.0,18.0,0.0,15.8
+Kebab m. bröd sallad sås,216.0,7.8,18.8,12.0
+Kebabtallrik m. pommes frites,254.0,6.4,19.2,16.6
+Korv m. mos ketchup senap bostongurka,105.0,2.9,12.3,4.6
+Korv m. bröd ketchup senap,259.0,8.5,22.4,14.7
+Hamburgare dubbel m. bröd ost inlagd gurka tillagad på restaurang,260.0,16.8,16.3,13.9
+Hamburgare 90 g m. bröd tillbehör tillagad på restaurang,249.0,11.9,17.5,14.4
+Hamburgare m. bröd ost tillagad på restaurang,259.0,14.2,22.9,11.8
+Ris basmati kokt m. salt,121.0,3.1,25.9,0.3
+Ris jasmin kokt m. salt,113.0,2.4,25.0,0.2
+Ris långkornigt kokt m. salt,113.0,2.5,24.6,0.2
+Ris långkornigt parboiled kokt m. salt,129.0,2.8,27.9,0.4
+Ris råris långkornigt kokt m. salt fullkorn,138.0,3.6,27.3,1.1
+Ris snabbris kokt salt 1%,103.0,2.3,22.8,0.1
+Ris snabbris kokt m. salt,111.0,2.6,24.0,0.2
+Pasta tagliatelle m. ägg kokt m. salt glutenfri,159.0,1.1,34.0,1.9
+Pasta makaroner spagetti kokt m. salt glutenfri,153.0,3.1,32.8,0.5
+Pasta kokt m. salt majs 100% glutenfri,155.0,2.9,33.0,0.8
+Lasagne blandfärs,129.0,6.6,11.5,6.1
+Gröna ärtor kokta m. salt frysvara,69.0,5.2,8.9,0.4
+Gryta kalops älg,69.0,8.2,3.6,2.2
+Älg högrev rå,113.0,22.5,0.2,2.3
+Älg ryggbiff rå,106.0,23.6,0.0,1.1
+Tacoskal,481.0,5.5,59.9,23.5
+Romansallat,16.0,1.9,0.9,0.2
+Ruccolasallat,21.0,3.6,0.0,0.4
+Okra kokt u. salt,25.0,1.8,2.5,0.2
+Blomkål stekt el. wokad,71.0,2.5,3.4,4.8
+Broccoli stekt el. wokad,91.0,5.5,3.0,5.2
+Morot stekt el. wokad,103.0,0.9,8.3,6.9
+Paprika stekt el. wokad ,78.0,0.7,5.1,5.8
+Purjolök stekt el. wokad,79.0,2.1,5.3,4.7
+Rotselleri stekt el. wokad,81.0,1.3,5.7,5.1
+Blandfärs stekt tacokryddad,215.0,17.6,2.6,14.9
+Sojaprotein färs stekt tacokryddad,212.0,17.9,11.7,9.0
+Potatisgratäng kylvara,115.0,2.0,10.5,6.8
+Ugnsrostade grönsaker rotfrukter,61.0,1.1,6.7,2.7
+Kyckling färs stekt tacokryddad,146.0,20.6,2.7,5.6
+Rismål m. sylt,129.0,2.9,21.6,3.3
+Rismål m. sylt u. socker m. sötningsmedel ,95.0,3.2,13.1,3.2
+Nöt innanlår stekt,130.0,27.8,0.0,1.9
+Älgbiff stekt,124.0,27.6,0.0,1.3
+Kycklinggryta m. grädde/crème fraiche,123.0,8.8,2.9,8.3
+Salt u. jod,0.0,0.0,0.0,0.0
+Blåbärspaj,320.0,2.9,36.1,17.7
+Ost halloumi stekt eller grillad,308.0,23.6,2.0,23.1
+Vilt färs stekt tacokryddad,130.0,21.0,2.5,3.8
+Lamm färs stekt tacokryddad,251.0,16.1,2.6,19.6
+Fiskgratäng m. grönsaker,89.0,8.5,3.1,4.5
+Gräddsås,253.0,2.2,8.3,23.8
+Skaldjurssås,106.0,6.4,4.2,7.1
+Dressing hamburgerdressing,542.0,1.3,10.1,56.0
+Gulaschsoppa,62.0,4.5,5.2,2.3
+Fisksoppa skaldjurssoppa u. vin,51.0,5.8,2.8,1.6
+Sill inlagd m. gräddfilssås,290.0,5.3,15.6,23.2
+Sill inlagd m. senapssås,239.0,5.2,14.5,18.0
+Hummus kikärtsröra,306.0,5.8,8.5,26.5
+Muffins hembakad,347.0,3.9,44.0,17.0
+Chokladmuffins hembakad,416.0,4.8,58.5,17.5
+Chilinötter,516.0,16.6,36.5,32.3
+Pinjefrö,697.0,14.8,8.9,66.8
+Bulgur kokt m. salt,128.0,4.5,24.7,0.5
+Korv ren rå,252.0,17.2,4.0,18.8
+Korv lamm rå,255.0,15.9,4.8,19.3
+"Kvarg naturell fett 0,2%",64.0,10.0,5.2,0.2
+Brödkrutonger ,415.0,11.9,73.5,6.6
+Älg färs rå,106.0,22.6,0.0,1.6
+Älg ytterlår,108.0,22.1,1.5,1.3
+Chips potatis naturell,506.0,5.6,55.6,27.9
+Linfröolja,884.0,0.0,0.0,100.0
+Frukostflingor havre fullkorn typ Havrefras,385.0,12.0,61.8,6.9
+Barnmat klämmis m. yoghurt banan jordgubb konserv.,78.0,1.7,14.4,1.1
+Sill inlagd olika smaker,245.0,9.8,20.0,14.0
+Quinoa röd kokt m. salt,140.0,4.4,21.7,2.4
+Bananchips ,506.0,1.9,59.1,28.1
+Bulgur kokt u. salt fullkorn,113.0,4.1,20.7,0.6
+Äppelkaka hembakad typ Fyriskaka,297.0,3.0,38.0,14.5
+Kladdkaka,413.0,4.7,58.7,17.1
+Kyckling bröstfilé kokt u. skinn,156.0,34.6,0.0,1.8
+Fläsk färs stekt tacokryddad,221.0,15.9,2.6,16.3
+Nöt färs stekt tacokryddad,200.0,18.8,2.6,12.7
+Fläsk färs stekt m. salt fett 15%,250.0,21.1,0.0,18.5
+Lamm färs stekt m. salt,286.0,21.1,0.0,22.7
+Älg färs stekt m. salt,129.0,27.6,0.0,1.9
+Svampprotein färs stekt tacokryddad,155.0,17.9,5.7,5.2
+Sojadryck berikad,37.0,2.6,3.2,1.5
+Lasagne m. sojafärs,133.0,7.0,12.3,5.8
+Couscous kokt m. salt fullkorn,144.0,4.7,27.0,0.9
+Pasta kokt m. salt,139.0,4.6,27.5,0.6
+Vita bönor torkade kokta m. salt,112.0,8.8,11.0,0.9
+Stora vita bönor konserv. u. lag,107.0,6.9,14.6,0.8
+Kikärtor torkade kokta m. salt,133.0,8.1,12.6,2.9
+Sötpotatis rå,71.0,1.6,12.9,0.4
+Dinkelmjöl fullkorn,353.0,11.9,63.5,3.3
+Bröd rågsikt fibrer ca 7%,233.0,6.8,41.8,2.8
+Bröd vitt fibrer ca 5% typ formfranska,249.0,8.6,44.0,3.0
+Hårt bröd fullkorn råg fibrer ca 19% typ Rågi,338.0,8.8,61.8,1.7
+Bröd fullkorn vete råg fibrer ca 6%,256.0,7.4,42.6,4.0
+Bröd vitt fibrer ca 5% typ limpa,261.0,7.5,47.7,2.8
+Bröd fullkorn råg fibrer ca 7%,226.0,9.3,38.3,2.3
+Korvbröd grovt,264.0,9.3,42.4,4.9
+Lax odlad Norge fjordlax rå över disk,203.0,20.0,0.7,13.4
+Kikärtor konserv. u. lag,128.0,7.5,15.7,2.5
+Kidneybönor röda bönor konserv. u. lag,110.0,8.8,13.4,0.7
+Svarta bönor konserv. u. lag,111.0,8.1,13.8,1.0
+Hamburgerbröd,290.0,8.0,47.0,6.8
+Bröd vitt mjölk fibrer ca 4% typ tekaka,285.0,8.1,51.2,4.1
+Bruna bönor rullpack kylvara,95.0,4.4,15.0,0.5
+Gröna linser torkade kokta m. salt,127.0,9.4,15.9,0.7
+Röda linser torkade kokta m. salt,125.0,10.6,14.6,0.6
+Röda linser konserv. u. lag,89.0,6.9,11.9,0.5
+Gröna linser konserv. u. lag,92.0,6.2,13.1,0.6
+Hamburgerbröd grovt,263.0,7.5,43.0,5.0
+Pasta kokt m. salt fullkorn>50%,161.0,5.8,29.9,1.0
+Ägg rått eko.,141.0,12.4,0.4,10.1
+Äggula rå eko.,327.0,16.2,0.6,29.2
+Dinkel speltvete kokt m. salt,135.0,4.6,24.4,1.3
+Muffins m. frukt bär,352.0,4.0,45.0,17.0
+Kycklingröra hemlagad,85.0,10.3,3.6,3.0
+Smoothie m. frukt bär u. mjölk,51.0,0.7,11.0,0.2
+Råkostsallad m. morot äpple paprika purjolök,37.0,0.6,7.2,0.2
+Rödbetssallad kylvara,256.0,1.3,11.7,22.8
+Skagenröra m. majonnäs kylvara,405.0,5.4,6.8,40.1
+Mördegskaka,503.0,4.6,46.9,32.8
+Huvudsallat,16.0,0.9,1.2,0.6
+Majskrokar,410.0,8.9,84.2,3.6
+Wasabi pasta,280.0,2.2,40.0,10.9
+Frukt torkad m. socker,338.0,0.0,81.3,0.0
+Tranbär torkade,309.0,0.0,72.1,0.6
+Mâchesallat,19.0,2.6,0.8,0.2
+Hampafröolja,883.0,0.0,0.0,99.9
+Hushållsmargarin mjölkfri fett 80% berikad typ Milda,707.0,0.0,0.0,80.0
+Lättmargarin fett 40% berikad typ Coop,358.0,0.5,0.5,40.0
+Bordsmargarin fett 60% berikad typ Ica Basic,535.0,0.5,0.5,60.0
+Hushållsmargarin fett 80% berikad typ ICA,710.0,0.2,0.3,80.0
+Nudlar kokta m. kryddor,102.0,2.4,11.8,4.3
+Potatis Hasselbackspotatis bakad,164.0,2.5,22.0,6.6
+Palmolja,884.0,0.0,0.0,100.0
+Ägg stekt eko.,198.0,13.5,0.4,16.1
+Ägg kokt eko.,141.0,12.4,0.4,10.1
+Crème fraichesås m. örtkryddor,169.0,3.0,4.4,15.6
+Majskolv stekt grillad,117.0,3.9,20.3,1.2
+Färs stekt m. salt,226.0,22.5,0.0,15.2
+Pangasiusmal rå,63.0,13.1,0.0,1.1
+Kokosbaserad bit berikad som alternativ till ost,265.0,0.0,18.1,21.0
+Potatis Solist rå,63.0,1.0,13.6,0.1
+Potatis Swift rå,53.0,1.1,11.0,0.1
+Potatis Solist kokt m. salt,77.0,1.4,16.4,0.1
+Potatis Swift kokt m. salt,62.0,1.5,12.5,0.1
+Potatis Asterix rå,74.0,1.8,14.7,0.1
+Nudlar risnudlar okokta,360.0,3.4,83.2,0.6
+Nudlar risnudlar kokta,108.0,0.9,24.9,0.2
+Havtorn,65.0,1.5,5.7,3.2
+Potatis rå,79.0,1.7,16.4,0.1
+Potatis kokt m. salt,83.0,1.8,17.5,0.1
+Grönkålssallad,129.0,1.9,11.4,7.9
+Kålrotslåda,105.0,1.9,9.0,6.2
+Potatis färsk kokt m. salt,71.0,1.4,14.8,0.1
+Potatis färsk rå,59.0,1.1,12.5,0.1
+Potatis Inova rå,66.0,1.9,13.1,0.1
+Potatis King Edward rå,83.0,1.8,17.7,0.1
+Potatis mandelpotatis rå,89.0,2.2,18.1,0.1
+Potatis kokt m. salt tillagad i storhushåll,76.0,1.7,15.8,0.1
+Potatis Asterix kokt m. salt,81.0,1.9,16.7,0.1
+Potatis Inova kokt m. salt,74.0,1.8,15.2,0.1
+Potatis King Edward kokt m. salt,84.0,1.8,17.8,0.1
+Potatis mandelpotatis kokt m. salt,101.0,2.4,21.1,0.1
+Gratäng broccoligratäng m. cottage cheese tomat veg.,92.0,9.2,2.4,4.8
+Gris färs rå fett 15%,202.0,16.8,0.0,15.1
+Hoki rå,72.0,16.6,0.0,0.5
+Aronia slånaronia,48.0,0.7,8.3,0.1
+Vinbär vita,54.0,1.4,9.5,0.2
+Ris rundkornigt kokt m. salt,129.0,2.3,28.6,0.3
+Pilgrimsmussla,43.0,9.5,0.0,0.5
+Laxbullar tillagade m. sås,114.0,5.2,7.2,7.2
+Fiskpinnar ugnsstekta,207.0,12.3,19.0,9.1
+Skarpsill,152.0,17.6,0.0,9.0
+Sill inlagd u. lag,235.0,9.8,21.9,12.0
+Sill höstsill inlagd u. lag,247.0,11.7,23.1,12.0
+Sill inlagd senapssill u. sås,251.0,7.8,15.2,17.8
+Kapkummel rå,73.0,16.6,0.0,0.6
+Guldsparid rå,177.0,18.9,0.0,11.4
+Havsabborre rå,134.0,19.5,0.0,6.2
+Alaska pollock rå,76.0,17.6,0.0,0.5
+Guldsparid grillad m. salt,191.0,20.4,0.0,12.3
+Havsabborre grillad m. salt,146.0,21.2,0.0,6.7
+Olivolja extra jungfruolja,884.0,0.0,0.0,100.0
+Rapsolja kallpressad,884.0,0.0,0.0,100.0
+Flytande matfettsblandning fett 80% berikad typ Arla smör- och rapsolja,711.0,0.5,0.3,80.0
+Matfettsblandning fett 43% berikad typ Bregott mindre,403.0,0.5,5.0,43.0
+Pastasås m. tonfisk curry,80.0,7.9,3.6,3.6
+Tomat körsbärstomat röd,25.0,0.8,4.4,0.1
+Tomat torkad m. olja avrunnen,167.0,9.4,23.3,1.5
+Broccoli kokt u. salt frysvara,26.0,2.4,2.0,0.3
+Spenat färsk,24.0,3.3,0.8,0.4
+Mangold röd småbladig färsk,16.0,2.1,0.0,0.5
+Kruksallat,13.0,1.9,0.0,0.2
+Lök röd,46.0,1.2,9.0,0.1
+Kantarell gul rå,24.0,1.7,2.0,0.3
+Hjort kronhjort kött rå,108.0,22.3,0.0,2.0
+Hjort dovhjort färs rå,134.0,21.8,0.0,5.1
+Ren kött kallrökt rå,132.0,26.2,0.5,2.7
+Hjort skav rå,128.0,17.9,0.0,6.3
+Korv hjort rå,230.0,17.0,1.4,17.6
+Vildsvin bog rå,104.0,22.6,0.0,1.4
+Vildsvin filé rå,111.0,23.3,0.0,1.8
+Rådjur stek rå,106.0,23.6,0.0,1.1
+Vildsvin stek rå,105.0,23.0,0.0,1.3
+Korv kycklingkorv,197.0,9.4,9.6,13.6
+Vildsvin kött rå,107.0,23.0,0.0,1.5
+Rådjur bog rå,111.0,24.3,0.0,1.4
+Ren kött rå,109.0,23.1,0.0,1.7
+Nöt kött rå,128.0,22.2,0.0,4.2
+Lamm kött rå,164.0,19.9,0.0,9.4
+Lamm grytbitar rå,134.0,20.1,0.0,5.9
+Bordsmargarin fett 80% berikad typ Flora original,708.0,0.2,0.0,80.0
+Flytande matfettsblandning fett 80% berikad typ Ica raps- och smörolja,710.0,0.2,0.3,80.0
+Potatis höst kokt u. salt,85.0,1.9,17.8,0.1
+Julmust påskmust,34.0,0.0,8.3,0.0
+Slush drickf.,41.0,0.0,10.2,0.0
+Mandeldryck berikad,26.0,0.0,3.5,1.3
+Alkoläsk kolsyrad dryck vol. % 4-5,52.0,0.0,5.9,0.0
+Potatis kokt u. salt,83.0,1.8,17.5,0.1
+Lasagne m. svarta bönor veg. ,136.0,4.4,7.5,9.6
+Tranbärsdryck drickf. berikad,39.0,0.2,9.4,0.0
+Barngröt ätf. flerkorn m. frukt berikad,105.0,3.8,12.2,4.2
+Barngröt ätf. m. fullkorn frukt bär berikad,105.0,3.8,12.4,4.1
+Barngröt ätf. m. frukt berikad,105.0,3.5,13.1,4.0
+Barngröt ätf. ris mjölkfri berikad,93.0,3.2,14.6,2.2
+Barngröt ätf. m. fullkorn frukt müsli berikad,66.0,2.5,10.0,1.5
+Barngröt ätf. m. yoghurt frukt berikad,90.0,3.5,13.4,2.1
+Barngröt ätf. havre m. frukt berikad,77.0,3.2,11.3,1.9
+Barngröt ätf. havre naturell berikad,97.0,4.2,13.3,2.6
+Barngröt ätf. havre m. frukt bär berikad,91.0,3.8,13.3,2.2
+Pepparsås,224.0,1.9,6.6,21.2
+Saffransris,116.0,2.3,21.9,2.0
+Ljus sås till fiskgratäng,198.0,3.7,7.5,17.2
+Gris kött rå,155.0,19.2,0.0,8.7
+Gratäng zucchinigratäng m. kalvfärs,118.0,6.1,3.1,8.8
+Pastagratäng m. kyckling,175.0,7.7,9.0,11.9
+Tomatsås till pizza,100.0,1.4,7.8,6.8
+"Minimjölk fett < 0,1% berikad",35.0,3.6,4.9,0.0
+Örtagårdssås m. gräddfil,285.0,2.6,4.9,28.6
+Köttfärssås Bolognese m. nötfärs bacon,110.0,7.5,3.1,7.1
+Aioli,763.0,1.6,1.4,84.8
+Guacamole,140.0,1.6,2.6,13.1
+Pasta carbonara m. pasta fläsk grädde,188.0,9.1,19.0,8.1
+Brownie,464.0,6.4,44.0,28.4
+Fisk m. apelsin chili ugnsstekt,201.0,17.5,3.7,13.0
+Pulled pork gris m. marinad tillagad,172.0,18.5,5.3,8.3
+Tropisk juice drickf.,44.0,0.2,10.5,0.0
+Sojabönor färska förvällda u. skal,130.0,10.9,4.9,6.4
+Sparris grön kokt m. salt,22.0,1.9,1.8,0.2
+Kålrot kokt,34.0,1.3,5.0,0.1
+Brysselkål kokt,41.0,2.6,5.5,0.0
+Rotselleri kokt,25.0,1.0,2.7,0.5
+Gula ärtor kokta m. salt,128.0,8.4,16.4,0.6
+Bruna bönor torkade kokta m. salt,137.0,8.8,16.8,0.9
+Gråärtor kokta m. salt,130.0,10.2,16.6,0.5
+Åkerbönor torkade kokta m. salt,134.0,10.2,18.4,0.5
+Äpple Aroma rött,46.0,0.0,10.2,0.0
+Äpple Ingrid Marie rött,49.0,0.0,11.0,0.0
+Äpple Frida,56.0,0.0,12.6,0.0
+Äpple Golden delicious Granny Smith grönt,43.0,0.0,9.4,0.0
+Kyckling pulled chicken tillagad m. marinad,133.0,19.6,0.9,5.4
+Tacosås,32.0,1.9,5.1,0.0
+Hälleflundra odlad Atlanten rå,102.0,20.0,0.0,2.4
+Korngryn kokt u. salt,82.0,2.1,15.2,0.7
+Julmust light,0.0,0.0,0.0,0.0
+"Havregurt naturell fett 2,2% berikad",76.0,1.5,11.7,2.4
+Fraiche m. havre veg. fett 15% berikad,185.0,0.8,10.1,15.7
+Havrebaserat bredbart pålägg naturell,231.0,2.9,10.9,19.6
+Havredryck m. apelsin mango,55.0,0.7,11.3,0.5
+Korv grillkorv grillad kött 32-35%,229.0,7.6,12.8,16.3
+Korv falukorv tillagad kött 58%,267.0,8.7,5.4,23.7
+Korv bratwurst tillagad kryddig kött 73-75%,267.0,11.5,4.5,22.7
+Blodpudding blodkorv tillagad,218.0,8.6,23.0,9.4
+Gris sidfläsk el. stekfläsk rimmat stekt,385.0,11.4,0.1,38.3
+Korv kabanoss tillagad kryddig kött 90%,292.0,16.0,1.4,24.8
+Kryddblandning taco,284.0,5.6,50.9,3.6
+Bröd vitt vetetortilla,306.0,8.4,55.5,4.8
+Gris färs tillagad u. salt,241.0,16.0,0.0,19.9
+Te fermenterat m. socker,17.0,0.0,2.2,0.0
+Gris skinka innanlår tillagad,117.0,20.5,0.0,3.8
+Gris skinkstek tillagad u. salt,126.0,20.0,0.0,5.1
+Gris ytterfilé tillagad,120.0,17.0,0.0,5.8
+Gris fläskkotlett tillagad,133.0,19.6,0.0,6.0
+Gris fläskfilé tillagad,118.0,20.0,0.0,4.1
+Nöt kalv lever tillagad,150.0,20.0,9.3,3.5
+Kyckling lever ugnsstekt,124.0,16.0,4.5,4.6
+Gris lever tillagad,142.0,22.0,6.0,3.2
+Kalkon rökt tunna skivor,98.0,18.3,1.1,2.1
+Korv veg. soja- och veteprotein tillagad typ middagskorv,252.0,14.0,14.1,15.3
+Gratäng m. korv rotfrukt,191.0,5.5,9.1,14.6
+Pastasås m. lax crème fraiche grädde dill,268.0,12.1,3.1,23.3
+Cashewnötter rostade m. salt,597.0,18.0,19.1,48.7
+Gris kassler tillagad,148.0,18.6,0.0,8.2
+Kyckling bröstfilé tillagad u. skinn frysvara,98.0,19.7,0.0,2.0
+Drickyoghurt smaksatt fett ca 1%,59.0,2.8,10.1,0.8
+Ost hårdost eko. fett 28%,352.0,25.2,2.7,27.0
+Vaniljsås ätf.,109.0,3.0,15.3,3.9
+Yoghurt naturell eko. fett 3% berikad,56.0,3.2,4.7,2.7
+Pannkaka tunn helfabrikat,186.0,6.5,25.9,5.8
+Hårt bröd fullkorn råg fiber ca 20% typ sport ,352.0,8.6,64.0,3.3
+Bröd vitt grovt m. nyckelhål typ formfranska,260.0,8.6,43.8,4.2
+Bröd vitt typ levain,249.0,7.5,49.5,1.4
+Frukostflingor müsli vete havre råg korn fullkorn m. frukt nötter fröer,445.0,15.2,47.2,20.1
+Mandelmjöl,610.0,22.4,7.4,53.1
+Filmjölk eko. fett 3% berikad,57.0,3.3,4.5,2.9
+Kvarg drickf. olika smaker,42.0,5.4,4.6,0.2
+Kvarg smaksatt sötningsm.,64.0,10.0,5.2,0.2
+Kvarg smaksatt m. socker,64.0,10.0,5.2,0.2
+Drickyoghurt smaksatt fett ca 1% socker ca 8%,59.0,2.8,10.1,0.8
+Drickyoghurt smaksatt fett ca 1% socker ca 11%,59.0,2.8,10.1,0.8
+Frukostflingor fullkorn berikad typ Specialflingor,384.0,9.2,78.7,2.2
+Yoghurt naturell fett 10%,109.0,3.6,5.2,8.3
+Pizza m. köttfärs frysvara,218.0,10.3,27.7,6.6
+Pizza m. köttstek frysvara,215.0,11.9,28.2,5.3
+Pizza m. tomat mozzarella veg. frysvara,269.0,11.0,26.8,12.5
+Noni fruktpuré,36.0,0.6,7.2,0.1
+Fisk Bordelaise,118.0,15.2,5.2,4.0
+Ostkräm,613.0,7.9,1.3,65.1
+Äppeljuice konc.,164.0,3.8,36.3,0.1
+Matvete kokt m. salt,178.0,4.5,33.5,0.7
+Mathavre kokt m. salt,199.0,5.8,33.1,3.0
+Psylliumfröskal,199.0,1.2,10.0,0.5
+Chiafrö,448.0,19.4,0.0,33.9
+Hampafrö m. skal,443.0,20.9,0.0,32.9
+Hampafrö u. skal,609.0,28.0,2.6,53.6
+Vallmofrö,534.0,17.9,4.8,45.9
+Senap sötstark,271.0,3.7,48.9,6.4
+Kokosolja,881.0,0.0,0.7,99.3
+Majonnäs m. sojabönolja fett 80%,677.0,1.3,2.7,74.7
+Majonnäs m. solrosolja fett 80%,656.0,1.3,7.1,70.3
+Kräfta kräftstjärtar konserv. u. lag,71.0,15.6,0.8,0.4
+Sikrom Nordamerikansk,185.0,20.0,5.7,9.1
+Påläggskaviar m. färskost,288.0,5.9,13.8,23.0
+Tångkaviar röd,10.0,0.3,0.4,0.2
+Tångkaviar påläggskaviar,299.0,0.7,16.4,25.8
+Lax vildfångad Sverige rå,188.0,22.5,1.1,10.4
+Lax odlad Norge fjordlax rå frysvara,217.0,19.4,1.2,15.1
+Lax odlad Norge fjordlax rå förpackad,210.0,21.2,0.3,13.9
+Välling för barn pulver fullkorn osötad berikad,425.0,14.9,59.1,13.8
+Välling för barn pulver havre osötad berikad,460.0,14.5,59.6,18.0
+Välling för barn pulver majs osötad berikad,463.0,13.8,59.4,18.7
+Välling för barn pulver havre mjölkfri osötad berikad,415.0,10.8,65.6,11.2
+Barngröt pulver havre m. banan äpple mjölkfri osötad berikad,423.0,13.2,66.4,10.6
+Barngröt pulver naturell fullkorn osötad berikad,449.0,15.9,58.7,16.0
+Barnmat pasta couscous m. kyckling konserv.,78.0,4.2,8.0,2.8
+Barnmat spagetti m. köttfärssås konserv.,70.0,3.6,6.8,2.7
+Barnmat potatis m. nötköttsgryta konserv.,79.0,3.0,8.4,3.3
+Barnmat pastagratäng m. fläskkött konserv.,79.0,6.5,7.6,2.5
+Barnmat fiskgryta konserv.,80.0,3.4,8.4,3.3
+Barnmat lasagne pastagratäng veg. m. grönsaker konserv.,86.0,3.4,9.7,3.2
+Barnmat frukt bär m. yoghurt konserv.,77.0,1.8,13.9,1.2
+Barnmat frukt bär m. yoghurt konserv. berikad,77.0,1.8,13.9,1.2
+Fruktstång fruktgodis,384.0,2.1,75.8,6.9
+Fruktstång fruktgodis berikad,384.0,2.1,75.8,6.9
+Barnmat klämmis m. gröt päron mango havre hirs konserv.,77.0,1.4,15.3,0.5
+Välling för barn drickf. fullkorn osötad berikad,59.0,2.1,8.1,1.9
+Välling för barn drickf. mild havre osötad berikad,63.0,2.0,8.2,2.5
+Välling för barn drickf. majs osötad berikad,70.0,2.1,9.0,2.8
+Välling för barn drickf. havre mjölkfri osötad berikad,57.0,1.5,9.0,1.5
+Barngröt ätf. havre m. banan äpple mjölkfri osötad berikad,98.0,3.0,15.3,2.4
+Barngröt ätf. naturell fullkorn osötad berikad,104.0,3.7,13.5,3.7
+Sojaprotein bitar kylvara el. frysvara typ Tzay®,161.0,16.4,9.3,5.4
+Sojaprotein bitar frysvara typ Oumph®,91.0,18.6,0.0,0.5
+Havreprotein pulled havre strimlor kylvara el. frysvara,203.0,30.4,9.0,4.0
+Sojaprotein färs kylvara el. frysvara berikad,167.0,15.2,4.8,8.6
+Soja- och veteprotein färs frysvara,162.0,18.6,11.9,3.0
+Sojaprotein bullar kylvara el. frysvara,179.0,13.6,5.5,10.4
+Svampprotein bullar frysvara,123.0,13.3,8.3,3.3
+Svampprotein nugget kylvara el. frysvara,194.0,11.3,17.0,8.0
+Sojaprotein nugget kylvara el. frysvara,214.0,11.3,15.8,10.6
+Soja- och veteprotein nugget kylvara el. frysvara,237.0,18.6,13.5,11.4
+Soja- och veteprotein nugget kylvara el. frysvara berikad,237.0,18.6,13.5,11.4
+Soja- och veteprotein bitar som alternativ till bacon kylvara el. frysvara,211.0,18.4,6.3,11.8
+Soja- och veteprotein schnitzel kylvara el. frysvara,239.0,12.9,16.3,12.8
+Soja- och veteprotein schnitzel kylvara el. frysvara berikad,239.0,12.9,16.3,12.8
+Svampprotein schnitzel kylvara el. frysvara,243.0,12.4,18.4,12.8
+Svampprotein färs bitar filé stekt,105.0,16.7,2.3,1.9
+Falafel kikärtskroketter stekta,257.0,9.0,23.6,12.6
+Falafel kikärtskroketter ugnsstekta,285.0,10.0,26.1,13.9
+Soja- och veteprotein bullar stekta,204.0,19.0,10.3,8.3
+Soja- och veteprotein bullar ugnsstekta,216.0,20.1,10.8,8.8
+Sojaprotein färs stekt,252.0,22.9,7.2,13.0
+Sojaprotein bitar stekta typ Tzay®,169.0,17.2,9.8,5.7
+Sojaprotein bitar stekta typ Oumph®,97.0,19.8,0.0,0.5
+Havreprotein pulled havre strimlor stekt,277.0,41.5,12.3,5.5
+Sojaprotein färs stekt berikad,252.0,22.9,7.2,13.0
+Soja- och veteprotein färs stekt,234.0,26.8,17.2,4.3
+Ärtprotein färs stekt,272.0,38.0,8.1,8.9
+Sojaprotein bullar stekta,206.0,15.7,6.3,12.0
+Sojaprotein bullar ugnsstekta,219.0,16.7,6.7,12.7
+Svampprotein bullar stekta,144.0,15.6,9.7,3.9
+Svampprotein nugget stekt,229.0,10.9,16.4,12.5
+Svampprotein nugget ugnsstekt,196.0,11.4,17.2,8.1
+Sojaprotein nugget stekt,248.0,10.9,15.2,15.0
+Sojaprotein nugget ugnsstekt,216.0,11.4,16.0,10.7
+Soja- och veteprotein nugget stekt,270.0,17.9,13.0,15.8
+Soja- och veteprotein nugget ugnsstekt,239.0,18.8,13.6,11.5
+Soja- och veteprotein nugget stekt berikad,270.0,17.9,13.0,15.8
+Soja- och veteprotein nugget ugnsstekt berikad,239.0,18.8,13.6,11.5
+Soja- och veteprotein baconimitation stekt,238.0,20.7,7.1,13.3
+Soja- och veteprotein schnitzel stekt,272.0,12.4,15.7,17.1
+Soja- och veteprotein schnitzel ugnsstekt,241.0,13.0,16.5,12.9
+Soja- och veteprotein schnitzel stekt berikad,272.0,12.4,15.7,17.1
+Soja- och veteprotein schnitzel ugnsstekt berikad,266.0,14.4,18.2,14.3
+Svampprotein schnitzel ugnsstekt,276.0,11.9,17.7,17.1
+Äggstanning,88.0,7.3,3.4,5.1
+Jams kokt u. salt,124.0,1.6,27.4,0.2
+Vindruvor gröna,67.0,0.7,14.7,0.2
+Vindruvor röda,72.0,0.6,16.4,0.1
+Dressing hamburgerdressing lätt fett 28 %,273.0,0.9,7.0,27.2
+Majonnäs äggfri,484.0,0.2,0.6,54.3
+Sås mango curry m. majonnäs kylvara,540.0,1.0,13.5,54.4
+Ostsås m. kalkon,143.0,10.0,6.0,8.8
+Lasagne m. zucchini aubergine nötfärs,110.0,9.1,2.8,6.7
+Karlssons frestelse m. nötfärs,144.0,7.6,11.5,7.2
+Lasagne nötfärs,137.0,7.9,11.5,6.3
+Skinkfrestelse m. grädde,174.0,5.9,10.6,11.7
+Lök stekt m. flytande matfett,54.0,1.4,8.3,1.2
+Tzatziki m. morot,83.0,1.9,6.0,5.4
+Mango currysås hemlagad,133.0,1.2,9.0,10.2
+Kycklingpanna m. citron örter crème fraiche,162.0,18.1,4.0,8.2
+Cowboysoppa m. potatis köttfärs,110.0,6.7,6.7,6.1
+Fransk bondsoppa m. fläsk rotfrukter,58.0,2.2,6.1,2.3
+Kycklingpanna m. lime honung crème fraiche,186.0,13.0,3.8,13.3
+Hedvigsoppa m. vitkål nötfärs morot,59.0,5.3,2.8,2.7
+Nikkaluoktasoppa m. vitkål nötfärs,63.0,5.4,1.5,3.8
+Mexicanasoppa m. kyckling majs,42.0,2.4,6.5,0.5
+Kycklingpanna m. oliv basilika citron grädde,155.0,12.1,1.9,11.0
+Färsruta m. fetaost ugnsstekt,222.0,20.4,1.5,15.0
+Fisk cornflakesfisk panerad ugnsstekt,160.0,17.7,6.7,6.8
+Gryta fiskgryta m. torsk kokosmjölk curry,180.0,10.8,3.7,13.4
+Rödbetshummus,174.0,4.5,9.8,11.8
+Ajvaryoghurt,100.0,3.1,5.4,7.2
+Karl-Alfredsås m. yoghurt spenat,196.0,2.7,4.4,18.8
+Chili- och mangosås,117.0,1.3,8.9,8.4
+Fisk mager m. fänkål tomat crème fraiche ångkokt,117.0,11.5,1.6,7.2
+Bondomelett m. bönor,113.0,6.5,8.8,5.3
+Grönsaksbiff Caribbean stekt,201.0,3.9,26.5,8.1
+Gräddsås m. persilja,148.0,1.7,4.2,14.1
+Köttfärs- och grönsaksbiff stekt,162.0,14.6,8.4,6.9
+Grönsaksbiff broccolibiff stekt veg.,271.0,7.3,24.1,15.9
+Gryta kycklinggryta m. bönor kakao ,95.0,10.9,4.2,3.3
+Fisk Björkeby m. ströbröd smör persilja ugnsstekt,259.0,18.1,11.3,15.4
+Fisk m. soltorkad tomat persilja vitlök,232.0,18.2,10.9,12.4
+Gratäng djungelgratäng m. kyckling banan mango chutney crème fraiche,221.0,11.2,7.9,16.2
+Mango chutney,112.0,0.6,25.7,0.3
+Gratäng m. kassler ananas ost,129.0,18.2,3.9,4.3
+Gryta fiskgryta brasiliansk fiskgryta m. kokosmjölk krossad tomat paprika,136.0,8.6,4.1,9.2
+Gryta mormors kycklinggryta m. svamp,123.0,11.4,2.8,7.3
+Gryta köttgryta m. fransk senap pepparrot gräddfil,112.0,12.1,2.9,5.1
+Gryta fisk m. crème fraiche curry apelsin,123.0,13.8,3.6,5.8
+Korv falukorv ugnsstekt m. ajvar,232.0,8.3,5.5,19.9
+Gryta kyckling tikka masala,121.0,20.2,2.4,3.3
+Senapskräm,275.0,2.8,14.9,22.9
+Köttfärslåda,125.0,8.8,7.5,6.4
+Gryta svampprotein m. lätt crème fraiche bambuskott haricot verts paprika veg.,88.0,5.1,4.4,5.3
+Gryta svampprotein tikka masala veg.,103.0,12.4,3.8,3.3
+Gryta svampprotein m. fransk senap pepparrot gräddfil veg.,92.0,8.2,3.3,4.0
+Grönsaksburgare stekt veg.,229.0,3.7,24.6,12.1
+Grönsaksbiff rödbetsbiff stekt veg.,108.0,4.5,11.1,4.6
+Grönsaksbiff morotsbiff stekt veg.,107.0,3.7,11.2,4.8
+Grönsaksbiff zucchinibiff m. ost stekt veg.,205.0,8.7,14.3,12.2
+Grönsaksbiff ärt- och kålrotsbiff stekt veg. kylvara,171.0,6.5,17.6,6.5
+Grönsaksbiff kikärtsbiff stekt veg. hemlagad,210.0,8.7,17.1,9.6
+Gryta chili sin carne m. zucchini paprika veg.,73.0,3.5,9.2,1.7
+Gryta chili sin carne m. svampprotein veg.,91.0,6.9,8.6,2.2
+Gryta chili con soja veg.,104.0,6.8,9.1,3.5
+Svampproteinfärssås veg. ,90.0,8.1,6.0,3.0
+Gryta böngryta provencale m. potatis rotselleri vitt vin crème fraiche veg.,99.0,3.6,10.3,4.0
+Gryta halloumigryta m. linser veg.,147.0,7.7,7.9,8.8
+Halloumi stroganoff veg.,254.0,15.8,3.9,19.6
+Gryta halloumigryta m. aubergine veg.,118.0,7.5,4.1,7.7
+Gryta svampprotein m. grönsaker veg.,58.0,4.7,3.9,2.0
+Gryta kalops m. svampprotein veg.,41.0,2.6,3.8,1.5
+Gryta indonesisk kycklinggryta m. mango chutney,179.0,11.2,6.0,12.2
+Gryta svampprotein indonesisk gryta m. mango chutney veg.,145.0,8.2,7.2,8.6
+Gryta svampprotein m. persika veg.,143.0,7.2,6.3,9.4
+Bön stroganoff veg.,129.0,6.0,11.1,5.7
+Gryta m. gröna linser rotfrukter kokosmjölk veg.,81.0,2.4,6.2,4.5
+Gryta gulasch m. bönor veg.,60.0,2.5,7.3,1.8
+Grönsaker ugnsstekta,24.0,0.7,3.7,0.2
+Majssås,98.0,2.1,5.7,7.2
+Gryta kikärtsgryta m. aprikos blandade grönsaker veg.,63.0,1.8,7.3,2.5
+Svamp stroganoff veg.,92.0,3.0,4.9,6.2
+Broccolisås,137.0,4.0,2.4,12.4
+Gryta indisk lammgryta,115.0,9.4,3.7,6.8
+Sojafärssås veg.,117.0,7.7,6.9,5.8
+Sojafärssås m. linser veg.,112.0,7.5,7.8,4.9
+Tikka masala m. potatis grönsaker veg.,107.0,2.8,8.9,6.2
+Medelhavssås m. grädde soltorkad tomat,281.0,3.8,6.7,26.6
+Sås m. grädde soltorkad tomat basilika vitlök,198.0,4.3,8.5,16.1
+Gryta currygryta m. grönsaker veg.,104.0,1.8,5.3,8.2
+Pasta carbonara m. pasta sojabönor veg.,150.0,5.3,13.0,8.2
+Lasagne m. linser veg.,138.0,4.6,7.6,9.6
+Lasagne m. grönsaker veg. ,130.0,4.6,17.9,4.0
+Grönsaksbas grönsakspasta,84.0,1.0,6.8,5.4
+Tomatsås m. grädde,134.0,1.4,4.4,12.4
+Morotssås,68.0,1.4,5.3,4.3
+Ajvar- och spenatsås,131.0,7.0,7.3,7.8
+Paprika grillad,32.0,0.7,5.8,0.3
+Lasagne m. cottage cheese veg. ,101.0,6.1,8.6,4.5
+Paj m. fetaost sötpotatis veg.,247.0,7.8,9.8,19.4
+Grynblandning havre råg vete korn kokt m. salt,133.0,3.6,23.4,1.2
+Soppa m. kokosmjölk blomkål potatis spenat veg.,225.0,2.9,5.8,21.0
+Sötpotatissoppa m. linser chili kokosmjölk veg.,109.0,2.4,7.3,7.2
+Rysk kålsoppa veg.,49.0,0.9,3.9,3.0
+Vegestronesoppa veg.,39.0,1.2,5.5,0.9
+Gratäng m. svampprotein ananas veg. ,115.0,12.4,6.6,3.4
+Pumpasoppa veg.,32.0,0.7,4.5,1.1
+Gryta chiligryta m. bönor linser sojakorv veg.,107.0,6.0,10.9,3.2
+Lasagne m. skinka,117.0,7.6,12.3,3.9
+Pastasås m. kyckling paprika,168.0,11.6,2.2,12.6
+Pastagratäng Rossini m. kycklingfärs ananas paprika squash tomat purjolök,176.0,8.4,10.0,11.3
+Köttfärssås Vivaldi nöt m. squash majs paprika rödlök ost,109.0,8.1,5.4,5.9
+Chiapudding,111.0,3.2,11.0,5.0
+Korv stroganoff hemlagad,253.0,6.3,5.7,23.0
+Lasagne hemlagad,124.0,7.1,12.7,4.7
+Pizza Funghi m. champinjoner restaurang,292.0,14.9,20.4,16.1
+Havremjöl fullkorn,352.0,11.3,59.2,4.4
+Vitlökssås m. örter hemlagad,411.0,2.1,4.7,42.8
+Öring Sverige höst rå ,175.0,21.2,1.7,9.2
+Taco tortilla m. köttfärs grönsaker ost,152.0,8.2,11.1,8.1
+Kornflingor ångprep. fullkorn,351.0,9.2,65.4,3.1
+Rågflingor ångprep. fullkorn,323.0,9.2,61.1,1.5
+Veteflingor ångprep. fullkorn,328.0,10.2,61.0,2.0
+Dinkelmjöl,355.0,12.0,69.3,1.7
+Grönsaksbiff jordnötsbiff tillagad veg.,237.0,7.8,17.4,14.1
+Vitlökssås fetthalt ca 10%,135.0,1.8,5.5,11.9
+Vetemjöl durum,352.0,12.2,67.9,1.6
+Mjölblandning vete korn råg havre,346.0,8.7,68.4,2.2
+Mjölblandning rågsikt,356.0,8.6,71.8,1.4
+Pizza Vesuvio m. skinka restaurang,297.0,17.0,19.9,16.0
+Pizza Capricciosa m. skinka champinjoner restaurang,295.0,16.0,20.2,16.0
+Pizza m. kött restaurang,298.0,15.4,19.3,17.1
+Pizza Bussola m. skinka räkor restaurang,297.0,17.0,19.9,16.0
+Pizza m. köttfärs restaurang,293.0,15.4,19.8,16.2
+Pizza m. ost restaurang,328.0,16.3,19.9,19.7
+Rapsolja berikad,884.0,0.0,0.0,100.0
+Durra el. andra sorghumarter mjöl,353.0,9.5,69.7,2.6
+Amarant mjöl,352.0,15.0,55.2,6.0
+Kiwi gul,72.0,0.6,15.9,0.3
+Sojasås shoyu,72.0,7.7,10.1,0.0
+Pizzadeg tillagad hemlagad,240.0,5.4,41.3,5.0
+Insalata Caprese,146.0,5.8,1.8,12.8
+Waldorfsallad,119.0,2.2,5.9,9.2
+Jordnötter m. chokladöverdrag,514.0,8.1,57.9,26.9
+Chokladkex m. vaniljfyllning,465.0,4.6,65.3,19.8
+Risotto m. kyckling spenat,116.0,5.9,12.3,4.5
+Bröd rågsikt fibrer ca 4% typ rågkaka,264.0,7.3,48.9,2.7
+Sött vetebröd kanelbulle gräddad kylvara frysvara el. butiksbakad,345.0,6.7,51.7,11.3
+Bröd fröbröd fullkorn vete råg,270.0,8.7,41.0,5.9
+Pizza m. tomatsås ost restaurang,328.0,16.5,22.9,18.2
+Pizzadeg tillagad kylvara,335.0,9.5,60.8,4.7
+Pommes frites smaksatta tillagad frysvara,207.0,3.2,26.1,9.0
+Frukostflingor vete puffat m. choklad,382.0,8.4,73.1,3.4
+Frukostflingor granola m. frukt nötter,436.0,11.4,46.0,19.5
+Frukostflingor granola m. kakao hallon,408.0,8.8,47.8,15.8
+Majskaka smaksatt ost,446.0,6.8,70.5,14.3
+Linskaka smaksatt,418.0,15.9,58.7,11.6
+Kex bokstavskex fullkorn,410.0,7.5,62.3,11.2
+Pepparkaksdeg kylvara,383.0,4.6,58.8,13.4
+Bröd vitt croissant gräddad kylvara frysvara el. butiksbakad,339.0,7.4,34.5,18.4
+Pommes frites smaksatta frysvara,168.0,2.6,21.1,7.3
+Frukostflingor majs typ cornflakes,376.0,7.0,80.0,1.2
+Ris sushiris kokt,173.0,2.8,38.3,0.4
+Nudlar äggnudlar kokta u. salt,121.0,4.2,22.8,0.8
+Havregurt hallon berikad,82.0,0.9,15.3,1.7
+Havregurt blåbär hallon berikad,83.0,0.8,15.2,1.8
+Havregurt jordgubb berikad,76.0,0.9,13.3,1.8
+Havregurt vanilj berikad,84.0,0.9,15.0,2.0
+"Havredryck fett 1,5% eko. berikad",48.0,0.9,7.2,1.5
+"Havredryck fett 0,5 % eko. berikad",39.0,0.9,7.3,0.5
+Havregurt naturell fett 11 % berikad,152.0,2.8,11.3,10.5
+Glass havreglass chokladfudge,235.0,1.0,35.5,9.5
+Glass havreglass karamell hasselnöt,245.0,1.4,28.2,13.9
+Glass havreglass karamell vanilj,210.0,0.5,29.9,9.6
+Havrebaserat bredbart pålägg tomat basilika,215.0,2.9,11.2,17.6
+Havrebaserat bredbart pålägg vitlök gurka,207.0,2.7,10.7,17.1
+"Havredryck choklad fett 2,5 % berikad",71.0,1.3,10.5,2.4
+Havregurt smaksatt berikad,81.0,0.9,14.7,1.8
+"Havredryck fett 3,0% berikad",60.0,1.0,6.6,3.0
+Glass havreglass smaksatt,230.0,1.0,31.2,11.0
+Havrebaserat bredbart pålägg smaksatt,211.0,2.8,11.0,17.4
+Kex bokstavskex fullkorn berikad,410.0,7.5,62.3,11.2
+Vitlökssås fetthalt ≥ 40%,509.0,1.8,5.7,54.1
+Sött vetebröd saffransbröd,317.0,7.5,51.5,8.0
+Pommes frites klyftpotatis frysvara,158.0,2.4,22.3,5.6
+Sojaprotein kebab frysvara typ Oumph®,136.0,17.4,4.6,3.8
+Sojaprotein pulled sojaprotein frysvara typ Oumph®,117.0,12.1,13.4,0.5
+Sojaprotein bitar m. timjan vitlök frysvara typ Oumph®,127.0,17.7,4.2,3.0
+Rismål u. sylt,118.0,3.6,16.7,4.1
+Rismål u. sylt u. socker m. sötningsmedel,100.0,3.9,12.1,4.0
+Chips linser smaksatta fett 17%,455.0,13.0,53.6,19.1
+Linsbågar fett 28%,511.0,15.8,40.3,30.8
+Frukostflingor ris glutenfri berikad typ Specialflingor,384.0,5.9,86.5,0.7
+Frukostflingor granola glutenfri,432.0,9.1,44.5,20.3
+Frukostflingor majs glutenfri berikad,369.0,7.4,81.3,0.2
+Mjölblandning ljus glutenfri,336.0,2.8,75.0,0.0
+Bovetemjöl grovt,360.0,17.7,60.2,3.7
+Teffmjöl,344.0,10.3,65.3,2.3
+Våffelmix glutenfri,390.0,5.4,87.7,1.3
+Våffla glutenfri,216.0,1.9,29.8,9.9
+Majsgryn polenta,345.0,8.6,68.3,2.1
+Bröd surdegsbröd glutenfritt,192.0,3.4,35.1,2.5
+Bröd vitt tortilla glutenfritt,252.0,6.4,41.1,4.3
+Hårt bröd m. chiafrö glutenfritt fibrer ca 10%,363.0,4.4,75.0,2.3
+Hårt bröd m. sesamfrö glutenfritt fibrer ca 9%,407.0,6.1,65.2,11.2
+Bröd vitt osötat glutenfritt fibrer ca 7% typ ciabatta,295.0,6.0,47.8,7.2
+Sockerbetsfiber,203.0,8.3,0.0,2.3
+Kex salta glutenfritt,446.0,2.6,78.0,13.0
+Chokladkaka chocolate chip cookie glutenfri,507.0,2.8,63.3,26.4
+Korv veg. sojaprotein kylvara el. frysvara typ grillkorv,176.0,12.0,3.4,11.6
+Korv veg. solrosprotein kylvara el. frysvara typ grillkorv,142.0,5.3,6.7,10.5
+Korv veg. solros- och ärtprotein kylvara el. frysvara typ grillkorv,174.0,4.7,8.2,12.6
+Korv veg. grönsaker kylvara el. frysvara typ grillkorv,160.0,7.1,14.7,7.4
+Korv veg. sojaprotein tillagad kylvara el. frysvara typ grillkorv,186.0,12.7,3.6,12.2
+Korv veg. solrosprotein tillagad kylvara el. frysvara typ grillkorv,151.0,5.6,7.1,11.2
+Korv veg. solros- och ärtprotein tillagad kylvara el. frysvara typ grillkorv,184.0,5.0,8.7,13.3
+Korv veg. tillagad kylvara el. frysvara typ grillkorv,162.0,9.9,7.2,9.6
+Korv veg. grönsaker tillagad kylvara el. frysvara typ grillkorv,170.0,7.5,15.6,7.9
+Burgare veg. potatis linser bönor majs kylvara el. frysvara,230.0,7.8,24.0,9.9
+Burgare veg. potatis linser bönor majs stekt kylvara el. frysvara,270.0,9.1,28.1,11.6
+Ärtprotein färs kylvara el. frysvara,190.0,26.6,5.6,6.2
+Sojadryck osötad berikad,33.0,3.4,1.7,1.3
+Mandeldryck osötad berikad,15.0,0.0,1.0,1.2
+Kokosnötdryck ,18.0,0.0,4.4,0.0
+Mörk choklad kakao 70%,581.0,8.4,34.0,43.9
+Mörk choklad kakao 85%,592.0,11.1,22.3,48.6
+Pommes frites klyftpotatis tillagad frysvara,196.0,3.0,27.7,7.0
+Sojaprotein kebab stekt frysvara typ Oumph®,97.0,19.8,0.0,0.5
+Sojaprotein pulled sojaprotein stekt frysvara typ Oumph®,97.0,19.8,0.0,0.5
+Sojaprotein bitar m. timjan vitlök stekta frysvara typ Oumph®,97.0,19.8,0.0,0.5
+Pommes frites klyftpotatis friterad frysvara,244.0,2.8,25.8,13.4
+Bulgur kokt m. tomat buljong olja,129.0,3.1,15.6,5.4
+Majsdessert m. socker typ somalisk xalwo,326.0,0.0,39.4,18.7
+Gryta auberginegryta veg. typ tapsi,41.0,1.2,5.2,1.3
+Gryta m. kött kyckling typ tapsi,223.0,21.3,0.8,15.0
+Fatteh veg.,143.0,5.2,12.8,7.1
+Fatteh m. kyckling,119.0,7.6,10.3,4.6
+Börek m. spenat fetaost veg.,206.0,7.6,15.8,12.1
+Börek m. köttfärs,222.0,9.7,22.2,10.1
+Pizza orientalisk,207.0,9.2,26.5,6.6
+Pirog m. kött ugnsstekt typ sambusa,229.0,7.6,24.9,10.5
+Pirog m. spenat ugnsstekt veg. typ sambusa,197.0,4.1,23.2,9.3
+Pirog m. ost ugnsstekt typ sambusa,281.0,10.2,27.8,14.0
+Pirog m. grönsaker friterad veg. typ sambusa,228.0,4.3,26.8,11.0
+Dolma veg.,91.0,2.3,12.3,3.1
+Grön chilisås typ basbaas cagaar,45.0,1.2,8.8,0.2
+Yoghurtdryck typ ayran,28.0,1.7,2.3,1.4
+Bröd vitt mjukt typ chapati,258.0,4.3,41.8,7.6
+Gryta köttgryta typ suqaar,92.0,7.3,3.0,5.3
+Kebab m. lamm hemlagad,208.0,16.7,1.6,14.9
+Biryani ris m. kyckling lammkött grönsaker,167.0,7.8,20.1,5.7
+Yoghurtsås m. tahini citron,111.0,4.2,5.1,8.1
+Potatisgratäng kylvara tillagad,120.0,2.1,10.9,7.1
+Kakaobönor,576.0,12.6,0.0,51.9
+Choklad ljus vegansk,557.0,3.3,53.4,35.8
+Gelégodis u. gelatin,327.0,0.6,79.2,0.0
+Mango torkad,296.0,2.6,64.0,0.9
+Gojibär torkade,279.0,11.2,47.2,2.4
+Glykossirap,324.0,0.0,79.8,0.0
+Näringsjäst,332.0,46.6,12.6,5.2
+Havreris kokt m. salt,170.0,5.6,28.5,2.7
+Lakritsgodis,350.0,5.1,80.1,0.2
+Hirs kokt m. salt,98.0,2.7,20.1,0.6
+Kokosbaserad bit riven fett ca 20% som alternativ till ost,274.0,0.0,18.0,22.0
+Kokosbaserad bit fett ca 20% som alternativ till ost,282.0,0.0,20.4,22.0
+Korv kryddkorv kött ca 75%,244.0,11.8,3.4,20.6
+Dippsås m. gräddfil dippmix,150.0,3.7,8.5,11.2
+Snabbkaffe koffeinfritt pulver,304.0,22.5,38.1,1.0
+Mullbär,56.0,1.2,10.5,0.4
+Te fermenterat m. fruktjuice,12.0,0.0,1.8,0.0
+Te fermenterat m. sötningsmedel,8.0,0.0,2.0,0.0
+Färskost ricotta fett ca 10%,146.0,10.2,2.0,10.9
+Wasabirot,104.0,4.8,15.8,0.6
+Macadamianötter,740.0,7.9,5.2,75.8
+Quinoa okokt,356.0,14.4,56.8,6.1
+Quinoamjöl,343.0,14.4,52.5,5.6
+Tempeh,207.0,18.6,8.2,10.8
+Arrowrotmjöl,354.0,1.0,85.2,0.2
+Vinblad konserv.,61.0,4.3,1.8,2.0
+Hampamjöl avfettat,298.0,22.3,3.8,11.1
+Kakaosmör,884.0,0.0,0.0,100.0
+Röd pepparsås,60.0,12.9,0.0,0.8
+Shiitakesvamp,18.0,1.8,0.5,0.3
+Ostronskivling,26.0,2.0,2.6,0.4
+Blåbär amerikanska,54.0,0.3,10.6,0.4
+Odon,42.0,0.4,7.2,0.7
+Rönnbär,80.0,1.1,12.9,1.2
+Aronia svart,53.0,0.4,8.9,0.6
+Aronia torkad pulver,277.0,5.1,34.7,2.4
+Rågkli,278.0,14.0,26.7,4.3
+Ärtskott,23.0,3.3,0.6,0.4
+Kakaopulver fett 10-15%,368.0,21.2,24.8,14.4
+Korv kryddkorv kött ca 75% stekt,258.0,12.5,3.6,21.8
+Köttbullar stekta frysvara,264.0,15.2,8.0,18.8
+Korv falukorv stekt fett ca 22 % kött 58% ,254.0,9.6,5.4,21.8
+Frityrolja,884.0,0.0,0.0,100.0
+Mjuk kaka tårtbotten glutenfri,311.0,4.0,65.3,3.3
+Crème fraiche fett 32%,323.0,2.3,3.3,32.0
+Nöt färs m. morot blomkål rå,106.0,10.7,2.3,5.8
+Rödbetssallad m. creme fraiche kylvara,210.0,1.4,13.7,16.5
+Rödbetssallad u. ägg kylvara,222.0,0.8,10.5,19.7
+Schnitzel kalv stekt,211.0,19.9,9.6,10.1
+Kanelbulle glutenfri,340.0,2.6,47.5,15.2
+Muffins glutenfri,333.0,5.5,43.6,14.7
+Kladdkaka glutenfri,395.0,6.1,45.0,20.4
+Småkakor glutenfria hembakade,425.0,2.7,57.8,19.9
+Krabba vitt kött kokt,86.0,20.5,0.0,0.3
+Krabba brunt kött kokt,163.0,18.8,4.4,7.8
+Kex m. kola rispuffar mjölkchokladöverdrag,499.0,5.2,60.7,25.8
+Maltkulor m. mjölkchokladöverdrag,498.0,7.6,63.5,23.3
+Nöt färs m. ärtprotein,190.0,21.9,1.7,10.5
+Hampafrö,609.0,30.0,2.8,52.0
+Dadlar peanut,389.0,6.6,59.7,12.3
+Swebar chokladboll,412.0,30.0,40.0,14.0
+Swebar kladdkaka,420.0,30.0,42.0,16.0
+Swebar päronsplitt,444.0,30.0,40.0,18.0
+Wafer nicks,471.0,9.1,34.0,36.0
+Estrella nötmix,530.0,14.6,43.0,32.0
+Protinella,496.0,15.4,41.2,35.1
+Sojayoghurt,60.0,4.5,4.3,2.2
+Sojamjölk,36.0,3.5,0.8,2.0
+Bregott,633.0,0.3,8.7,70.0
+Marabou dukat,634.0,3.5,44.0,49.0
+Barbell cashew,367.0,36.0,30.0,15.0
+Barbell santa,349.0,25.0,34.0,15.0
+Barbell coockies caramel,360.0,36.0,31.0,15.0
+Barbell choco,370.0,28.0,31.0,17.0
+Hårdost emmentaler 30,386.0,29.0,0.0,30.0
+Beanaise garant,600.0,0.5,0.5,66.0
+Coleslaw eldorado,300.0,0.7,6.6,30.0
+Koreansk morotssallad,80.0,1.1,10.0,3.5
+Grillost chili,278.0,21.0,1.2,21.0
+Veg chorizo,219.0,14.0,4.0,16.0
+Grönkålsbiff,182.0,6.3,15.0,9.6
+Ica frö ljust,255.0,5.4,39.0,7.1
+Nutramino chocolate,510.0,30.0,26.0,33.0
+Lohilo salted caramel,360.0,29.0,38.0,15.0
+Dadlar lakrits,320.0,2.4,67.8,2.6
+Falafel dafgårds,210.0,8.7,21.0,10.0
+Dadlar färska,270.0,1.4,61.0,0.0
+Dadelboll jordnöt,61.3,0.9,7.85,2.35
+Dadelboll protinella,58.9,0.75,8.4,2.05
+Snickers bar,83.0,1.67,6.5,4.67
+Vego cabanossy,211.0,6.6,2.0,19.6
+Grillost ica basic,290.0,20.0,1.5,23.0
+Kaki,126.0,0.8,34.0,0.4
+Banana toffee,369.0,30.0,34.0,16.0
+Chocolate mudcake,360.0,30.0,31.0,16.0
+Caramel choklad,514.0,5.5,57.0,29.0
+Hazelnaut choklad,540.0,6.4,54.0,33.0
+Barbell creamy crisp,355.0,35.0,29.0,14.0
+Barbell chocolate almond,364.0,36.0,29.0,15.0
+Dadlar lakrits garant,330.0,2.6,70.0,2.6
+Naturgodis saltad caramel,571.0,14.0,37.0,40.0
+Vassle gammaldags vanlij,388.0,75.0,5.7,7.2
+Profeel mousse med apelsin,80.0,10.0,5.8,0.9
+Kvarg vit choklad,60.0,10.0,3.4,0.2
+Kvarg vanlij,55.0,9.0,4.6,0.3
+Aioli lohmanders,700.0,1.5,1.3,74.0
+Toffifee,522.0,6.0,59.0,28.8
+Dadlar mörk choklad,400.0,3.2,62.0,14.0
+Jordnötstopp,547.0,12.8,43.3,34.9
+Lakritspulver,375.0,0.0,94.0,0.05
+Chokladkaka 1 bit,70.0,1.8,4.1,4.8
+Dadelboll lakrtis citron 1 boll,43.0,0.3,1.1,2.0
+Bodylab skummnisse,394.0,29.0,44.0,11.0
+Bodylab peanut caramel,418.0,30.0,30.0,17.0
+Proteinbar ica salted caramel,365.0,30.0,32.0,16.0
+Fillet piecees,149.0,22.5,1.2,4.7
+Sun rice,534.0,6.4,61.0,29.0
+Majskaka ica,384.0,7.0,85.0,1.4
+Proteinbar coockies and cream,365.0,30.0,33.0,16.0
+Mörk choklad hasselnöt och havssalt,569.0,8.6,44.0,39.0

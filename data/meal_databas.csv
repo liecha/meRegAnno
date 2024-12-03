@@ -1,0 +1,55 @@
+name,livsmedel,amount,code,favorite
+Yoghurt bowl,Havregryn fullkorn,40.0,490/15/38/24,False
+Yoghurt bowl,Jordnötter rostade saltade,10.0,490/15/38/24,False
+Yoghurt bowl,Pumpafrö,10.0,490/15/38/24,False
+Yoghurt bowl,Jordnötssmör,10.0,490/15/38/24,False
+Yoghurt bowl,Estrella nötmix,10.0,490/15/38/24,False
+Yoghurt bowl,Protinella,10.0,490/15/38/24,False
+Yoghurt bowl,Sojayoghurt,100.0,490/15/38/24,False
+Dadelbollar jordnöt,Dadlar färska,200.0,1226/18/157/47,False
+Dadelbollar jordnöt,Havregryn fullkorn,40.0,1226/18/157/47,False
+Dadelbollar jordnöt,Kakaopulver fett 20-22%,12.5,1226/18/157/47,False
+Dadelbollar jordnöt,Kokosflingor,35.0,1226/18/157/47,False
+Dadelbollar jordnöt,Jordnötssmör,30.0,1226/18/157/47,False
+Dadelbollar jordnöt,Kaffe bryggt,0.0,1226/18/157/47,False
+Dadelbollar jordnöt,Salt m. jod,0.0,1226/18/157/47,False
+Dadelbollar protinella,Dadlar färska,200.0,1178/15/168/41,False
+Dadelbollar protinella,Havregryn fullkorn,40.0,1178/15/168/41,False
+Dadelbollar protinella,Kakaopulver fett 20-22%,12.5,1178/15/168/41,False
+Dadelbollar protinella,Kokosflingor,35.0,1178/15/168/41,False
+Dadelbollar protinella,Protinella,40.0,1178/15/168/41,False
+Dadelbollar protinella,Kaffe bryggt,0.0,1178/15/168/41,False
+Dadelbollar protinella,Salt m. jod,0.0,1178/15/168/41,False
+Snickars bars,Dadlar färska,51.0,498/10/39/28,False
+Snickars bars,Jordnötssmör,25.0,498/10/39/28,False
+Snickars bars,Mörk choklad kakao 85%,20.0,498/10/39/28,False
+Snickars bars,Jordnötter rostade saltade,15.0,498/10/39/28,False
+Protein porridge,Havregryn fullkorn,60.0,540/37/41/20,True
+Protein porridge,Vassle gammaldags vanlij,35.0,540/37/41/20,True
+Protein porridge,Jordnötssmör,20.0,540/37/41/20,True
+Protein porridge,Pumpafrö,10.0,540/37/41/20,True
+Chokladkaka,Dadlar färska,1.62,2110/53/124/144,False
+Chokladkaka,Ägg rått,1.5,2110/53/124/144,False
+Chokladkaka,Cashewnötter rostade u. salt,0.6,2110/53/124/144,False
+Chokladkaka,Valnötter,1.4,2110/53/124/144,False
+Chokladkaka,Kakaopulver fett 20-22%,0.2,2110/53/124/144,False
+Chokladkaka,Kokosflingor,0.11,2110/53/124/144,False
+Chokladkaka,Bakpulver,0.03,2110/53/124/144,False
+Dadelbollar lakrits/citron,Dadlar färska,2.0,954/7/154/25,False
+Dadelbollar lakrits/citron,Havregryn fullkorn,0.4,954/7/154/25,False
+Dadelbollar lakrits/citron,Kokosflingor,0.35,954/7/154/25,False
+Dadelbollar lakrits/citron,Lakritspulver,0.03,954/7/154/25,False
+Dadelbollar lakrits/citron,Citron,0.25,954/7/154/25,False
+Ugnsbakad sötpotatis och rödbeta med fillets,Sötpotatis rå,208.0,345/23/38/3,False
+Ugnsbakad sötpotatis och rödbeta med fillets,Rödbeta,117.0,345/23/38/3,False
+Ugnsbakad sötpotatis och rödbeta med fillets,Fillet piecees,80.0,345/23/38/3,False
+Ugnsbakad sötpotatis och rödbeta med fillets,Grönkål,50.0,345/23/38/3,False
+Porridge,Havregryn fullkorn,40.0,570/18/34/32,False
+Porridge,Jordnötter rostade saltade,10.0,570/18/34/32,False
+Porridge,Chiafrö,10.0,570/18/34/32,False
+Porridge,Pumpafrö,10.0,570/18/34/32,False
+Porridge,Hampafrö,10.0,570/18/34/32,False
+Porridge,Jordnötssmör,10.0,570/18/34/32,False
+Porridge,Estrella nötmix,10.0,570/18/34/32,False
+Porridge,Protinella,10.0,570/18/34/32,False
+Porridge,Sojamjölk,100.0,570/18/34/32,False

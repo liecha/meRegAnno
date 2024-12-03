@@ -1,0 +1,6 @@
+streamlit
+pandas
+altair
+plotly
+sqlalchemy==2.0.27
+psycopg2-binary
