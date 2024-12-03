@@ -101,6 +101,6 @@ def add_registration(data: dict, table_name):
     df_energy_new = add_new_data_to_dataset_csv(df_db_csv, df_new_post, date_new_post)    
     df_energy_new.to_csv('data/updated-database-results.csv', index=False)
     print('Result uploaded in csv-file...')
-    store_in_db(table_name)
-    print('Result uploaded in database...')
+    #store_in_db(table_name)
+    #print('Result uploaded in database...')
     st.rerun()

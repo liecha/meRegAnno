@@ -9,6 +9,7 @@ from scripts.data_storage import add_registration
 def create_new_form_activity():
     date_now =  date_time_now()   
     col = st.columns((2.5, 2.5), gap='medium') 
+    
     if "my_time" not in st.session_state:
         st.session_state.my_time = None
     
@@ -103,7 +104,7 @@ def create_new_form_food(code, options_string):
                     'energy_balance'
                 )
 
-def create_form_add_recipie_to_database(meal_df, code):    
+def create_form_add_recipie_to_database(meal_df, code): 
     form_recipie = st.form(key="form_add_meal", clear_on_submit=True)
     with form_recipie:
         this_name = st.text_input("Name of recipie")
@@ -118,7 +119,6 @@ def create_form_add_recipie_to_database(meal_df, code):
                 meal_df['favorite'] = False
             meal_df['name'] = this_name
             meal_df = meal_df.rename(columns={"Food": "livsmedel", "Amount (g)": "amount"})
-            print(meal_df)
             meal_df = meal_df[['name', 'livsmedel' , 'amount', 'code', 'favorite']]
             add_meal = pd.concat([df_meal_db, meal_df])
             add_meal.to_csv('data/meal_databas.csv', index=False)

@@ -959,11 +959,16 @@ date,time,label,activity,distance,energy,energy_acc,pro,protein_acc,carb,fat,not
 2024-12-03,13:19,FOOD,Eat,0.0,33.0,-856.0,2.0,76.0,2.0,1.0,Barbell choco,🍲  Barbell choco
 2024-12-03,14:00,REST,Bmr,0,-56.0,-912.0,0.0,76.0,0.0,0.0,0,0
 2024-12-03,15:00,REST,Bmr,0,-56.0,-968.0,0.0,76.0,0.0,0.0,0,0
-2024-12-03,16:00,REST,Bmr,0,-56.0,-1024.0,0.0,76.0,0.0,0.0,0,0
-2024-12-03,17:00,REST,Bmr,0,-56.0,-1080.0,0.0,76.0,0.0,0.0,0,0
-2024-12-03,18:00,REST,Bmr,0,-56.0,-1136.0,0.0,76.0,0.0,0.0,0,0
-2024-12-03,19:00,REST,Bmr,0,-56.0,-1192.0,0.0,76.0,0.0,0.0,0,0
-2024-12-03,20:00,REST,Bmr,0,-56.0,-1248.0,0.0,76.0,0.0,0.0,0,0
-2024-12-03,21:00,REST,Bmr,0,-56.0,-1304.0,0.0,76.0,0.0,0.0,0,0
-2024-12-03,22:00,REST,Bmr,0,-56.0,-1360.0,0.0,76.0,0.0,0.0,0,0
-2024-12-03,23:00,REST,Bmr,0,-56.0,-1416.0,0.0,76.0,0.0,0.0,0,0
+2024-12-03,15:29,TRAINING,Strength,0,-153.0,-1121.0,0.0,76.0,0.0,0.0,LowerBody power,🏋🏻‍♂️ Strength LowerBody power
+2024-12-03,16:00,REST,Bmr,0,-56.0,-1177.0,0.0,76.0,0.0,0.0,0,0
+2024-12-03,16:58,FOOD,Eat,0.0,490.0,-687.0,35.0,111.0,39.0,11.0,Ugnsbakad sötpotatis och rödbeta med fillets/Lax kokt m. salt/Rhode island dressing lätt,🍲  Ugnsbakad sötpotatis och rödbeta med fillets/Lax kokt m. salt/Rhode island dressing lätt
+2024-12-03,17:00,REST,Bmr,0,-56.0,-743.0,0.0,111.0,0.0,0.0,0,0
+2024-12-03,17:24,FOOD,Eat,0.0,190.0,-553.0,9.0,120.0,14.0,9.0,Proteinbar ica salted caramel/Proteinbar ica choklade mudcake/Barbell choco/Wafer nicks,🍲  Proteinbar ica salted caramel/Proteinbar ica choklade mudcake/Barbell choco/Wafer nicks
+2024-12-03,17:31,FOOD,Eat,0.0,276.0,-277.0,0.0,120.0,23.0,13.0,Dadelboll jordnöt/Dadelboll protinella/Dadelboll lakrtis citron 1 boll/Mörk choklad kakao 70%/Mörk choklad hasselnöt och havssalt,🍲  Dadelboll jordnöt/Dadelboll protinella/Dadelboll lakrtis citron 1 boll/Mörk choklad kakao 70%/Mörk choklad hasselnöt och havssalt
+2024-12-03,17:37,FOOD,Eat,0.0,108.0,-169.0,0.0,120.0,9.0,6.0,Sun rice/Marabou dukat,🍲  Sun rice/Marabou dukat
+2024-12-03,18:00,REST,Bmr,0,-56.0,-225.0,0.0,120.0,0.0,0.0,0,0
+2024-12-03,19:00,REST,Bmr,0,-56.0,-281.0,0.0,120.0,0.0,0.0,0,0
+2024-12-03,20:00,REST,Bmr,0,-56.0,-337.0,0.0,120.0,0.0,0.0,0,0
+2024-12-03,21:00,REST,Bmr,0,-56.0,-393.0,0.0,120.0,0.0,0.0,0,0
+2024-12-03,22:00,REST,Bmr,0,-56.0,-449.0,0.0,120.0,0.0,0.0,0,0
+2024-12-03,23:00,REST,Bmr,0,-56.0,-505.0,0.0,120.0,0.0,0.0,0,0
