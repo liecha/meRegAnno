@@ -3,7 +3,6 @@ import streamlit as st
 import pandas as pd
 import datetime
 import altair as alt
-from streamlit_autorefresh import st_autorefresh
 
 import io
 
