@@ -5,8 +5,11 @@ import altair as alt
 
 def date_time_now():
     date_now = date.today()
-    #time_now = datetime.now().time() 
     return date_now
+
+def time_now():
+    time_now = datetime.now().time() 
+    return time_now
 
 def datetime_to_string(this_date):
     date_str = this_date.strftime("%Y-%m-%d")
