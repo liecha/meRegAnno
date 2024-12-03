@@ -92,19 +92,6 @@ def basal_energy(date_new_post):
     df_energy['energy'] = -1 * int(BMR / 24)
     return df_energy
 
-def prepare_data_for_dashboard(selected_date, df_energy, bmr):
-    selected_date = datetime_to_string(selected_date)
-    df_energy_date = df_energy[df_energy['date'] == selected_date]
-    sum_energy_output = calc_daily_energy_output(df_energy_date, bmr)
-    
-    if len(df_energy_date) != 0:
-        df_nutrition_acc = nutrition_content(df_energy_date)
-        df_nutritions_labeled = nutrition_differ(df_energy_date)
-        df_activity_irl = add_summary_to_dataset(df_energy_date)
-        df_registration_list = create_summary_activity_list(df_activity_irl)
-        df_energy_plot = energy_differ(df_energy_date)   
-    return df_energy_date, df_registration_list, sum_energy_output, df_nutrition_acc, df_nutritions_labeled, df_activity_irl, df_energy_plot
-
 def energy_differ(df_energy_date):
     data_e = {
         'energy': df_energy_date['energy'].values,
@@ -152,6 +139,12 @@ def energy_balance_at_current_time(df_energy_date):
     else:
         deficite_text = "- kcal"
     return energy_in, energy_out, energy_balance, deficite_text
+
+def calc_energy_deficite(df_energy):
+    df_deficite_list = df_energy[df_energy['time'] == '23:00']
+    total_deficite = df_deficite_list['energy_acc'].values
+    last_seven_days_deficite_list = total_deficite[(len(total_deficite) - 7):]
+    return last_seven_days_deficite_list
 
 def calc_accumulated_energy(df_data):
     ls_dates = df_data.groupby(['date']).count().index.to_list()

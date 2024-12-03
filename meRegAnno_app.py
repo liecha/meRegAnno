@@ -14,6 +14,7 @@ from scripts.data_dashboard import text_dates
 from scripts.data_dashboard import calc_bmr
 from scripts.data_dashboard import energy_differ
 from scripts.data_dashboard import calc_daily_energy_output
+from scripts.data_dashboard import  calc_energy_deficite
 from scripts.data_dashboard import energy_balance_at_current_time
 from scripts.data_dashboard import nutrition_content
 from scripts.data_dashboard import nutrition_differ
@@ -71,6 +72,12 @@ def create_dashobard():
 
         df_energy_date = df_energy[df_energy['date'] == selected_date]
         sum_energy_output = calc_daily_energy_output(df_energy_date, bmr)
+        last_seven_days_deficite_list = calc_energy_deficite(df_energy)
+        last_seven_days_deficite_sum = sum(last_seven_days_deficite_list)
+        deficite_string = ''
+        for i in range(0, len(last_seven_days_deficite_list)):
+            deficite_string = deficite_string + str(last_seven_days_deficite_list[i]) + ', '
+        deficite_string = deficite_string[:-2]
         
         if len(df_energy_date) != 0:
             # NUTRITION
@@ -82,8 +89,7 @@ def create_dashobard():
         
             df_energy_plot = energy_differ(df_energy_date)
             energy_in, energy_out, energy_balance, deficite_text = energy_balance_at_current_time(df_energy_date)
-
-                       
+              
         if len(df_energy_date) == 0:
             st.caption("The selected date is _:blue[" + str(current_date) + ' ' + text_month + " (" + text_weekday + ")]_")  
             st.markdown('#### Energy balance') 
@@ -136,8 +142,9 @@ def create_dashobard():
     with col[2]: 
         if len(df_energy_date) == 0:
             st.markdown('#### Accumulated deficit') 
-            st.caption("_:blue[Total energy needed]_ at selected day is _:blue[" + str(int(sum_energy_output)) + " kcal]_. _:blue[Total energy needed]_ at selected day is _:blue[" + str(int(sum_energy_output)) + " kcal]_.")  
-            
+            st.caption("_:blue[Total energy deficite]_ is " + "_:blue[" + str(int(last_seven_days_deficite_sum)) + " kcal]_  for the last seven days"  + " (_" + deficite_string + "_)")  
+            st.write(deficite_string)
+
             st.markdown('#### Activity')  
             st.caption("There is _:blue[no data available]_ for the selected day")
 
@@ -146,7 +153,7 @@ def create_dashobard():
 
         else:
             st.markdown('#### Accumulated deficit') 
-            st.caption("_:blue[Total energy needed]_ at selected day is _:blue[" + str(int(sum_energy_output)) + " kcal]_. _:blue[Total energy needed]_ at selected day is _:blue[" + str(int(sum_energy_output)) + " kcal]_.")  
+            st.caption("_:blue[Total energy deficite]_ is " + "_:blue[" + str(int(last_seven_days_deficite_sum)) + " kcal]_  for the last seven days"  + " (_" + deficite_string + "_)")  
 
             st.markdown('#### Activity')  
             st.caption("_:blue[Stored calendar activities]_ from selected day in _:blue[real time]_")
