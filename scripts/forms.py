@@ -104,26 +104,6 @@ def create_new_form_food(code, options_string):
                     'energy_balance'
                 )
 
-def create_form_add_recipie_to_database(meal_df, code): 
-    form_recipie = st.form(key="form_add_meal", clear_on_submit=True)
-    with form_recipie:
-        this_name = st.text_input("Name of recipie")
-        st.text_input("Meal code (kcal/pro/carb/fat)", code)
-        save_favorite = st.checkbox("⭐️ Save recipie as favorite ")
-        submit_recipie = st.form_submit_button("Save recipie")    
-        if submit_recipie:
-            df_meal_db = pd.read_csv('data/meal_databas.csv')
-            if save_favorite == True:
-                meal_df['favorite'] = True
-            else:  
-                meal_df['favorite'] = False
-            meal_df['name'] = this_name
-            meal_df = meal_df.rename(columns={"Food": "livsmedel", "Amount (g)": "amount"})
-            meal_df = meal_df[['name', 'livsmedel' , 'amount', 'code', 'favorite']]
-            add_meal = pd.concat([df_meal_db, meal_df])
-            add_meal.to_csv('data/meal_databas.csv', index=False)
-
-
 def create_form_add_food_item_to_database():
     form_food_item = st.form(key="form_add_food_item", clear_on_submit=True)
     with form_food_item:
@@ -145,3 +125,31 @@ def create_form_add_food_item_to_database():
             df_food_db = pd.read_csv('data/livsmedelsdatabas.csv')
             df_add_food_item = pd.concat([df_food_db, df_new_food_item])
             df_add_food_item.to_csv('data/livsmedelsdatabas.csv', index=False)
+
+def create_form_add_recipie_to_database(meal_df, code): 
+    if "df_meal_storage" not in st.session_state:
+        st.session_state.df_meal_storage = pd.DataFrame([{}])
+    
+    def submit():
+        st.session_state.df_meal_storage = meal_df
+        st.session_state.options_database = st.session_state.add_meal
+        st.session_state.add_meal = []
+
+    form_recipie = st.form(key="form_add_meal", clear_on_submit=True)
+    with form_recipie:
+        this_name = st.text_input("Name of recipie")
+        st.text_input("Meal code (kcal/pro/carb/fat)", code)
+        save_favorite = st.checkbox("⭐️ Save recipie as favorite ")
+        submit_recipie = st.form_submit_button("Save recipie", on_click=submit)   
+        if submit_recipie:
+            df_meal_db = pd.read_csv('data/meal_databas.csv')
+            df_stored_meal = st.session_state.df_meal_storage
+            if save_favorite == True:
+                df_stored_meal['favorite'] = True
+            else:  
+                df_stored_meal['favorite'] = False
+            df_stored_meal['name'] = this_name
+            df_stored_meal = df_stored_meal.rename(columns={"Food": "livsmedel", "Amount (g)": "amount"})
+            df_stored_meal = df_stored_meal[['name', 'livsmedel' , 'amount', 'code', 'favorite']]
+            add_meal = pd.concat([df_meal_db, df_stored_meal])
+            add_meal.to_csv('data/meal_databas.csv', index=False)

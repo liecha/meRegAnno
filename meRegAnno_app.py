@@ -143,7 +143,6 @@ def create_dashobard():
         if len(df_energy_date) == 0:
             st.markdown('#### Accumulated deficit') 
             st.caption("_:blue[Total energy deficite]_ is " + "_:blue[" + str(int(last_seven_days_deficite_sum)) + " kcal]_  for the last seven days"  + " (_" + deficite_string + "_)")  
-            st.write(deficite_string)
 
             st.markdown('#### Activity')  
             st.caption("There is _:blue[no data available]_ for the selected day")
@@ -273,11 +272,17 @@ def create_page_database():
         st.caption("_:blue[Type in food items]_ that you want to add to your recipie")  
         df_food_db = pd.read_csv('data/livsmedelsdatabas.csv')
         food_list = df_food_db['livsmedel'].values
-        options_database = st.multiselect(
+        
+        st.multiselect(
             "Select food items to your recipie",
             food_list,
             key='add_meal'
         )
+
+        if "options_database" not in st.session_state:
+            st.session_state.options_database = []
+        options_database = st.session_state.add_meal
+
         st.markdown("#### Create recipie")
         st.caption("This is the _:blue[ content of your recipie]_")  
         temp_store_database = []
@@ -309,7 +314,6 @@ def create_page_logg_book():
         df_meal_db = pd.read_csv('data/meal_databas.csv')
         summary = df_meal_db.groupby(['name', 'code']).count().sort_values(['favorite', 'name'])
         for i in range(0, len(summary)):
-            this_key = 'meal_' + str(i)
             this_meal = df_meal_db[df_meal_db['name'] == summary.index[i][0]]
             if this_meal['favorite'].iloc[0] == True:
                 this_icon = '⭐️'
@@ -322,8 +326,8 @@ def create_page_logg_book():
             for j in range(0, len(this_meal)):
                 expander.write(':violet[' + "     -- " + this_meal['livsmedel'].iloc[j] + ' ] ' +  '   (_' + str(this_meal['amount'].iloc[j])+ "_ g)") 
     with col[1]: 
-        st.markdown('#### Registration list')  
-        st.caption("_:blue[Stored registrations]_ from selected day in _:blue[real time]_")
+        st.markdown('#### Delete registered post')  
+        st.caption("_:blue[Select registrations]_ that you aim to _:blue[delete]_")
         selected_date_input = st.date_input("Select a date", date_now, key='head_selector')
         selected_date_delete = datetime_to_string(selected_date_input)
         df_energy_date = df_energy[df_energy['date'] == selected_date_delete]
@@ -372,7 +376,76 @@ def create_page_logg_book():
                 delete_item_from_dataset(selected_date_delete, df_new)
                 st.rerun()
 
+        st.markdown('#### Delete recipies in database')  
+        st.caption("_:blue[Select recipie]_ that you aim to _:blue[delete]_")
+        df_meal_db = pd.read_csv('data/meal_databas.csv')
+        df_names_recipies = df_meal_db.groupby(['name']).count().reset_index()
+        if len(df_names_recipies) > 0:
+            recipies_list = df_names_recipies['name'].values
+            selected_recipie = st.selectbox("Select a recipie", recipies_list, key='recipie_delete_selector')
+            
+            st.checkbox("Delete recipie", key="button_delete_recipie_logg")
+            st.checkbox("Change recipie", key="button_change_recipie_logg")
 
+            if "delete_recipie" not in st.session_state:
+                st.session_state.delete_recipie = False
+            delete_recipie = st.session_state.button_delete_recipie_logg
+            
+            if "change_recipie" not in st.session_state:
+                st.session_state.change_recipie = False
+            change_recipie = st.session_state.button_change_recipie_logg
+
+            def submit_delete():
+                st.session_state.button_delete_recipie_logg = False
+                df_meal_db_update.to_csv('data/meal_databas.csv', index=False)
+            
+            def submit_change():
+                st.session_state.button_change_recipie_logg = False
+                df_meal_db_update_change = df_meal_db[df_meal_db['name'] != selected_recipie]
+                df_add_update = pd.concat([df_meal_db_update_change, edited_df_recipie])
+                df_add_update.to_csv('data/meal_databas.csv', index=False)
+
+            if delete_recipie:
+                df_meal_db_update = df_meal_db[df_meal_db['name'] != selected_recipie]
+                button_pressed_delete_save = st.button("Save changes", key="button_save_delete_logg", on_click=submit_delete)
+                if button_pressed_delete_save:  
+                    st.rerun()
+
+            if change_recipie:
+                df_meal_db_change = df_meal_db[df_meal_db['name'] == selected_recipie]
+                if len(df_meal_db_change) > 0:
+                    df_recipie_show = df_meal_db_change[['livsmedel', 'amount']]
+                    edited_df_recipie = st.data_editor(
+                        df_recipie_show, 
+                        column_config={
+                            "livsmedel": st.column_config.Column(
+                                "Food",
+                                width="large",
+                                required=True,
+                            ),
+                            "amount": st.column_config.Column(
+                                "Amount (g)",
+                                width="small",
+                                required=True,
+                            ),
+                        },
+                        key='change_recipie_logg', 
+                        hide_index=True, 
+                        use_container_width=True)
+                if len(edited_df_recipie) > 0:
+                    edited_df_recipie = edited_df_recipie.rename(columns={"livsmedel": "Food", "amount": "Amount (g)"})
+                    df_food_nutrition = locate_eatables(edited_df_recipie)
+                    code = code_detector(edited_df_recipie, df_food_nutrition)
+                    edited_df_recipie['code'] = code
+                    edited_df_recipie['name'] = selected_recipie
+                    edited_df_recipie['favorite'] = df_meal_db_change['favorite'].iloc[0]
+                    edited_df_recipie = edited_df_recipie.rename(columns={"Food": "livsmedel", "Amount (g)": "amount"})
+                    edited_df_recipie = edited_df_recipie[['name', 'livsmedel', 'amount', 'code', 'favorite']]
+                    st.button("Save changes", key="button_save_change_logg", on_click=submit_change)
+        else:
+            st.caption("There are _:blue[no recipies]_ saved in your database")
+        
+            
 with st.sidebar:
     st.image("zeus_logo_test.png")  
     bmr = calc_bmr(50, 170, 42)
