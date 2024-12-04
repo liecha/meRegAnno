@@ -10,7 +10,7 @@ from scripts.data_storage import delete_item_from_dataset
 
 from scripts.data_dashboard import date_time_now
 from scripts.data_dashboard import datetime_to_string
-from scripts.data_dashboard import text_dates
+from scripts.data_dashboard import translate_dates_to_text
 from scripts.data_dashboard import calc_bmr
 from scripts.data_dashboard import energy_differ
 from scripts.data_dashboard import calc_daily_energy_output
@@ -64,20 +64,19 @@ df_energy =  df_db_csv = pd.read_csv('data/updated-database-results.csv')
 st.subheader('Emelie Chandni Jutvik')
 
 def create_dashobard():
-    col = st.columns((5.5, 5.5, 5.5), gap='medium') 
+    col = st.columns((5.5, 5.5), gap='medium') 
     with col[0]: 
-        selected_date_input = st.date_input("Select a date", date_now, key='head_selector')
-        selected_date = datetime_to_string(selected_date_input)
-        current_date, text_month, text_weekday = text_dates(selected_date)
-
+        current_date, text_month, text_weekday = translate_dates_to_text(selected_date)
         df_energy_date = df_energy[df_energy['date'] == selected_date]
         sum_energy_output = calc_daily_energy_output(df_energy_date, bmr)
-        last_seven_days_deficite_list = calc_energy_deficite(df_energy)
-        last_seven_days_deficite_sum = sum(last_seven_days_deficite_list)
+        df_deficite = calc_energy_deficite(df_energy, selected_date, selected_date_input)
         deficite_string = ''
-        for i in range(0, len(last_seven_days_deficite_list)):
-            deficite_string = deficite_string + str(last_seven_days_deficite_list[i]) + ', '
-        deficite_string = deficite_string[:-2]
+        seven_days_deficite_sum = 0
+        if len(df_deficite) > 0:
+            seven_days_deficite_sum = sum(df_deficite['energy_acc'].values)
+            for i in range(0, len(df_deficite)):
+                deficite_string = deficite_string + str(int(df_deficite['energy_acc'].iloc[i])) + ', '
+            deficite_string = deficite_string[:-2]
         
         if len(df_energy_date) != 0:
             # NUTRITION
@@ -91,102 +90,137 @@ def create_dashobard():
             energy_in, energy_out, energy_balance, deficite_text = energy_balance_at_current_time(df_energy_date)
               
         if len(df_energy_date) == 0:
+            st.markdown('#### Summary energy') 
             st.caption("The selected date is _:blue[" + str(current_date) + ' ' + text_month + " (" + text_weekday + ")]_")  
-            st.markdown('#### Energy balance') 
             st.caption("There is _:blue[no data available]_ for the selected day")    
         else:
+            st.markdown('#### Summary energy') 
             st.caption("The selected date is _:blue[" + str(current_date) + ' ' + text_month + " (" + text_weekday + ")]_")               
-            st.markdown('#### Overview') 
-            st.caption("_:blue[Energy inputs/outputs]_ at selected day")
-            st.bar_chart(df_energy_plot, x="time", y="energy", color="label")
-
-            st.markdown('#### Energy balance') 
-            st.caption("_:blue[Energy intake]_ at selected day in _:blue[real time]_")
             col1, col2, col3 = st.columns(3)
             col1.metric("Input energy", energy_in, "+ kcal")
             col2.metric("Output energy", energy_out, "-kcal")
-            col3.metric("Deficite", energy_balance, deficite_text)   
-                                
-    with col[1]:
-        if len(df_energy_date) == 0:
-            st.markdown('#### Energy data') 
-            st.caption("_:blue[Total energy needed]_ at selected day is _:blue[" + str(int(sum_energy_output)) + " kcal]_. Your body requires _:blue[" + str(bmr) + " kcal]_ at rest.")  
+            col3.metric("Deficite", energy_balance, deficite_text)  
+            st.caption("_:blue[Energy inputs/outputs/deficite]_ at selected day in _:blue[real time]_")
 
-            st.markdown('#### Nutrition meals') 
-            st.caption("There is _:blue[no data available]_ for the selected day")
-
-            st.markdown('#### Nutrition balance') 
-            st.caption("There is _:blue[no data available]_ for the selected day")
-        else:
-            st.markdown('#### Energy data') 
-            st.caption("_:blue[Total energy needed]_ at selected day is _:blue[" + str(int(sum_energy_output)) + " kcal]_. Your body requires _:blue[" + str(bmr) + " kcal]_ at rest.") 
-            
-            st.markdown('#### Nutrition meals') 
-            if sum(df_nutritions_labeled['nutrient'].values) == 0.0:
-                st.caption("There are _:blue[no meals registered]_ for the selected day")
-                
-            else:
-                st.caption("_:blue[Nutrition intake]_ for registered meals at selected day")
-                st.bar_chart(df_nutritions_labeled, x="time", y="nutrient", color="label") 
-            
-            st.markdown('#### Nutrition balance') 
-            if sum(df_nutritions_labeled['nutrient'].values) == 0.0:
-                st.caption("There are _:blue[no meals registered]_ for the selected day")
-            else:
-                st.caption("_:blue[Nutrition intake]_ at selected day in _:blue[real time]_")    
-                col1, col2, col3 = st.columns(3)
-                col1.metric("Protein", str(int(df_nutrition_acc['value'].iloc[0])) + ' g', df_nutrition_acc['percent'].iloc[0])
-                col2.metric("Carbs", str(int(df_nutrition_acc['value'].iloc[1])) + ' g', df_nutrition_acc['percent'].iloc[1])
-                col3.metric("Fat", str(int(df_nutrition_acc['value'].iloc[2])) + ' g', df_nutrition_acc['percent'].iloc[2])  
-   
-    with col[2]: 
         if len(df_energy_date) == 0:
             st.markdown('#### Accumulated deficit') 
-            st.caption("_:blue[Total energy deficite]_ is " + "_:blue[" + str(int(last_seven_days_deficite_sum)) + " kcal]_  for the last seven days"  + " (_" + deficite_string + "_)")  
-
-            st.markdown('#### Activity')  
-            st.caption("There is _:blue[no data available]_ for the selected day")
-
-            st.markdown('#### Registration list') 
-            st.caption("There are _:blue[no registrations]_ made at the selected day")
+            if seven_days_deficite_sum == 0:
+                st.caption("There is _:blue[no data available]_ for the selected day")
+            else:
+                st.caption("_:blue[Total energy deficite]_ is " + "_:blue[" + str(int(seven_days_deficite_sum)) + " kcal]_  for the last seven days")  
 
         else:
             st.markdown('#### Accumulated deficit') 
-            st.caption("_:blue[Total energy deficite]_ is " + "_:blue[" + str(int(last_seven_days_deficite_sum)) + " kcal]_  for the last seven days"  + " (_" + deficite_string + "_)")  
-
-            st.markdown('#### Activity')  
-            st.caption("_:blue[Stored calendar activities]_ from selected day in _:blue[real time]_")
-            st.bar_chart(df_energy_date, x="time", y="energy", color="activity") 
-
-            st.markdown('#### Registration list')  
-            st.caption("_:blue[Stored registrations]_ from selected day in _:blue[real time]_")
-            if len(df_energy_date) > 0:
-                df_activity_irl = df_activity_irl[['time', 'summary']]
+            if seven_days_deficite_sum == 0:
+                st.caption("There is _:blue[no data available]_ for the selected day")
+            else:
+                st.caption("_:blue[Total energy deficite]_ is " + "_:blue[" + str(int(seven_days_deficite_sum)) + " kcal]_  for the last seven days")  
+                df_deficite_show = df_deficite[['date_text', 'energy_acc']]
                 st.data_editor(
-                    df_activity_irl, 
+                    df_deficite_show, 
                     column_config={
-                        "time": st.column_config.Column(
-                            "Time",
+                        "date_text": st.column_config.Column(
+                            "Day",
                             width="small",
                             required=True,
                         ),
-                        "summary": st.column_config.Column(
-                            "Summary",
-                            width="large",
+                        "energy_acc": st.column_config.Column(
+                            "Deficite (kcal/day)",
+                            width="small",
                             required=True,
                         ),
                     },
-                    key='change_registration', 
+                    key='energy_deficite', 
                     hide_index=True, 
-                    use_container_width=True)
-
-
+                    use_container_width=True
+                )
+            st.caption("_:blue[Energy inputs/outputs/deficite]_ at selected day in _:blue[real time]_")
+            st.bar_chart(df_energy_plot, x="time", y="energy", color="label")
+                                
+    with col[1]:
+        if len(df_energy_date) == 0:
+            st.markdown('#### Summary meals/activity') 
+            if len(df_deficite) != 0:
+                st.caption("_:blue[Total energy needed]_ at selected day is _:blue[" + str(int(sum_energy_output)) + " kcal]_. Your body requires _:blue[" + str(bmr) + " kcal]_ at rest.")  
+            else:
+                st.caption("_:blue[No data is available]_ at selected date")  
+        else:
+            st.markdown('#### Summary meals/activity') 
+            if len(df_deficite) != 0:
+                st.caption("_:blue[Total energy needed]_ at selected day is _:blue[" + str(int(sum_energy_output)) + " kcal]_. Your body requires _:blue[" + str(bmr) + " kcal]_ at rest.")  
+            else:
+                st.caption("_:blue[No data is available]_ at selected date")  
+            
+            if sum(df_nutritions_labeled['nutrient'].values) == 0.0:
+                st.caption("There are _:blue[no meals registered]_ for the selected day")   
+            else:
+                col1, col2, col3 = st.columns(3)
+                col1.metric("Protein", str(int(df_nutrition_acc['value'].iloc[0])) + ' g', df_nutrition_acc['percent'].iloc[0])
+                col2.metric("Carbs", str(int(df_nutrition_acc['value'].iloc[1])) + ' g', df_nutrition_acc['percent'].iloc[1])
+                col3.metric("Fat", str(int(df_nutrition_acc['value'].iloc[2])) + ' g', df_nutrition_acc['percent'].iloc[2]) 
+                st.caption("_:blue[Nutrition intake]_ at selected day in _:blue[real time]_")
+                
+            st.markdown('#### Registered meals/activities') 
+            if sum(df_nutritions_labeled['nutrient'].values) == 0.0:
+                st.caption("There are _:blue[no meals registered]_ for the selected day")
+            else: 
+                st.caption("There are _:blue[meals and activities registered]_ for the selected day")
+                if len(df_energy_date) > 0:
+                    df_activity_irl = df_activity_irl[['time', 'summary']]
+                    st.data_editor(
+                        df_activity_irl, 
+                        column_config={
+                            "time": st.column_config.Column(
+                                "Time",
+                                width="small",
+                                required=True,
+                            ),
+                            "summary": st.column_config.Column(
+                                "Summary",
+                                width="large",
+                                required=True,
+                            ),
+                        },
+                        key='change_registration', 
+                        hide_index=True, 
+                        use_container_width=True
+                    )
+                st.caption("_:blue[Nutrition intake]_ for registered meals at selected day")
+                st.bar_chart(df_nutritions_labeled, x="time", y="nutrient", color="label")    
+                 
 def create_page_activity_registration():
     col = st.columns((5.5, 5.5), gap='medium') 
+    df_energy_date = df_energy[df_energy['date'] == selected_date]
+    if len(df_energy_date) != 0:            
+            df_activity_irl = add_summary_to_dataset(df_energy_date)
     with col[0]:  
-        st.markdown("#### Activity Registration")
+        st.markdown('#### Stored activities')  
+        if len(df_energy_date) > 0:
+            df_activity_irl = df_activity_irl[['time', 'summary']]
+            st.data_editor(
+                df_activity_irl, 
+                column_config={
+                    "time": st.column_config.Column(
+                        "Time",
+                        width="small",
+                        required=True,
+                    ),
+                    "summary": st.column_config.Column(
+                        "Summary",
+                        width="large",
+                        required=True,
+                    ),
+                },
+                key='change_registration', 
+                hide_index=True, 
+                use_container_width=True
+            )
+            st.caption("_:blue[Stored activities]_ from selected day in _:blue[real time]_")
+            st.bar_chart(df_energy_date, x="time", y="energy", color="activity") 
+    with col[1]:
+        st.markdown("#### Create new activity")
         create_new_form_activity()
-
+        
 
 def create_page_meal_registration():
     col = st.columns((5.5, 5.5), gap='medium') 
@@ -328,7 +362,6 @@ def create_page_logg_book():
     with col[1]: 
         st.markdown('#### Delete registered post')  
         st.caption("_:blue[Select registrations]_ that you aim to _:blue[delete]_")
-        selected_date_input = st.date_input("Select a date", date_now, key='head_selector')
         selected_date_delete = datetime_to_string(selected_date_input)
         df_energy_date = df_energy[df_energy['date'] == selected_date_delete]
         if len(df_energy_date) != 0:            
@@ -449,11 +482,13 @@ def create_page_logg_book():
 with st.sidebar:
     st.image("zeus_logo_test.png")  
     bmr = calc_bmr(50, 170, 42)
-    date_now =  date_time_now()   
+    date_now =  date_time_now()  
+    selected_date_input = st.date_input("Select a date", date_now, key='head_selector') 
+    selected_date = datetime_to_string(selected_date_input)
     page_names_to_funcs = {
         "Dashboard": create_dashobard,
-        "Activity Registration": create_page_activity_registration,
-        "Meal Registration": create_page_meal_registration,
+        "Activity": create_page_activity_registration,
+        "Meals": create_page_meal_registration,
         "Database": create_page_database,
         "Log book": create_page_logg_book
     }

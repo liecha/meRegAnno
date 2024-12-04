@@ -66,7 +66,7 @@ def find_weekday(this_day):
         text_day = 'Sunday'
     return text_day
 
-def text_dates(selected_date):
+def translate_dates_to_text(selected_date):
     current_date = datetime.strptime(selected_date, "%Y-%m-%d")    
     current_day = current_date.day
     text_month = find_month(current_date.month)    
@@ -140,11 +140,34 @@ def energy_balance_at_current_time(df_energy_date):
         deficite_text = "- kcal"
     return energy_in, energy_out, energy_balance, deficite_text
 
-def calc_energy_deficite(df_energy):
+def calc_energy_deficite(df_energy, selected_date, selected_date_input):
+    intervall_length = 7
+    date_now_str = datetime_to_string(date.today())
     df_deficite_list = df_energy[df_energy['time'] == '23:00']
-    total_deficite = df_deficite_list['energy_acc'].values
-    last_seven_days_deficite_list = total_deficite[(len(total_deficite) - 7):]
-    return last_seven_days_deficite_list
+    df_deficite_list = df_deficite_list[['date', 'energy_acc']]
+    temp_storage = []
+    for i in range(0, len(df_deficite_list)):
+        this_date = df_deficite_list['date'].iloc[i]
+        current_day, text_month, text_weekday = translate_dates_to_text(this_date)
+        if this_date == date_now_str:
+            day_string = 'Today' + ' (' + text_weekday + ')'
+        else:
+            day_string = str(current_day) + ' ' + text_month + ' (' + text_weekday + ')'
+        temp_storage.append(day_string)
+    df_deficite_list.insert(2, 'date_text', temp_storage)
+    if selected_date == date_now_str:
+        df_this_intervall = df_deficite_list[len(df_deficite_list)-intervall_length:].sort_values(by='date', ascending=False)
+    else:
+        date_now = date.today()
+        difference = date_now - selected_date_input
+        day_diff = int(difference.total_seconds() / 86400.0)
+        if day_diff > 0:
+            int_start = len(df_deficite_list) - intervall_length - day_diff
+            int_end = int_start + intervall_length
+            df_this_intervall = df_deficite_list[int_start:int_end].sort_values(by='date', ascending=False)
+        if day_diff < 0:
+            df_this_intervall = []
+    return df_this_intervall
 
 def calc_accumulated_energy(df_data):
     ls_dates = df_data.groupby(['date']).count().index.to_list()
