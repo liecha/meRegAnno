@@ -294,6 +294,9 @@ def add_summary_to_dataset(df_energy_date):
             if activities[i] == 'Strength':
                 str_string = '🏋🏻‍♂️ ' + activities[i] + ' ' + df['note'].iloc[i] 
                 note_storage.append(str_string)  
+            if activities[i] == 'Yoga':
+                yoga_string = '🧘🏽‍♀️ ' + activities[i] + ' ' + df['note'].iloc[i] 
+                note_storage.append(yoga_string)  
     df.insert(12, 'summary', note_storage)
     return df
     

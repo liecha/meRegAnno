@@ -26,7 +26,7 @@ def create_new_form_activity():
         st.write("Selected time: ", st.session_state.act_time)
     form_activity = st.form(key="activity", clear_on_submit=True)
     with form_activity:
-        this_activity = st.selectbox("Choose activity", ("","Walk", "Run", "Swim", "Bike", "Strength"))
+        this_activity = st.selectbox("Choose activity", ("","Walk", "Run", "Swim", "Bike", "Strength", "Yoga"))
         this_distance = st.text_input("Distance (km)")
         this_energy = st.text_input("Energy burned (kcal)")
         this_note = st.text_input("Details")
