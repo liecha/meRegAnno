@@ -286,7 +286,7 @@ def create_page_meal_registration():
             print(options_string)
             if len(df_result_meal) > 0:
                 df_food_nutrition = locate_eatables(df_result_meal)
-                code = code_detector(df_result_meal, df_food_nutrition)
+                code = code_detector(df_result_meal, df_food_nutrition, 1)
                 df_result_meal['code'] = code
         else:
             st.error('Your meal is empty', icon="🚨")
@@ -321,6 +321,8 @@ def create_page_database():
         options_database = st.session_state.add_meal
 
         st.markdown("#### Create recipie")
+        portions = st.slider("Amount of portions", 1, 30, 1)
+        st.write("Portions: ", portions)
         st.caption("This is the _:blue[ content of your recipie]_")  
         temp_store_database = []
         code = ''
@@ -332,7 +334,7 @@ def create_page_database():
             meal_df = st.data_editor(df_my, key='add_meal_editor', hide_index=True, use_container_width=True)
             if len(meal_df) > 0:
                 df_food_nutrition = locate_eatables(meal_df)
-                code = code_detector(meal_df, df_food_nutrition)
+                code = code_detector(meal_df, df_food_nutrition, portions)
                 meal_df['code'] = code
         else:
             st.error('Your recipie is empty', icon="🚨")
@@ -471,7 +473,7 @@ def create_page_logg_book():
                 if len(edited_df_recipie) > 0:
                     edited_df_recipie = edited_df_recipie.rename(columns={"livsmedel": "Food", "amount": "Amount (g)"})
                     df_food_nutrition = locate_eatables(edited_df_recipie)
-                    code = code_detector(edited_df_recipie, df_food_nutrition)
+                    code = code_detector(edited_df_recipie, df_food_nutrition, 1)
                     edited_df_recipie['code'] = code
                     edited_df_recipie['name'] = selected_recipie
                     edited_df_recipie['favorite'] = df_meal_db_change['favorite'].iloc[0]

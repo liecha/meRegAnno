@@ -28,7 +28,7 @@ def locate_eatables(df_meal):
         df_result = pd.concat(found_eatables)
         return df_result
 
-def code_detector(df_meal, df_nutrition):
+def code_detector(df_meal, df_nutrition, portions):
     key_list = df_meal['Food'].values
     values_list = df_meal['Amount (g)'].values
     calories = 0.0
@@ -37,10 +37,10 @@ def code_detector(df_meal, df_nutrition):
     fat = 0.0
     for i in range(0, len(key_list)):
         this_eatable = df_nutrition.loc[df_nutrition['livsmedel'] == key_list[i]]  
-        calories = int(calories + float(this_eatable['calorie'].iloc[0]) * (values_list[i] / 100))
-        protein = int(protein +  float(this_eatable['protein'].iloc[0]) * (values_list[i] / 100))
-        carb = int(carb +  float(this_eatable['carb'].iloc[0]) * (values_list[i] / 100))
-        fat = int(fat +  float(this_eatable['fat'].iloc[0]) * (int(values_list[i]) / 100))
+        calories = int((calories + float(this_eatable['calorie'].iloc[0]) * (values_list[i] / 100))/portions)
+        protein = int((protein +  float(this_eatable['protein'].iloc[0]) * (values_list[i] / 100)) / portions)
+        carb = int((carb +  float(this_eatable['carb'].iloc[0]) * (values_list[i] / 100)) / portions)
+        fat = int((fat +  float(this_eatable['fat'].iloc[0]) * (int(values_list[i]) / 100)) / portions)
     food_code = str(calories) + '/' + str(protein) + '/' + str(carb) + '/' + str(fat)
     return food_code
 
