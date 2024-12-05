@@ -194,29 +194,32 @@ def create_page_activity_registration():
     if len(df_energy_date) != 0:            
             df_activity_irl = add_summary_to_dataset(df_energy_date)
     with col[0]:  
-        st.markdown('#### Stored activities')  
-        if len(df_energy_date) > 0:
-            df_activity_irl = df_activity_irl[['time', 'summary']]
-            st.data_editor(
-                df_activity_irl, 
-                column_config={
-                    "time": st.column_config.Column(
-                        "Time",
-                        width="small",
-                        required=True,
-                    ),
-                    "summary": st.column_config.Column(
-                        "Summary",
-                        width="large",
-                        required=True,
-                    ),
-                },
-                key='change_registration', 
-                hide_index=True, 
-                use_container_width=True
-            )
-            st.caption("_:blue[Stored activities]_ from selected day in _:blue[real time]_")
-            st.bar_chart(df_energy_date, x="time", y="energy", color="activity") 
+        st.markdown('#### Stored activities') 
+        if len(df_energy_date) != 0:
+            if len(df_energy_date) > 0:
+                df_activity_irl = df_activity_irl[['time', 'summary']]
+                st.data_editor(
+                    df_activity_irl, 
+                    column_config={
+                        "time": st.column_config.Column(
+                            "Time",
+                            width="small",
+                            required=True,
+                        ),
+                        "summary": st.column_config.Column(
+                            "Summary",
+                            width="large",
+                            required=True,
+                        ),
+                    },
+                    key='change_registration', 
+                    hide_index=True, 
+                    use_container_width=True
+                )
+                st.caption("_:blue[Stored activities]_ from selected day in _:blue[real time]_")
+                st.bar_chart(df_energy_date, x="time", y="energy", color="activity") 
+        else:
+             st.caption("There are _:blue[no stored activities]_ at selected day") 
     with col[1]:
         st.markdown("#### Create new activity")
         create_new_form_activity()
