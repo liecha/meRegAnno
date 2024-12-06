@@ -59,7 +59,7 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 #df_energy = load_data_from_db('energy_balance')
-df_energy =  df_db_csv = pd.read_csv('data/updated-database-results.csv')
+df_energy = pd.read_csv('data/updated-database-results.csv')
 
 st.subheader('Emelie Chandni Jutvik')
 
