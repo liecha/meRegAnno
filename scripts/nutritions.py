@@ -37,10 +37,10 @@ def code_detector(df_meal, df_nutrition, portions):
     fat = 0.0
     for i in range(0, len(key_list)):
         this_eatable = df_nutrition.loc[df_nutrition['livsmedel'] == key_list[i]]  
-        calories = int((calories + float(this_eatable['calorie'].iloc[0]) * (values_list[i] / 100))/portions)
-        protein = int((protein +  float(this_eatable['protein'].iloc[0]) * (values_list[i] / 100)) / portions)
-        carb = int((carb +  float(this_eatable['carb'].iloc[0]) * (values_list[i] / 100)) / portions)
-        fat = int((fat +  float(this_eatable['fat'].iloc[0]) * (int(values_list[i]) / 100)) / portions)
+        calories = int(calories + float(this_eatable['calorie'].iloc[0] / portions) * (values_list[i] / 100))
+        protein = int(protein +  float(this_eatable['protein'].iloc[0] / portions) * (values_list[i] / 100)) 
+        carb = int(carb +  float(this_eatable['carb'].iloc[0] / portions) * (values_list[i] / 100))
+        fat = int(fat +  float(this_eatable['fat'].iloc[0] / portions) * (int(values_list[i]) / 100))
     food_code = str(calories) + '/' + str(protein) + '/' + str(carb) + '/' + str(fat)
     return food_code
 
