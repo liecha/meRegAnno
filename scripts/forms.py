@@ -13,6 +13,9 @@ def create_new_form_activity():
     if "my_time" not in st.session_state:
         st.session_state.my_time = None
     
+    if "button_disabled" not in st.session_state:
+        st.session_state.button_disabled = True
+    
     def submit():
         st.session_state.my_time = st.session_state.act_time
         st.session_state.act_time = None
@@ -24,13 +27,15 @@ def create_new_form_activity():
         my_time = st.session_state.my_time
         st.time_input("Select a time", value=None, key="act_time")
         st.write("Selected time: ", st.session_state.act_time)
+    
     form_activity = st.form(key="activity", clear_on_submit=True)
     with form_activity:
         this_activity = st.selectbox("Choose activity", ("","Walk", "Run", "Swim", "Bike", "Strength", "Yoga"))
         this_distance = st.text_input("Distance (km)")
         this_energy = st.text_input("Energy burned (kcal)")
         this_note = st.text_input("Details")
-        submit_activity = st.form_submit_button("Submit", on_click=submit)
+        #if this_time
+        submit_activity = st.form_submit_button("Submit",  on_click=submit) #disabled=st.session_state.button_disabled,
         if submit_activity:
             add_registration(
                 {     
