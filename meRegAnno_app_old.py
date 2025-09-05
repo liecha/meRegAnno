@@ -60,7 +60,7 @@ st.subheader('Emelie Chandni Jutvik')
 
 with st.sidebar:
     st.image("zeus_logo_test.png")  
-    bmr = calc_bmr(50, 170, 42)
+    bmr = calc_bmr(50, 170, 43)
     date_now =  date_time_now()   
     selected_date_input = st.date_input("Select a date", date_now, key='head_selector')
 

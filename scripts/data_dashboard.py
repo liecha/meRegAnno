@@ -74,17 +74,14 @@ def translate_dates_to_text(selected_date):
     return current_day, text_month, text_weekday
 
 def calc_bmr(weight, height, age):
-    weight = 50
-    height = 170
-    age = 42
-    BMR = 1360 #int(447.593 + (9.247 * weight) + (3.098 * height) - (4.330 * age))
+    BMR = int(447.593 + (9.247 * weight) + (3.098 * height) - (4.330 * age)) #1187
     return BMR
 
 def basal_energy(date_new_post):
     weight = 50
     height = 170
-    age = 42
-    BMR = 1360 #int(447.593 + (9.247 * weight) + (3.098 * height) - (4.330 * age))
+    age = 43
+    BMR = int(447.593 + (9.247 * weight) + (3.098 * height) - (4.330 * age)) #
     df_energy = pd.read_csv('data/energy_template.csv')
     df_energy['date'] = date_new_post
     df_energy['label'] = 'REST'
@@ -273,30 +270,27 @@ def add_summary_to_dataset(df_energy_date):
     note_storage = []
     for i in range(0, len(labels)):
         if labels[i] == 'FOOD':
-            food_string =  '🍲  ' + df['note'].iloc[i]
+            food_string = '🍲  ' + str(df['note'].iloc[i])
             note_storage.append(food_string)
         if labels[i] == 'TRAINING':
-            if activities[i] == 'Walk':
-                walk_string = '🚶🏻‍♂️ '  + activities[i] + ' ' + df['distance'].iloc[i]
+            if activities[i] == 'WALK' or activities[i] == 'Walk':
+                walk_string = '🚶🏻‍♂️ '  + activities[i] + ' ' + str(df['distance'].iloc[i])
                 note_storage.append(walk_string)
-            if activities[i] == 'SWIM':
-                swim_string = '🏊🏼‍♀️ '   + activities[i] + ' ' + df['distance'].iloc[i]
+            elif activities[i] == 'SWIM' or activities[i] == 'Swim':
+                swim_string = '🏊🏼‍♀️ '   + activities[i] + ' ' + str(df['distance'].iloc[i])
                 note_storage.append(swim_string)
-            if activities[i] == 'RUN':
-                run_string = '🏃🏽‍♂️ ' + activities[i] + ' ' + df['distance'].iloc[i]
+            elif activities[i] == 'RUN' or activities[i] == 'Run':
+                run_string = '🏃🏽‍♂️ ' + activities[i] + ' ' + str(df['distance'].iloc[i])
                 note_storage.append(run_string)
-            if activities[i] == 'BIKE':
-                bike_string = '🚵🏼 ' + activities[i] + ' ' + df['note'].iloc[i] 
+            elif activities[i] == 'BIKE' or activities[i] == 'Bike':
+                bike_string = '🚵🏼 ' + activities[i] + ' ' + str(df['note'].iloc[i])
                 note_storage.append(bike_string)
-            if activities[i] == 'STR':
-                str_string = '🏋🏻‍♂️ ' + activities[i] + ' ' + df['note'].iloc[i] 
-                note_storage.append(str_string)  
-            if activities[i] == 'Strength':
-                str_string = '🏋🏻‍♂️ ' + activities[i] + ' ' + df['note'].iloc[i] 
-                note_storage.append(str_string)  
-            if activities[i] == 'Yoga':
-                yoga_string = '🧘🏽‍♀️ ' + activities[i] + ' ' + df['note'].iloc[i] 
-                note_storage.append(yoga_string)  
+            elif activities[i] == 'STR' or activities[i] == 'Strength':
+                str_string = '🏋🏻‍♂️ ' + activities[i] + ' ' + str(df['note'].iloc[i])
+                note_storage.append(str_string)
+            elif activities[i] == 'YOGA' or activities[i] == 'Yoga':
+                yoga_string = '🧘🏽‍♀️ ' + activities[i] + ' ' + str(df['note'].iloc[i])
+                note_storage.append(yoga_string)
     df.insert(12, 'summary', note_storage)
     return df
     
