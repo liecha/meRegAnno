@@ -1,5 +1,8 @@
 import pandas as pd
 
+from scripts.data_storage import fetch_data_from_storage
+from scripts.data_storage import save_data_to_storage
+
 def locate_eatables(df_meal):
     eatables = df_meal['Food'].values
     found_eatables = []
@@ -56,14 +59,14 @@ def def_recipie(name_meal, code_meal, meal_dict):
     return new_recipie
 
 def list_all_meals():
-    summary = pd.read_csv('data/meal_databas.csv').groupby(['name', 'code']).count()
+    summary = fetch_data_from_storage('data/recipie_databas.csv').groupby(['name', 'code']).count()
     print('Måltider registrerade i databasen: ')
     print()
     for i in range(0, len(summary)):       
         print(summary.index[i][0] + ' (' + summary.index[i][1] + ')' )
         
 def meal_search(name_meal):
-    df_meals = pd.read_csv('data/meal_databas.csv')
+    df_meals = fetch_data_from_storage('data/recipie_databas.csv')
     look_for_recipie = df_meals.loc[df_meals['name'] == name_meal] 
     if len(look_for_recipie) == 0:
         print(name_meal + ' finns inte registrerad i databasen.')
@@ -79,20 +82,20 @@ def meal_search(name_meal):
     
 def add_meal_db(name_meal, code_meal, meal_dict):
     new_recipie = def_recipie(name_meal, code_meal, meal_dict)
-    df_meals = pd.read_csv('data/meal_databas.csv')
+    df_meals = fetch_data_from_storage('data/recipie_databas.csv')
     look_for_recipie = df_meals.loc[df_meals['name'] == name_meal]
     if len(look_for_recipie) != 0:
         print('Denna måltid finns redan i databasen:')
         print(look_for_recipie)
     else:
         df_add_meal = pd.concat([df_meals, new_recipie])
-        df_add_meal.to_csv('data/meal_databas.csv', index=False)
-        df_meals = pd.read_csv('data/meal_databas.csv')
+        save_data_to_storage(df_add_meal, 'data/recipie_databas.csv')
+        df_meals = fetch_data_from_storage('data/recipie_databas.csv')
         print(df_meals)
 
 
 def list_meal_content(name_meal):
-    df_meals = pd.read_csv('data/meal_databas.csv')
+    df_meals = fetch_data_from_storage('data/recipie_databas.csv')
     look_for_meal = df_meals.loc[df_meals['name'] == name_meal]
     if len(look_for_meal) == 0:
         print(name_meal + ' finns inte registrerad i databasen.')

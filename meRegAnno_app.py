@@ -6,6 +6,7 @@ import altair as alt
 
 import io
 from scripts.data_storage import fetch_data_from_storage
+from scripts.data_storage import save_data_to_storage
 from scripts.data_storage import delete_item_from_dataset
 
 from scripts.data_dashboard import calc_bmr
@@ -230,7 +231,8 @@ def create_page_meal_registration():
     with col[0]: 
         st.markdown("#### Add recipie")
         st.caption("Type in a _:blue[ recipie name]_ that you want to add to your meal")  
-        df_recipie_db = pd.read_csv('data/meal_databas.csv').sort_values(['name'])
+        df_recipie_db = fetch_data_from_storage('data/recipie_databas.csv').sort_values(['name'])
+        
         recipie_list = df_recipie_db['name'].unique()
 
         st.multiselect(
@@ -350,7 +352,7 @@ def create_page_logg_book():
     with col[0]: 
         st.markdown("#### Recipies in database")
         st.caption("These are the stored _:blue[ recipies in your database]_")  
-        df_meal_db = pd.read_csv('data/meal_databas.csv')
+        df_meal_db = fetch_data_from_storage('data/recipie_databas.csv')
         summary = df_meal_db.groupby(['name', 'code']).count().sort_values(['favorite', 'name'])
         for i in range(0, len(summary)):
             this_meal = df_meal_db[df_meal_db['name'] == summary.index[i][0]]
@@ -416,7 +418,7 @@ def create_page_logg_book():
 
         st.markdown('#### Delete recipies in database')  
         st.caption("_:blue[Select recipie]_ that you aim to _:blue[delete]_")
-        df_meal_db = pd.read_csv('data/meal_databas.csv')
+        df_meal_db = fetch_data_from_storage('data/recipie_databas.csv')
         df_names_recipies = df_meal_db.groupby(['name']).count().reset_index()
         if len(df_names_recipies) > 0:
             recipies_list = df_names_recipies['name'].values
@@ -435,13 +437,13 @@ def create_page_logg_book():
 
             def submit_delete():
                 st.session_state.button_delete_recipie_logg = False
-                df_meal_db_update.to_csv('data/meal_databas.csv', index=False)
+                save_data_to_storage(df_meal_db_update, 'data/recipie_databas.csv')
             
             def submit_change():
                 st.session_state.button_change_recipie_logg = False
                 df_meal_db_update_change = df_meal_db[df_meal_db['name'] != selected_recipie]
                 df_add_update = pd.concat([df_meal_db_update_change, edited_df_recipie])
-                df_add_update.to_csv('data/meal_databas.csv', index=False)
+                save_data_to_storage(df_add_update, 'data/recipie_databas.csv')
 
             if delete_recipie:
                 df_meal_db_update = df_meal_db[df_meal_db['name'] != selected_recipie]

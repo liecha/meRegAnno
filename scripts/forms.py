@@ -4,6 +4,8 @@ import pandas as pd
 from scripts.data_dashboard import date_time_now
 from scripts.data_dashboard import time_now
 
+from scripts.data_storage import fetch_data_from_storage
+from scripts.data_storage import save_data_to_storage
 from scripts.data_storage import add_registration
 
 def create_new_form_activity(bmr):
@@ -147,7 +149,7 @@ def create_form_add_recipie_to_database(meal_df, code):
         save_favorite = st.checkbox("⭐️ Save recipie as favorite ")
         submit_recipie = st.form_submit_button("Save recipie", on_click=submit)   
         if submit_recipie:
-            df_meal_db = pd.read_csv('data/meal_databas.csv')
+            df_meal_db = fetch_data_from_storage('data/recipie_databas.csv')
             df_stored_meal = st.session_state.df_meal_storage
             if save_favorite == True:
                 df_stored_meal['favorite'] = True
@@ -157,4 +159,4 @@ def create_form_add_recipie_to_database(meal_df, code):
             df_stored_meal = df_stored_meal.rename(columns={"Food": "livsmedel", "Amount (g)": "amount"})
             df_stored_meal = df_stored_meal[['name', 'livsmedel' , 'amount', 'code', 'favorite']]
             add_meal = pd.concat([df_meal_db, df_stored_meal])
-            add_meal.to_csv('data/meal_databas.csv', index=False)
+            save_data_to_storage(add_meal, 'data/recipie_databas.csv')
