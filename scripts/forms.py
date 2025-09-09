@@ -6,7 +6,7 @@ from scripts.data_dashboard import time_now
 
 from scripts.data_storage import add_registration
 
-def create_new_form_activity():
+def create_new_form_activity(bmr):
     date_now =  date_time_now()   
     col = st.columns((2.5, 2.5), gap='medium') 
     
@@ -50,7 +50,7 @@ def create_new_form_activity():
                     "distance": this_distance,                
                     "note": str(this_note), 
                 },
-                    'energy_balance'
+                    bmr
                 )
 
 ### FOOD REGISTRATION

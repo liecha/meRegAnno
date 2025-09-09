@@ -1,6 +1,10 @@
 streamlit
+supabase>=2.0.0
+gotrue>=2.0.0
+st-supabase-connection
 pandas
 altair
 plotly
 sqlalchemy==2.0.27
 psycopg2-binary
+watchdog

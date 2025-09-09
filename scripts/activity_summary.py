@@ -4,9 +4,11 @@ from datetime import datetime, timedelta
 import altair as alt
 import streamlit as st
 
+from scripts.data_storage import fetch_data_from_storage
+
 def load_data():
     """Load the activity data"""
-    df = pd.read_csv('data/updated-database-results.csv')
+    df = fetch_data_from_storage('data/updated-database-results.csv')
     df['date'] = pd.to_datetime(df['date'])
     df['datetime'] = pd.to_datetime(df['date'].astype(str) + ' ' + df['time'])
     return df

@@ -5,20 +5,20 @@ import datetime
 import altair as alt
 
 import io
-
+from scripts.data_storage import fetch_data_from_storage
 from scripts.data_storage import delete_item_from_dataset
 
+from scripts.data_dashboard import calc_bmr
 from scripts.data_dashboard import date_time_now
 from scripts.data_dashboard import datetime_to_string
 from scripts.data_dashboard import translate_dates_to_text
-from scripts.data_dashboard import calc_bmr
-from scripts.data_dashboard import energy_differ
 from scripts.data_dashboard import calc_daily_energy_output
-from scripts.data_dashboard import  calc_energy_deficite
-from scripts.data_dashboard import energy_balance_at_current_time
+from scripts.data_dashboard import calc_energy_deficite
 from scripts.data_dashboard import nutrition_content
 from scripts.data_dashboard import nutrition_differ
 from scripts.data_dashboard import add_summary_to_dataset 
+from scripts.data_dashboard import energy_differ
+from scripts.data_dashboard import energy_balance_at_current_time
 
 from scripts.nutritions import locate_eatables
 from scripts.nutritions import code_detector
@@ -58,8 +58,8 @@ st.markdown("""
     }
     </style>
 """, unsafe_allow_html=True)
-#df_energy = load_data_from_db('energy_balance')
-df_energy = pd.read_csv('data/updated-database-results.csv')
+
+df_energy = fetch_data_from_storage('data/updated-database-results.csv')
 
 st.subheader('Emelie Chandni Jutvik')
 
@@ -222,7 +222,7 @@ def create_page_activity_registration():
              st.caption("There are _:blue[no stored activities]_ at selected day") 
     with col[1]:
         st.markdown("#### Create new activity")
-        create_new_form_activity()
+        create_new_form_activity(bmr)
         
 
 def create_page_meal_registration():
@@ -411,7 +411,7 @@ def create_page_logg_book():
                             df_activity_irl = df_activity_irl[df_activity_irl['time'] != drop_time]
                             break
                 df_new = df_activity_irl.drop(['delete'], axis=1)
-                delete_item_from_dataset(selected_date_delete, df_new)
+                delete_item_from_dataset(selected_date_delete, df_new, bmr)
                 st.rerun()
 
         st.markdown('#### Delete recipies in database')  
@@ -485,8 +485,11 @@ def create_page_logg_book():
         
             
 with st.sidebar:
-    st.image("zeus_logo_test.png")  
-    bmr = calc_bmr(50, 170, 42)
+    st.image("zeus_logo_test.png")
+    weight = 50
+    height = 170
+    age = 43
+    bmr = calc_bmr(weight, height, age)
     date_now =  date_time_now()  
     selected_date_input = st.date_input("Select a date", date_now, key='head_selector') 
     selected_date = datetime_to_string(selected_date_input)

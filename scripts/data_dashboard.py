@@ -3,6 +3,10 @@ import pandas as pd
 from datetime import datetime, date
 import altair as alt
 
+def calc_bmr(weight, height, age):
+    BMR = int(447.593 + (9.247 * weight) + (3.098 * height) - (4.330 * age)) #1187
+    return BMR
+
 def date_time_now():
     date_now = date.today()
     return date_now
@@ -73,37 +77,23 @@ def translate_dates_to_text(selected_date):
     text_weekday = find_weekday(current_date.weekday())
     return current_day, text_month, text_weekday
 
-def calc_bmr(weight, height, age):
-    BMR = int(447.593 + (9.247 * weight) + (3.098 * height) - (4.330 * age)) #1187
-    return BMR
+def create_energy_template():
+    """Create the energy template dataframe without reading from CSV"""
+    hours = [f"{i:02d}:00" for i in range(24)]
+    df_energy = pd.DataFrame({
+        'time': hours,
+        'energy': [0] * 24
+    })
+    return df_energy
 
-def basal_energy(date_new_post):
-    weight = 50
-    height = 170
-    age = 43
-    BMR = int(447.593 + (9.247 * weight) + (3.098 * height) - (4.330 * age)) #
-    df_energy = pd.read_csv('data/energy_template.csv')
+def basal_energy(date_new_post, bmr):
+    """Create basal energy dataframe with provided BMR value"""
+    df_energy = create_energy_template()
     df_energy['date'] = date_new_post
     df_energy['label'] = 'REST'
     df_energy['activity'] = 'Bmr'
-    df_energy['energy'] = -1 * int(BMR / 24)
+    df_energy['energy'] = -1 * int(bmr / 24)
     return df_energy
-
-def energy_differ(df_energy_date):
-    data_e = {
-        'energy': df_energy_date['energy'].values,
-        'time':df_energy_date['time'].values,
-        'label': ['in_out'] * len(df_energy_date)
-        }
-    df_e = pd.DataFrame(data_e)
-    data_acc = {
-        'energy': df_energy_date['energy_acc'].values,
-        'time':df_energy_date['time'].values,
-        'label': ['energy_acc'] * len(df_energy_date)
-        }
-    df_acc = pd.DataFrame(data_acc)
-    df_energy_date_final = pd.concat([df_e, df_acc])
-    return df_energy_date_final
 
 def calc_daily_energy_output(df_energy_date, bmr):
     df_output = df_energy_date[df_energy_date['label'] == 'TRAINING']
@@ -112,30 +102,6 @@ def calc_daily_energy_output(df_energy_date, bmr):
     for i in range(0, len(list_output_energy)):
         sum_output = sum_output + (-1 * list_output_energy[i])  
     return sum_output
-
-def energy_balance_at_current_time(df_energy_date):    
-    now = datetime.now() # current date and time
-    current_date = now.strftime("%Y-%m-%d")
-    if df_energy_date['date'].iloc[0] < current_date:
-        df_in = df_energy_date[df_energy_date['label'] == 'FOOD']
-        df_out = df_energy_date[df_energy_date['label'] != 'FOOD']
-        energy_in = int(sum(df_in['energy'].values))
-        energy_out = int(sum(df_out['energy'].values))
-        energy_balance = int(df_energy_date['energy_acc'].values[-1])    
-    if df_energy_date['date'].iloc[0] == current_date:
-        time = now.strftime("%H:%M:%S")
-        df_energy_date_balance = df_energy_date[df_energy_date['time'] <= time]
-        df_in = df_energy_date_balance[df_energy_date_balance['label'] == 'FOOD']
-        df_out = df_energy_date_balance[df_energy_date_balance['label'] != 'FOOD']
-        energy_in = int(sum(df_in['energy'].values))
-        energy_out = int(sum(df_out['energy'].values))
-        energy_balance = int(df_energy_date_balance['energy_acc'].values[-1])
-    deficite = energy_in + energy_out
-    if deficite >= 0:
-        deficite_text = "+ kcal"
-    else:
-        deficite_text = "- kcal"
-    return energy_in, energy_out, energy_balance, deficite_text
 
 def calc_energy_deficite(df_energy, selected_date, selected_date_input):
     intervall_length = 7
@@ -165,26 +131,6 @@ def calc_energy_deficite(df_energy, selected_date, selected_date_input):
         if day_diff < 0:
             df_this_intervall = []
     return df_this_intervall
-
-def calc_accumulated_energy(df_data):
-    ls_dates = df_data.groupby(['date']).count().index.to_list()
-    storage = []
-    for j in range(0, len(ls_dates)):
-        df_day = df_data[df_data['date'] == ls_dates[j]]
-        ls_calories = df_day['energy'].values
-        ls_protein = df_day['pro'].values
-        ls_acc_calories = [ls_calories[0]]
-        ls_acc_protein = [ls_protein[0]]
-        for i in range(0, len(ls_calories) - 1):           
-            counting_calories = ls_acc_calories[i] + ls_calories[i + 1]
-            counting_protein = ls_acc_protein[i] + ls_protein[i + 1]
-            ls_acc_calories.append(counting_calories) 
-            ls_acc_protein.append(counting_protein)
-        df_day.insert(6, 'energy_acc', ls_acc_calories)
-        df_day.insert(8, 'protein_acc', ls_acc_protein)
-        storage.append(df_day)
-    df_energy_acc = pd.concat(storage)
-    return df_energy_acc
 
 def nutrition_content(df_energy_date):
     now = datetime.now() # current date and time
@@ -226,7 +172,7 @@ def nutrition_content(df_energy_date):
             "value": nutrition_acc
             })
     return df_nutrition_acc
-    
+
 ### PROTEIN
 def nutrition_differ(df_energy_date):
     data_p = {
@@ -293,11 +239,43 @@ def add_summary_to_dataset(df_energy_date):
                 note_storage.append(yoga_string)
     df.insert(12, 'summary', note_storage)
     return df
-    
-### CHART
-def make_donut(source): 
-    chart = alt.Chart(source).mark_arc(innerRadius=50).encode(
-        theta="value",
-        color="category:N",
-    )
-    return chart
+
+def energy_differ(df_energy_date):
+    data_e = {
+        'energy': df_energy_date['energy'].values,
+        'time':df_energy_date['time'].values,
+        'label': ['in_out'] * len(df_energy_date)
+        }
+    df_e = pd.DataFrame(data_e)
+    data_acc = {
+        'energy': df_energy_date['energy_acc'].values,
+        'time':df_energy_date['time'].values,
+        'label': ['energy_acc'] * len(df_energy_date)
+        }
+    df_acc = pd.DataFrame(data_acc)
+    df_energy_date_final = pd.concat([df_e, df_acc])
+    return df_energy_date_final
+
+def energy_balance_at_current_time(df_energy_date):    
+    now = datetime.now() # current date and time
+    current_date = now.strftime("%Y-%m-%d")
+    if df_energy_date['date'].iloc[0] < current_date:
+        df_in = df_energy_date[df_energy_date['label'] == 'FOOD']
+        df_out = df_energy_date[df_energy_date['label'] != 'FOOD']
+        energy_in = int(sum(df_in['energy'].values))
+        energy_out = int(sum(df_out['energy'].values))
+        energy_balance = int(df_energy_date['energy_acc'].values[-1])    
+    if df_energy_date['date'].iloc[0] == current_date:
+        time = now.strftime("%H:%M:%S")
+        df_energy_date_balance = df_energy_date[df_energy_date['time'] <= time]
+        df_in = df_energy_date_balance[df_energy_date_balance['label'] == 'FOOD']
+        df_out = df_energy_date_balance[df_energy_date_balance['label'] != 'FOOD']
+        energy_in = int(sum(df_in['energy'].values))
+        energy_out = int(sum(df_out['energy'].values))
+        energy_balance = int(df_energy_date_balance['energy_acc'].values[-1])
+    deficite = energy_in + energy_out
+    if deficite >= 0:
+        deficite_text = "+ kcal"
+    else:
+        deficite_text = "- kcal"
+    return energy_in, energy_out, energy_balance, deficite_text

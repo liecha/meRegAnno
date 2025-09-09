@@ -3,9 +3,11 @@ import numpy as np
 from datetime import datetime, timedelta
 import statistics
 
+from scripts.data_storage import fetch_data_from_storage
+
 def load_and_prepare_data():
     """Load and prepare the fitness/nutrition data for analysis"""
-    df = pd.read_csv('data/updated-database-results.csv')
+    df = fetch_data_from_storage('data/updated-database-results.csv')
     df['date'] = pd.to_datetime(df['date'])
     df['datetime'] = pd.to_datetime(df['date'].astype(str) + ' ' + df['time'])
     return df
