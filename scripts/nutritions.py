@@ -7,7 +7,7 @@ def locate_eatables(df_meal):
     eatables = df_meal['Food'].values
     found_eatables = []
     for j in range(0, len(eatables)):
-        df_db = pd.read_csv('data/livsmedelsdatabas.csv')
+        df_db = fetch_data_from_storage('data/livsmedelsdatabas.csv')
         this_eatable = eatables[j]
         look_for_eatable = df_db.loc[df_db['livsmedel'] == this_eatable]    
         if len(look_for_eatable) == 0:            

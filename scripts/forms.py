@@ -129,9 +129,9 @@ def create_form_add_food_item_to_database():
                 'fat': float(this_fat)
             }
             df_new_food_item = pd.DataFrame([new_food_item])
-            df_food_db = pd.read_csv('data/livsmedelsdatabas.csv')
+            df_food_db = fetch_data_from_storage('data/livsmedelsdatabas.csv')
             df_add_food_item = pd.concat([df_food_db, df_new_food_item])
-            df_add_food_item.to_csv('data/livsmedelsdatabas.csv', index=False)
+            save_data_to_storage(df_add_food_item, 'data/livsmedelsdatabas.csv')
 
 def create_form_add_recipie_to_database(meal_df, code): 
     if "df_meal_storage" not in st.session_state:

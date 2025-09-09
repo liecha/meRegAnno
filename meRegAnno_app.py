@@ -247,7 +247,7 @@ def create_page_meal_registration():
 
         st.markdown("#### Add food items")
         st.caption("_:blue[Type in food items]_ that you want to add to your meal")  
-        df_food_db = pd.read_csv('data/livsmedelsdatabas.csv')
+        df_food_db = fetch_data_from_storage('data/livsmedelsdatabas.csv')
         food_list = df_food_db['livsmedel'].values
 
         st.multiselect(
@@ -309,7 +309,7 @@ def create_page_database():
     with col[1]: 
         st.markdown("#### Search for food items")
         st.caption("_:blue[Type in food items]_ that you want to add to your recipie")  
-        df_food_db = pd.read_csv('data/livsmedelsdatabas.csv')
+        df_food_db = fetch_data_from_storage('data/livsmedelsdatabas.csv')
         food_list = df_food_db['livsmedel'].values
         
         st.multiselect(

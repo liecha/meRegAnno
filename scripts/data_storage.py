@@ -120,7 +120,9 @@ def add_registration(data: dict, bmr):
     }
 
     df_new_post = pd.DataFrame([new_data])
-    df_new_post.to_csv('data/new-post-results.csv', index=False)
+
+    # Keep this line if you still want to save for debugging/logging
+    # df_new_post.to_csv('data/new-post-results.csv', index=False)
     date_new_post = df_new_post['date'].iloc[0]
     
     df_db_csv = fetch_data_from_storage('data/updated-database-results.csv')
