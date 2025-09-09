@@ -296,7 +296,7 @@ def create_page_meal_registration():
         st.markdown("#### Food Registration")
         st.caption("_:blue[Register your meal]_ to the dashboard")  
         options_string = options_string[:-1]
-        create_new_form_food(code, options_string)
+        create_new_form_food(code, options_string, bmr)
 
 def create_page_database():
     col = st.columns((5.0, 5.0, 5.0), gap='medium') 
@@ -486,13 +486,51 @@ def create_page_logg_book():
             
 with st.sidebar:
     st.image("zeus_logo_test.png")
-    weight = 50
-    height = 170
-    age = 43
-    bmr = calc_bmr(weight, height, age)
-    date_now =  date_time_now()  
+    
+    # Expandable User Settings Section
+    with st.expander("⚙️ User Settings", expanded=False):
+        weight = st.number_input(
+            "Weight (kg)", 
+            min_value=30.0, 
+            max_value=300.0, 
+            value=50.0, 
+            step=0.5,
+            help="Enter your weight in kilograms"
+        )
+        
+        height = st.number_input(
+            "Height (cm)", 
+            min_value=100.0, 
+            max_value=250.0, 
+            value=170.0, 
+            step=0.5,
+            help="Enter your height in centimeters"
+        )
+        
+        age = st.number_input(
+            "Age (years)", 
+            min_value=10, 
+            max_value=100, 
+            value=43, 
+            step=1,
+            help="Enter your age in years"
+        )
+        
+        # Calculate BMR with the user inputs
+        bmr = calc_bmr(weight, height, age)
+        
+        # Display calculated BMR to user
+        st.success(f"Your calculated basal energy need is **{bmr} kcal per day**")
+        st.caption("This is the energy your body needs at rest for basic functions.")
+    
+    # Date selection
+    st.markdown("#### Date Selection")
+    date_now = date_time_now()  
     selected_date_input = st.date_input("Select a date", date_now, key='head_selector') 
     selected_date = datetime_to_string(selected_date_input)
+    
+    # Navigation
+    st.markdown("#### Navigation")
     page_names_to_funcs = {
         "Dashboard": create_dashobard,
         "Activity": create_page_activity_registration,

@@ -54,7 +54,7 @@ def create_new_form_activity(bmr):
                 )
 
 ### FOOD REGISTRATION
-def create_new_form_food(code, options_string):
+def create_new_form_food(code, options_string, bmr):
     date_now =  date_time_now() 
     col = st.columns((2.5, 2.5), gap='medium') 
     
@@ -106,7 +106,7 @@ def create_new_form_food(code, options_string):
                     "distance": 0.0, 
                     "note": str(this_note), 
                 },
-                    'energy_balance'
+                    bmr
                 )
 
 def create_form_add_food_item_to_database():
