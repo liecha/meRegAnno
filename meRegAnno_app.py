@@ -235,7 +235,322 @@ def create_page_activity_registration():
     with col[1]:
         st.markdown("#### Create new activity")
         create_new_form_activity(bmr)
+
+
+
+
+# Add this new function to your main app file (meRegAnno_app.py)
+# Insert this function after the existing meal registration functions
+
+def create_copy_previous_meal_section():
+    """Create a section for copying previous meals"""
+    st.markdown("#### Copy previous meal")
+    st.caption("Select a _:blue[previously saved meal]_ to add to your current meal")
+    
+    # Initialize session state for modal
+    if "show_meal_modal" not in st.session_state:
+        st.session_state.show_meal_modal = False
+    if "selected_previous_meal" not in st.session_state:
+        st.session_state.selected_previous_meal = None
+    if "copied_meal_items" not in st.session_state:
+        st.session_state.copied_meal_items = []
+    
+    # Button to open meal selection modal
+    if st.button("Browse previous meals", type="secondary", key="open_meal_modal"):
+        st.session_state.show_meal_modal = True
+    
+    # Modal for meal selection
+    if st.session_state.show_meal_modal:
+        create_meal_selection_modal()
+    
+    # Display selected meal info if any
+    if st.session_state.selected_previous_meal:
+        meal_info = st.session_state.selected_previous_meal
+        st.success(f"Selected: **{meal_info['name']}** from {meal_info['date']} at {meal_info['time']}")
+        st.caption(f"Meal code: {meal_info['code']}")
         
+        # Clear selection button
+        if st.button("Clear selection", key="clear_meal_selection"):
+            st.session_state.selected_previous_meal = None
+            st.session_state.copied_meal_items = []
+            st.rerun()
+
+def create_meal_selection_modal():
+    """Create a modal for selecting previous meals"""
+    # Load meal database
+    try:
+        df_meal_db = fetch_data_from_storage('data/meal_databas.csv')
+    except:
+        st.error("No previous meals found in database")
+        st.session_state.show_meal_modal = False
+        return
+    
+    if df_meal_db.empty:
+        st.error("No previous meals found")
+        st.session_state.show_meal_modal = False
+        return
+    
+    # Create modal container
+    with st.container():
+        st.markdown("---")
+        st.markdown("### 🍽️ Select a Previous Meal")
+        
+        # Close button
+        col1, col2 = st.columns([6, 1])
+        with col2:
+            if st.button("✖️ Close", key="close_meal_modal"):
+                st.session_state.show_meal_modal = False
+                st.rerun()
+        
+        # Get unique meals grouped by name, date, and time
+        df_meals_grouped = df_meal_db.groupby(['name', 'date', 'time', 'code']).first().reset_index()
+        df_meals_grouped = df_meals_grouped.sort_values(['date', 'time'], ascending=False)
+        
+        # Search functionality
+        search_term = st.text_input("🔍 Search meals", key="meal_search", 
+                                   help="Search by meal name")
+        
+        if search_term:
+            df_meals_filtered = df_meals_grouped[
+                df_meals_grouped['name'].str.contains(search_term, case=False, na=False)
+            ]
+        else:
+            df_meals_filtered = df_meals_grouped
+        
+        # Display meals in a nice format
+        if df_meals_filtered.empty:
+            st.warning("No meals found matching your search")
+        else:
+            st.caption(f"Found {len(df_meals_filtered)} meals")
+            
+            # Display meals
+            for idx, row in df_meals_filtered.iterrows():
+                with st.expander(f"🍽️ {row['name']} - {row['date']} at {row['time']}", 
+                               expanded=False):
+                    
+                    # Show meal details
+                    meal_items = df_meal_db[
+                        (df_meal_db['name'] == row['name']) & 
+                        (df_meal_db['date'] == row['date']) & 
+                        (df_meal_db['time'] == row['time'])
+                    ]
+                    
+                    col_info1, col_info2 = st.columns(2)
+                    with col_info1:
+                        st.write(f"**Date:** {row['date']}")
+                        st.write(f"**Time:** {row['time']}")
+                        if row['favorite']:
+                            st.write("⭐ **Favorite meal**")
+                    
+                    with col_info2:
+                        st.write(f"**Nutrition code:** {row['code']}")
+                        code_parts = row['code'].split('/')
+                        if len(code_parts) == 4:
+                            st.write(f"**Energy:** {code_parts[0]} kcal")
+                            st.write(f"**Protein/Carbs/Fat:** {code_parts[1]}/{code_parts[2]}/{code_parts[3]} g")
+                    
+                    # Show ingredients
+                    st.write("**Ingredients:**")
+                    for _, item in meal_items.iterrows():
+                        st.write(f"• {item['livsmedel']}: {item['amount']} g")
+                    
+                    # Select button
+                    if st.button(f"Select this meal", 
+                               key=f"select_meal_{idx}_{row['date']}_{row['time']}"):
+                        # Store selected meal info
+                        st.session_state.selected_previous_meal = {
+                            'name': row['name'],
+                            'date': row['date'],
+                            'time': row['time'],
+                            'code': row['code'],
+                            'favorite': row['favorite']
+                        }
+                        
+                        # Store meal items for adding to current meal
+                        st.session_state.copied_meal_items = meal_items[['livsmedel', 'amount']].rename(
+                            columns={'livsmedel': 'Food', 'amount': 'Amount (g)'}
+                        ).to_dict('records')
+                        
+                        st.session_state.show_meal_modal = False
+                        st.success(f"Selected meal: {row['name']}")
+                        st.rerun()
+        
+        st.markdown("---")
+
+def get_copied_meal_items():
+    """Get the copied meal items for integration with existing meal creation"""
+    if st.session_state.get('copied_meal_items'):
+        return pd.DataFrame(st.session_state.copied_meal_items)
+    return pd.DataFrame()
+
+# Modified version of the meal registration page
+def create_page_meal_registration_with_copy():
+    """Modified meal registration page that includes copy previous meal functionality"""
+    col = st.columns((5.5, 5.5), gap='medium') 
+    df_meal_items = None
+    code = ''
+    options_string = ''
+    
+    # Initialize session state for meal items
+    if "current_meal_items" not in st.session_state:
+        st.session_state.current_meal_items = None
+    
+    with col[0]: 
+        # Add the copy previous meal section at the top
+        create_copy_previous_meal_section()
+        
+        st.markdown("#### Add recipie")
+        st.caption("Type in a _:blue[ recipie name]_ that you want to add to your meal")  
+        df_recipie_db = fetch_data_from_storage('data/recipie_databas.csv').sort_values(['name'])
+        
+        recipie_list = df_recipie_db['name'].unique()
+
+        st.multiselect(
+            "Select recipies to add to your meal",
+            recipie_list,
+            key='find_recipie'
+        )
+
+        if "options_recipie" not in st.session_state:
+            st.session_state.options_recipie = []
+        options_recipie = st.session_state.find_recipie
+
+        # Add portion control for recipes
+        recipe_portions = {}
+        if len(options_recipie) > 0:
+            st.markdown("##### Recipe portions")
+            st.caption("Specify portion sizes for selected recipes (1.0 = full portion, 0.5 = half portion)")
+            for recipe_name in options_recipie:
+                portion_key = f"portion_{recipe_name.replace(' ', '_')}"
+                recipe_portions[recipe_name] = st.number_input(
+                    f"Portion of {recipe_name}", 
+                    min_value=0.05, 
+                    max_value=10.0, 
+                    value=1.0, 
+                    step=0.05,
+                    key=portion_key,
+                    help=f"Enter portion size for {recipe_name} (e.g., 0.5 for half portion)"
+                )
+
+        st.markdown("#### Add food items")
+        st.caption("_:blue[Type in food items]_ that you want to add to your meal")  
+        df_food_db = fetch_data_from_storage('data/livsmedelsdatabas.csv')
+        food_list = df_food_db['livsmedel'].values
+
+        st.multiselect(
+            "Select food items to add to your meal",
+            food_list,
+            key='create_meal'
+        )
+
+        if "options" not in st.session_state:
+            st.session_state.options = []
+        options = st.session_state.create_meal
+
+        st.markdown("#### Your meal")
+        st.caption("This is the _:blue[ content of your meal]_")  
+        
+        # Combine all meal sources: recipes, individual foods, and copied meals
+        temp_store = []
+        df_recipies = pd.DataFrame([{"Food":'Deleted', "Amount (g)": 0.0}])
+        df_meal = pd.DataFrame([{"Food":'', "Amount (g)": 0.0}])
+        df_copied = get_copied_meal_items()
+        
+        # Add copied meal items to the meal
+        if not df_copied.empty:
+            copied_name = st.session_state.selected_previous_meal['name']
+            options_string = f"{copied_name}/"
+            for _, item in df_copied.iterrows():
+                temp_store.append({"Food": item['Food'], "Amount (g)": item['Amount (g)']})
+        
+        # Rest of the existing recipe and food item logic...
+        if (len(options) > 0) or len(options_recipie) or not df_copied.empty:
+            temp_store_recipies = []
+            if len(options_recipie) > 0:
+                for i in range(0, len(options_recipie)):
+                    df_this_recpie = df_recipie_db[df_recipie_db['name'] == options_recipie[i]]
+                    portion_size = recipe_portions.get(options_recipie[i], 1.0)
+                    
+                    for k in range(0, len(df_this_recpie)):
+                        scaled_amount = df_this_recpie['amount'].iloc[k] * portion_size
+                        temp_store_recipies.append({
+                            "Food": df_this_recpie['livsmedel'].iloc[k], 
+                            "Amount (g)": round(scaled_amount, 1)
+                        })
+                    
+                    if portion_size != 1.0:
+                        options_string = options_string + f"{df_this_recpie['name'].iloc[0]} ({portion_size:.2f})/"
+                    else:
+                        options_string = options_string + df_this_recpie['name'].iloc[0] + '/'
+                        
+                df_recipies = pd.DataFrame(temp_store_recipies)
+                
+            for i in range(0, len(options)):
+                temp_store.append({"Food": options[i], "Amount (g)": 0})
+                options_string = options_string + options[i] + '/'
+                
+            df_meal = pd.DataFrame(temp_store)
+            df_total = pd.concat([df_recipies, df_meal])
+            df_total = df_total[df_total['Food'] != 'Deleted']
+            df_result_meal = st.data_editor(df_total, key='create_meal_editor', hide_index=True, use_container_width=True)
+            
+            if len(df_result_meal) > 0:
+                from scripts.nutritions import locate_eatables, code_detector
+                df_food_nutrition = locate_eatables(df_result_meal)
+                code = code_detector(df_result_meal, df_food_nutrition, 1)
+                df_result_meal['code'] = code
+
+                # Store the meal items for saving to meal database
+                df_meal_items = df_result_meal[['Food', 'Amount (g)']].copy()
+                
+                # Add date and time columns
+                from scripts.data_dashboard import datetime_to_string, time_to_string, date_time_now, time_now
+                current_date = datetime_to_string(date_time_now())
+                current_time = time_to_string(time_now())
+                
+                # Clean up options_string for meal name
+                meal_name = options_string[:-1] if options_string.endswith('/') else options_string
+                
+                # Add columns in the correct order for CSV
+                df_meal_items.insert(0, 'name', meal_name)
+                df_meal_items.insert(0, 'time', current_time)
+                df_meal_items.insert(0, 'date', current_date)
+                
+                # Rename columns to match CSV structure
+                df_meal_items = df_meal_items.rename(columns={
+                    'Food': 'livsmedel',
+                    'Amount (g)': 'amount'
+                })
+                
+                # Add code and favorite columns
+                df_meal_items['code'] = code
+                df_meal_items['favorite'] = False
+                
+                # Store in session state
+                st.session_state.current_meal_items = df_meal_items
+
+        else:
+            st.error('Your meal is empty', icon="🚨")
+            st.write('Search for food items, select recipes, or copy a previous meal.')
+
+    with col[1]:  
+        st.markdown("#### Food Registration")
+        st.caption("_:blue[Register your meal]_ to the dashboard")  
+        
+        # Clean up options_string
+        if options_string.endswith('/'):
+            options_string = options_string[:-1]
+
+        # Use the meal items from session state
+        df_meal_items = st.session_state.current_meal_items
+
+        # Call the existing form function
+        create_new_form_food(code, options_string, bmr, df_meal_items)
+
+
+
+
+
 
 def create_page_meal_registration():
     col = st.columns((5.5, 5.5), gap='medium') 
@@ -627,7 +942,7 @@ with st.sidebar:
     page_names_to_funcs = {
         "Dashboard": create_dashobard,
         "Activity": create_page_activity_registration,
-        "Meals": create_page_meal_registration,
+        "Meals": create_page_meal_registration_with_copy,
         "Database": create_page_database,
         "Log book": create_page_logg_book
     }
