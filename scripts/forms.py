@@ -2,11 +2,12 @@ import streamlit as st
 import pandas as pd
 
 from scripts.data_dashboard import date_time_now
-from scripts.data_dashboard import time_now
+from scripts.data_dashboard import datetime_to_string, time_to_string
 
 from scripts.data_storage import fetch_data_from_storage
-from scripts.data_storage import save_data_to_storage
 from scripts.data_storage import add_registration
+from scripts.data_storage import save_data_to_storage
+
 
 def create_new_form_activity(bmr):
     date_now =  date_time_now()   
@@ -36,7 +37,7 @@ def create_new_form_activity(bmr):
         this_distance = st.text_input("Distance (km)")
         this_energy = st.text_input("Energy burned (kcal)")
         this_note = st.text_input("Details")
-        #if this_time
+
         submit_activity = st.form_submit_button("Submit",  on_click=submit) #disabled=st.session_state.button_disabled,
         if submit_activity:
             add_registration(
@@ -56,8 +57,8 @@ def create_new_form_activity(bmr):
                 )
 
 ### FOOD REGISTRATION
-def create_new_form_food(code, options_string, bmr):
-    date_now =  date_time_now() 
+def create_new_form_food(code, options_string, bmr, df_meal_items=None):
+    date_now = date_time_now() 
     col = st.columns((2.5, 2.5), gap='medium') 
     
     if "my_time" not in st.session_state:
@@ -86,6 +87,7 @@ def create_new_form_food(code, options_string, bmr):
         my_time = st.session_state.my_time
         st.time_input("What time did you eat", value=None, key="foo_time")
         st.write("Selected time: ", st.session_state.foo_time)
+    
     form_food = st.form(key="form_create_meal", clear_on_submit=True)
     with form_food:
         this_code = st.session_state.code
@@ -93,8 +95,39 @@ def create_new_form_food(code, options_string, bmr):
         food_split = this_code.split('/')
         this_note = st.session_state.note
         st.text_input("Details", options_string, key="note_input")
+        
+        # Allow user to mark meal as favorite
+        mark_as_favorite = st.checkbox("Mark as favorite meal", key="favorite_meal_checkbox")
+        
         submit_food = st.form_submit_button("Submit", on_click=submit)   
         if submit_food:
+            
+            # SAVE MEAL TO DATABASE FIRST (before add_registration which calls st.rerun())
+            if df_meal_items is not None and len(df_meal_items) > 0:
+                
+                # Update the meal data with user-selected date/time and favorite status
+                df_meal_to_save = df_meal_items.copy()
+                df_meal_to_save['date'] = datetime_to_string(this_date)
+                df_meal_to_save['time'] = time_to_string(my_time) if my_time else "00:00"
+                df_meal_to_save['favorite'] = mark_as_favorite
+                
+                # Save directly to CSV
+                try:
+                    try:
+                        df_meal_db = fetch_data_from_storage('data/meal_databas.csv')
+                    except:
+                        df_meal_db = pd.DataFrame(columns=['date', 'time', 'name', 'livsmedel', 'amount', 'code', 'favorite'])
+                    
+                    df_updated_meal_db = pd.concat([df_meal_db, df_meal_to_save], ignore_index=True)
+                    save_data_to_storage(df_updated_meal_db, 'data/meal_databas.csv')
+                    print(f'Meal automatically saved to meal log with {len(df_meal_to_save)} food items')
+                    
+                except Exception as e:
+                    print(f'Error saving meal to database: {e}')
+            else:
+                print("=== NOT SAVING MEAL - NO MEAL ITEMS ===")
+            
+            # Register the meal in the main energy tracking
             add_registration(
                 {
                     "date": this_date, 

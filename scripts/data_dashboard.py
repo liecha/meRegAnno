@@ -21,8 +21,10 @@ def datetime_to_string(this_date):
     return date_str
 
 def time_to_string(this_time):
-    time_str = this_time.strftime("%H:%M")
-    return time_str
+    if this_time:
+        time_str = this_time.strftime("%H:%M")
+        return time_str
+    return "00:00"
 
 def find_month(this_month):
     text_month = ''

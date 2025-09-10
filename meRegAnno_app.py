@@ -5,12 +5,22 @@ import datetime
 import altair as alt
 
 import io
+
+# ===================== DATA STORAGE CONFIGURATION =====================
+# SINGLE SOURCE OF TRUTH: Set this to True to use Supabase database, False to use CSV files
+USE_DATABASE = False  # Change to True when ready to use database
+
+# Import and configure data storage module
 from scripts.data_storage import fetch_data_from_storage
 from scripts.data_storage import save_data_to_storage
 from scripts.data_storage import delete_item_from_dataset
+import scripts.data_storage as ds
+ds.USE_DATABASE = USE_DATABASE  # Pass configuration to data_storage module
 
 from scripts.data_dashboard import calc_bmr
 from scripts.data_dashboard import date_time_now
+from scripts.data_dashboard import time_now
+from scripts.data_dashboard import time_to_string
 from scripts.data_dashboard import datetime_to_string
 from scripts.data_dashboard import translate_dates_to_text
 from scripts.data_dashboard import calc_daily_energy_output
@@ -29,6 +39,7 @@ from scripts.forms import create_new_form_food
 from scripts.forms import create_form_add_recipie_to_database
 from scripts.forms import create_form_add_food_item_to_database
 
+# Rest of your existing code continues here...
 # Page configuration
 st.set_page_config(
     page_title="meRegAnno",
@@ -228,6 +239,14 @@ def create_page_activity_registration():
 
 def create_page_meal_registration():
     col = st.columns((5.5, 5.5), gap='medium') 
+    df_meal_items = None  # Initialize variable to store meal composition
+    code = ''  # Initialize code variable
+    options_string = ''  # Initialize options_string
+    
+    # Initialize session state for meal items
+    if "current_meal_items" not in st.session_state:
+        st.session_state.current_meal_items = None
+    
     with col[0]: 
         st.markdown("#### Add recipie")
         st.caption("Type in a _:blue[ recipie name]_ that you want to add to your meal")  
@@ -244,6 +263,23 @@ def create_page_meal_registration():
         if "options_recipie" not in st.session_state:
             st.session_state.options_recipie = []
         options_recipie = st.session_state.find_recipie
+
+        # Add portion control for recipes with 0.05 step increments
+        recipe_portions = {}
+        if len(options_recipie) > 0:
+            st.markdown("##### Recipe portions")
+            st.caption("Specify portion sizes for selected recipes (1.0 = full portion, 0.5 = half portion)")
+            for recipe_name in options_recipie:
+                portion_key = f"portion_{recipe_name.replace(' ', '_')}"
+                recipe_portions[recipe_name] = st.number_input(
+                    f"Portion of {recipe_name}", 
+                    min_value=0.05, 
+                    max_value=10.0, 
+                    value=1.0, 
+                    step=0.05,  # Changed to 0.05 for steps of 5
+                    key=portion_key,
+                    help=f"Enter portion size for {recipe_name} (e.g., 0.5 for half portion)"
+                )
 
         st.markdown("#### Add food items")
         st.caption("_:blue[Type in food items]_ that you want to add to your meal")  
@@ -263,42 +299,93 @@ def create_page_meal_registration():
         st.markdown("#### Your meal")
         st.caption("This is the _:blue[ content of your meal]_")  
         temp_store = []
-        code = ''
-        options_string = ''
         df_recipies = pd.DataFrame([{"Food":'Deleted', "Amount (g)": 0.0}])
         df_meal = pd.DataFrame([{"Food":'', "Amount (g)": 0.0}])
+        
         if (len(options) > 0) or len(options_recipie):
             temp_store_recipies = []
             if len(options_recipie) > 0:
                 for i in range(0, len(options_recipie)):
                     df_this_recpie = df_recipie_db[df_recipie_db['name'] == options_recipie[i]]
+                    # Get the portion size for this recipe
+                    portion_size = recipe_portions.get(options_recipie[i], 1.0)
+                    
                     for k in range(0, len(df_this_recpie)):
+                        # Apply portion scaling to the recipe amounts
+                        scaled_amount = df_this_recpie['amount'].iloc[k] * portion_size
                         temp_store_recipies.append({
                             "Food": df_this_recpie['livsmedel'].iloc[k], 
-                            "Amount (g)": df_this_recpie['amount'].iloc[k]})
-                    options_string = options_string + df_this_recpie['name'].iloc[0] + '/'
+                            "Amount (g)": round(scaled_amount, 1)
+                        })
+                    
+                    # Update options_string with proper 2-decimal formatting
+                    if portion_size != 1.0:
+                        options_string = options_string + f"{df_this_recpie['name'].iloc[0]} ({portion_size:.2f})/"
+                    else:
+                        options_string = options_string + df_this_recpie['name'].iloc[0] + '/'
+                        
                 df_recipies = pd.DataFrame(temp_store_recipies)
+                
             for i in range(0, len(options)):
                 temp_store.append({"Food": options[i], "Amount (g)": 0})
                 options_string = options_string + options[i] + '/'
+                
             df_meal = pd.DataFrame(temp_store)
             df_total = pd.concat([df_recipies, df_meal])
             df_total = df_total[df_total['Food'] != 'Deleted']
             df_result_meal = st.data_editor(df_total, key='create_meal_editor', hide_index=True, use_container_width=True)
-            print(options_string)
+            
             if len(df_result_meal) > 0:
                 df_food_nutrition = locate_eatables(df_result_meal)
                 code = code_detector(df_result_meal, df_food_nutrition, 1)
                 df_result_meal['code'] = code
+
+                # Store the meal items for saving to meal database
+                # Add the meal name column and prepare for saving
+                df_meal_items = df_result_meal[['Food', 'Amount (g)']].copy()
+                
+                # Add date and time columns
+                current_date = datetime_to_string(date_time_now())
+                current_time = time_to_string(time_now())
+                
+                # Clean up options_string for meal name (remove trailing slash)
+                meal_name = options_string[:-1] if options_string.endswith('/') else options_string
+                
+                # Add columns in the correct order for CSV
+                df_meal_items.insert(0, 'name', meal_name)
+                df_meal_items.insert(0, 'time', current_time)
+                df_meal_items.insert(0, 'date', current_date)
+                
+                # Rename columns to match CSV structure
+                df_meal_items = df_meal_items.rename(columns={
+                    'Food': 'livsmedel',
+                    'Amount (g)': 'amount'
+                })
+                
+                # Add code and favorite columns
+                df_meal_items['code'] = code
+                df_meal_items['favorite'] = False  # Default to False, will be updated in form
+                
+                # Store in session state so it persists across reruns
+                st.session_state.current_meal_items = df_meal_items
+
         else:
             st.error('Your meal is empty', icon="🚨")
-            st.write('Serach for food items to add to your meal.')
+            st.write('Search for food items to add to your meal.')
 
     with col[1]:  
         st.markdown("#### Food Registration")
         st.caption("_:blue[Register your meal]_ to the dashboard")  
-        options_string = options_string[:-1]
-        create_new_form_food(code, options_string, bmr)
+        # Clean up options_string
+        if options_string.endswith('/'):
+            options_string = options_string[:-1]
+
+        # Use the meal items from session state
+        df_meal_items = st.session_state.current_meal_items
+
+        # Call the modified form function with meal items
+        create_new_form_food(code, options_string, bmr, df_meal_items)
+
 
 def create_page_database():
     col = st.columns((5.0, 5.0, 5.0), gap='medium') 
@@ -488,6 +575,10 @@ def create_page_logg_book():
             
 with st.sidebar:
     st.image("zeus_logo_test.png")
+
+    # Storage method indicator
+    storage_method = "🗄️ Database (Supabase)" if USE_DATABASE else "📄 CSV Files"
+    st.caption(f"Storage: {storage_method}")
     
     # Expandable User Settings Section
     with st.expander("⚙️ User Settings", expanded=False):
