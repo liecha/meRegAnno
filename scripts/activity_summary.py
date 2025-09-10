@@ -1,370 +1,442 @@
 import pandas as pd
-import numpy as np
-from datetime import datetime, timedelta
 import altair as alt
-import streamlit as st
+from datetime import timedelta
+import re  # Add this line
 
-from scripts.data_storage import fetch_data_from_storage
+def standardize_activity_name(activity):
+    """Standardize activity names to consistent format"""
+    if pd.isna(activity):
+        return activity
+    
+    activity_upper = str(activity).upper()
+    
+    # Mapping of various spellings to standard names
+    activity_mapping = {
+        'WALK': 'Walk',
+        'RUN': 'Run',
+        'RUNNING': 'Run',
+        'STR': 'Strength',
+        'STRENGTH': 'Strength',
+        'BIKE': 'Bike',
+        'YOGA': 'Yoga',
+        'SWIM': 'Swim',
+        'BMR': 'Bmr'  # Keep BMR as Bmr for consistency with existing code
+    }
+    
+    return activity_mapping.get(activity_upper, activity)
 
-def load_data():
-    """Load the activity data"""
-    df = fetch_data_from_storage('data/updated-database-results.csv')
-    df['date'] = pd.to_datetime(df['date'])
-    df['datetime'] = pd.to_datetime(df['date'].astype(str) + ' ' + df['time'])
-    return df
-
-def get_date_range(center_date, period_type):
-    """Get start and end dates based on period type"""
-    center_date = pd.to_datetime(center_date)
-    
-    if period_type == "Day":
-        start_date = center_date
-        end_date = center_date
-    elif period_type == "Week":
-        # Get the Monday of the week containing center_date
-        start_date = center_date - timedelta(days=center_date.weekday())
-        end_date = start_date + timedelta(days=6)
-    elif period_type == "Month":
-        start_date = center_date.replace(day=1)
-        # Get last day of month
-        if center_date.month == 12:
-            end_date = center_date.replace(year=center_date.year + 1, month=1, day=1) - timedelta(days=1)
-        else:
-            end_date = center_date.replace(month=center_date.month + 1, day=1) - timedelta(days=1)
-    
-    return start_date, end_date
-
-def filter_data_by_period(df, center_date, period_type):
-    """Filter data based on selected period"""
-    start_date, end_date = get_date_range(center_date, period_type)
-    return df[(df['date'] >= start_date) & (df['date'] <= end_date)]
-
-def get_activity_summary(df, period_type, activity_filter=None):
-    """Get activity summary for the selected period"""
-    # Filter by activity type if specified
-    if activity_filter and activity_filter != "All":
-        df = df[df['activity'] == activity_filter]
-    
-    # Training activities only
-    training_df = df[df['label'] == 'TRAINING'].copy()
-    
-    if training_df.empty:
-        return {
-            'total_sessions': 0,
-            'total_energy': 0,
-            'total_distance': 0,
-            'avg_session_energy': 0,
-            'activity_breakdown': {},
-            'daily_totals': pd.DataFrame()
-        }
-    
-    # Calculate metrics
-    total_sessions = len(training_df)
-    total_energy = training_df['energy'].sum()
-    avg_session_energy = total_energy / total_sessions if total_sessions > 0 else 0
-    
-    # Distance calculation (extract numeric values)
-    training_df['distance_numeric'] = training_df['distance'].str.extract('(\d+\.?\d*)').astype(float).fillna(0)
-    total_distance = training_df['distance_numeric'].sum()
-    
-    # Activity breakdown
-    activity_breakdown = training_df['activity'].value_counts().to_dict()
-    
-    # Daily totals for charting
-    daily_totals = training_df.groupby('date').agg({
-        'energy': 'sum',
-        'distance_numeric': 'sum'
-    }).reset_index()
-    daily_totals['sessions'] = training_df.groupby('date').size().values
-    
+def get_activity_colors():
+    """Define colors for different activities"""
     return {
-        'total_sessions': total_sessions,
-        'total_energy': abs(total_energy),  # Make positive for display
-        'total_distance': total_distance,
-        'avg_session_energy': abs(avg_session_energy),
-        'activity_breakdown': activity_breakdown,
-        'daily_totals': daily_totals
+        'Walk': '#2E8B57',      # Sea Green
+        'Run': '#FF4500',       # Orange Red (changed from RUN to Run)
+        'Bike': '#1E90FF',      # Dodger Blue
+        'Swim': '#00CED1',      # Dark Turquoise
+        'Strength': '#8B008B',  # Dark Magenta (changed from STR to Strength)
+        'Yoga': '#9370DB',      # Medium Purple
+        'REST': '#D3D3D3',      # Light Gray
+        'FOOD': '#32CD32'       # Lime Green
     }
 
-def get_nutrition_summary(df, period_type):
-    """Get nutrition summary for the selected period"""
+def filter_data_by_period(df, period_type, selected_date):
+    """Filter data based on period type (day, week, month)"""
+    df['date'] = pd.to_datetime(df['date'])
+    selected_date = pd.to_datetime(selected_date)
+    
+    if period_type == "Day":
+        return df[df['date'] == selected_date]
+    elif period_type == "Week":
+        # Get start of week (Monday)
+        start_of_week = selected_date - timedelta(days=selected_date.weekday())
+        end_of_week = start_of_week + timedelta(days=6)
+        return df[(df['date'] >= start_of_week) & (df['date'] <= end_of_week)]
+    elif period_type == "Month":
+        start_of_month = selected_date.replace(day=1)
+        if selected_date.month == 12:
+            end_of_month = selected_date.replace(year=selected_date.year + 1, month=1, day=1) - timedelta(days=1)
+        else:
+            end_of_month = selected_date.replace(month=selected_date.month + 1, day=1) - timedelta(days=1)
+        return df[(df['date'] >= start_of_month) & (df['date'] <= end_of_month)]
+    
+    return df
+
+def extract_numeric_distance(distance_str):
+    """
+    Extract numeric value from distance string.
+    Examples: '8.93 km' -> 8.93, '0' -> 0.0, '20.0' -> 20.0
+    """
+    if pd.isna(distance_str):
+        return 0.0
+    
+    # Convert to string if not already
+    distance_str = str(distance_str)
+    
+    # Extract numeric part using regex
+    match = re.search(r'(\d+\.?\d*)', distance_str)
+    if match:
+        return float(match.group(1))
+    else:
+        return 0.0
+
+def get_training_summary(df, selected_activities):
+    """
+    Generate training summary for selected activities with proper distance handling.
+    """
+    if df.empty:
+        return pd.DataFrame()
+    
+    # Standardize activity names before filtering
+    df_copy = df.copy()
+    df_copy['activity'] = df_copy['activity'].apply(standardize_activity_name)
+    
+    # Filter for training activities only
+    training_df = df_copy[
+        (df_copy['label'] == 'TRAINING') & 
+        (df_copy['activity'].isin(selected_activities))
+    ].copy()
+    
+    if training_df.empty:
+        return pd.DataFrame()
+    
+    # Clean the distance column - extract numeric values
+    training_df['distance_numeric'] = training_df['distance'].apply(extract_numeric_distance)
+    
+    # Perform aggregation with cleaned numeric distance column
+    summary = training_df.groupby('activity').agg({
+        'distance_numeric': ['count', 'sum', 'mean'],  # Use cleaned numeric column
+        'energy': ['sum', 'mean'],
+        'note': 'first'  # Get time/pace info from note
+    }).round(2)
+    
+    # Flatten column names
+    summary.columns = ['_'.join(col).strip() for col in summary.columns.values]
+    
+    # Rename columns for better display
+    summary = summary.rename(columns={
+        'distance_numeric_count': 'Sessions',
+        'distance_numeric_sum': 'Total Distance (km)',
+        'distance_numeric_mean': 'Avg Distance (km)',
+        'energy_sum': 'Total Energy (kcal)',
+        'energy_mean': 'Avg Energy (kcal)',
+        'note_first': 'Sample Note'
+    })
+    
+    return summary.reset_index()
+
+def get_weekly_summary(df):
+    """
+    Generate weekly summary of all activities.
+    """
+    if df.empty:
+        return pd.DataFrame()
+    
+    # Convert date to datetime and extract week
+    df_copy = df.copy()
+    df_copy['date'] = pd.to_datetime(df_copy['date'])
+    df_copy['week'] = df_copy['date'].dt.isocalendar().week
+    df_copy['year'] = df_copy['date'].dt.year
+    df_copy['week_year'] = df_copy['year'].astype(str) + '-W' + df_copy['week'].astype(str).str.zfill(2)
+    
+    # Standardize activity names
+    df_copy['activity'] = df_copy['activity'].apply(standardize_activity_name)
+    
+    # Clean distance for proper aggregation
+    df_copy['distance_numeric'] = df_copy['distance'].apply(extract_numeric_distance)
+    
+    # Filter out BMR entries for training summary
+    training_df = df_copy[df_copy['label'] == 'TRAINING'].copy()
+    
+    if training_df.empty:
+        return pd.DataFrame()
+    
+    # Group by week and activity
+    weekly_summary = training_df.groupby(['week_year', 'activity']).agg({
+        'distance_numeric': ['count', 'sum'],
+        'energy': 'sum'
+    }).round(2)
+    
+    # Flatten column names
+    weekly_summary.columns = ['_'.join(col).strip() for col in weekly_summary.columns.values]
+    
+    # Rename columns
+    weekly_summary = weekly_summary.rename(columns={
+        'distance_numeric_count': 'Sessions',
+        'distance_numeric_sum': 'Distance (km)',
+        'energy_sum': 'Energy (kcal)'
+    })
+    
+    return weekly_summary.reset_index()
+
+def get_daily_energy_balance(df):
+    """
+    Calculate daily energy balance (intake - expenditure).
+    """
+    if df.empty:
+        return pd.DataFrame()
+    
+    # Convert date to datetime
+    df_copy = df.copy()
+    df_copy['date'] = pd.to_datetime(df_copy['date'])
+    
+    # Group by date and calculate daily totals
+    daily_balance = df_copy.groupby('date').agg({
+        'energy': 'sum',  # This will be net energy (negative for expenditure, positive for intake)
+        'pro': 'sum',     # Total protein
+        'carb': 'sum',    # Total carbs
+        'fat': 'sum'      # Total fat
+    }).round(1)
+    
+    # Rename columns
+    daily_balance = daily_balance.rename(columns={
+        'energy': 'Net Energy (kcal)',
+        'pro': 'Protein (g)',
+        'carb': 'Carbs (g)',
+        'fat': 'Fat (g)'
+    })
+    
+    return daily_balance.reset_index()
+
+def get_nutrition_summary(df):
+    """
+    Generate nutrition summary for food intake only.
+    """
+    if df.empty:
+        return pd.DataFrame()
+    
+    # Filter for food entries only
     food_df = df[df['label'] == 'FOOD'].copy()
     
     if food_df.empty:
-        return {
-            'total_calories': 0,
-            'avg_daily_calories': 0,
-            'total_protein': 0,
-            'avg_daily_protein': 0,
-            'total_carbs': 0,
-            'total_fat': 0,
-            'daily_nutrition': pd.DataFrame()
-        }
+        return pd.DataFrame()
     
-    # Calculate totals
-    total_calories = food_df['energy'].sum()
-    total_protein = food_df['pro'].sum()
-    total_carbs = food_df['carb'].sum()
-    total_fat = food_df['fat'].sum()
+    # Convert date to datetime
+    food_df['date'] = pd.to_datetime(food_df['date'])
     
-    # Daily averages
-    daily_nutrition = food_df.groupby('date').agg({
+    # Group by date and sum nutrition values
+    nutrition_summary = food_df.groupby('date').agg({
         'energy': 'sum',
         'pro': 'sum',
         'carb': 'sum',
         'fat': 'sum'
-    }).reset_index()
+    }).round(1)
     
-    num_days = len(daily_nutrition)
-    avg_daily_calories = total_calories / num_days if num_days > 0 else 0
-    avg_daily_protein = total_protein / num_days if num_days > 0 else 0
+    # Calculate averages
+    avg_nutrition = nutrition_summary.mean().round(1)
     
-    return {
-        'total_calories': total_calories,
-        'avg_daily_calories': avg_daily_calories,
-        'total_protein': total_protein,
-        'avg_daily_protein': avg_daily_protein,
-        'total_carbs': total_carbs,
-        'total_fat': total_fat,
-        'daily_nutrition': daily_nutrition,
-        'num_days': num_days
-    }
+    # Rename columns
+    nutrition_summary = nutrition_summary.rename(columns={
+        'energy': 'Energy Intake (kcal)',
+        'pro': 'Protein (g)',
+        'carb': 'Carbs (g)',
+        'fat': 'Fat (g)'
+    })
+    
+    return nutrition_summary.reset_index(), avg_nutrition
 
-def get_energy_balance_summary(df):
-    """Get energy balance summary"""
-    # Get the last energy_acc value for each day (end of day balance)
-    daily_balance = df.groupby('date')['energy_acc'].last().reset_index()
-    daily_balance = daily_balance.dropna()
+def get_food_summary(df):
+    """Generate food intake summary"""
+    food_df = df[df['label'] == 'FOOD']
     
-    if daily_balance.empty:
+    if food_df.empty:
         return {
-            'avg_daily_balance': 0,
-            'deficit_days': 0,
-            'surplus_days': 0,
-            'daily_balance': pd.DataFrame()
+            'total_energy': 0,
+            'total_protein': 0,
+            'total_carbs': 0,
+            'total_fat': 0,
+            'meal_count': 0
         }
     
-    avg_balance = daily_balance['energy_acc'].mean()
-    deficit_days = (daily_balance['energy_acc'] < 0).sum()
-    surplus_days = (daily_balance['energy_acc'] > 0).sum()
-    
-    return {
-        'avg_daily_balance': avg_balance,
-        'deficit_days': deficit_days,
-        'surplus_days': surplus_days,
-        'daily_balance': daily_balance
+    summary = {
+        'total_energy': food_df['energy'].sum(),
+        'total_protein': food_df['pro'].sum(),
+        'total_carbs': food_df['carb'].sum(),
+        'total_fat': food_df['fat'].sum(),
+        'meal_count': len(food_df)
     }
+    
+    return summary
 
-def create_activity_chart(daily_data, period_type):
-    """Create activity visualization chart with colors for different activities"""
-    if daily_data.empty:
-        return alt.Chart(pd.DataFrame()).mark_text().encode(
-            text=alt.value("No data available")
+def create_training_chart(df, selected_activities, chart_type="energy"):
+    """Create training visualization chart"""
+    # Standardize activity names
+    df_copy = df.copy()
+    df_copy['activity'] = df_copy['activity'].apply(standardize_activity_name)
+    
+    training_df = df_copy[df_copy['label'] == 'TRAINING'].copy()
+    
+    if selected_activities:
+        training_df = training_df[training_df['activity'].isin(selected_activities)]
+    
+    if training_df.empty:
+        return alt.Chart(pd.DataFrame()).mark_text(text="No data available")
+    
+    # Get activity colors
+    colors = get_activity_colors()
+    
+    if chart_type == "energy":
+        chart = alt.Chart(training_df).mark_bar().add_selection(
+            alt.selection_interval()
+        ).encode(
+            x=alt.X('date:T', title='Date'),
+            y=alt.Y('energy:Q', title='Energy Burned (kcal)', scale=alt.Scale(reverse=True)),
+            color=alt.Color('activity:N', 
+                          scale=alt.Scale(domain=list(colors.keys()), 
+                                        range=list(colors.values())),
+                          title='Activity'),
+            tooltip=['date:T', 'activity:N', 'energy:Q', 'distance:Q', 'note:N']
+        ).properties(
+            width=600,
+            height=300,
+            title="Energy Burned by Activity"
         )
     
-    # Prepare data for chart
-    chart_data = daily_data.copy()
-    chart_data['date_str'] = chart_data['date'].dt.strftime('%Y-%m-%d')
+    elif chart_type == "distance":
+        # Filter out activities without distance data
+        distance_df = training_df[training_df['distance'] > 0]
+        
+        if distance_df.empty:
+            return alt.Chart(pd.DataFrame()).mark_text(text="No distance data available")
+        
+        chart = alt.Chart(distance_df).mark_bar().add_selection(
+            alt.selection_interval()
+        ).encode(
+            x=alt.X('date:T', title='Date'),
+            y=alt.Y('distance:Q', title='Distance (km)'),
+            color=alt.Color('activity:N', 
+                          scale=alt.Scale(domain=list(colors.keys()), 
+                                        range=list(colors.values())),
+                          title='Activity'),
+            tooltip=['date:T', 'activity:N', 'distance:Q', 'energy:Q', 'note:N']
+        ).properties(
+            width=600,
+            height=300,
+            title="Distance by Activity"
+        )
     
-    # Define color scale for activities
-    activity_colors = {
-        'WALK': '#1f77b4',      # Blue
-        'RUN': '#ff7f0e',       # Orange  
-        'BIKE': '#2ca02c',      # Green
-        'SWIM': '#d62728',      # Red
-        'STRENGTH': '#9467bd',  # Purple
-        'YOGA': '#8c564b',      # Brown
-        'STR': '#9467bd'        # Purple (same as STRENGTH)
-    }
+    return chart
+
+def create_weekly_summary_chart(df, selected_activities):
+    """Create weekly summary chart showing activity distribution"""
+    # Standardize activity names
+    df_copy = df.copy()
+    df_copy['activity'] = df_copy['activity'].apply(standardize_activity_name)
     
-    # Create stacked bar chart to show multiple activities per day
-    chart = alt.Chart(chart_data).mark_bar().encode(
-        x=alt.X('date_str:O', title='Date', axis=alt.Axis(labelAngle=-45)),
-        y=alt.Y('energy:Q', title='Energy Burned (kcal)'),
+    training_df = df_copy[df_copy['label'] == 'TRAINING'].copy()
+    
+    if selected_activities:
+        training_df = training_df[training_df['activity'].isin(selected_activities)]
+    
+    if training_df.empty:
+        return alt.Chart(pd.DataFrame()).mark_text(text="No data available")
+    
+    # Add day of week
+    training_df['day_of_week'] = pd.to_datetime(training_df['date']).dt.day_name()
+    training_df['weekday_num'] = pd.to_datetime(training_df['date']).dt.dayofweek
+    
+    # Group by day of week and activity
+    weekly_summary = training_df.groupby(['day_of_week', 'weekday_num', 'activity'])['energy'].sum().reset_index()
+    weekly_summary = weekly_summary.sort_values('weekday_num')
+    
+    colors = get_activity_colors()
+    
+    chart = alt.Chart(weekly_summary).mark_bar().encode(
+        x=alt.X('day_of_week:O', title='Day of Week', sort=['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']),
+        y=alt.Y('energy:Q', title='Energy Burned (kcal)', scale=alt.Scale(reverse=True)),
         color=alt.Color('activity:N', 
-                       title='Activity Type',
-                       scale=alt.Scale(
-                           domain=list(activity_colors.keys()),
-                           range=list(activity_colors.values())
-                       )),
-        tooltip=['date_str:O', 'activity:N', 'energy:Q']
+                      scale=alt.Scale(domain=list(colors.keys()), 
+                                    range=list(colors.values())),
+                      title='Activity'),
+        tooltip=['day_of_week:O', 'activity:N', 'energy:Q']
     ).properties(
         width=600,
         height=300,
-        title=f'Daily Training Energy by Activity - {period_type} View'
+        title="Weekly Activity Distribution"
     )
     
     return chart
 
-def create_nutrition_chart(daily_nutrition):
-    """Create nutrition visualization chart"""
-    if daily_nutrition.empty:
-        return alt.Chart(pd.DataFrame()).mark_text().encode(
-            text=alt.value("No data available")
-        )
-    
-    # Prepare data for stacked chart
-    chart_data = daily_nutrition.copy()
-    chart_data['date_str'] = chart_data['date'].dt.strftime('%Y-%m-%d')
-    
-    # Melt the data for stacked chart
-    melted_data = pd.melt(
-        chart_data, 
-        id_vars=['date_str'], 
-        value_vars=['pro', 'carb', 'fat'],
-        var_name='nutrient',
-        value_name='grams'
-    )
-    
-    # Create stacked bar chart
-    nutrition_chart = alt.Chart(melted_data).mark_bar().encode(
-        x=alt.X('date_str:O', title='Date', axis=alt.Axis(labelAngle=-45)),
-        y=alt.Y('grams:Q', title='Grams'),
-        color=alt.Color('nutrient:N', 
-                       scale=alt.Scale(domain=['pro', 'carb', 'fat'], 
-                                     range=['#ff7f0e', '#2ca02c', '#d62728']),
-                       legend=alt.Legend(title="Macronutrients")),
-        tooltip=['date_str:O', 'nutrient:N', 'grams:Q']
-    ).properties(
-        width=600,
-        height=300,
-        title='Daily Macronutrient Intake'
-    )
-    
-    return nutrition_chart
-
-def create_energy_balance_chart(daily_balance):
-    """Create energy balance visualization"""
-    if daily_balance.empty:
-        return alt.Chart(pd.DataFrame()).mark_text().encode(
-            text=alt.value("No data available")
-        )
-    
-    chart_data = daily_balance.copy()
-    chart_data['date_str'] = chart_data['date'].dt.strftime('%Y-%m-%d')
-    chart_data['balance_type'] = chart_data['energy_acc'].apply(
-        lambda x: 'Surplus' if x > 0 else 'Deficit' if x < 0 else 'Balanced'
-    )
-    
-    balance_chart = alt.Chart(chart_data).mark_bar().encode(
-        x=alt.X('date_str:O', title='Date', axis=alt.Axis(labelAngle=-45)),
-        y=alt.Y('energy_acc:Q', title='Energy Balance (kcal)'),
-        color=alt.Color('balance_type:N',
-                       scale=alt.Scale(domain=['Deficit', 'Balanced', 'Surplus'],
-                                     range=['#d62728', '#17becf', '#2ca02c']),
-                       legend=alt.Legend(title="Balance Type")),
-        tooltip=['date_str:O', 'energy_acc:Q', 'balance_type:N']
-    ).properties(
-        width=600,
-        height=300,
-        title='Daily Energy Balance'
-    )
-    
-    # Add a zero line
-    zero_line = alt.Chart(pd.DataFrame({'y': [0]})).mark_rule(
-        color='black', strokeDash=[3, 3]
-    ).encode(y='y:Q')
-    
-    return balance_chart + zero_line
-
-def get_training_nutrition_correlation(df):
-    """Analyze correlation between training days and nutrition intake"""
-    # Get daily totals
-    daily_training = df[df['label'] == 'TRAINING'].groupby('date')['energy'].sum().abs()
-    daily_nutrition = df[df['label'] == 'FOOD'].groupby('date').agg({
+def create_energy_balance_chart(df):
+    """Create energy balance chart showing input vs output"""
+    # Group by date and calculate daily totals
+    daily_summary = df.groupby('date').agg({
         'energy': 'sum',
-        'pro': 'sum'
-    })
+        'energy_acc': 'last'  # Take the last accumulated value of the day
+    }).reset_index()
     
-    # Merge data
-    combined = pd.merge(daily_training, daily_nutrition, 
-                       left_index=True, right_index=True, 
-                       suffixes=('_training', '_nutrition'), how='outer').fillna(0)
+    # Separate positive (food) and negative (exercise/BMR) energy
+    daily_summary['energy_in'] = df[df['energy'] > 0].groupby('date')['energy'].sum().fillna(0)
+    daily_summary['energy_out'] = abs(df[df['energy'] < 0].groupby('date')['energy'].sum().fillna(0))
     
-    if len(combined) < 2:
-        return None, pd.DataFrame()
+    # Create the chart data in long format
+    chart_data = []
+    for _, row in daily_summary.iterrows():
+        chart_data.append({
+            'date': row['date'],
+            'value': row['energy_in'],
+            'type': 'Energy In',
+            'balance': row['energy_acc']
+        })
+        chart_data.append({
+            'date': row['date'],
+            'value': row['energy_out'],
+            'type': 'Energy Out',
+            'balance': row['energy_acc']
+        })
     
-    # Calculate correlation
-    correlation = combined['energy_training'].corr(combined['energy_nutrition'])
+    chart_df = pd.DataFrame(chart_data)
     
-    # Prepare data for scatter plot
-    scatter_data = combined.reset_index()
-    scatter_data['date_str'] = scatter_data['date'].dt.strftime('%Y-%m-%d')
+    if chart_df.empty:
+        return alt.Chart(pd.DataFrame()).mark_text(text="No data available")
     
-    return correlation, scatter_data
-
-def create_correlation_chart(scatter_data, correlation):
-    """Create training vs nutrition correlation chart"""
-    if scatter_data.empty:
-        return alt.Chart(pd.DataFrame()).mark_text().encode(
-            text=alt.value("No data available")
-        )
-    
-    # Scatter plot
-    scatter = alt.Chart(scatter_data).mark_circle(size=60).encode(
-        x=alt.X('energy_training:Q', title='Training Energy Burned (kcal)'),
-        y=alt.Y('energy_nutrition:Q', title='Nutrition Energy Intake (kcal)'),
-        tooltip=['date_str:O', 'energy_training:Q', 'energy_nutrition:Q']
+    # Create the chart
+    bars = alt.Chart(chart_df).mark_bar().encode(
+        x=alt.X('date:T', title='Date'),
+        y=alt.Y('value:Q', title='Energy (kcal)'),
+        color=alt.Color('type:N', 
+                       scale=alt.Scale(domain=['Energy In', 'Energy Out'], 
+                                     range=['#32CD32', '#FF4500']),
+                       title='Type'),
+        tooltip=['date:T', 'type:N', 'value:Q']
+    ).properties(
+        width=600,
+        height=250
     )
     
-    # Trend line
-    trend = scatter.transform_regression('energy_training', 'energy_nutrition').mark_line()
+    # Add balance line
+    balance_line = alt.Chart(daily_summary).mark_line(
+        color='red',
+        strokeWidth=2
+    ).encode(
+        x='date:T',
+        y=alt.Y('energy_acc:Q', title='Energy Balance'),
+        tooltip=['date:T', 'energy_acc:Q']
+    )
     
-    chart = (scatter + trend).properties(
-        width=500,
-        height=400,
-        title=f'Training vs Nutrition Correlation (r = {correlation:.2f})'
-    ).resolve_scale(color='independent')
+    chart = alt.layer(bars, balance_line).resolve_scale(
+        y='independent'
+    ).properties(
+        title="Daily Energy Balance"
+    )
     
     return chart
 
 def get_available_activities(df):
-    """Get list of available activities for filtering"""
-    activities = df[df['label'] == 'TRAINING']['activity'].unique()
-    return ['All'] + sorted([act for act in activities if pd.notna(act)])
+    """Get list of available training activities"""
+    # Standardize activity names before getting unique values
+    df_copy = df.copy()
+    df_copy['activity'] = df_copy['activity'].apply(standardize_activity_name)
+    
+    training_df = df_copy[df_copy['label'] == 'TRAINING']
+    return sorted(training_df['activity'].unique().tolist())
 
-def format_period_summary(period_type, start_date, end_date):
-    """Format period summary text"""
+def format_time_period(period_type, selected_date):
+    """Format the time period for display"""
     if period_type == "Day":
-        return f"Summary for {start_date.strftime('%Y-%m-%d (%A)')}"
+        return selected_date.strftime("%Y-%m-%d")
     elif period_type == "Week":
-        return f"Week summary: {start_date.strftime('%Y-%m-%d')} to {end_date.strftime('%Y-%m-%d')}"
+        start_of_week = selected_date - timedelta(days=selected_date.weekday())
+        end_of_week = start_of_week + timedelta(days=6)
+        return f"{start_of_week.strftime('%Y-%m-%d')} to {end_of_week.strftime('%Y-%m-%d')}"
     elif period_type == "Month":
-        return f"Month summary: {start_date.strftime('%B %Y')}"
-    
-    return f"Period: {start_date.strftime('%Y-%m-%d')} to {end_date.strftime('%Y-%m-%d')}"
-
-def calculate_weekly_averages(df, center_date):
-    """Calculate weekly averages for comparison"""
-    # Get 4 weeks of data around the center date
-    week_start = center_date - timedelta(days=center_date.weekday() + 21)  # 3 weeks before
-    week_end = center_date + timedelta(days=(6 - center_date.weekday()) + 7)  # 1 week after
-    
-    period_data = df[(df['date'] >= week_start) & (df['date'] <= week_end)]
-    
-    # Group by week
-    period_data['week_start'] = period_data['date'] - pd.to_timedelta(period_data['date'].dt.dayofweek, unit='d')
-    
-    weekly_stats = {}
-    
-    # Training stats
-    training_weekly = period_data[period_data['label'] == 'TRAINING'].groupby('week_start').agg({
-        'energy': lambda x: abs(x).sum(),
-        'activity': 'count'
-    })
-    
-    if not training_weekly.empty:
-        weekly_stats['avg_weekly_training_energy'] = training_weekly['energy'].mean()
-        weekly_stats['avg_weekly_sessions'] = training_weekly['activity'].mean()
-    
-    # Nutrition stats
-    nutrition_weekly = period_data[period_data['label'] == 'FOOD'].groupby('week_start').agg({
-        'energy': 'sum',
-        'pro': 'sum'
-    })
-    
-    if not nutrition_weekly.empty:
-        weekly_stats['avg_weekly_calories'] = nutrition_weekly['energy'].mean()
-        weekly_stats['avg_weekly_protein'] = nutrition_weekly['pro'].mean()
-    
-    return weekly_stats
+        return selected_date.strftime("%Y-%m")
+    return str(selected_date)

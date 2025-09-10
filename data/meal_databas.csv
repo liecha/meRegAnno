@@ -1,1 +1,19 @@
 date,time,name,livsmedel,amount,code,favorite
+2025-09-10,09:00,Basic Oats,Havregryn fullkorn,80.0,571/16/66/20,False
+2025-09-10,09:00,Basic Oats,Russin,20.0,571/16/66/20,False
+2025-09-10,09:00,Basic Oats,Jordnötssmör,20.0,571/16/66/20,False
+2025-09-10,09:00,Basic Oats,Sojadryck,100.0,571/16/66/20,False
+2025-09-10,09:00,Basic Oats,Pumpafrö,10.0,571/16/66/20,False
+2025-09-10,12:00,Nöt färs rå fett 10%/Potatis rå/Gurka/Vindruvor gröna,Nöt färs rå fett 10%,130.0,354/27/24/14,False
+2025-09-10,12:00,Nöt färs rå fett 10%/Potatis rå/Gurka/Vindruvor gröna,Potatis rå,100.0,354/27/24/14,False
+2025-09-10,12:00,Nöt färs rå fett 10%/Potatis rå/Gurka/Vindruvor gröna,Gurka,50.0,354/27/24/14,False
+2025-09-10,12:00,Nöt färs rå fett 10%/Potatis rå/Gurka/Vindruvor gröna,Vindruvor gröna,50.0,354/27/24/14,False
+2025-09-10,16:00,Kyckling bröstfilé rå u. skinn/Ägg rått/Ärtfalaffel garant/Tomat/Gurka/Vindruvor gröna/Plommon,Kyckling bröstfilé rå u. skinn,50.0,292/22/20/9,False
+2025-09-10,16:00,Kyckling bröstfilé rå u. skinn/Ägg rått/Ärtfalaffel garant/Tomat/Gurka/Vindruvor gröna/Plommon,Ägg rått,60.0,292/22/20/9,False
+2025-09-10,16:00,Kyckling bröstfilé rå u. skinn/Ägg rått/Ärtfalaffel garant/Tomat/Gurka/Vindruvor gröna/Plommon,Ärtfalaffel garant,40.0,292/22/20/9,False
+2025-09-10,16:00,Kyckling bröstfilé rå u. skinn/Ägg rått/Ärtfalaffel garant/Tomat/Gurka/Vindruvor gröna/Plommon,Tomat,40.0,292/22/20/9,False
+2025-09-10,16:00,Kyckling bröstfilé rå u. skinn/Ägg rått/Ärtfalaffel garant/Tomat/Gurka/Vindruvor gröna/Plommon,Gurka,40.0,292/22/20/9,False
+2025-09-10,16:00,Kyckling bröstfilé rå u. skinn/Ägg rått/Ärtfalaffel garant/Tomat/Gurka/Vindruvor gröna/Plommon,Vindruvor gröna,60.0,292/22/20/9,False
+2025-09-10,16:00,Kyckling bröstfilé rå u. skinn/Ägg rått/Ärtfalaffel garant/Tomat/Gurka/Vindruvor gröna/Plommon,Plommon,30.0,292/22/20/9,False
+2025-09-10,16:30,Mörk choklad kakao 85%/Dadlar lakrits,Mörk choklad kakao 85%,20.0,214/2/24/9,False
+2025-09-10,16:30,Mörk choklad kakao 85%/Dadlar lakrits,Dadlar lakrits,30.0,214/2/24/9,False

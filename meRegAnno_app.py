@@ -39,6 +39,13 @@ from scripts.forms import create_new_form_food
 from scripts.forms import create_form_add_recipie_to_database
 from scripts.forms import create_form_add_food_item_to_database
 
+from scripts.activity_summary import (
+    filter_data_by_period, get_training_summary, get_food_summary,
+    create_training_chart, create_weekly_summary_chart, 
+    create_energy_balance_chart, get_available_activities, 
+    format_time_period, get_activity_colors
+)
+
 # Rest of your existing code continues here...
 # Page configuration
 st.set_page_config(
@@ -886,8 +893,155 @@ def create_page_logg_book():
                     st.button("Save changes", key="button_save_change_logg", on_click=submit_change)
         else:
             st.caption("There are _:blue[no recipies]_ saved in your database")
+
+def create_page_summary():
+    """Create the summary page for training and food intake analysis"""
+    col = st.columns((5.5, 5.5), gap='medium')
+    
+    with col[0]:
+        st.markdown('#### Summary Controls')
         
+        # Period selection
+        period_type = st.selectbox(
+            "Select time period", 
+            ["Day", "Week", "Month"],
+            key='summary_period'
+        )
+        
+        # Date selection (reuse the existing selected_date from sidebar)
+        period_display = format_time_period(period_type, selected_date_input)
+        st.caption(f"Showing data for: _:blue[{period_display}]_")
+        
+        # Filter data based on period
+        filtered_df = filter_data_by_period(df_energy, period_type, selected_date_input)
+        
+        # Activity selection
+        available_activities = get_available_activities(df_energy)
+        selected_activities = st.multiselect(
+            "Select activities to analyze",
+            available_activities,
+            default=available_activities,
+            key='summary_activities'
+        )
+        
+        # Activity colors display
+        if selected_activities:
+            st.markdown("##### Activity Colors")
+            colors = get_activity_colors()
+            color_info = ""
+            for activity in selected_activities:
+                if activity in colors:
+                    color_info += f"**{activity}**: <span style='color:{colors[activity]}'>{colors[activity]}</span><br>"
+            if color_info:
+                st.markdown(color_info, unsafe_allow_html=True)
+        
+        # Training Summary Statistics
+        st.markdown('#### Training Summary')
+        training_summary = get_training_summary(filtered_df, selected_activities)
+        
+        if not training_summary.empty:
+            # Format the summary for display
+            display_summary = training_summary.copy()
+            display_summary['Total Distance (km)'] = display_summary['Total Distance (km)'].round(2)
+            display_summary['Avg Distance (km)'] = display_summary['Avg Distance (km)'].round(2)
+            # No need to create new columns - use the existing ones
             
+            st.data_editor(
+                display_summary,
+                column_config={
+                    "activity": st.column_config.Column("Activity", width="medium"),
+                    "Sessions": st.column_config.Column("Sessions", width="small"),
+                    "Total Distance (km)": st.column_config.Column("Total Distance (km)", width="medium"),
+                    "Avg Distance (km)": st.column_config.Column("Avg Distance (km)", width="medium"),
+                    "Total Energy (kcal)": st.column_config.Column("Total Energy (kcal)", width="medium"),
+                    "Avg Energy (kcal)": st.column_config.Column("Avg Energy (kcal)", width="medium"),
+                    "Sample Note": st.column_config.Column("Notes", width="large"),
+                },
+                key='training_summary_table',
+                hide_index=True,
+                use_container_width=True
+            )
+            
+            # Summary metrics - use correct column names
+            total_sessions = training_summary['Sessions'].sum()
+            total_distance = training_summary['Total Distance (km)'].sum()
+            total_energy_burned = training_summary['Total Energy (kcal)'].sum()
+            
+            st.markdown("##### Quick Stats")
+            metric_col1, metric_col2, metric_col3 = st.columns(3)
+            metric_col1.metric("Total Sessions", total_sessions)
+            metric_col2.metric("Total Distance", f"{total_distance:.1f} km")
+            metric_col3.metric("Energy Burned", f"{int(total_energy_burned)} kcal")
+        else:
+            st.caption("No training data available for the selected period and activities.")
+        
+        # Food Summary
+        st.markdown('#### Food Summary')
+        food_summary = get_food_summary(filtered_df)
+        
+        if food_summary['meal_count'] > 0:
+            food_col1, food_col2 = st.columns(2)
+            # Use the correct keys from get_food_summary function
+            food_col1.metric("Total Energy", f"{int(food_summary['total_energy'])} kcal")
+            food_col1.metric("Total Protein", f"{int(food_summary['total_protein'])} g")
+            food_col2.metric("Total Meals", food_summary['meal_count'])
+            food_col2.metric("Carbs/Fat", f"{int(food_summary['total_carbs'])}g / {int(food_summary['total_fat'])}g")
+        else:
+            st.caption("No food data available for the selected period.")
+    
+    with col[1]:
+        st.markdown('#### Visualizations')
+        
+        # Chart type selection
+        chart_type = st.selectbox(
+            "Select chart type",
+            ["Energy Burned", "Distance", "Weekly Distribution", "Energy Balance"],
+            key='chart_type'
+        )
+        
+        if chart_type == "Energy Burned":
+            chart = create_training_chart(filtered_df, selected_activities, "energy")
+            st.altair_chart(chart, use_container_width=True)
+            
+        elif chart_type == "Distance":
+            chart = create_training_chart(filtered_df, selected_activities, "distance")
+            st.altair_chart(chart, use_container_width=True)
+            
+        elif chart_type == "Weekly Distribution":
+            chart = create_weekly_summary_chart(filtered_df, selected_activities)
+            st.altair_chart(chart, use_container_width=True)
+            
+        elif chart_type == "Energy Balance":
+            chart = create_energy_balance_chart(filtered_df)
+            st.altair_chart(chart, use_container_width=True)
+        
+        # Additional insights
+        st.markdown('#### Insights')
+        
+        if not training_summary.empty:
+            # Find most frequent activity - use correct column name
+            most_frequent = training_summary.loc[training_summary['Sessions'].idxmax()]
+            st.success(f"Most frequent activity: **{most_frequent['activity']}** with {most_frequent['Sessions']} sessions")
+            
+            # Find highest energy burning activity - use correct column name
+            if training_summary['Total Energy (kcal)'].max() > 0:
+                highest_energy = training_summary.loc[training_summary['Total Energy (kcal)'].idxmax()]
+                st.info(f"Highest energy burn: **{highest_energy['activity']}** with {int(highest_energy['Total Energy (kcal)'])} kcal total")
+            
+            # Find longest distance activity - use correct column name
+            distance_activities = training_summary[training_summary['Total Distance (km)'] > 0]
+            if not distance_activities.empty:
+                longest_distance = distance_activities.loc[distance_activities['Total Distance (km)'].idxmax()]
+                st.info(f"Longest total distance: **{longest_distance['activity']}** with {longest_distance['Total Distance (km)']:.1f} km")
+        
+        # Energy balance insights - use correct keys
+        if food_summary['meal_count'] > 0 and not training_summary.empty:
+            net_energy = food_summary['total_energy'] - abs(training_summary['Total Energy (kcal)'].sum())
+            if net_energy > 0:
+                st.warning(f"Energy surplus: {int(net_energy)} kcal")
+            else:
+                st.success(f"Energy deficit: {int(abs(net_energy))} kcal")
+
 with st.sidebar:
     st.image("zeus_logo_test.png")
 
@@ -944,7 +1098,8 @@ with st.sidebar:
         "Activity": create_page_activity_registration,
         "Meals": create_page_meal_registration_with_copy,
         "Database": create_page_database,
-        "Log book": create_page_logg_book
+        "Log book": create_page_logg_book,
+        "Summary": create_page_summary  # Add this new line
     }
 
 demo_name = st.sidebar.selectbox("Select a page", page_names_to_funcs.keys())

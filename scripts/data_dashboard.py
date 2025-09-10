@@ -3,6 +3,28 @@ import pandas as pd
 from datetime import datetime, date
 import altair as alt
 
+def standardize_activity_name(activity):
+    """Standardize activity names to consistent format"""
+    if pd.isna(activity):
+        return activity
+    
+    activity_upper = str(activity).upper()
+    
+    # Mapping of various spellings to standard names
+    activity_mapping = {
+        'WALK': 'Walk',
+        'RUN': 'Run',
+        'RUNNING': 'Run',
+        'STR': 'Strength',
+        'STRENGTH': 'Strength',
+        'BIKE': 'Bike',
+        'YOGA': 'Yoga',
+        'SWIM': 'Swim',
+        'BMR': 'Bmr'  # Keep BMR as Bmr for consistency with existing code
+    }
+    
+    return activity_mapping.get(activity_upper, activity)
+
 def calc_bmr(weight, height, age):
     BMR = int(447.593 + (9.247 * weight) + (3.098 * height) - (4.330 * age)) #1187
     return BMR
@@ -203,6 +225,10 @@ def nutrition_differ(df_energy_date):
 def add_summary_to_dataset(df_energy_date):
     df_activity = df_energy_date.drop(['summary'], axis=1)
     df_activity = df_activity[df_activity['label'] != 'REST']
+    
+    # Standardize activity names
+    df_activity['activity'] = df_activity['activity'].apply(standardize_activity_name)
+    
     now = datetime.now() # current date and time
     current_date = now.strftime("%Y-%m-%d")
     if df_activity['date'].iloc[0] == current_date:
@@ -218,26 +244,27 @@ def add_summary_to_dataset(df_energy_date):
     note_storage = []
     for i in range(0, len(labels)):
         if labels[i] == 'FOOD':
-            food_string = '🍲  ' + str(df['note'].iloc[i])
+            food_string = 'ðŸ²  ' + str(df['note'].iloc[i])
             note_storage.append(food_string)
         if labels[i] == 'TRAINING':
-            if activities[i] == 'WALK' or activities[i] == 'Walk':
-                walk_string = '🚶🏻‍♂️ '  + activities[i] + ' ' + str(df['distance'].iloc[i])
+            # Use standardized activity names
+            if activities[i] == 'Walk':
+                walk_string = 'ðŸš¶ðŸ»â€â™‚ï¸ '  + activities[i] + ' ' + str(df['distance'].iloc[i])
                 note_storage.append(walk_string)
-            elif activities[i] == 'SWIM' or activities[i] == 'Swim':
-                swim_string = '🏊🏼‍♀️ '   + activities[i] + ' ' + str(df['distance'].iloc[i])
+            elif activities[i] == 'Swim':
+                swim_string = 'ðŸŠðŸ¼â€â™€ï¸ '   + activities[i] + ' ' + str(df['distance'].iloc[i])
                 note_storage.append(swim_string)
-            elif activities[i] == 'RUN' or activities[i] == 'Run':
-                run_string = '🏃🏽‍♂️ ' + activities[i] + ' ' + str(df['distance'].iloc[i])
+            elif activities[i] == 'Run':
+                run_string = 'ðŸƒðŸ½â€â™‚ï¸ ' + activities[i] + ' ' + str(df['distance'].iloc[i])
                 note_storage.append(run_string)
-            elif activities[i] == 'BIKE' or activities[i] == 'Bike':
-                bike_string = '🚵🏼 ' + activities[i] + ' ' + str(df['note'].iloc[i])
+            elif activities[i] == 'Bike':
+                bike_string = 'ðŸšµðŸ¼ ' + activities[i] + ' ' + str(df['note'].iloc[i])
                 note_storage.append(bike_string)
-            elif activities[i] == 'STR' or activities[i] == 'Strength':
-                str_string = '🏋🏻‍♂️ ' + activities[i] + ' ' + str(df['note'].iloc[i])
+            elif activities[i] == 'Strength':
+                str_string = 'ðŸ‹ðŸ»â€â™‚ï¸ ' + activities[i] + ' ' + str(df['note'].iloc[i])
                 note_storage.append(str_string)
-            elif activities[i] == 'YOGA' or activities[i] == 'Yoga':
-                yoga_string = '🧘🏽‍♀️ ' + activities[i] + ' ' + str(df['note'].iloc[i])
+            elif activities[i] == 'Yoga':
+                yoga_string = 'ðŸ§˜ðŸ½â€â™€ï¸ ' + activities[i] + ' ' + str(df['note'].iloc[i])
                 note_storage.append(yoga_string)
     df.insert(12, 'summary', note_storage)
     return df
