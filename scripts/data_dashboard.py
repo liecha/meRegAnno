@@ -154,7 +154,6 @@ def calc_energy_deficite(df_energy, selected_date, selected_date_input):
             df_this_intervall = df_deficite_list[int_start:int_end].sort_values(by='date', ascending=False)
         if day_diff < 0:
             df_this_intervall = []
-    print('Calculated dificite CHECK: ', df_this_intervall)
     return df_this_intervall
 
 def nutrition_content(df_energy_date):
