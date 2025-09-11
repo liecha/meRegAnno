@@ -34,3 +34,24 @@ date,time,name,livsmedel,amount,code,favorite
 2025-09-11,12:04,Nöt färs rå fett 10%/Potatis rå/Squash/Aubergine/Gurka/Tomat/Vindruvor gröna,Gurka,49.0,348/27/21/14,False
 2025-09-11,12:04,Nöt färs rå fett 10%/Potatis rå/Squash/Aubergine/Gurka/Tomat/Vindruvor gröna,Tomat,41.0,348/27/21/14,False
 2025-09-11,12:04,Nöt färs rå fett 10%/Potatis rå/Squash/Aubergine/Gurka/Tomat/Vindruvor gröna,Vindruvor gröna,22.0,348/27/21/14,False
+2025-09-11,13:35,Vitargo Elektrolyter,Vitargo Elektrolyter,10.0,34/0/8/0,False
+2025-09-11,15:51,"Kyckling bröstfilé rå u. skinn/Soltorkad tomat/Kvarg naturell fett 0,2%/Ost hårdost parmesan fett 30%/Gurka/Persika nektarin/Vattenmelon/Potatis rå",Kyckling bröstfilé rå u. skinn,130.0,338/34/34/2,False
+2025-09-11,15:51,"Kyckling bröstfilé rå u. skinn/Soltorkad tomat/Kvarg naturell fett 0,2%/Ost hårdost parmesan fett 30%/Gurka/Persika nektarin/Vattenmelon/Potatis rå",Soltorkad tomat,10.0,338/34/34/2,False
+2025-09-11,15:51,"Kyckling bröstfilé rå u. skinn/Soltorkad tomat/Kvarg naturell fett 0,2%/Ost hårdost parmesan fett 30%/Gurka/Persika nektarin/Vattenmelon/Potatis rå","Kvarg naturell fett 0,2%",22.5,338/34/34/2,False
+2025-09-11,15:51,"Kyckling bröstfilé rå u. skinn/Soltorkad tomat/Kvarg naturell fett 0,2%/Ost hårdost parmesan fett 30%/Gurka/Persika nektarin/Vattenmelon/Potatis rå",Ost hårdost parmesan fett 30%,5.0,338/34/34/2,False
+2025-09-11,15:51,"Kyckling bröstfilé rå u. skinn/Soltorkad tomat/Kvarg naturell fett 0,2%/Ost hårdost parmesan fett 30%/Gurka/Persika nektarin/Vattenmelon/Potatis rå",Gurka,47.0,338/34/34/2,False
+2025-09-11,15:51,"Kyckling bröstfilé rå u. skinn/Soltorkad tomat/Kvarg naturell fett 0,2%/Ost hårdost parmesan fett 30%/Gurka/Persika nektarin/Vattenmelon/Potatis rå",Persika nektarin,55.0,338/34/34/2,False
+2025-09-11,15:51,"Kyckling bröstfilé rå u. skinn/Soltorkad tomat/Kvarg naturell fett 0,2%/Ost hårdost parmesan fett 30%/Gurka/Persika nektarin/Vattenmelon/Potatis rå",Vattenmelon,130.0,338/34/34/2,False
+2025-09-11,15:51,"Kyckling bröstfilé rå u. skinn/Soltorkad tomat/Kvarg naturell fett 0,2%/Ost hårdost parmesan fett 30%/Gurka/Persika nektarin/Vattenmelon/Potatis rå",Potatis rå,100.0,338/34/34/2,False
+2025-09-11,16:12,"Kyckling bröstfilé rå u. skinn/Soltorkad tomat/Kvarg naturell fett 0,2%/Ost hårdost parmesan fett 30%/Gurka/Persika nektarin/Vattenmelon/Potatis rå",Kyckling bröstfilé rå u. skinn,170.0,379/43/34/3,False
+2025-09-11,16:12,"Kyckling bröstfilé rå u. skinn/Soltorkad tomat/Kvarg naturell fett 0,2%/Ost hårdost parmesan fett 30%/Gurka/Persika nektarin/Vattenmelon/Potatis rå",Soltorkad tomat,10.0,379/43/34/3,False
+2025-09-11,16:12,"Kyckling bröstfilé rå u. skinn/Soltorkad tomat/Kvarg naturell fett 0,2%/Ost hårdost parmesan fett 30%/Gurka/Persika nektarin/Vattenmelon/Potatis rå","Kvarg naturell fett 0,2%",22.5,379/43/34/3,False
+2025-09-11,16:12,"Kyckling bröstfilé rå u. skinn/Soltorkad tomat/Kvarg naturell fett 0,2%/Ost hårdost parmesan fett 30%/Gurka/Persika nektarin/Vattenmelon/Potatis rå",Ost hårdost parmesan fett 30%,5.0,379/43/34/3,False
+2025-09-11,16:12,"Kyckling bröstfilé rå u. skinn/Soltorkad tomat/Kvarg naturell fett 0,2%/Ost hårdost parmesan fett 30%/Gurka/Persika nektarin/Vattenmelon/Potatis rå",Gurka,47.0,379/43/34/3,False
+2025-09-11,16:12,"Kyckling bröstfilé rå u. skinn/Soltorkad tomat/Kvarg naturell fett 0,2%/Ost hårdost parmesan fett 30%/Gurka/Persika nektarin/Vattenmelon/Potatis rå",Persika nektarin,55.0,379/43/34/3,False
+2025-09-11,16:12,"Kyckling bröstfilé rå u. skinn/Soltorkad tomat/Kvarg naturell fett 0,2%/Ost hårdost parmesan fett 30%/Gurka/Persika nektarin/Vattenmelon/Potatis rå",Vattenmelon,130.0,379/43/34/3,False
+2025-09-11,16:12,"Kyckling bröstfilé rå u. skinn/Soltorkad tomat/Kvarg naturell fett 0,2%/Ost hårdost parmesan fett 30%/Gurka/Persika nektarin/Vattenmelon/Potatis rå",Potatis rå,100.0,379/43/34/3,False
+2025-09-11,16:17,Dadlar lakrits/Peanut caramel redo proteinbar/Mörk choklad kakao 70%,Dadlar lakrits,30.0,310/10/33/11,False
+2025-09-11,16:17,Dadlar lakrits/Peanut caramel redo proteinbar/Mörk choklad kakao 70%,Peanut caramel redo proteinbar,40.0,310/10/33/11,False
+2025-09-11,16:17,Dadlar lakrits/Peanut caramel redo proteinbar/Mörk choklad kakao 70%,Mörk choklad kakao 70%,10.0,310/10/33/11,False
+2025-09-11,16:46,Mörk choklad kakao 70%,Mörk choklad kakao 70%,10.0,58/0/3/4,False
