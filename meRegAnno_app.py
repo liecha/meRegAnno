@@ -92,7 +92,7 @@ def create_dashobard():
         deficite_string = ''
         seven_days_deficite_sum = 0
         if len(df_deficite) > 0:
-            seven_days_deficite_sum = sum(df_deficite['energy_acc'].values)
+            seven_days_deficite_sum = sum(df_deficite['energy_acc'].values[1:])
             for i in range(0, len(df_deficite)):
                 deficite_string = deficite_string + str(int(df_deficite['energy_acc'].iloc[i])) + ', '
             deficite_string = deficite_string[:-2]

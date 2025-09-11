@@ -31,31 +31,119 @@ def create_new_form_activity(bmr):
         st.time_input("Select a time", value=None, key="act_time")
         st.write("Selected time: ", st.session_state.act_time)
     
-    form_activity = st.form(key="activity", clear_on_submit=True)
-    with form_activity:
-        this_activity = st.selectbox("Choose activity", ("","Walk", "Run", "Swim", "Bike", "Strength", "Yoga"))
-        this_distance = st.text_input("Distance (km)")
-        this_energy = st.text_input("Energy burned (kcal)")
-        this_note = st.text_input("Details")
+    # Move activity selection outside the form so it can update the form content
+    this_activity = st.selectbox("Choose activity", ("","Walk", "Run", "Swim", "Bike", "Strength", "Yoga"))
+    
+    # Only show the form if an activity is selected
+    if this_activity:
+        form_activity = st.form(key="activity", clear_on_submit=True)
+        with form_activity:
+            # Initialize variables with default values
+            duration = "00:00:00"
+            distance = 0.0
+            pace = 0.0
+            energy = 0
+            steps = 0
+            note = ""
+            
+            if this_activity == "Walk":
+                col1, col2 = st.columns(2)
+                with col1:
+                    duration = st.text_input("Duration (hh:mm:ss)", value="00:00:00")
+                    distance = st.number_input("Distance (km)", min_value=0.0, step=0.1)
+                    energy = st.number_input("Energy burned (kcal)", min_value=0, step=1)
+                with col2:
+                    steps = st.number_input("Steps", min_value=0, step=1)
+                
+                # Note section at the bottom for all activities
+                note = st.text_area("Activity notes", placeholder="Describe your workout, how you felt, route details, etc.", height=100)
+                    
+            elif this_activity == "Run":
+                col1, col2 = st.columns(2)
+                with col1:
+                    duration = st.text_input("Duration (hh:mm:ss)", value="00:00:00")
+                    distance = st.number_input("Distance (km)", min_value=0.0, step=0.1)
+                    pace = st.number_input("Pace (min/km)", min_value=0.0, step=0.1)
+                with col2:
+                    energy = st.number_input("Energy burned (kcal)", min_value=0, step=1)
+                    steps = st.number_input("Steps", min_value=0, step=1)
+                
+                # Note section at the bottom for all activities
+                note = st.text_area("Activity notes", placeholder="Describe your run, route, weather, performance, etc.", height=100)
+                    
+            elif this_activity == "Swim":
+                col1, col2 = st.columns(2)
+                with col1:
+                    duration = st.text_input("Duration (hh:mm:ss)", value="00:00:00")
+                    distance = st.number_input("Distance (m)", min_value=0.0, step=1.0)
+                    pace = st.number_input("Pace (min/100m)", min_value=0.0, step=0.1)
+                with col2:
+                    energy = st.number_input("Energy burned (kcal)", min_value=0, step=1)
+                
+                # Note section at the bottom for all activities
+                note = st.text_area("Activity notes", placeholder="Pool details, strokes used, technique focus, etc.", height=100)
+                    
+            elif this_activity == "Bike":
+                col1, col2 = st.columns(2)
+                with col1:
+                    duration = st.text_input("Duration (hh:mm:ss)", value="00:00:00")
+                    distance = st.number_input("Distance (km)", min_value=0.0, step=0.1)
+                    pace = st.number_input("Pace (min/km)", min_value=0.0, step=0.1)
+                with col2:
+                    energy = st.number_input("Energy burned (kcal)", min_value=0, step=1)
+                
+                # Note section at the bottom for all activities
+                note = st.text_area("Activity notes", placeholder="Route details, terrain, bike type, weather conditions, etc.", height=100)
+                    
+            elif this_activity == "Strength":
+                col1, col2 = st.columns(2)
+                with col1:
+                    duration = st.text_input("Duration (hh:mm:ss)", value="00:00:00")
+                    energy = st.number_input("Energy burned (kcal)", min_value=0, step=1)
+                with col2:
+                    pass  # Empty column for layout consistency
+                
+                # Note section at the bottom for all activities
+                note = st.text_area("Activity notes", placeholder="Exercises performed, weights used, sets/reps, muscle groups targeted, etc.", height=100)
+                    
+            elif this_activity == "Yoga":
+                col1, col2 = st.columns(2)
+                with col1:
+                    duration = st.text_input("Duration (hh:mm:ss)", value="00:00:00")
+                    energy = st.number_input("Energy burned (kcal)", min_value=0, step=1)
+                with col2:
+                    pass  # Empty column for layout consistency
+                
+                # Note section at the bottom for all activities
+                note = st.text_area("Activity notes", placeholder="Yoga style, poses practiced, how you felt, meditation time, etc.", height=100)
 
-        submit_activity = st.form_submit_button("Submit",  on_click=submit) #disabled=st.session_state.button_disabled,
-        if submit_activity:
-            add_registration(
-                {     
-                    "date": this_date, 
-                    "time": my_time,
-                    "label": 'TRAINING', 
-                    "energy": -1 * int(this_energy), 
-                    "pro": 0, 
-                    "carb": 0, 
-                    "fat": 0, 
-                    "activity": this_activity, 
-                    "distance": this_distance,                
-                    "note": str(this_note), 
-                },
-                    bmr
-                )
-
+            submit_activity = st.form_submit_button("Submit",  on_click=submit)
+            if submit_activity:
+                # Convert distance to km for swim (from meters)
+                if this_activity == "Swim":
+                    distance_km = distance / 1000.0
+                else:
+                    distance_km = distance
+                    
+                add_registration(
+                    {     
+                        "date": this_date, 
+                        "time": my_time,
+                        "label": 'TRAINING', 
+                        "energy": -1 * int(energy), 
+                        "pro": 0, 
+                        "carb": 0, 
+                        "fat": 0, 
+                        "activity": this_activity, 
+                        "distance": distance_km,
+                        "duration": duration,
+                        "pace": pace,
+                        "steps": steps,
+                        "note": str(note), 
+                    },
+                        bmr
+                    )
+                
 ### FOOD REGISTRATION
 def create_new_form_food(code, options_string, bmr, df_meal_items=None):
     date_now = date_time_now() 

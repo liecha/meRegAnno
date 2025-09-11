@@ -157,7 +157,7 @@ def get_empty_dataframe(table_name):
     if table_name == "energy_balance":
         return pd.DataFrame(columns=['date', 'time', 'label', 'activity', 'distance', 
                                    'energy', 'pro', 'carb', 'fat', 'note', 
-                                   'energy_acc', 'protein_acc'])
+                                   'energy_acc', 'protein_acc', 'duration', 'pace', 'steps'])
     elif table_name == "livsmedelsdatabas":
         return pd.DataFrame(columns=['livsmedel', 'calorie', 'protein', 'carb', 'fat'])
     elif table_name == "recipie_databas":
@@ -266,17 +266,44 @@ def calc_accumulated_energy(df_data):
     return df_energy_acc
 
 def add_new_data_to_dataset_csv(df_db_csv, df_new_post, date_new_post, bmr):
+    """Updated function to handle new columns"""
     df_new  = df_db_csv[df_db_csv['date'] == date_new_post]
     if len(df_new) == 0:
         df_basal_energy = basal_energy(date_new_post, bmr)       
         df_new_post = df_new_post[df_new_post['date'] == date_new_post]   
-        df_concat = pd.concat([df_basal_energy, df_new_post]).sort_values(['time']).fillna(0) 
-        df_concat = df_concat[['date', 'time', 'label', 'activity', 'distance', 'energy', 'pro', 'carb', 'fat', 'note']]  
+        df_concat = pd.concat([df_basal_energy, df_new_post]).sort_values(['time']).fillna({
+            'duration': '00:00:00',
+            'pace': 0.0,
+            'steps': 0,
+            'distance': 0.0,
+            'pro': 0.0,
+            'carb': 0.0,
+            'fat': 0.0,
+            'note': ''
+        })
+        df_concat = df_concat[['date', 'time', 'label', 'activity', 'distance', 'energy', 
+                              'pro', 'carb', 'fat', 'note', 'duration', 'pace', 'steps']]  
         df_concat_acc = calc_accumulated_energy(df_concat)
         df_energy_new = pd.concat([df_db_csv, df_concat_acc])
     else:
-        df_db_csv = df_db_csv.drop(['energy_acc', 'protein_acc'], axis=1)
+        # Remove accumulated columns before concatenation
+        cols_to_drop = ['energy_acc', 'protein_acc']
+        cols_to_drop = [col for col in cols_to_drop if col in df_db_csv.columns]
+        if cols_to_drop:
+            df_db_csv = df_db_csv.drop(cols_to_drop, axis=1)
+        
         df_concat_acc = pd.concat([df_db_csv, df_new_post]).sort_values(['date', 'time'])
+        # Fill missing values for new columns
+        df_concat_acc = df_concat_acc.fillna({
+            'duration': '00:00:00',
+            'pace': 0.0,
+            'steps': 0,
+            'distance': 0.0,
+            'pro': 0.0,
+            'carb': 0.0,
+            'fat': 0.0,
+            'note': ''
+        })
         df_energy_new = calc_accumulated_energy(df_concat_acc).sort_values(['date', 'time'])
     return df_energy_new
 
@@ -308,7 +335,10 @@ def add_registration(data: dict, bmr):
         'carb': df_registration['carb'].iloc[0],
         'fat': df_registration['fat'].iloc[0],
         'activity': df_registration['activity'].iloc[0],
-        'distance': df_registration['distance'].iloc[0],
+        'distance': df_registration['distance'].iloc[0] if 'distance' in df_registration.columns else 0.0,
+        'duration': df_registration['duration'].iloc[0] if 'duration' in df_registration.columns else '00:00:00',
+        'pace': df_registration['pace'].iloc[0] if 'pace' in df_registration.columns else 0.0,
+        'steps': df_registration['steps'].iloc[0] if 'steps' in df_registration.columns else 0,
         'note': df_registration['note'].iloc[0]
     }
 
@@ -316,6 +346,15 @@ def add_registration(data: dict, bmr):
     date_new_post = df_new_post['date'].iloc[0]
     
     df_db_csv = fetch_data_from_storage('data/updated-database-results.csv')
+    
+    # Add missing columns if they don't exist
+    if 'duration' not in df_db_csv.columns:
+        df_db_csv['duration'] = '00:00:00'
+    if 'pace' not in df_db_csv.columns:
+        df_db_csv['pace'] = 0.0
+    if 'steps' not in df_db_csv.columns:
+        df_db_csv['steps'] = 0
+    
     df_energy_new = add_new_data_to_dataset_csv(df_db_csv, df_new_post, date_new_post, bmr)  
     save_data_to_storage(df_energy_new, 'data/updated-database-results.csv')  
     
@@ -324,7 +363,7 @@ def add_registration(data: dict, bmr):
     storage_type = "database" if USE_DATABASE else "CSV file"
     print(f'Registration added successfully to {storage_type}...')
     st.rerun()
-
+    
 def save_meal_to_database(date_str, time_str, meal_name, df_meal_items, code, favorite=False):
     """
     Save a meal with all its components to the meal_databas.csv file

@@ -128,7 +128,7 @@ def calc_daily_energy_output(df_energy_date, bmr):
     return sum_output
 
 def calc_energy_deficite(df_energy, selected_date, selected_date_input):
-    intervall_length = 7
+    intervall_length = 8
     date_now_str = datetime_to_string(date.today())
     df_deficite_list = df_energy[df_energy['time'] == '23:00']
     df_deficite_list = df_deficite_list[['date', 'energy_acc']]
@@ -154,6 +154,7 @@ def calc_energy_deficite(df_energy, selected_date, selected_date_input):
             df_this_intervall = df_deficite_list[int_start:int_end].sort_values(by='date', ascending=False)
         if day_diff < 0:
             df_this_intervall = []
+    print('Calculated dificite CHECK: ', df_this_intervall)
     return df_this_intervall
 
 def nutrition_content(df_energy_date):
@@ -223,49 +224,68 @@ def nutrition_differ(df_energy_date):
     return df_nutritions_labeled
 
 def add_summary_to_dataset(df_energy_date):
+    """Enhanced version with more detailed emoji mapping"""
     df_activity = df_energy_date.drop(['summary'], axis=1)
     df_activity = df_activity[df_activity['label'] != 'REST']
     
     # Standardize activity names
     df_activity['activity'] = df_activity['activity'].apply(standardize_activity_name)
     
-    now = datetime.now() # current date and time
+    # Enhanced emoji mapping with fallbacks
+    ACTIVITY_EMOJIS = {
+        'Walk': ['🚶‍♂️', '🚶', '👟'],
+        'Run': ['🏃‍♂️', '🏃', '💨'],
+        'Bike': ['🚴‍♂️', '🚴', '🚲'],
+        'Swim': ['🏊‍♂️', '🏊', '🏊‍♀️'],
+        'Strength': ['💪', '🏋️‍♂️', '🏋️'],
+        'Yoga': ['🧘‍♂️', '🧘', '🧘‍♀️'],
+        'FOOD': ['🍽️', '🍴', '🥗']
+    }
+    
+    def get_emoji(activity):
+        """Get primary emoji for activity"""
+        if activity in ACTIVITY_EMOJIS:
+            return ACTIVITY_EMOJIS[activity][0]
+        return '⚡'  # Default fallback
+    
+    now = datetime.now()
     current_date = now.strftime("%Y-%m-%d")
+    
     if df_activity['date'].iloc[0] == current_date:
         time = now.strftime("%H:%M:%S")
         df_activity_irl = df_activity[df_activity['time'] <= time]
         labels = df_activity_irl['label'].values
         activities = df_activity_irl['activity'].values 
         df = df_activity_irl.copy()
-    if df_activity['date'].iloc[0] < current_date:   
+    elif df_activity['date'].iloc[0] < current_date:   
         labels = df_activity['label'].values
         activities = df_activity['activity'].values
         df = df_activity.copy()
+    
     note_storage = []
-    for i in range(0, len(labels)):
+    
+    for i in range(len(labels)):
         if labels[i] == 'FOOD':
-            food_string = 'ðŸ²  ' + str(df['note'].iloc[i])
+            # Food entry with emoji
+            food_string = f"{get_emoji('FOOD')} {str(df['note'].iloc[i])}"
             note_storage.append(food_string)
-        if labels[i] == 'TRAINING':
-            # Use standardized activity names
-            if activities[i] == 'Walk':
-                walk_string = 'ðŸš¶ðŸ»â€â™‚ï¸ '  + activities[i] + ' ' + str(df['distance'].iloc[i])
-                note_storage.append(walk_string)
-            elif activities[i] == 'Swim':
-                swim_string = 'ðŸŠðŸ¼â€â™€ï¸ '   + activities[i] + ' ' + str(df['distance'].iloc[i])
-                note_storage.append(swim_string)
-            elif activities[i] == 'Run':
-                run_string = 'ðŸƒðŸ½â€â™‚ï¸ ' + activities[i] + ' ' + str(df['distance'].iloc[i])
-                note_storage.append(run_string)
-            elif activities[i] == 'Bike':
-                bike_string = 'ðŸšµðŸ¼ ' + activities[i] + ' ' + str(df['note'].iloc[i])
-                note_storage.append(bike_string)
-            elif activities[i] == 'Strength':
-                str_string = 'ðŸ‹ðŸ»â€â™‚ï¸ ' + activities[i] + ' ' + str(df['note'].iloc[i])
-                note_storage.append(str_string)
-            elif activities[i] == 'Yoga':
-                yoga_string = 'ðŸ§˜ðŸ½â€â™€ï¸ ' + activities[i] + ' ' + str(df['note'].iloc[i])
-                note_storage.append(yoga_string)
+            
+        elif labels[i] == 'TRAINING':
+            activity = activities[i]
+            emoji = get_emoji(activity)
+            
+            # For activities with distance
+            if activity in ['Walk', 'Run', 'Swim']:
+                distance = df['distance'].iloc[i]
+                activity_string = f"{emoji} {activity} {distance} km"
+                note_storage.append(activity_string)
+            
+            # For other activities - use note field
+            else:
+                note = str(df['note'].iloc[i])
+                activity_string = f"{emoji} {activity} {note}"
+                note_storage.append(activity_string)
+    
     df.insert(12, 'summary', note_storage)
     return df
 
