@@ -448,26 +448,6 @@ def create_error_recovery_point(data: Dict[str, Any], context: str):
     except Exception as e:
         logger.error(f"Failed to create recovery point: {e}")
 
-def restore_from_recovery_point(context: str) -> Optional[Dict[str, Any]]:
-    """
-    Restore data from the most recent recovery point
-    
-    Args:
-        context: Context to restore from
-    
-    Returns:
-        Restored data or None if no recovery point exists
-    """
-    try:
-        backup_keys = [k for k in st.session_state.keys() if k.startswith(f"backup_{context}_")]
-        if backup_keys:
-            latest_key = sorted(backup_keys)[-1]
-            return st.session_state.get(latest_key)
-    except Exception as e:
-        logger.error(f"Failed to restore from recovery point: {e}")
-    
-    return None
-
 # Error reporting and diagnostics
 def show_error_diagnostics():
     """Show error diagnostics page for debugging"""

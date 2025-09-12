@@ -72,7 +72,7 @@ def validate_date_time_selection(date_input: Optional[date], time_input: Optiona
 
 def validate_activity_data(activity_type: str, **kwargs) -> ValidationResult:
     """
-    Validate activity-specific required fields
+    Validate activity-specific required fields - simplified to only essential checks
     
     Args:
         activity_type: Type of activity (Walk, Run, Swim, etc.)
@@ -83,69 +83,24 @@ def validate_activity_data(activity_type: str, **kwargs) -> ValidationResult:
     """
     result = ValidationResult()
     
+    # Check if activity type is selected
     if not activity_type or activity_type.strip() == "":
         result.add_error("🏃 Please select an activity type")
         return result
     
-    # Get common fields
-    duration = kwargs.get('duration', '00:00:00')
-    energy = kwargs.get('energy', 0)
+    # Get required fields
     distance = kwargs.get('distance', 0.0)
-    pace = kwargs.get('pace', 0.0)
-    steps = kwargs.get('steps', 0)
-    note = kwargs.get('note', '')
+    energy = kwargs.get('energy', 0)
     
-    # Validate duration format
-    if duration and not _validate_duration_format(duration):
-        result.add_error("⏱️ Duration must be in format HH:MM:SS (e.g., 01:30:00)")
+    # Only check the essential requirements:
     
-    # Validate energy burned
-    if energy < 0:
-        result.add_error("💪 Energy burned cannot be negative")
-    elif energy == 0:
-        result.add_warning("⚠️ Energy burned is 0 - is this correct?")
-    elif energy > 2000:
-        result.add_warning("⚠️ Energy burned seems very high (>2000 kcal) - please verify")
+    # 1. Distance must be greater than 0
+    if distance <= 0:
+        result.add_error("📏 Distance must be greater than 0")
     
-    # Activity-specific validations
-    if activity_type.lower() in ['walk', 'run', 'bike']:
-        # Activities that typically have distance
-        if distance <= 0:
-            result.add_warning("⚠️ Distance is 0 - consider adding distance for better tracking")
-        elif distance > 100:  # More than 100km seems unusual
-            result.add_warning("⚠️ Distance seems very high - please verify")
-        
-        # Validate pace if provided
-        if pace > 0 and distance > 0:
-            if pace < 2:  # Less than 2 min/km is very fast
-                result.add_warning("⚠️ Pace seems very fast - please verify")
-            elif pace > 20:  # More than 20 min/km is very slow
-                result.add_warning("⚠️ Pace seems very slow - please verify")
-    
-    elif activity_type.lower() == 'swim':
-        # Swimming specific validation
-        if distance > 10:  # More than 10km swimming is unusual
-            result.add_warning("⚠️ Swimming distance seems very high - please verify")
-        
-        # Swimming pace validation (different from running)
-        if pace > 0 and pace < 1:
-            result.add_warning("⚠️ Swimming pace seems very fast - please verify")
-    
-    elif activity_type.lower() in ['strength', 'yoga']:
-        # Activities that don't typically have distance
-        if distance > 0:
-            result.add_warning("⚠️ Distance is unusual for this activity type")
-    
-    # Validate steps if provided
-    if steps > 0:
-        if steps > 50000:  # More than 50k steps seems unusual
-            result.add_warning("⚠️ Step count seems very high - please verify")
-        elif activity_type.lower() in ['swim', 'strength', 'yoga'] and steps > 1000:
-            result.add_warning("⚠️ Step count seems high for this activity type")
-    
-    # Validate note length
-    if note and len(note) > 500:
-        result.add_warning("⚠️ Note is very long - consider shortening it")
+    # 2. Energy burned must be greater than 0
+    if energy <= 0:
+        result.add_error("💪 Energy burned must be greater than 0")
     
     return result
 

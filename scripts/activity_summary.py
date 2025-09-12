@@ -522,6 +522,74 @@ def create_energy_balance_chart(df):
     
     return chart
 
+def create_improved_energy_balance_chart(df):
+    """Create clear energy balance chart with proper legend and labeling"""
+    if df.empty:
+        return alt.Chart(pd.DataFrame()).mark_text(text="No data available", fontSize=16, color='gray')
+    
+    # Ensure date is datetime
+    df_copy = df.copy()
+    df_copy['date'] = pd.to_datetime(df_copy['date'])
+    
+    # Separate positive (food) and negative (exercise/BMR) energy
+    food_energy = df_copy[df_copy['energy'] > 0].groupby('date')['energy'].sum().fillna(0)
+    exercise_energy = abs(df_copy[df_copy['energy'] < 0].groupby('date')['energy'].sum().fillna(0))
+    
+    # Create a clean dataframe for the chart
+    chart_data = []
+    for date in food_energy.index.union(exercise_energy.index):
+        chart_data.append({
+            'date': date,
+            'Energy (kcal)': food_energy.get(date, 0),
+            'Type': 'Food Intake'
+        })
+        chart_data.append({
+            'date': date,
+            'Energy (kcal)': exercise_energy.get(date, 0),
+            'Type': 'Energy Burned'
+        })
+    
+    chart_df = pd.DataFrame(chart_data)
+    
+    if chart_df.empty:
+        return alt.Chart(pd.DataFrame()).mark_text(text="No data available", fontSize=16, color='gray')
+    
+    # Create the line chart with proper legend
+    chart = alt.Chart(chart_df).mark_line(
+        strokeWidth=3,
+        point=alt.OverlayMarkDef(size=60)
+    ).encode(
+        x=alt.X('date:T', title='Date'),
+        y=alt.Y('Energy (kcal):Q', title='Energy (kcal)', scale=alt.Scale(zero=False)),
+        color=alt.Color(
+            'Type:N',
+            title='Energy Type',
+            scale=alt.Scale(
+                domain=['Food Intake', 'Energy Burned'],
+                range=['#32CD32', '#FF4500']  # Green for intake, Orange for burned
+            ),
+            legend=alt.Legend(
+                orient='top',
+                titleFontSize=12,
+                labelFontSize=11,
+                symbolStrokeWidth=3,
+                symbolSize=100,
+                padding=10
+            )
+        ),
+        tooltip=[
+            alt.Tooltip('date:T', title='Date'),
+            alt.Tooltip('Type:N', title='Type'),
+            alt.Tooltip('Energy (kcal):Q', title='Energy', format='.0f')
+        ]
+    ).properties(
+        width=700,
+        height=350,
+        title="Daily Energy Balance: Food Intake vs Energy Burned"
+    )
+    
+    return chart
+
 def get_available_activities(df):
     """Get list of available training activities"""
     # Standardize activity names before getting unique values

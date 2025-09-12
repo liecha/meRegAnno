@@ -14,7 +14,7 @@ from scripts.state_management import (
     init_state, get_user_settings, update_user_settings, 
     show_notifications, clear_all_notifications, state_manager
 )
-from scripts.ui_components import create_date_time_selector, create_data_table
+from scripts.ui_components import create_data_table
 from scripts.constants import APP_NAME, APP_ICON, get_table_config
 
 # Import existing modules with error handling
@@ -40,8 +40,7 @@ from scripts.forms import (
 
 from scripts.activity_summary import (
     filter_data_by_period, get_training_summary, get_food_summary,
-    create_training_chart, create_weekly_summary_chart, 
-    create_energy_balance_chart, get_available_activities, 
+    create_training_chart, create_weekly_summary_chart, create_improved_energy_balance_chart, get_available_activities, 
     format_time_period, get_activity_colors
 )
 
@@ -494,17 +493,21 @@ def create_page_meal_registration_with_copy():
 
 @handle_errors("database page")
 def create_page_database():
-    """ORIGINAL database page with improvements"""
+    """Database page with improved 2-column layout"""
     state_manager.set_page('Database')
     
-    col = st.columns((5.0, 5.0, 5.0), gap='medium') 
+    # Changed from 3 columns to 2 columns
+    col = st.columns((5.0, 10.0), gap='medium') 
+    
+    # FIRST COLUMN: Add food item (unchanged)
     with col[0]: 
         st.markdown("#### Add food item")
         st.caption("_:blue[Add new food item]_ to the database")  
-        # USING IMPROVED FORM WITH VALIDATION
         create_form_add_food_item_to_database()
     
+    # SECOND COLUMN: Recipe creation workflow (spans what used to be columns 2 and 3)
     with col[1]: 
+        # Search for food items section
         st.markdown("#### Search for food items")
         st.caption("_:blue[Type in food items]_ that you want to add to your recipie")  
         df_food_db = fetch_data_from_storage('data/livsmedelsdatabas.csv')
@@ -520,6 +523,7 @@ def create_page_database():
             st.session_state.options_database = []
         options_database = st.session_state.add_meal
 
+        # Create recipe section
         st.markdown("#### Create recipie")
         portions = st.slider("Amount of portions", 1, 30, 1)
         st.write("Portions: ", portions)
@@ -538,13 +542,12 @@ def create_page_database():
                 meal_df['code'] = code
         else:
             st.error('Your recipie is empty', icon="🚨")
-            st.write('Serach for food items to add to your recipie.')
-    
-    with col[2]:
+            st.write('Search for food items to add to your recipie.')
+        
+        # Save recipe section (now spans the full width of the second column)
         st.markdown("#### Save recipie")
         st.caption("_:blue[Save your recipie]_ to the database")  
-        # USING IMPROVED FORM WITH VALIDATION
-        create_form_add_recipie_to_database(meal_df, code)   
+        create_form_add_recipie_to_database(meal_df, code)
 
 @handle_errors("log book page")
 def create_page_logg_book():
@@ -676,152 +679,178 @@ def create_page_logg_book():
 
 @handle_errors("summary page")
 def create_page_summary():
-    """ORIGINAL summary page with improvements"""
+    """Training-focused summary page with improved layout and progress tracking"""
     state_manager.set_page('Summary')
     
-    col = st.columns((5.5, 5.5), gap='medium')
+    # Single column layout - stacked sections
+    st.markdown('### Training Summary & Progress')
+    st.caption("Overview of your training activities and progress over time (excluding walking)")
     
-    with col[0]:
-        st.markdown('#### Summary Controls')
-        
-        # Period selection - SAME AS ORIGINAL
+    # CONTROLS SECTION
+    st.markdown('#### Period & Activity Controls')
+    
+    # Create three columns for controls
+    control_col1, control_col2, control_col3 = st.columns(3)
+    
+    with control_col1:
+        # Period selection
         period_type = st.selectbox(
-            "Select time period", 
-            ["Day", "Week", "Month"],
+            "Time Period", 
+            ["Week", "Month", "Day"],
             key='summary_period'
         )
-        
-        # Date selection (reuse the existing selected_date from sidebar) - SAME AS ORIGINAL
+    
+    with control_col2:
+        # Date selection - reuse the existing selected_date from sidebar
         period_display = format_time_period(period_type, selected_date_input)
-        st.caption(f"Showing data for: _:blue[{period_display}]_")
-        
-        # Filter data based on period - SAME AS ORIGINAL
-        filtered_df = filter_data_by_period(df_energy, period_type, selected_date_input)
-        
-        # Activity selection - SAME AS ORIGINAL
+        st.write(f"**Selected Period:**")
+        st.caption(f"{period_display}")
+    
+    with control_col3:
+        # Activity selection - EXCLUDE WALKING by default for training focus
         available_activities = get_available_activities(df_energy)
+        # Remove 'Walk' from available activities for training focus
+        training_activities = [act for act in available_activities]
+        
         selected_activities = st.multiselect(
-            "Select activities to analyze",
-            available_activities,
-            default=available_activities,
+            "Training Activities",
+            training_activities,
+            default=training_activities,  # Select all training activities except walking
             key='summary_activities'
         )
-        
-        # Activity colors display - SAME AS ORIGINAL
-        if selected_activities:
-            st.markdown("##### Activity Colors")
-            colors = get_activity_colors()
-            color_info = ""
-            for activity in selected_activities:
-                if activity in colors:
-                    color_info += f"**{activity}**: <span style='color:{colors[activity]}'>{colors[activity]}</span><br>"
-            if color_info:
-                st.markdown(color_info, unsafe_allow_html=True)
-        
-        # Training Summary Statistics - SAME AS ORIGINAL
-        st.markdown('#### Training Summary')
-        training_summary = get_training_summary(filtered_df, selected_activities)
-        
-        if not training_summary.empty:
-            # Format the summary for display - SAME AS ORIGINAL
-            display_summary = training_summary.copy()
-            display_summary['Total Distance (km)'] = display_summary['Total Distance (km)'].round(2)
-            display_summary['Avg Distance (km)'] = display_summary['Avg Distance (km)'].round(2)
-            
-            # Using improved table component
-            create_data_table(
-                display_summary,
-                {
-                    "activity": st.column_config.Column("Activity", width="medium"),
-                    "Sessions": st.column_config.Column("Sessions", width="small"),
-                    "Total Distance (km)": st.column_config.Column("Total Distance (km)", width="medium"),
-                    "Avg Distance (km)": st.column_config.Column("Avg Distance (km)", width="medium"),
-                    "Total Energy (kcal)": st.column_config.Column("Total Energy (kcal)", width="medium"),
-                    "Avg Energy (kcal)": st.column_config.Column("Avg Energy (kcal)", width="medium"),
-                    "Sample Note": st.column_config.Column("Notes", width="large"),
-                },
-                'training_summary_table'
-            )
-            
-            # Summary metrics - SAME AS ORIGINAL
-            total_sessions = training_summary['Sessions'].sum()
-            total_distance = training_summary['Total Distance (km)'].sum()
-            total_energy_burned = training_summary['Total Energy (kcal)'].sum()
-            
-            st.markdown("##### Quick Stats")
-            metric_col1, metric_col2, metric_col3 = st.columns(3)
-            metric_col1.metric("Total Sessions", total_sessions)
-            metric_col2.metric("Total Distance", f"{total_distance:.1f} km")
-            metric_col3.metric("Energy Burned", f"{int(total_energy_burned)} kcal")
-        else:
-            st.caption("No training data available for the selected period and activities.")
-        
-        # Food Summary - SAME AS ORIGINAL
-        st.markdown('#### Food Summary')
-        food_summary = get_food_summary(filtered_df)
-        
-        if food_summary['meal_count'] > 0:
-            food_col1, food_col2 = st.columns(2)
-            food_col1.metric("Total Energy", f"{int(food_summary['total_energy'])} kcal")
-            food_col1.metric("Total Protein", f"{int(food_summary['total_protein'])} g")
-            food_col2.metric("Total Meals", food_summary['meal_count'])
-            food_col2.metric("Carbs/Fat", f"{int(food_summary['total_carbs'])}g / {int(food_summary['total_fat'])}g")
-        else:
-            st.caption("No food data available for the selected period.")
     
-    with col[1]:
-        st.markdown('#### Visualizations')
+    st.markdown("---")
+    
+    # Filter data based on period
+    filtered_df = filter_data_by_period(df_energy, period_type, selected_date_input)
+    
+    # TRAINING ACTIVITIES SECTION
+    st.markdown('#### Activity Overview')
+    
+    # Get training summary
+    training_summary = get_training_summary(filtered_df, selected_activities)
+    
+    if not training_summary.empty:
+        # Key metrics in columns
+        metric_col1, metric_col2, metric_col3, metric_col4 = st.columns(4)
         
-        # Chart type selection - SAME AS ORIGINAL
-        chart_type = st.selectbox(
-            "Select chart type",
-            ["Energy Burned", "Distance", "Weekly Distribution", "Energy Balance"],
-            key='chart_type'
+        total_sessions = training_summary['Sessions'].sum()
+        total_distance = training_summary['Total Distance (km)'].sum()
+        total_energy_burned = training_summary['Total Energy (kcal)'].sum()
+        total_duration = training_summary['Total Duration (min)'].sum()
+        
+        metric_col1.metric("Total Sessions", total_sessions)
+        metric_col2.metric("Total Distance", f"{total_distance:.1f} km")
+        metric_col3.metric("Energy Burned", f"{int(total_energy_burned)} kcal")
+        metric_col4.metric("Total Duration", f"{int(total_duration)} min")
+        
+        # Simplified activity breakdown table - only requested columns
+        st.markdown("##### Activity Breakdown")
+        
+        # Format the summary for display with only requested columns
+        display_summary = training_summary.copy()
+        display_summary['Total Distance (km)'] = display_summary['Total Distance (km)'].round(2)
+        display_summary['Total Duration (min)'] = display_summary['Total Duration (min)'].round(0)
+        display_summary['Avg Pace (min/km)'] = display_summary['Avg Pace (min/km)'].round(2)
+        
+        # Select only the columns you requested in the specified order
+        columns_to_show = [
+            'activity', 'Sessions', 'Total Distance (km)', 'Total Energy (kcal)', 
+            'Avg Energy (kcal)', 'Total Duration (min)', 'Avg Pace (min/km)', 
+            'Total Steps', 'Sample Note'
+        ]
+        
+        # Filter to only show existing columns
+        available_columns = [col for col in columns_to_show if col in display_summary.columns]
+        simplified_summary = display_summary[available_columns]
+        
+        # Create simplified table with only requested columns
+        create_data_table(
+            simplified_summary,
+            {
+                "activity": st.column_config.Column("Activity", width="small"),
+                "Sessions": st.column_config.Column("Sessions", width="small"),
+                "Total Distance (km)": st.column_config.Column("Distance (km)", width="small"),
+                "Total Energy (kcal)": st.column_config.Column("Energy (kcal)", width="small"),
+                "Avg Energy (kcal)": st.column_config.Column("Avg Energy", width="small"),
+                "Total Duration (min)": st.column_config.Column("Duration (min)", width="small"),
+                "Avg Pace (min/km)": st.column_config.Column("Pace", width="small"),
+                "Total Steps": st.column_config.Column("Steps", width="small"),
+                "Sample Note": st.column_config.Column("Notes", width="medium"),
+            },
+            'training_summary_table'
         )
         
-        # Create charts - SAME AS ORIGINAL
-        if chart_type == "Energy Burned":
-            chart = create_training_chart(filtered_df, selected_activities, "energy")
-            st.altair_chart(chart, use_container_width=True)
-            
-        elif chart_type == "Distance":
-            chart = create_training_chart(filtered_df, selected_activities, "distance")
-            st.altair_chart(chart, use_container_width=True)
-            
-        elif chart_type == "Weekly Distribution":
-            chart = create_weekly_summary_chart(filtered_df, selected_activities)
-            st.altair_chart(chart, use_container_width=True)
-            
-        elif chart_type == "Energy Balance":
-            chart = create_energy_balance_chart(filtered_df)
-            st.altair_chart(chart, use_container_width=True)
+        # Training insights
+        st.markdown("##### Training Insights")
+        insight_col1, insight_col2 = st.columns(2)
         
-        # Additional insights - SAME AS ORIGINAL
-        st.markdown('#### Insights')
-        
-        if not training_summary.empty:
-            # Find most frequent activity
+        with insight_col1:
+            # Most frequent activity
             most_frequent = training_summary.loc[training_summary['Sessions'].idxmax()]
-            st.success(f"Most frequent activity: **{most_frequent['activity']}** with {most_frequent['Sessions']} sessions")
+            st.info(f"**Most Frequent:** {most_frequent['activity']} ({most_frequent['Sessions']} sessions)")
             
-            # Find highest energy burning activity
+            # Highest energy activity
             if training_summary['Total Energy (kcal)'].max() > 0:
                 highest_energy = training_summary.loc[training_summary['Total Energy (kcal)'].idxmax()]
-                st.info(f"Highest energy burn: **{highest_energy['activity']}** with {int(highest_energy['Total Energy (kcal)'])} kcal total")
-            
-            # Find longest distance activity
+                st.info(f"**Highest Energy:** {highest_energy['activity']} ({int(highest_energy['Total Energy (kcal)'])} kcal)")
+        
+        with insight_col2:
+            # Longest distance activity
             distance_activities = training_summary[training_summary['Total Distance (km)'] > 0]
             if not distance_activities.empty:
                 longest_distance = distance_activities.loc[distance_activities['Total Distance (km)'].idxmax()]
-                st.info(f"Longest total distance: **{longest_distance['activity']}** with {longest_distance['Total Distance (km)']:.1f} km")
+                st.info(f"**Longest Distance:** {longest_distance['activity']} ({longest_distance['Total Distance (km)']:.1f} km)")
+            
+            # Average session duration
+            avg_session_duration = total_duration / total_sessions if total_sessions > 0 else 0
+            st.info(f"**Avg Session:** {int(avg_session_duration)} minutes")
         
-        # Energy balance insights - SAME AS ORIGINAL
-        if food_summary['meal_count'] > 0 and not training_summary.empty:
-            net_energy = food_summary['total_energy'] - abs(training_summary['Total Energy (kcal)'].sum())
-            if net_energy > 0:
-                st.warning(f"Energy surplus: {int(net_energy)} kcal")
-            else:
-                st.success(f"Energy deficit: {int(abs(net_energy))} kcal")
+    else:
+        st.warning("No training data available for the selected period and activities.")
+        st.info("Try selecting a different time period or ensure you have logged training activities.")
+    
+    st.markdown("---")
+    
+    # VISUALIZATIONS SECTION (EXACTLY AS YOU REQUESTED)
+    st.markdown('#### Training Visualizations')
+    
+    # Chart type selection
+    chart_type = st.selectbox(
+        "Select chart type",
+        ["Energy Balance", "Energy Burned", "Distance", "Weekly Distribution"],
+        key='chart_type'
+    )
+    
+    # Create charts
+    if chart_type == "Energy Burned":
+        chart = create_training_chart(filtered_df, selected_activities, "energy")
+        st.altair_chart(chart, use_container_width=True)
+        
+    elif chart_type == "Distance":
+        chart = create_training_chart(filtered_df, selected_activities, "distance")
+        st.altair_chart(chart, use_container_width=True)
+        
+    elif chart_type == "Weekly Distribution":
+        chart = create_weekly_summary_chart(filtered_df, selected_activities)
+        st.altair_chart(chart, use_container_width=True)
+        
+    elif chart_type == "Energy Balance":
+        # IMPROVED: Line chart for energy balance instead of bars
+        chart = create_improved_energy_balance_chart(filtered_df)
+        st.altair_chart(chart, use_container_width=True)
+    
+    # Progress tracking suggestions
+    if training_summary.empty:
+        st.markdown("---")
+        st.markdown("##### Getting Started with Training Tracking")
+        st.info("""
+        **To build a comprehensive training overview:**
+        - Log your training sessions regularly (Run, Bike, Swim, Strength, Yoga)
+        - Include distance, duration, and energy burned when possible
+        - Use different time periods (Week/Month) to see progress trends
+        - Track consistency by reviewing weekly distributions
+        """)
 
 # ===================== NAVIGATION SETUP - SAME AS ORIGINAL =====================
 page_names_to_funcs = {
@@ -857,7 +886,6 @@ except Exception as e:
 
 # ===================== SIDEBAR FOOTER - ENHANCED =====================
 with st.sidebar:
-    st.markdown("---")
     
     # Show form state indicators - NEW
     form_states = []
@@ -870,17 +898,3 @@ with st.sidebar:
         st.warning("Unsaved changes:")
         for state_msg in form_states:
             st.caption(f"🔄 {state_msg}")
-    
-    st.caption(f"{APP_NAME} - Personal Health Tracker")
-    
-    # Quick actions - NEW
-    col1, col2 = st.columns(2)
-    with col1:
-        if st.button("Clear Notifications", help="Clear all notification messages"):
-            clear_all_notifications()
-            st.success("Cleared!")
-    
-    with col2:
-        if st.button("Reset Forms", help="Reset all form states"):
-            state_manager.reset_to_defaults(['activity_form', 'food_form', 'recipe_creation'])
-            st.success("Reset!")# meRegAnno_app.py - Complete App with ALL Original Features + Validation & Error Handling
