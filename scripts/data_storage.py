@@ -320,8 +320,6 @@ def delete_item_from_dataset(selected_date, df_new, bmr):
 
 def add_registration(data: dict, bmr):
     """Add new registration without CSV file dependency"""
-
-    print('This is the added data:')
     df_registration = pd.DataFrame([data])
     this_date = df_registration['date'].iloc[0]
     this_time = df_registration['time'].iloc[0]
