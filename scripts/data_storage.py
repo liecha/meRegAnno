@@ -312,8 +312,24 @@ def delete_item_from_dataset(selected_date, df_new, bmr):
     df_db = df_db[df_db.date != selected_date]
     df_basal_energy = basal_energy(selected_date, bmr)      
     df_new_post = df_new[df_new['date'] == selected_date]   
-    df_concat = pd.concat([df_basal_energy, df_new_post]).sort_values(['time']).fillna(0) 
-    df_concat = df_concat[['date', 'time', 'label', 'activity', 'distance', 'energy', 'pro', 'carb', 'fat', 'note', 'summary']]  
+    df_concat = pd.concat([df_basal_energy, df_new_post]).sort_values(['time'])
+    
+    # Use selective fillna instead of filling everything with 0
+    df_concat = df_concat.fillna({
+        'duration': '00:00:00',
+        'pace': 0.0,
+        'steps': 0,
+        'distance': 0.0,
+        'pro': 0.0,
+        'carb': 0.0,
+        'fat': 0.0,
+        'note': '',
+        'energy': 0.0,  # Only fill numeric columns that should default to 0
+        'activity': '',
+        'label': ''
+    })
+    
+    df_concat = df_concat[['date', 'time', 'label', 'activity', 'distance', 'energy', 'pro', 'carb', 'fat', 'note', 'summary', 'duration', 'pace', 'steps']]  
     df_concat_acc = calc_accumulated_energy(df_concat)
     df_energy_new = pd.concat([df_db, df_concat_acc]).sort_values(['date', 'time'])
     save_data_to_storage(df_energy_new, 'data/updated-database-results.csv')
