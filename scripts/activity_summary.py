@@ -665,47 +665,9 @@ def calculate_energy_balance(df, period_name):
         'days_with_data': days_with_data
     }
 
-def check_consecutive_days(df, min_days=8):
-    """
-    Check if we have at least min_days consecutive days of data
-    
-    Args:
-        df: DataFrame containing energy data with 'date' column
-        min_days: Minimum number of consecutive days required
-    
-    Returns:
-        Tuple (has_sufficient_consecutive_days, max_consecutive_found)
-    """
-    if df.empty:
-        return False, 0
-    
-    # Get unique dates and sort them
-    unique_dates = pd.to_datetime(df['date']).dt.date.unique()
-    unique_dates = sorted(unique_dates)
-    
-    if len(unique_dates) < min_days:
-        return False, len(unique_dates)
-    
-    # Check for consecutive days
-    max_consecutive = 1
-    current_consecutive = 1
-    
-    for i in range(1, len(unique_dates)):
-        current_date = unique_dates[i]
-        previous_date = unique_dates[i-1]
-        
-        # Check if dates are consecutive (difference of 1 day)
-        if (current_date - previous_date).days == 1:
-            current_consecutive += 1
-            max_consecutive = max(max_consecutive, current_consecutive)
-        else:
-            current_consecutive = 1
-    
-    return max_consecutive >= min_days, max_consecutive
-
 def get_deficit_analysis(df_energy, selected_date_input):
     """
-    Get comprehensive deficit analysis for day, week, month, and overall periods
+    Get comprehensive deficit analysis for day, week, month, and long-term periods
     
     Args:
         df_energy: Main energy dataframe
@@ -717,6 +679,9 @@ def get_deficit_analysis(df_energy, selected_date_input):
     from datetime import timedelta
     
     selected_date = pd.to_datetime(selected_date_input)
+    
+    # Calculate total days available first
+    total_days_available = len(pd.to_datetime(df_energy['date']).dt.date.unique()) if not df_energy.empty else 0
     
     # Day analysis - filter for selected date
     day_df = df_energy[pd.to_datetime(df_energy['date']).dt.date == selected_date.date()]
@@ -750,60 +715,104 @@ def get_deficit_analysis(df_energy, selected_date_input):
         f"Month ({month_start.strftime('%Y-%m')})"
     )
     
-    # Overall analysis (8+ consecutive days)
-    has_consecutive, max_consecutive = check_consecutive_days(df_energy, min_days=8)
-    overall_analysis = None
+    # Initialize default overall_analysis to prevent KeyError - this will ALWAYS exist
+    overall_analysis = {
+        'balance': {
+            'period': 'No Data',
+            'input_energy': 0,
+            'output_energy': 0,
+            'net_balance': 0,
+            'days_with_data': 0
+        },
+        'consecutive_days': 0,
+        'total_days': 0,
+        'daily_average': 0,
+        'start_date': None,
+        'end_date': None,
+        'health_guidance': {
+            'type': 'info',
+            'message': 'No data available'
+        },
+        'period_type': 'no_data'
+    }
     
-    if has_consecutive:
-        # Find the most recent consecutive period of 8+ days
-        all_dates = sorted(pd.to_datetime(df_energy['date']).dt.date.unique(), reverse=True)
+    # Long-term analysis - from first day in dataframe up to the day before the last registered date
+    has_sufficient_data = False
+    
+    if not df_energy.empty and total_days_available >= 1:
+        # Get all unique dates and sort them
+        all_dates = sorted(pd.to_datetime(df_energy['date']).dt.date.unique())
+        first_date = all_dates[0]
+        last_date = all_dates[-1]
         
-        consecutive_dates = [all_dates[0]]
-        for i in range(1, len(all_dates)):
-            current_date = all_dates[i]
-            previous_date = consecutive_dates[-1]
-            
-            if (previous_date - current_date).days == 1:
-                consecutive_dates.append(current_date)
-                if len(consecutive_dates) >= 8:
-                    break
-            else:
-                consecutive_dates = [all_dates[i]]
+        # Calculate up to the day before the last registered date
+        # If we only have one day of data, use that day
+        if len(all_dates) == 1:
+            end_date = last_date
+            period_description = f"Single Day ({first_date})"
+            days_in_period = 1
+        else:
+            end_date = last_date - timedelta(days=1)
+            period_description = f"Long-term ({first_date} to {end_date})"
+            days_in_period = (end_date - first_date).days + 1
         
-        if len(consecutive_dates) >= 8:
-            start_date = min(consecutive_dates)
-            end_date = max(consecutive_dates)
+        # Filter data for the long-term period
+        longterm_df = df_energy[
+            (pd.to_datetime(df_energy['date']).dt.date >= first_date) & 
+            (pd.to_datetime(df_energy['date']).dt.date <= end_date)
+        ]
+        
+        if not longterm_df.empty:
+            has_sufficient_data = True
             
-            consecutive_df = df_energy[
-                (pd.to_datetime(df_energy['date']).dt.date >= start_date) & 
-                (pd.to_datetime(df_energy['date']).dt.date <= end_date)
-            ]
-            
-            overall_balance = calculate_energy_balance(
-                consecutive_df, 
-                f"{len(consecutive_dates)}-Day Period ({start_date} to {end_date})"
-            )
+            # Calculate the balance for this period
+            overall_balance = calculate_energy_balance(longterm_df, period_description)
             
             # Calculate daily average
-            daily_avg = overall_balance['net_balance'] / len(consecutive_dates)
+            daily_avg = overall_balance['net_balance'] / days_in_period if days_in_period > 0 else 0
             
+            # UPDATE the overall_analysis with real data
             overall_analysis = {
                 'balance': overall_balance,
-                'consecutive_days': len(consecutive_dates),
+                'consecutive_days': days_in_period,  # Keep this key for compatibility
+                'total_days': days_in_period,
                 'daily_average': int(daily_avg),
-                'start_date': start_date,
+                'start_date': first_date,
                 'end_date': end_date,
-                'health_guidance': get_health_guidance(daily_avg)
+                'health_guidance': get_health_guidance(daily_avg),
+                'period_type': 'single_day' if len(all_dates) == 1 else 'long_term'
             }
     
+    # Return the complete structure - overall_analysis will NEVER be None
     return {
         'day': day_balance,
         'week': week_balance,
         'month': month_balance,
-        'overall': overall_analysis,
-        'has_sufficient_data': has_consecutive,
-        'max_consecutive_days': max_consecutive
+        'overall': overall_analysis,  # This is guaranteed to exist
+        'has_sufficient_data': has_sufficient_data,
+        'max_consecutive_days': total_days_available,  # Keep this key for compatibility
+        'total_days_available': total_days_available
     }
+
+def check_consecutive_days(df, min_days=1):
+    """
+    Check if we have at least min_days of data (simplified version)
+    
+    Args:
+        df: DataFrame containing energy data with 'date' column
+        min_days: Minimum number of days required (default 1)
+    
+    Returns:
+        Tuple (has_sufficient_days, total_days_found)
+    """
+    if df.empty:
+        return False, 0
+    
+    # Get unique dates
+    unique_dates = pd.to_datetime(df['date']).dt.date.unique()
+    total_days = len(unique_dates)
+    
+    return total_days >= min_days, total_days
 
 def get_health_guidance(daily_avg):
     """
