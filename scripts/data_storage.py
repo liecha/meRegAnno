@@ -429,3 +429,112 @@ def save_meal_to_database(date_str, time_str, meal_name, df_meal_items, code, fa
         print(f'Error saving meal to database: {e}')
         # Don't show error to user since this is automatic logging
         # st.error(f'Failed to save meal to database: {e}')
+
+def sync_csv_to_database():
+    """Simple function to sync CSV data to database"""
+    
+    try:
+        from scripts.data_storage import get_supabase_connection
+        conn = get_supabase_connection()
+        st.info("Connected to database")
+    except Exception as e:
+        st.error(f"Connection failed: {str(e)}")
+        return False
+
+
+    def prepare_energy_data(df):
+        """Clean and prepare energy_balance data"""
+        df_clean = df.copy()
+        
+        # Get the current authenticated user ID from Supabase
+        try:
+            conn = get_supabase_connection()
+            # Try to get the current user - this might not work with service key
+            user_response = conn.auth.get_user()
+            if user_response and user_response.user:
+                user_id = user_response.user.id
+            else:
+                # If no authenticated user, you might need to use a specific user ID
+                # that exists in your auth.users table, or create one
+                user_id = '00000000-0000-0000-0000-000000000000'
+        except:
+            # Fallback to dummy user ID
+            user_id = '00000000-0000-0000-0000-000000000000'
+        
+        df_clean['user_id'] = user_id
+        
+        # Rest of your existing code...
+        df_clean['date'] = pd.to_datetime(df_clean['date']).dt.strftime('%Y-%m-%d')
+        
+        def fix_time(time_val):
+            if pd.isna(time_val) or str(time_val).lower() in ['nan', '']:
+                return '00:00:00'
+            
+            time_str = str(time_val).strip()
+            if ':' in time_str:
+                parts = time_str.split(':')
+                if len(parts) >= 2:
+                    hour = int(parts[0])
+                    minute = int(parts[1]) 
+                    second = int(parts[2]) if len(parts) > 2 else 0
+                    return f"{hour:02d}:{minute:02d}:{second:02d}"
+            return '00:00:00'
+        
+        df_clean['time'] = df_clean['time'].apply(fix_time)
+        
+        # Convert numeric columns and replace NaN with 0
+        numeric_cols = ['distance', 'energy', 'energy_acc', 'pro', 'protein_acc', 'carb', 'fat', 'pace', 'steps']
+        for col in numeric_cols:
+            if col in df_clean.columns:
+                df_clean[col] = pd.to_numeric(df_clean[col], errors='coerce').fillna(0)
+        
+        # Convert text columns and replace NaN with empty string
+        text_cols = ['label', 'activity', 'note', 'summary']
+        for col in text_cols:
+            if col in df_clean.columns:
+                df_clean[col] = df_clean[col].astype(str).fillna('').replace('nan', '')
+        
+        # Remove duration column (not in your schema)
+        if 'duration' in df_clean.columns:
+            df_clean = df_clean.drop('duration', axis=1)
+        
+        # Remove id column (auto-generated)
+        if 'id' in df_clean.columns:
+            df_clean = df_clean.drop('id', axis=1)
+            
+        return df_clean
+
+    # Load and process energy data
+    try:
+        from scripts.data_storage import fetch_from_csv
+        df_energy = fetch_from_csv('data/updated-database-results.csv')
+        st.info(f"Loaded {len(df_energy)} energy records")
+        
+        # Clean the data
+        df_clean = prepare_energy_data(df_energy)
+        st.info(f"Cleaned data: {len(df_clean)} valid records")
+        
+        # Clear existing data
+        conn.table('energy_balance').delete().neq('id', -1).execute()
+        st.info("Cleared existing energy_balance data")
+        
+        # Insert new data in chunks
+        records = df_clean.to_dict('records')
+        chunk_size = 100
+        total_inserted = 0
+        
+        for i in range(0, len(records), chunk_size):
+            chunk = records[i:i + chunk_size]
+            try:
+                response = conn.table('energy_balance').insert(chunk).execute()
+                total_inserted += len(response.data) if response.data else 0
+                st.success(f"Inserted chunk {i//chunk_size + 1}: {len(chunk)} records")
+            except Exception as e:
+                st.error(f"Chunk {i//chunk_size + 1} failed: {str(e)}")
+                
+        st.success(f"Total inserted: {total_inserted} records")
+        return total_inserted > 0
+        
+    except Exception as e:
+        st.error(f"Data processing failed: {str(e)}")
+        return False
