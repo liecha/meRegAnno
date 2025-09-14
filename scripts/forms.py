@@ -15,10 +15,32 @@ def simple_time_validation(selected_time):
     return True
 
 def create_new_form_activity(bmr):
-    """
-    Activity registration form - BACK TO ORIGINAL with only time validation
-    """
-    # Date and time selection - ORIGINAL STYLE
+    # Define activity types and emojis locally to avoid import issues
+    ACTIVITY_TYPES = ["Walk", "Run", "Bike", "Swim", "Strength", "Yoga"]
+    
+    def get_activity_emoji(activity_type):
+        emojis = {
+            "Walk": "🚶‍♀️",
+            "Run": "🏃‍♀️", 
+            "Bike": "🚴‍♀️",
+            "Swim": "🏊‍♀️",
+            "Strength": "💪",
+            "Yoga": "🧘‍♀️"
+        }
+        return emojis.get(activity_type, "🏃‍♀️")
+
+    # Check if we just submitted successfully - if so, use cleared values
+    if "activity_just_submitted" in st.session_state and st.session_state.activity_just_submitted:
+        # Clear the flag
+        st.session_state.activity_just_submitted = False
+        # Use None/empty values for widgets
+        default_time = None
+        default_activity = ""
+    else:
+        # Normal behavior - use session state values if they exist
+        default_time = st.session_state.get('act_time', None)
+        default_activity = st.session_state.get('activity_type_select', "")
+
     col1, col2 = st.columns(2)
     
     with col1:
@@ -26,30 +48,26 @@ def create_new_form_activity(bmr):
         st.success(f"Date: {selected_date}")
     
     with col2:
-        selected_time = st.time_input("Select a time", value=None, key='act_time')
+        selected_time = st.time_input("Select a time", value=default_time, key='act_time')
         if selected_time:
             st.success(f"Time: {selected_time}")
         else:
             st.error("Please select a time")
     
-    # Activity type selection - ORIGINAL
     activity_type = st.selectbox(
         "Choose activity", 
         [""] + ACTIVITY_TYPES,
-        index=0,
+        index=0 if default_activity == "" else ([""] + ACTIVITY_TYPES).index(default_activity) if default_activity in ACTIVITY_TYPES else 0,
         key="activity_type_select"
     )
     
-    # Only show form if activity is selected - ORIGINAL
     if not activity_type:
         st.info("Please select an activity type to continue")
         return
     
-    # Activity-specific form - ORIGINAL
-    with st.form(key="activity_form", clear_on_submit=False):
+    with st.form(key="activity_form", clear_on_submit=True):
         st.subheader(f"{get_activity_emoji(activity_type)} Register {activity_type} Activity")
         
-        # Activity input fields - ORIGINAL LAYOUT
         if activity_type in ["Walk", "Run", "Bike"]:
             col1, col2 = st.columns(2)
             with col1:
@@ -89,7 +107,7 @@ def create_new_form_activity(bmr):
             pace = 0.0
             steps = 0
         
-        # Notes section - ORIGINAL
+        # Notes section
         note_placeholder = {
             "Walk": "Describe your walk: route, pace, how you felt, weather conditions...",
             "Run": "Describe your run: route, performance, splits, how you felt...",
@@ -102,7 +120,7 @@ def create_new_form_activity(bmr):
         note = st.text_area("Activity notes", placeholder=note_placeholder, height=100)
         
         # Submit button - ONLY TIME VALIDATION
-        time_is_valid = simple_time_validation(selected_time)
+        time_is_valid = selected_time is not None
         
         col1, col2 = st.columns([1, 3])
         with col1:
@@ -114,13 +132,13 @@ def create_new_form_activity(bmr):
             else:
                 st.success("Ready to submit activity")
         
-        # Handle form submission - ORIGINAL LOGIC
+        # Handle form submission
         if submit_button and time_is_valid:
             try:
-                # Convert distance for swimming (meters to km) - ORIGINAL
+                # Convert distance for swimming (meters to km)
                 distance_km = distance / 1000.0 if activity_type == "Swim" else distance
                 
-                # Prepare activity data - ORIGINAL
+                # Prepare activity data
                 activity_registration = {
                     "date": selected_date,
                     "time": selected_time,
@@ -137,7 +155,10 @@ def create_new_form_activity(bmr):
                     "note": str(note),
                 }
                 
-                # Save the registration - ORIGINAL
+                # Set flag to indicate successful submission
+                st.session_state.activity_just_submitted = True
+                
+                # Save the registration (this will call st.rerun() internally)
                 add_registration(activity_registration, bmr)
                 
                 st.success(f"✅ {activity_type} activity registered successfully!")
@@ -150,9 +171,19 @@ def create_new_form_activity(bmr):
 
 def create_new_form_food(code, options_string, bmr, df_meal_items=None):
     """
-    Food registration form - BACK TO ORIGINAL with only time validation
+    Food registration form with clearing mechanism
     """
-    # Date and time selection - ORIGINAL
+    # Check if we just submitted successfully - if so, use cleared values
+    if "food_just_submitted" in st.session_state and st.session_state.food_just_submitted:
+        # Clear the flag
+        st.session_state.food_just_submitted = False
+        # Use None for default time
+        default_time = None
+    else:
+        # Normal behavior - use session state values if they exist
+        default_time = st.session_state.get('food_time', None)
+    
+    # Date and time selection
     col1, col2 = st.columns(2)
     
     with col1:
@@ -160,17 +191,17 @@ def create_new_form_food(code, options_string, bmr, df_meal_items=None):
         st.success(f"Date: {selected_date}")
     
     with col2:
-        selected_time = st.time_input("What time did you eat", value=None, key='food_time')
+        selected_time = st.time_input("What time did you eat", value=default_time, key='food_time')
         if selected_time:
             st.success(f"Time: {selected_time}")
         else:
             st.error("Please select a time")
     
-    # Meal registration form - ORIGINAL
-    with st.form(key="food_registration_form", clear_on_submit=False):
+    # Meal registration form
+    with st.form(key="food_registration_form", clear_on_submit=True):
         st.markdown("### Register Meal")
         
-        # Nutrition code input - ORIGINAL
+        # Nutrition code input
         meal_code = st.text_input(
             "Meal code (kcal/protein/carb/fat)", 
             value=code,
@@ -178,7 +209,7 @@ def create_new_form_food(code, options_string, bmr, df_meal_items=None):
             key="meal_code_input"
         )
         
-        # Meal details - ORIGINAL
+        # Meal details
         meal_note = st.text_input(
             "Meal details", 
             value=options_string,
@@ -186,20 +217,20 @@ def create_new_form_food(code, options_string, bmr, df_meal_items=None):
             key="meal_note_input"
         )
         
-        # Favorite meal option - ORIGINAL
+        # Favorite meal option
         mark_favorite = st.checkbox(
             "Mark as favorite meal", 
             help="Save this meal to your favorites for easy access later"
         )
         
-        # Show info about meal composition - ORIGINAL
+        # Show info about meal composition
         if df_meal_items is None:
             st.info("Create a meal composition on the left to register it")
         elif df_meal_items.empty:
             st.info("Add some ingredients to your meal")
         
         # Only validate time and require meal data
-        time_is_valid = simple_time_validation(selected_time)
+        time_is_valid = selected_time is not None
         form_is_valid = time_is_valid and df_meal_items is not None and not df_meal_items.empty
         
         # Submit button
@@ -215,24 +246,24 @@ def create_new_form_food(code, options_string, bmr, df_meal_items=None):
             else:
                 st.success("Ready to register meal")
         
-        # Handle form submission - ORIGINAL LOGIC
+        # Handle form submission
         if submit_button and form_is_valid:
             try:
-                # Parse nutrition code - ORIGINAL
+                # Parse nutrition code
                 food_split = meal_code.split('/')
                 if len(food_split) != 4:
                     raise ValueError("Invalid nutrition code format")
                 
-                # SAVE MEAL TO DATABASE FIRST - ORIGINAL
+                # SAVE MEAL TO DATABASE FIRST
                 if df_meal_items is not None and len(df_meal_items) > 0:
                     try:
-                        # Prepare meal data for database - ORIGINAL
+                        # Prepare meal data for database
                         df_meal_to_save = df_meal_items.copy()
                         df_meal_to_save['date'] = datetime_to_string(selected_date)
                         df_meal_to_save['time'] = time_to_string(selected_time)
                         df_meal_to_save['favorite'] = mark_favorite
                         
-                        # Load existing meal database - ORIGINAL
+                        # Load existing meal database
                         try:
                             df_meal_db = fetch_data_from_storage('data/meal_databas.csv')
                         except:
@@ -240,14 +271,14 @@ def create_new_form_food(code, options_string, bmr, df_meal_items=None):
                                 'date', 'time', 'name', 'livsmedel', 'amount', 'code', 'favorite'
                             ])
                         
-                        # Save to database - ORIGINAL
+                        # Save to database
                         df_updated_meal_db = pd.concat([df_meal_db, df_meal_to_save], ignore_index=True)
                         save_data_to_storage(df_updated_meal_db, 'data/meal_databas.csv')
                         
                     except Exception as e:
                         st.warning(f"Could not save meal to database: {str(e)}")
                 
-                # Register the meal in main energy tracking - ORIGINAL
+                # Register the meal in main energy tracking
                 meal_registration_data = {
                     "date": selected_date,
                     "time": selected_time,
@@ -261,15 +292,17 @@ def create_new_form_food(code, options_string, bmr, df_meal_items=None):
                     "note": str(meal_note),
                 }
                 
-                add_registration(meal_registration_data, bmr)
+                # Set flag to indicate successful submission
+                st.session_state.food_just_submitted = True
                 
-                # Clear meal creation state - ORIGINAL
+                # Clear meal creation state (only the current_meal_items, others handled by main page)
                 if 'current_meal_items' in st.session_state:
                     st.session_state.current_meal_items = None
-                if 'create_meal' in st.session_state:
-                    st.session_state.create_meal = []
-                if 'find_recipie' in st.session_state:
-                    st.session_state.find_recipie = []
+                
+                # Set a flag for the main page to clear the meal creation widgets
+                st.session_state.clear_meal_widgets = True
+                
+                add_registration(meal_registration_data, bmr)
                 
                 st.success("✅ Meal registered successfully!")
                 st.balloons()
@@ -283,24 +316,42 @@ def create_new_form_food(code, options_string, bmr, df_meal_items=None):
 
 def create_form_add_food_item_to_database():
     """
-    Create form for adding new food items to database - SUPER SIMPLE
+    Create form for adding new food items to database with clearing
     """
+    # Check if we just submitted successfully
+    if "food_item_just_submitted" in st.session_state and st.session_state.food_item_just_submitted:
+        # Clear the flag
+        st.session_state.food_item_just_submitted = False
+        # Use cleared values
+        default_food_name = ""
+        default_calories = 0.0
+        default_protein = 0.0
+        default_carb = 0.0
+        default_fat = 0.0
+    else:
+        # Use session state or defaults
+        default_food_name = st.session_state.get('food_item_name', "")
+        default_calories = st.session_state.get('food_item_calories', 0.0)
+        default_protein = st.session_state.get('food_item_protein', 0.0)
+        default_carb = st.session_state.get('food_item_carb', 0.0)
+        default_fat = st.session_state.get('food_item_fat', 0.0)
+    
     with st.form(key="food_item_form", clear_on_submit=True):
         st.markdown("### Add New Food Item")
         
         # Food item inputs
-        food_name = st.text_input("Name of food item")
+        food_name = st.text_input("Name of food item", value=default_food_name)
         
         col1, col2 = st.columns(2)
         with col1:
-            calories = st.number_input("Energy (kcal / 100 g)", min_value=0.0, step=1.0)
-            protein = st.number_input("Proteins (g / 100 g)", min_value=0.0, step=0.1)
+            calories = st.number_input("Energy (kcal / 100 g)", min_value=0.0, step=1.0, value=default_calories)
+            protein = st.number_input("Proteins (g / 100 g)", min_value=0.0, step=0.1, value=default_protein)
         
         with col2:
-            carb = st.number_input("Carbohydrates (g / 100 g)", min_value=0.0, step=0.1)
-            fat = st.number_input("Fats (g / 100 g)", min_value=0.0, step=0.1)
+            carb = st.number_input("Carbohydrates (g / 100 g)", min_value=0.0, step=0.1, value=default_carb)
+            fat = st.number_input("Fats (g / 100 g)", min_value=0.0, step=0.1, value=default_fat)
         
-        # Simple submit button - NO VALIDATION
+        # Submit button
         submit_button = st.form_submit_button("Save Food Item")
         
         # Handle submission with validation AFTER click
@@ -333,22 +384,39 @@ def create_form_add_food_item_to_database():
                         # Save to storage
                         save_data_to_storage(df_updated, 'data/livsmedelsdatabas.csv')
                         
+                        # Set flag for clearing form
+                        st.session_state.food_item_just_submitted = True
+                        
                         st.success(f"Food item '{food_name}' added successfully!")
+                        st.rerun()
                         
                 except Exception as e:
                     st.error("Failed to save food item. Please try again.")
                     with st.expander("Error Details"):
                         st.code(str(e))
 
+
 def create_form_add_recipie_to_database(meal_df, code):
     """
-    Create form for adding recipes to database - SIMPLE AND WORKING
+    Create form for adding recipes to database with clearing
     """
+    # Check if we just submitted successfully
+    if "recipe_just_submitted" in st.session_state and st.session_state.recipe_just_submitted:
+        # Clear the flag
+        st.session_state.recipe_just_submitted = False
+        # Use cleared values
+        default_recipe_name = ""
+        default_favorite = False
+    else:
+        # Use session state or defaults
+        default_recipe_name = st.session_state.get('recipe_name', "")
+        default_favorite = st.session_state.get('recipe_favorite', False)
+    
     with st.form(key="recipe_form", clear_on_submit=True):
         st.markdown("### Save Recipe")
         
         # Recipe name input
-        recipe_name = st.text_input("Name of recipe")
+        recipe_name = st.text_input("Name of recipe", value=default_recipe_name)
         
         # Display nutrition code (read-only)
         st.text_input(
@@ -359,9 +427,9 @@ def create_form_add_recipie_to_database(meal_df, code):
         )
         
         # Favorite checkbox
-        is_favorite = st.checkbox("Save recipe as favorite")
+        is_favorite = st.checkbox("Save recipe as favorite", value=default_favorite)
         
-        # Always enabled submit button
+        # Submit button
         submit_button = st.form_submit_button("Save Recipe")
         
         # Handle submission with validation AFTER click
@@ -400,6 +468,12 @@ def create_form_add_recipie_to_database(meal_df, code):
                         df_updated = pd.concat([df_recipe_db, df_recipe_data], ignore_index=True)
                         save_data_to_storage(df_updated, 'data/recipie_databas.csv')
                         
+                        # Set flag for clearing form
+                        st.session_state.recipe_just_submitted = True
+                        
+                        # Set flag for the main database page to clear the recipe composition widgets
+                        st.session_state.clear_recipe_widgets = True
+                        
                         favorite_text = " as favorite" if is_favorite else ""
                         st.success(f"Recipe '{recipe_name}' saved successfully{favorite_text}!")
                         st.info("Form has been cleared. You can create another recipe.")
@@ -410,7 +484,6 @@ def create_form_add_recipie_to_database(meal_df, code):
                     with st.expander("Error Details"):
                         st.code(str(e))
 
-# COPY PREVIOUS MEAL FUNCTIONALITY - ORIGINAL
 def create_copy_previous_meal_section():
     """Create a section for copying previous meals - ORIGINAL FUNCTIONALITY"""
     st.markdown("### Copy Previous Meal")

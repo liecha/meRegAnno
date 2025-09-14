@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import numpy as np
 import datetime
 import altair as alt
 import io
@@ -96,20 +97,137 @@ def load_energy_data():
 # Load main data
 df_energy = load_energy_data()
 
+# ===================== SAVE TO DATABASE FUNCTION =====================
+@handle_errors("database sync", show_user_error=True)
+def sync_csv_to_database():
+    """Simple function to sync CSV data to database"""
+    
+    try:
+        from scripts.data_storage import get_supabase_connection
+        conn = get_supabase_connection()
+        st.info("Connected to database")
+    except Exception as e:
+        st.error(f"Connection failed: {str(e)}")
+        return False
+
+    def prepare_energy_data(df):
+        """Clean and prepare energy_balance data"""
+        df_clean = df.copy()
+        
+        # Add required user_id (use dummy for CSV import)
+        df_clean['user_id'] = '00000000-0000-0000-0000-000000000000'
+        
+        # Convert date strings to proper format
+        df_clean['date'] = pd.to_datetime(df_clean['date']).dt.strftime('%Y-%m-%d')
+        
+        # Fix time field - this is the key fix
+        def fix_time(time_val):
+            if pd.isna(time_val) or str(time_val).lower() in ['nan', '']:
+                return '00:00:00'
+            
+            time_str = str(time_val).strip()
+            if ':' in time_str:
+                parts = time_str.split(':')
+                if len(parts) >= 2:
+                    hour = int(parts[0])
+                    minute = int(parts[1]) 
+                    second = int(parts[2]) if len(parts) > 2 else 0
+                    return f"{hour:02d}:{minute:02d}:{second:02d}"
+            return '00:00:00'
+        
+        df_clean['time'] = df_clean['time'].apply(fix_time)
+        
+        # Convert numeric columns and replace NaN with 0
+        numeric_cols = ['distance', 'energy', 'energy_acc', 'pro', 'protein_acc', 'carb', 'fat', 'pace', 'steps']
+        for col in numeric_cols:
+            if col in df_clean.columns:
+                df_clean[col] = pd.to_numeric(df_clean[col], errors='coerce').fillna(0)
+        
+        # Convert text columns and replace NaN with empty string
+        text_cols = ['label', 'activity', 'note', 'summary']
+        for col in text_cols:
+            if col in df_clean.columns:
+                df_clean[col] = df_clean[col].astype(str).fillna('').replace('nan', '')
+        
+        # Remove duration column (not in your schema)
+        if 'duration' in df_clean.columns:
+            df_clean = df_clean.drop('duration', axis=1)
+        
+        # Remove id column (auto-generated)
+        if 'id' in df_clean.columns:
+            df_clean = df_clean.drop('id', axis=1)
+            
+        return df_clean
+
+    # Load and process energy data
+    try:
+        from scripts.data_storage import fetch_from_csv
+        df_energy = fetch_from_csv('data/updated-database-results.csv')
+        st.info(f"Loaded {len(df_energy)} energy records")
+        
+        # Clean the data
+        df_clean = prepare_energy_data(df_energy)
+        st.info(f"Cleaned data: {len(df_clean)} valid records")
+        
+        # Clear existing data
+        conn.table('energy_balance').delete().neq('id', -1).execute()
+        st.info("Cleared existing energy_balance data")
+        
+        # Insert new data in chunks
+        records = df_clean.to_dict('records')
+        chunk_size = 100
+        total_inserted = 0
+        
+        for i in range(0, len(records), chunk_size):
+            chunk = records[i:i + chunk_size]
+            try:
+                response = conn.table('energy_balance').insert(chunk).execute()
+                total_inserted += len(response.data) if response.data else 0
+                st.success(f"Inserted chunk {i//chunk_size + 1}: {len(chunk)} records")
+            except Exception as e:
+                st.error(f"Chunk {i//chunk_size + 1} failed: {str(e)}")
+                
+        st.success(f"Total inserted: {total_inserted} records")
+        return total_inserted > 0
+        
+    except Exception as e:
+        st.error(f"Data processing failed: {str(e)}")
+        return False
+    
+def clear_table_completely(conn, table_name):
+    """Clear table with multiple strategies"""
+    try:
+        # Strategy 1: Use truncate-like approach
+        if table_name == 'livsmedelsdatabas':
+            # For food database, delete all and reset sequence
+            conn.table(table_name).delete().neq('livsmedel', '__impossible_name__').execute()
+        else:
+            # For RLS tables, we might not be able to delete all rows
+            # Try to delete with a condition that should match all rows
+            conn.table(table_name).delete().neq('id', -1).execute()
+        
+        st.success(f"Successfully cleared {table_name}")
+        return True
+        
+    except Exception as e:
+        st.warning(f"Clear table warning for {table_name}: {str(e)}")
+        # Table might already be empty or we might not have permission
+        return True  # Continue anyway
+
 # ===================== MAIN HEADER =====================
 st.subheader('Emelie Chandni Jutvik')
 
 # Show any pending notifications
 show_notifications()
 
-# ===================== IMPROVED SIDEBAR WITH VALIDATION =====================
+# ===================== IMPROVED SIDEBAR WITH VALIDATION AND DATABASE SYNC =====================
 with st.sidebar:
     st.image("lumina_1.png")
 
-    # Storage method indicator - SAME AS ORIGINAL
+    # Storage method indicator
     storage_method = "🗄️ Database (Supabase)" if USE_DATABASE else "📄 CSV Files"
     st.caption(f"Storage: {storage_method}")
-    
+        
     # Expandable User Settings Section with Validation - ENHANCED
     with st.expander("⚙️ User Settings", expanded=False):
         current_settings = get_user_settings()
@@ -329,10 +447,58 @@ def create_page_activity_registration():
 
 @handle_errors("meal registration page")  
 def create_page_meal_registration_with_copy():
-    """ORIGINAL meal registration with copy functionality and improvements"""
     state_manager.set_page('Meals')
     
-    col = st.columns((5.5, 5.5), gap='medium') 
+    # Handle meal widget clearing after successful food submission
+    if st.session_state.get('clear_meal_widgets', False):
+        # Clear the flag
+        st.session_state.clear_meal_widgets = False
+        # Clear the meal selection widgets (these can be cleared from here)
+        if 'create_meal' in st.session_state:
+            st.session_state.create_meal = []
+        if 'find_recipie' in st.session_state:
+            st.session_state.find_recipie = []
+        if 'selected_previous_meal' in st.session_state:
+            st.session_state.selected_previous_meal = None
+        if 'copied_meal_items' in st.session_state:
+            st.session_state.copied_meal_items = []
+    
+    # Calculate current day's deficit - NEW
+    def get_current_deficit():
+        """Calculate current day's energy deficit and remaining calories"""
+        try:
+            df_deficite = calc_energy_deficite(df_energy, selected_date, selected_date_input)
+            if len(df_deficite) > 0:
+                current_deficit = df_deficite['energy_acc'].iloc[0]  # Today's deficit
+                return current_deficit
+            return 0
+        except:
+            return 0
+    
+    def calculate_meal_nutrition(df_meal_result):
+        """Calculate nutrition from current meal composition"""
+        if df_meal_result is None or len(df_meal_result) == 0:
+            return {"calories": 0, "protein": 0, "carbs": 0, "fat": 0}
+        
+        try:
+            df_food_nutrition = locate_eatables(df_meal_result)
+            meal_code = code_detector(df_meal_result, df_food_nutrition, 1)
+            
+            # Parse the code to extract nutrition values
+            parts = meal_code.split('/')
+            if len(parts) >= 4:
+                calories = float(parts[0])
+                protein = float(parts[1])
+                carbs = float(parts[2])
+                fat = float(parts[3])
+                return {"calories": calories, "protein": protein, "carbs": carbs, "fat": fat}
+        except:
+            pass
+        
+        return {"calories": 0, "protein": 0, "carbs": 0, "fat": 0}
+    
+    # Rest of your existing meal page code...
+    col = st.columns((5.5, 5.5), gap='medium')
     df_meal_items = None
     code = ''
     options_string = ''
@@ -441,6 +607,50 @@ def create_page_meal_registration_with_copy():
             df_result_meal = st.data_editor(df_total, key='create_meal_editor', hide_index=True, use_container_width=True)
             
             if len(df_result_meal) > 0:
+                # Calculate nutrition for the current meal
+                meal_nutrition = calculate_meal_nutrition(df_result_meal)
+                
+                # NEW: Show current deficit and remaining calories
+                current_deficit = get_current_deficit()
+                # Fixed calculation: deficit is how much you're under-eating
+                # -85 means you need 85 more calories, so -85 + 571 = 486 calories over target
+                calories_after_meal = current_deficit + meal_nutrition["calories"]
+                
+                # Display deficit information prominently
+                st.markdown("---")
+                st.markdown("#### Calorie Balance")
+                
+                deficit_col1, deficit_col2, deficit_col3 = st.columns(3)
+                
+                with deficit_col1:
+                    deficit_label = "Under Target" if current_deficit < 0 else "Over Target" if current_deficit > 0 else "On Target"
+                    st.metric("Today's Deficit", f"{int(current_deficit)} kcal", deficit_label,
+                             help="Negative = under-eating (need more calories), Positive = over-eating")
+                
+                with deficit_col2:
+                    st.metric("This Meal", f"{int(meal_nutrition['calories'])} kcal", 
+                             help="Calories from the current meal composition")
+                
+                with deficit_col3:
+                    # Show the result after adding this meal
+                    if calories_after_meal > 100:  # Over target by more than 100
+                        st.metric("After This Meal", f"+{int(calories_after_meal)} kcal", "Over target",
+                                 help="You'll be over your calorie target by this amount")
+                    elif calories_after_meal < -100:  # Still under target by more than 100
+                        st.metric("After This Meal", f"{int(calories_after_meal)} kcal", "Still need more",
+                                 help="You'll still be under your calorie target")
+                    else:  # Within 100 calories of target
+                        st.metric("After This Meal", f"{int(calories_after_meal)} kcal", "Good balance",
+                                 help="You'll be close to your calorie target")
+                
+                # Nutrition breakdown
+                st.markdown("##### Meal Nutrition")
+                nutr_col1, nutr_col2, nutr_col3 = st.columns(3)
+                nutr_col1.metric("Protein", f"{meal_nutrition['protein']:.1f}g")
+                nutr_col2.metric("Carbs", f"{meal_nutrition['carbs']:.1f}g") 
+                nutr_col3.metric("Fat", f"{meal_nutrition['fat']:.1f}g")
+                
+                # Store meal data
                 df_food_nutrition = locate_eatables(df_result_meal)
                 code = code_detector(df_result_meal, df_food_nutrition, 1)
                 df_result_meal['code'] = code
@@ -493,8 +703,18 @@ def create_page_meal_registration_with_copy():
 
 @handle_errors("database page")
 def create_page_database():
-    """Database page with improved 2-column layout"""
+    """Database page with improved 2-column layout and recipe clearing"""
     state_manager.set_page('Database')
+    
+    # Handle recipe widget clearing after successful recipe submission
+    if st.session_state.get('clear_recipe_widgets', False):
+        # Clear the flag
+        st.session_state.clear_recipe_widgets = False
+        # Clear the recipe composition widgets
+        if 'add_meal' in st.session_state:
+            st.session_state.add_meal = []
+        if 'options_database' in st.session_state:
+            st.session_state.options_database = []
     
     # Changed from 3 columns to 2 columns
     col = st.columns((5.0, 10.0), gap='medium') 
@@ -548,7 +768,7 @@ def create_page_database():
         st.markdown("#### Save recipie")
         st.caption("_:blue[Save your recipie]_ to the database")  
         create_form_add_recipie_to_database(meal_df, code)
-
+        
 @handle_errors("log book page")
 def create_page_logg_book():
     """ORIGINAL log book page with improvements"""
@@ -897,4 +1117,61 @@ with st.sidebar:
     if form_states:
         st.warning("Unsaved changes:")
         for state_msg in form_states:
-            st.caption(f"🔄 {state_msg}")
+            st.caption(f"📄 {state_msg}")
+    
+        # ===================== FIXED DATABASE SYNC SECTION =====================
+    st.markdown("---")
+    st.markdown("#### Database Sync")
+    
+    # Only show the button when NOT using database mode
+    if not USE_DATABASE:
+        st.caption("Sync your CSV files to Supabase database")
+        
+        # Add confirmation checkbox for safety
+        confirm_sync = st.checkbox(
+            "I understand this will overwrite all database tables",
+            key="confirm_database_sync",
+            help="This action will completely replace all data in the database tables with CSV data"
+        )
+        
+        # Store sync result in session state to prevent re-running
+        if "sync_completed" not in st.session_state:
+            st.session_state.sync_completed = False
+        
+        if st.button(
+            "🔄 Save to Database",
+            type="primary",
+            disabled=not confirm_sync,
+            key="save_to_database_btn",
+            help="Sync all CSV files to database tables"
+        ):
+            if confirm_sync:
+                with st.spinner("Syncing data to database..."):
+                    sync_success = sync_csv_to_database()
+                
+                # Mark sync as completed
+                st.session_state.sync_completed = sync_success
+                
+                if sync_success:
+                    st.success("Database sync completed! You can now optionally switch to database mode.")
+                    
+                    # Note: Don't modify the checkbox state after widget creation
+                    # The checkbox will reset naturally on the next rerun
+        
+        # Show option to switch modes only after successful sync
+        if st.session_state.get('sync_completed', False):
+            st.markdown("---")
+            if st.button(
+                "Switch to Database Mode",
+                type="secondary",
+                key="switch_to_db_mode",
+                help="Use database instead of CSV files going forward"
+            ):
+                st.info("To switch to database mode, set USE_DATABASE = True at the top of your script and restart the app.")
+                st.code("USE_DATABASE = True")
+    
+    else:
+        st.info("Already using database mode")
+        st.caption("CSV sync not needed when using database storage")
+    
+    st.markdown("---")
