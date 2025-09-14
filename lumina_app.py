@@ -41,8 +41,8 @@ from scripts.forms import (
 
 from scripts.activity_summary import (
     filter_data_by_period, get_training_summary, get_food_summary,
-    create_training_chart, create_weekly_summary_chart, create_improved_energy_balance_chart, get_available_activities, 
-    format_time_period, get_activity_colors
+    create_training_chart, create_weekly_summary_chart, create_improved_energy_balance_chart, 
+    get_available_activities, format_time_period
 )
 
 # ===================== DATA STORAGE CONFIGURATION =====================
@@ -446,14 +446,13 @@ def create_page_activity_registration():
         create_new_form_activity(bmr)
 
 @handle_errors("meal registration page")  
-def create_page_meal_registration_with_copy():
+def create_page_meal_registration():
+    """Modified compact version of your existing meal registration"""
     state_manager.set_page('Meals')
     
-    # Handle meal widget clearing after successful food submission
+    # Handle meal widget clearing after successful food submission (unchanged)
     if st.session_state.get('clear_meal_widgets', False):
-        # Clear the flag
         st.session_state.clear_meal_widgets = False
-        # Clear the meal selection widgets (these can be cleared from here)
         if 'create_meal' in st.session_state:
             st.session_state.create_meal = []
         if 'find_recipie' in st.session_state:
@@ -463,20 +462,18 @@ def create_page_meal_registration_with_copy():
         if 'copied_meal_items' in st.session_state:
             st.session_state.copied_meal_items = []
     
-    # Calculate current day's deficit - NEW
+    # Your existing deficit and nutrition calculation functions (unchanged)
     def get_current_deficit():
-        """Calculate current day's energy deficit and remaining calories"""
         try:
             df_deficite = calc_energy_deficite(df_energy, selected_date, selected_date_input)
             if len(df_deficite) > 0:
-                current_deficit = df_deficite['energy_acc'].iloc[0]  # Today's deficit
+                current_deficit = df_deficite['energy_acc'].iloc[0]
                 return current_deficit
             return 0
         except:
             return 0
     
     def calculate_meal_nutrition(df_meal_result):
-        """Calculate nutrition from current meal composition"""
         if df_meal_result is None or len(df_meal_result) == 0:
             return {"calories": 0, "protein": 0, "carbs": 0, "fat": 0}
         
@@ -484,7 +481,6 @@ def create_page_meal_registration_with_copy():
             df_food_nutrition = locate_eatables(df_meal_result)
             meal_code = code_detector(df_meal_result, df_food_nutrition, 1)
             
-            # Parse the code to extract nutrition values
             parts = meal_code.split('/')
             if len(parts) >= 4:
                 calories = float(parts[0])
@@ -496,86 +492,118 @@ def create_page_meal_registration_with_copy():
             pass
         
         return {"calories": 0, "protein": 0, "carbs": 0, "fat": 0}
-    
-    # Rest of your existing meal page code...
+
+    # Main layout (unchanged)
     col = st.columns((5.5, 5.5), gap='medium')
     df_meal_items = None
     code = ''
     options_string = ''
     
-    # Initialize session state for meal items - SAME AS ORIGINAL
     if "current_meal_items" not in st.session_state:
         st.session_state.current_meal_items = None
     
     with col[0]: 
-        # Add the copy previous meal section - SAME AS ORIGINAL
-        create_copy_previous_meal_section()
+        # COMPACT HEADER with selection preview
+        st.markdown("#### Build Your Meal")
         
-        st.markdown("#### Add recipie")
-        st.caption("Type in a _:blue[ recipie name]_ that you want to add to your meal")  
-        df_recipie_db = fetch_data_from_storage('data/recipie_databas.csv').sort_values(['name'])
+        # Show current selections as compact summary
+        current_recipes = st.session_state.get('find_recipie', [])
+        current_foods = st.session_state.get('create_meal', [])
+        copied_meal = get_copied_meal_items()
         
-        recipie_list = df_recipie_db['name'].unique()
-
-        st.multiselect(
-            "Select recipies to add to your meal",
-            recipie_list,
-            key='find_recipie'
-        )
-
-        if "options_recipie" not in st.session_state:
-            st.session_state.options_recipie = []
-        options_recipie = st.session_state.find_recipie
-
-        # Add portion control for recipes - SAME AS ORIGINAL
-        recipe_portions = {}
-        if len(options_recipie) > 0:
-            st.markdown("##### Recipe portions")
-            st.caption("Specify portion sizes for selected recipes (1.0 = full portion, 0.5 = half portion)")
-            for recipe_name in options_recipie:
-                portion_key = f"portion_{recipe_name.replace(' ', '_')}"
-                recipe_portions[recipe_name] = st.number_input(
-                    f"Portion of {recipe_name}", 
-                    min_value=0.05, 
-                    max_value=10.0, 
-                    value=1.0, 
-                    step=0.05,
-                    key=portion_key,
-                    help=f"Enter portion size for {recipe_name} (e.g., 0.5 for half portion)"
-                )
-
-        st.markdown("#### Add food items")
-        st.caption("_:blue[Type in food items]_ that you want to add to your meal")  
-        df_food_db = fetch_data_from_storage('data/livsmedelsdatabas.csv')
-        food_list = df_food_db['livsmedel'].values
-
-        st.multiselect(
-            "Select food items to add to your meal",
-            food_list,
-            key='create_meal'
-        )
-
-        if "options" not in st.session_state:
-            st.session_state.options = []
-        options = st.session_state.create_meal
-
-        st.markdown("#### Your meal")
-        st.caption("This is the _:blue[ content of your meal]_")  
+        if current_recipes or current_foods or not copied_meal.empty:
+            selections = []
+            if not copied_meal.empty:
+                meal_name = st.session_state.get('selected_previous_meal', {}).get('name', 'Previous meal')
+                selections.append(f"Previous: {meal_name}")
+            if current_recipes:
+                selections.append(f"Recipes: {len(current_recipes)}")
+            if current_foods:
+                selections.append(f"Foods: {len(current_foods)}")
+            
+            st.info(" • ".join(selections))
+            
+            # Quick clear button
+            if st.button("Clear All Selections", key="clear_all_meal_selections"):
+                st.session_state.find_recipie = []
+                st.session_state.create_meal = []
+                if 'selected_previous_meal' in st.session_state:
+                    del st.session_state.selected_previous_meal
+                if 'copied_meal_items' in st.session_state:
+                    st.session_state.copied_meal_items = []
+                st.rerun()
         
-        # Combine all meal sources: recipes, individual foods, and copied meals - ENHANCED
+        # 1. Copy Previous Meal Section
+        with st.expander("Copy Previous Meal", expanded=False):
+            create_copy_previous_meal_section()  # Your existing function unchanged!
+        
+        # 2. Add Recipe Section
+        with st.expander("Add Recipe", expanded=False):
+            st.caption("Type in a recipie name that you want to add to your meal")  
+            df_recipie_db = fetch_data_from_storage('data/recipie_databas.csv').sort_values(['name'])
+            recipie_list = df_recipie_db['name'].unique()
+
+            st.multiselect(
+                "Select recipies to add to your meal",
+                recipie_list,
+                key='find_recipie'
+            )
+
+            if "options_recipie" not in st.session_state:
+                st.session_state.options_recipie = []
+            options_recipie = st.session_state.find_recipie
+
+            # Add portion control for recipes
+            recipe_portions = {}
+            if len(options_recipie) > 0:
+                st.markdown("##### Recipe portions")
+                st.caption("Specify portion sizes for selected recipes (1.0 = full portion, 0.5 = half portion)")
+                for recipe_name in options_recipie:
+                    portion_key = f"portion_{recipe_name.replace(' ', '_')}"
+                    recipe_portions[recipe_name] = st.number_input(
+                        f"Portion of {recipe_name}", 
+                        min_value=0.05, 
+                        max_value=10.0, 
+                        value=1.0, 
+                        step=0.05,
+                        key=portion_key,  # Same key as your existing code!
+                        help=f"Enter portion size for {recipe_name} (e.g., 0.5 for half portion)"
+                    )
+        
+        # 3. Add Food Items Section
+        with st.expander("Add Food Items", expanded=False):
+            st.caption("Type in food items that you want to add to your meal")  
+            df_food_db = fetch_data_from_storage('data/livsmedelsdatabas.csv')
+            food_list = df_food_db['livsmedel'].values
+
+            st.multiselect(
+                "Select food items to add to your meal",
+                food_list,
+                key='create_meal'
+            )
+
+            if "options" not in st.session_state:
+                st.session_state.options = []
+            options = st.session_state.create_meal
+
+        # 4.Meal composition
+        st.markdown("#### Your Meal")
+        st.caption("This is the content of your meal")  
+        
+        # All meals
         temp_store = []
         df_recipies = pd.DataFrame([{"Food":'Deleted', "Amount (g)": 0.0}])
         df_meal = pd.DataFrame([{"Food":'', "Amount (g)": 0.0}])
         df_copied = get_copied_meal_items()
         
-        # Add copied meal items to the meal - SAME AS ORIGINAL
+        # Add copied meal items to the meal
         if not df_copied.empty:
             copied_name = st.session_state.selected_previous_meal['name']
             options_string = f"{copied_name}/"
             for _, item in df_copied.iterrows():
                 temp_store.append({"Food": item['Food'], "Amount (g)": item['Amount (g)']})
         
-        # Rest of the existing recipe and food item logic - SAME AS ORIGINAL
+        # Rest of your existing recipe and food item logic
         if (len(options) > 0) or len(options_recipie) or not df_copied.empty:
             temp_store_recipies = []
             if len(options_recipie) > 0:
@@ -607,17 +635,12 @@ def create_page_meal_registration_with_copy():
             df_result_meal = st.data_editor(df_total, key='create_meal_editor', hide_index=True, use_container_width=True)
             
             if len(df_result_meal) > 0:
-                # Calculate nutrition for the current meal
+                # NUTRITION CALCULATIONS
                 meal_nutrition = calculate_meal_nutrition(df_result_meal)
-                
-                # NEW: Show current deficit and remaining calories
                 current_deficit = get_current_deficit()
-                # Fixed calculation: deficit is how much you're under-eating
-                # -85 means you need 85 more calories, so -85 + 571 = 486 calories over target
                 calories_after_meal = current_deficit + meal_nutrition["calories"]
                 
-                # Display deficit information prominently
-                st.markdown("---")
+                # DISPLAY LOGIC
                 st.markdown("#### Calorie Balance")
                 
                 deficit_col1, deficit_col2, deficit_col3 = st.columns(3)
@@ -632,73 +655,59 @@ def create_page_meal_registration_with_copy():
                              help="Calories from the current meal composition")
                 
                 with deficit_col3:
-                    # Show the result after adding this meal
-                    if calories_after_meal > 100:  # Over target by more than 100
+                    if calories_after_meal > 100:
                         st.metric("After This Meal", f"+{int(calories_after_meal)} kcal", "Over target",
                                  help="You'll be over your calorie target by this amount")
-                    elif calories_after_meal < -100:  # Still under target by more than 100
+                    elif calories_after_meal < -100:
                         st.metric("After This Meal", f"{int(calories_after_meal)} kcal", "Still need more",
                                  help="You'll still be under your calorie target")
-                    else:  # Within 100 calories of target
+                    else:
                         st.metric("After This Meal", f"{int(calories_after_meal)} kcal", "Good balance",
                                  help="You'll be close to your calorie target")
                 
-                # Nutrition breakdown
                 st.markdown("##### Meal Nutrition")
                 nutr_col1, nutr_col2, nutr_col3 = st.columns(3)
                 nutr_col1.metric("Protein", f"{meal_nutrition['protein']:.1f}g")
                 nutr_col2.metric("Carbs", f"{meal_nutrition['carbs']:.1f}g") 
                 nutr_col3.metric("Fat", f"{meal_nutrition['fat']:.1f}g")
                 
-                # Store meal data
                 df_food_nutrition = locate_eatables(df_result_meal)
                 code = code_detector(df_result_meal, df_food_nutrition, 1)
                 df_result_meal['code'] = code
 
-                # Store the meal items for saving to meal database - SAME AS ORIGINAL
                 df_meal_items = df_result_meal[['Food', 'Amount (g)']].copy()
                 
-                # Add date and time columns - SAME AS ORIGINAL
                 current_date = datetime_to_string(date_time_now())
                 current_time = time_to_string(time_now())
                 
-                # Clean up options_string for meal name - SAME AS ORIGINAL
                 meal_name = options_string[:-1] if options_string.endswith('/') else options_string
                 
-                # Add columns in the correct order for CSV - SAME AS ORIGINAL
                 df_meal_items.insert(0, 'name', meal_name)
                 df_meal_items.insert(0, 'time', current_time)
                 df_meal_items.insert(0, 'date', current_date)
                 
-                # Rename columns to match CSV structure - SAME AS ORIGINAL
                 df_meal_items = df_meal_items.rename(columns={
                     'Food': 'livsmedel',
                     'Amount (g)': 'amount'
                 })
                 
-                # Add code and favorite columns - SAME AS ORIGINAL
                 df_meal_items['code'] = code
                 df_meal_items['favorite'] = False
                 
-                # Store in session state - SAME AS ORIGINAL
                 st.session_state.current_meal_items = df_meal_items
 
         else:
-            st.error('Your meal is empty', icon="🚨")
+            st.error('Your meal is empty')
             st.write('Search for food items, select recipes, or copy a previous meal.')
 
     with col[1]:  
         st.markdown("#### Food Registration")
-        st.caption("_:blue[Register your meal]_ to the dashboard")  
+        st.caption("Register your meal to the dashboard")  
         
-        # Clean up options_string - SAME AS ORIGINAL
         if options_string.endswith('/'):
             options_string = options_string[:-1]
 
-        # Use the meal items from session state - SAME AS ORIGINAL
         df_meal_items = st.session_state.current_meal_items
-
-        # Call the IMPROVED form function with validation
         create_new_form_food(code, options_string, bmr, df_meal_items)
 
 @handle_errors("database page")
@@ -931,13 +940,28 @@ def create_page_summary():
         available_activities = get_available_activities(df_energy)
         # Remove 'Walk' from available activities for training focus
         training_activities = [act for act in available_activities]
-        
-        selected_activities = st.multiselect(
+
+        # Create dropdown options with "All activities" as first option
+        dropdown_options = ["All activities"] + training_activities
+
+        # Activity dropdown selector
+        selected_option = st.selectbox(
             "Training Activities",
-            training_activities,
-            default=training_activities,  # Select all training activities except walking
+            dropdown_options,
+            index=0,  # Default to "All activities"
             key='summary_activities'
         )
+
+        # Convert selection to list of activities for downstream processing
+        if selected_option == "All activities":
+            selected_activities = training_activities  # Use all activities
+        else:
+            selected_activities = [selected_option]    # Use single selected activity
+
+        # Optional: Display what's currently selected
+        st.write(f"Selected: {selected_option}")
+        if selected_option == "All activities":
+            st.write(f"This includes: {', '.join(training_activities)}")
     
     st.markdown("---")
     
@@ -946,93 +970,212 @@ def create_page_summary():
     
     # TRAINING ACTIVITIES SECTION
     st.markdown('#### Activity Overview')
-    
-    # Get training summary
-    training_summary = get_training_summary(filtered_df, selected_activities)
-    
-    if not training_summary.empty:
-        # Key metrics in columns
-        metric_col1, metric_col2, metric_col3, metric_col4 = st.columns(4)
+
+    if period_type == "Day":
+        # Helper functions for data conversion - defined at the start
+        def safe_numeric(value, default=0.0):
+            """Safely convert value to numeric, handling strings and NaN"""
+            try:
+                if pd.isna(value):
+                    return default
+                str_val = str(value).strip()
+                if str_val.lower() in ['', 'nan', 'none']:
+                    return default
+                return float(str_val)
+            except (ValueError, TypeError, AttributeError):
+                return default
         
-        total_sessions = training_summary['Sessions'].sum()
-        total_distance = training_summary['Total Distance (km)'].sum()
-        total_energy_burned = training_summary['Total Energy (kcal)'].sum()
-        total_duration = training_summary['Total Duration (min)'].sum()
+        def safe_int(value, default=0):
+            """Safely convert value to integer, handling strings and NaN"""
+            return int(safe_numeric(value, default))
         
-        metric_col1.metric("Total Sessions", total_sessions)
-        metric_col2.metric("Total Distance", f"{total_distance:.1f} km")
-        metric_col3.metric("Energy Burned", f"{int(total_energy_burned)} kcal")
-        metric_col4.metric("Total Duration", f"{int(total_duration)} min")
+        def convert_time_to_minutes(time_str):
+            """Convert time string HH:MM:SS to minutes"""
+            try:
+                if pd.isna(time_str):
+                    return 0.0
+                
+                str_val = str(time_str).strip()
+                if str_val.lower() in ['', 'nan', '00:00:00', 'none']:
+                    return 0.0
+                
+                parts = str_val.split(':')
+                
+                if len(parts) == 3:  # HH:MM:SS format
+                    hours = int(parts[0])
+                    minutes = int(parts[1])
+                    seconds = int(parts[2])
+                    total_minutes = hours * 60 + minutes + seconds / 60.0
+                    return round(total_minutes, 1)
+                elif len(parts) == 2:  # MM:SS format
+                    minutes = int(parts[0])
+                    seconds = int(parts[1])
+                    total_minutes = minutes + seconds / 60.0
+                    return round(total_minutes, 1)
+                else:
+                    return 0.0
+            except (ValueError, TypeError, IndexError, AttributeError):
+                return 0.0
         
-        # Simplified activity breakdown table - only requested columns
-        st.markdown("##### Activity Breakdown")
-        
-        # Format the summary for display with only requested columns
-        display_summary = training_summary.copy()
-        display_summary['Total Distance (km)'] = display_summary['Total Distance (km)'].round(2)
-        display_summary['Total Duration (min)'] = display_summary['Total Duration (min)'].round(0)
-        display_summary['Avg Pace (min/km)'] = display_summary['Avg Pace (min/km)'].round(2)
-        
-        # Select only the columns you requested in the specified order
-        columns_to_show = [
-            'activity', 'Sessions', 'Total Distance (km)', 'Total Energy (kcal)', 
-            'Avg Energy (kcal)', 'Total Duration (min)', 'Avg Pace (min/km)', 
-            'Total Steps', 'Sample Note'
+        # Filter activities for the day
+        day_activities = filtered_df[
+            filtered_df['activity'].isin(selected_activities) & 
+            (filtered_df['activity'] != '') & 
+            (filtered_df['activity'].notna())
         ]
         
-        # Filter to only show existing columns
-        available_columns = [col for col in columns_to_show if col in display_summary.columns]
-        simplified_summary = display_summary[available_columns]
-        
-        # Create simplified table with only requested columns
-        create_data_table(
-            simplified_summary,
-            {
-                "activity": st.column_config.Column("Activity", width="small"),
-                "Sessions": st.column_config.Column("Sessions", width="small"),
-                "Total Distance (km)": st.column_config.Column("Distance (km)", width="small"),
-                "Total Energy (kcal)": st.column_config.Column("Energy (kcal)", width="small"),
-                "Avg Energy (kcal)": st.column_config.Column("Avg Energy", width="small"),
-                "Total Duration (min)": st.column_config.Column("Duration (min)", width="small"),
-                "Avg Pace (min/km)": st.column_config.Column("Pace", width="small"),
-                "Total Steps": st.column_config.Column("Steps", width="small"),
-                "Sample Note": st.column_config.Column("Notes", width="medium"),
-            },
-            'training_summary_table'
-        )
-        
-        # Training insights
-        st.markdown("##### Training Insights")
-        insight_col1, insight_col2 = st.columns(2)
-        
-        with insight_col1:
-            # Most frequent activity
-            most_frequent = training_summary.loc[training_summary['Sessions'].idxmax()]
-            st.info(f"**Most Frequent:** {most_frequent['activity']} ({most_frequent['Sessions']} sessions)")
+        if not day_activities.empty:
+            # Process individual sessions
+            individual_sessions = []
             
-            # Highest energy activity
-            if training_summary['Total Energy (kcal)'].max() > 0:
-                highest_energy = training_summary.loc[training_summary['Total Energy (kcal)'].idxmax()]
-                st.info(f"**Highest Energy:** {highest_energy['activity']} ({int(highest_energy['Total Energy (kcal)'])} kcal)")
-        
-        with insight_col2:
-            # Longest distance activity
-            distance_activities = training_summary[training_summary['Total Distance (km)'] > 0]
-            if not distance_activities.empty:
-                longest_distance = distance_activities.loc[distance_activities['Total Distance (km)'].idxmax()]
-                st.info(f"**Longest Distance:** {longest_distance['activity']} ({longest_distance['Total Distance (km)']:.1f} km)")
+            for _, row in day_activities.iterrows():
+                # Convert all values safely
+                distance_val = safe_numeric(row['distance'], 0.0)
+                energy_val = safe_int(row['energy'], 0)
+                pace_val = safe_numeric(row['pace'], 0.0)
+                steps_val = safe_int(row['steps'], 0)
+                duration_val = convert_time_to_minutes(row['duration'])
+                
+                # Create session record
+                session_data = {
+                    'Activity': str(row['activity']) if pd.notna(row['activity']) else '',
+                    'Time': str(row['time']) if pd.notna(row['time']) else '',
+                    'Distance (km)': round(distance_val, 2),
+                    'Energy (kcal)': energy_val,
+                    'Duration (min)': duration_val,
+                    'Pace (min/km)': round(pace_val, 2) if pace_val > 0 else 0,
+                    'Steps': steps_val,
+                    'Note': (str(row['note'])[:47] + '...' 
+                            if pd.notna(row['note']) and len(str(row['note'])) > 50 
+                            else str(row['note']) if pd.notna(row['note']) else '')
+                }
+                individual_sessions.append(session_data)
             
-            # Average session duration
-            avg_session_duration = total_duration / total_sessions if total_sessions > 0 else 0
-            st.info(f"**Avg Session:** {int(avg_session_duration)} minutes")
-        
+            # Create DataFrame from processed sessions
+            individual_df = pd.DataFrame(individual_sessions)
+            
+            # Calculate totals for display metrics
+            total_sessions = len(individual_sessions)
+            total_distance = individual_df['Distance (km)'].sum()
+            total_energy_burned = individual_df['Energy (kcal)'].sum()
+            total_steps = individual_df['Steps'].sum()
+            
+            # Display summary metrics
+            metric_col1, metric_col2, metric_col3, metric_col4 = st.columns(4)
+            
+            metric_col1.metric("Total Sessions", total_sessions)
+            metric_col2.metric("Total Distance", f"{total_distance:.1f} km")
+            metric_col3.metric("Energy Burned", f"{int(total_energy_burned)} kcal")
+            metric_col4.metric("Total Steps", f"{int(total_steps)}")
+            
+            # Display individual sessions table
+            st.markdown("##### Individual Sessions")
+            
+            create_data_table(
+                individual_df,
+                {
+                    "Activity": st.column_config.Column("Activity", width="small"),
+                    "Time": st.column_config.Column("Time", width="small"),
+                    "Distance (km)": st.column_config.Column("Distance (km)", width="small"),
+                    "Energy (kcal)": st.column_config.Column("Energy (kcal)", width="small"),
+                    "Duration (min)": st.column_config.Column("Duration (min)", width="small"),
+                    "Pace (min/km)": st.column_config.Column("Pace", width="small"),
+                    "Steps": st.column_config.Column("Steps", width="small"),
+                    "Note": st.column_config.Column("Notes", width="medium"),
+                },
+                'individual_sessions_table'
+            )
+            
+        else:
+            st.warning("No training data available for the selected day and activities.")
+            st.info("Try selecting a different date or ensure you have logged training activities.")
     else:
-        st.warning("No training data available for the selected period and activities.")
-        st.info("Try selecting a different time period or ensure you have logged training activities.")
+        # For Week and Month views, use the existing aggregated summary
+        training_summary = get_training_summary(filtered_df, selected_activities)
+        
+        if not training_summary.empty:
+            # Key metrics in columns
+            metric_col1, metric_col2, metric_col3, metric_col4 = st.columns(4)
+            
+            total_sessions = training_summary['Sessions'].sum()
+            total_distance = training_summary['Total Distance (km)'].sum()
+            total_energy_burned = training_summary['Total Energy (kcal)'].sum()
+            total_duration = training_summary['Total Duration (min)'].sum()
+            
+            metric_col1.metric("Total Sessions", total_sessions)
+            metric_col2.metric("Total Distance", f"{total_distance:.1f} km")
+            metric_col3.metric("Energy Burned", f"{int(total_energy_burned)} kcal")
+            metric_col4.metric("Total Duration", f"{int(total_duration)} min")
+            
+            # Simplified activity breakdown table - only requested columns
+            st.markdown("##### Activity Breakdown")
+            
+            # Format the summary for display with only requested columns
+            display_summary = training_summary.copy()
+            display_summary['Total Distance (km)'] = display_summary['Total Distance (km)'].round(2)
+            display_summary['Total Duration (min)'] = display_summary['Total Duration (min)'].round(0)
+            display_summary['Avg Pace (min/km)'] = display_summary['Avg Pace (min/km)'].round(2)
+            
+            # Select only the columns you requested in the specified order
+            columns_to_show = [
+                'activity', 'Sessions', 'Total Distance (km)', 'Total Energy (kcal)', 
+                'Avg Energy (kcal)', 'Total Duration (min)', 'Avg Pace (min/km)', 
+                'Total Steps', 'Sample Note'
+            ]
+            
+            # Filter to only show existing columns
+            available_columns = [col for col in columns_to_show if col in display_summary.columns]
+            simplified_summary = display_summary[available_columns]
+            
+            # Create simplified table with only requested columns
+            create_data_table(
+                simplified_summary,
+                {
+                    "activity": st.column_config.Column("Activity", width="small"),
+                    "Sessions": st.column_config.Column("Sessions", width="small"),
+                    "Total Distance (km)": st.column_config.Column("Distance (km)", width="small"),
+                    "Total Energy (kcal)": st.column_config.Column("Energy (kcal)", width="small"),
+                    "Avg Energy (kcal)": st.column_config.Column("Avg Energy", width="small"),
+                    "Total Duration (min)": st.column_config.Column("Duration (min)", width="small"),
+                    "Avg Pace (min/km)": st.column_config.Column("Pace", width="small"),
+                    "Total Steps": st.column_config.Column("Steps", width="small"),
+                    "Sample Note": st.column_config.Column("Notes", width="medium"),
+                },
+                'training_summary_table'
+            )
+            
+            # Training insights
+            st.markdown("##### Training Insights")
+            insight_col1, insight_col2 = st.columns(2)
+            
+            with insight_col1:
+                # Most frequent activity
+                most_frequent = training_summary.loc[training_summary['Sessions'].idxmax()]
+                st.info(f"**Most Frequent:** {most_frequent['activity']} ({most_frequent['Sessions']} sessions)")
+                
+                # Highest energy activity
+                if training_summary['Total Energy (kcal)'].max() > 0:
+                    highest_energy = training_summary.loc[training_summary['Total Energy (kcal)'].idxmax()]
+                    st.info(f"**Highest Energy:** {highest_energy['activity']} ({int(highest_energy['Total Energy (kcal)'])} kcal)")
+            
+            with insight_col2:
+                # Longest distance activity
+                distance_activities = training_summary[training_summary['Total Distance (km)'] > 0]
+                if not distance_activities.empty:
+                    longest_distance = distance_activities.loc[distance_activities['Total Distance (km)'].idxmax()]
+                    st.info(f"**Longest Distance:** {longest_distance['activity']} ({longest_distance['Total Distance (km)']:.1f} km)")
+                
+                # Average session duration
+                avg_session_duration = total_duration / total_sessions if total_sessions > 0 else 0
+                st.info(f"**Avg Session:** {int(avg_session_duration)} minutes")
+            
+        else:
+            st.warning("No training data available for the selected period and activities.")
+            st.info("Try selecting a different time period or ensure you have logged training activities.")
     
     st.markdown("---")
     
-    # VISUALIZATIONS SECTION (EXACTLY AS YOU REQUESTED)
+    # VISUALIZATIONS SECTION
     st.markdown('#### Training Visualizations')
     
     # Chart type selection
@@ -1060,8 +1203,114 @@ def create_page_summary():
         chart = create_improved_energy_balance_chart(filtered_df)
         st.altair_chart(chart, use_container_width=True)
     
+    # ===================== ENERGY BALANCE SUMMARY SECTION =====================
+    st.markdown("---")
+    st.markdown('#### Energy Balance Summary')
+    st.caption("Energy deficit/surplus analysis based on food intake vs energy expenditure (REST + TRAINING)")
+    
+    # Import the deficit analysis function
+    from scripts.activity_summary import get_deficit_analysis
+    
+    # Get comprehensive deficit analysis
+    deficit_data = get_deficit_analysis(df_energy, selected_date_input)
+    
+    # Display energy balance metrics for different time periods
+    balance_col1, balance_col2, balance_col3 = st.columns(3)
+    
+    with balance_col1:
+        st.markdown("**Daily Balance**")
+        day_balance = deficit_data['day']
+        
+        st.metric(
+            "Net Energy", 
+            f"{day_balance['net_balance']} kcal",
+            help="Negative = deficit (burning more than eating), Positive = surplus"
+        )
+        st.caption(f"Input: {day_balance['input_energy']} kcal")
+        st.caption(f"Output: {day_balance['output_energy']} kcal")
+    
+    with balance_col2:
+        st.markdown("**Weekly Balance**") 
+        week_balance = deficit_data['week']
+        st.metric(
+            "Net Energy",
+            f"{week_balance['net_balance']} kcal",
+            help="Weekly energy balance across 7 days"
+        )
+        st.caption(f"Input: {week_balance['input_energy']} kcal")
+        st.caption(f"Output: {week_balance['output_energy']} kcal")
+        st.caption(f"Days with data: {week_balance['days_with_data']}/7")
+    
+    with balance_col3:
+        st.markdown("**Monthly Balance**")
+        month_balance = deficit_data['month']
+        st.metric(
+            "Net Energy",
+            f"{month_balance['net_balance']} kcal", 
+            help="Monthly energy balance"
+        )
+        st.caption(f"Input: {month_balance['input_energy']} kcal")
+        st.caption(f"Output: {month_balance['output_energy']} kcal") 
+        st.caption(f"Days with data: {month_balance['days_with_data']}")
+    
+    # Overall deficit analysis section (requires 8+ consecutive days)
+    st.markdown("##### Long-term Deficit Tracking")
+    
+    if deficit_data['has_sufficient_data'] and deficit_data['overall']:
+        overall = deficit_data['overall']
+        
+        # Create two columns for overall analysis display
+        overall_col1, overall_col2 = st.columns(2)
+        
+        with overall_col1:
+            st.success(f"**{overall['consecutive_days']} Consecutive Days Available**")
+            st.metric(
+                "Overall Net Energy",
+                f"{overall['balance']['net_balance']} kcal",
+                help=f"Total energy balance over {overall['consecutive_days']} consecutive days"
+            )
+            
+            st.metric(
+                "Daily Average",
+                f"{overall['daily_average']} kcal/day",
+                help="Average daily energy balance over the consecutive period"
+            )
+        
+        with overall_col2:
+            st.info("**Period Analysis**")
+            st.caption(f"Period: {overall['start_date']} to {overall['end_date']}")
+            st.caption(f"Total Input: {overall['balance']['input_energy']:,} kcal")
+            st.caption(f"Total Output: {overall['balance']['output_energy']:,} kcal")
+            st.caption(f"Net Balance: {overall['balance']['net_balance']:,} kcal")
+            
+            # Display health guidance
+            guidance = overall['health_guidance']
+            if guidance['type'] == 'warning':
+                st.warning(f"⚠️ {guidance['message']}")
+            else:
+                st.success(f"✅ {guidance['message']}")
+    
+    else:
+        # Show information about insufficient data
+        st.warning(f"**Insufficient Data for Long-term Analysis**")
+        col_msg1, col_msg2 = st.columns(2)
+        
+        with col_msg1:
+            st.info(f"**Current Status:**")
+            st.caption(f"Maximum consecutive days: {deficit_data['max_consecutive_days']}")
+            st.caption(f"Required for analysis: 8+ days")
+            st.caption(f"Keep logging to unlock this feature!")
+        
+        with col_msg2:
+            st.info("**Benefits of Long-term Tracking:**")
+            st.caption("• Identify sustainable deficit patterns")
+            st.caption("• Monitor weekly energy balance trends") 
+            st.caption("• Get health-conscious guidance")
+            st.caption("• Track consistency over time")
+    
     # Progress tracking suggestions
-    if training_summary.empty:
+    if (period_type == "Day" and (filtered_df.empty or filtered_df[filtered_df['activity'].isin(selected_activities)].empty)) or \
+       (period_type != "Day" and (not 'training_summary' in locals() or training_summary.empty)):
         st.markdown("---")
         st.markdown("##### Getting Started with Training Tracking")
         st.info("""
@@ -1076,7 +1325,7 @@ def create_page_summary():
 page_names_to_funcs = {
     "Dashboard": create_dashobard,  # Keeping original function name
     "Activity": create_page_activity_registration,
-    "Meals": create_page_meal_registration_with_copy,
+    "Meals": create_page_meal_registration,
     "Database": create_page_database,
     "Log book": create_page_logg_book,
     "Summary": create_page_summary

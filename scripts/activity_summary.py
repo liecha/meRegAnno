@@ -610,3 +610,223 @@ def format_time_period(period_type, selected_date):
     elif period_type == "Month":
         return selected_date.strftime("%Y-%m")
     return str(selected_date)
+
+def safe_numeric_conversion(value, default=0.0):
+    """Helper function for safe numeric conversion"""
+    try:
+        if pd.isna(value):
+            return default
+        str_val = str(value).strip()
+        if str_val.lower() in ['', 'nan', 'none']:
+            return default
+        return float(str_val)
+    except (ValueError, TypeError, AttributeError):
+        return default
+
+def calculate_energy_balance(df, period_name):
+    """
+    Calculate energy input vs output for a given dataframe
+    
+    Args:
+        df: DataFrame containing energy data
+        period_name: String description of the period
+    
+    Returns:
+        Dictionary with input_energy, output_energy, net_balance, days_with_data
+    """
+    if df.empty:
+        return {
+            'period': period_name,
+            'input_energy': 0,
+            'output_energy': 0,
+            'net_balance': 0,
+            'days_with_data': 0
+        }
+    
+    # Food posts are input energy (positive values)
+    food_data = df[df['label'] == 'FOOD']
+    input_energy = food_data['energy'].apply(lambda x: safe_numeric_conversion(x, 0)).sum()
+    
+    # REST and TRAINING posts are output energy (typically negative values, so we take absolute)
+    output_data = df[df['label'].isin(['REST', 'TRAINING'])]
+    output_energy = abs(output_data['energy'].apply(lambda x: safe_numeric_conversion(x, 0)).sum())
+    
+    # Net balance: input - output (negative = deficit, positive = surplus)
+    net_balance = input_energy - output_energy
+    
+    # Count unique days with data
+    days_with_data = df['date'].nunique() if 'date' in df.columns else 0
+    
+    return {
+        'period': period_name,
+        'input_energy': int(input_energy),
+        'output_energy': int(output_energy), 
+        'net_balance': int(net_balance),
+        'days_with_data': days_with_data
+    }
+
+def check_consecutive_days(df, min_days=8):
+    """
+    Check if we have at least min_days consecutive days of data
+    
+    Args:
+        df: DataFrame containing energy data with 'date' column
+        min_days: Minimum number of consecutive days required
+    
+    Returns:
+        Tuple (has_sufficient_consecutive_days, max_consecutive_found)
+    """
+    if df.empty:
+        return False, 0
+    
+    # Get unique dates and sort them
+    unique_dates = pd.to_datetime(df['date']).dt.date.unique()
+    unique_dates = sorted(unique_dates)
+    
+    if len(unique_dates) < min_days:
+        return False, len(unique_dates)
+    
+    # Check for consecutive days
+    max_consecutive = 1
+    current_consecutive = 1
+    
+    for i in range(1, len(unique_dates)):
+        current_date = unique_dates[i]
+        previous_date = unique_dates[i-1]
+        
+        # Check if dates are consecutive (difference of 1 day)
+        if (current_date - previous_date).days == 1:
+            current_consecutive += 1
+            max_consecutive = max(max_consecutive, current_consecutive)
+        else:
+            current_consecutive = 1
+    
+    return max_consecutive >= min_days, max_consecutive
+
+def get_deficit_analysis(df_energy, selected_date_input):
+    """
+    Get comprehensive deficit analysis for day, week, month, and overall periods
+    
+    Args:
+        df_energy: Main energy dataframe
+        selected_date_input: Selected date as datetime object
+    
+    Returns:
+        Dictionary containing deficit analysis for all periods
+    """
+    from datetime import timedelta
+    
+    selected_date = pd.to_datetime(selected_date_input)
+    
+    # Day analysis - filter for selected date
+    day_df = df_energy[pd.to_datetime(df_energy['date']).dt.date == selected_date.date()]
+    day_balance = calculate_energy_balance(day_df, f"Day ({selected_date.strftime('%Y-%m-%d')})")
+    
+    # Week analysis - get week data (Monday to Sunday)
+    week_start = selected_date - timedelta(days=selected_date.weekday())
+    week_end = week_start + timedelta(days=6)
+    week_df = df_energy[
+        (pd.to_datetime(df_energy['date']).dt.date >= week_start.date()) & 
+        (pd.to_datetime(df_energy['date']).dt.date <= week_end.date())
+    ]
+    week_balance = calculate_energy_balance(
+        week_df, 
+        f"Week ({week_start.strftime('%Y-%m-%d')} to {week_end.strftime('%Y-%m-%d')})"
+    )
+    
+    # Month analysis - get month data
+    month_start = selected_date.replace(day=1)
+    if selected_date.month == 12:
+        month_end = selected_date.replace(year=selected_date.year+1, month=1, day=1) - timedelta(days=1)
+    else:
+        month_end = selected_date.replace(month=selected_date.month+1, day=1) - timedelta(days=1)
+    
+    month_df = df_energy[
+        (pd.to_datetime(df_energy['date']).dt.date >= month_start.date()) & 
+        (pd.to_datetime(df_energy['date']).dt.date <= month_end.date())
+    ]
+    month_balance = calculate_energy_balance(
+        month_df, 
+        f"Month ({month_start.strftime('%Y-%m')})"
+    )
+    
+    # Overall analysis (8+ consecutive days)
+    has_consecutive, max_consecutive = check_consecutive_days(df_energy, min_days=8)
+    overall_analysis = None
+    
+    if has_consecutive:
+        # Find the most recent consecutive period of 8+ days
+        all_dates = sorted(pd.to_datetime(df_energy['date']).dt.date.unique(), reverse=True)
+        
+        consecutive_dates = [all_dates[0]]
+        for i in range(1, len(all_dates)):
+            current_date = all_dates[i]
+            previous_date = consecutive_dates[-1]
+            
+            if (previous_date - current_date).days == 1:
+                consecutive_dates.append(current_date)
+                if len(consecutive_dates) >= 8:
+                    break
+            else:
+                consecutive_dates = [all_dates[i]]
+        
+        if len(consecutive_dates) >= 8:
+            start_date = min(consecutive_dates)
+            end_date = max(consecutive_dates)
+            
+            consecutive_df = df_energy[
+                (pd.to_datetime(df_energy['date']).dt.date >= start_date) & 
+                (pd.to_datetime(df_energy['date']).dt.date <= end_date)
+            ]
+            
+            overall_balance = calculate_energy_balance(
+                consecutive_df, 
+                f"{len(consecutive_dates)}-Day Period ({start_date} to {end_date})"
+            )
+            
+            # Calculate daily average
+            daily_avg = overall_balance['net_balance'] / len(consecutive_dates)
+            
+            overall_analysis = {
+                'balance': overall_balance,
+                'consecutive_days': len(consecutive_dates),
+                'daily_average': int(daily_avg),
+                'start_date': start_date,
+                'end_date': end_date,
+                'health_guidance': get_health_guidance(daily_avg)
+            }
+    
+    return {
+        'day': day_balance,
+        'week': week_balance,
+        'month': month_balance,
+        'overall': overall_analysis,
+        'has_sufficient_data': has_consecutive,
+        'max_consecutive_days': max_consecutive
+    }
+
+def get_health_guidance(daily_avg):
+    """
+    Provide health guidance based on daily average deficit/surplus
+    
+    Args:
+        daily_avg: Daily average energy balance (negative = deficit, positive = surplus)
+    
+    Returns:
+        Dictionary with guidance type and message
+    """
+    if daily_avg < -500:
+        return {
+            'type': 'warning',
+            'message': 'Large daily deficit - consider if this aligns with your health goals'
+        }
+    elif daily_avg > 500:
+        return {
+            'type': 'warning', 
+            'message': 'Large daily surplus - consider if this aligns with your health goals'
+        }
+    else:
+        return {
+            'type': 'success',
+            'message': 'Moderate energy balance'
+        }

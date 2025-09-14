@@ -484,38 +484,6 @@ def create_form_add_recipie_to_database(meal_df, code):
                     with st.expander("Error Details"):
                         st.code(str(e))
 
-def create_copy_previous_meal_section():
-    """Create a section for copying previous meals - ORIGINAL FUNCTIONALITY"""
-    st.markdown("### Copy Previous Meal")
-    
-    # Initialize session state for modal - ORIGINAL
-    if "show_meal_modal" not in st.session_state:
-        st.session_state.show_meal_modal = False
-    if "selected_previous_meal" not in st.session_state:
-        st.session_state.selected_previous_meal = None
-    if "copied_meal_items" not in st.session_state:
-        st.session_state.copied_meal_items = []
-    
-    # Button to open meal selection modal - ORIGINAL
-    if st.button("Browse previous meals", type="secondary", key="open_meal_modal"):
-        st.session_state.show_meal_modal = True
-    
-    # Modal for meal selection - ORIGINAL
-    if st.session_state.show_meal_modal:
-        create_meal_selection_modal()
-    
-    # Display selected meal info if any - ORIGINAL
-    if st.session_state.selected_previous_meal:
-        meal_info = st.session_state.selected_previous_meal
-        st.success(f"Selected: **{meal_info['name']}** from {meal_info['date']} at {meal_info['time']}")
-        st.caption(f"Meal code: {meal_info['code']}")
-        
-        # Clear selection button - ORIGINAL
-        if st.button("Clear selection", key="clear_meal_selection"):
-            st.session_state.selected_previous_meal = None
-            st.session_state.copied_meal_items = []
-            st.rerun()
-
 def create_meal_selection_modal():
     """Create a modal for selecting previous meals - ORIGINAL FUNCTIONALITY"""
     # Load meal database - ORIGINAL
@@ -611,10 +579,104 @@ def create_meal_selection_modal():
         st.success(f"Selected meal: {selected_meal['name']}")
         st.rerun()
 
+def create_copy_previous_meal_section():
+    """
+    Non-nested version of copy previous meal section for use inside expanders.
+    Connected to meal_databas.csv
+    """
+    
+    try:
+        # Load meal database (not recipie database!)
+        df_meal_db = fetch_data_from_storage('data/meal_databas.csv')
+        
+        if df_meal_db.empty:
+            st.info("No previous meals found in meal database")
+            return
+            
+        # Group by meal name and get unique meals with their details
+        df_unique_meals = df_meal_db.groupby(['name', 'date', 'time']).first().reset_index()
+        df_unique_meals = df_unique_meals.sort_values(['date', 'time'], ascending=[False, False])
+        
+        st.caption("Select a previous meal to copy to your current meal")
+        
+        # Create dropdown options
+        meal_options = []
+        for _, row in df_unique_meals.iterrows():
+            option_text = f"{row['name']} - {row['date']} at {row['time']}"
+            meal_options.append({
+                'display': option_text,
+                'name': row['name'],
+                'date': row['date'], 
+                'time': row['time']
+            })
+        
+        # Dropdown selection (no nested expanders!)
+        if meal_options:
+            selected_option = st.selectbox(
+                "Choose a previous meal",
+                options=[None] + meal_options,
+                format_func=lambda x: "Select a meal..." if x is None else x['display'],
+                key="previous_meal_selector"
+            )
+            
+            if selected_option is not None:
+                # Show meal details in a simple container (not expander)
+                with st.container():
+                    st.markdown(f"**Selected:** {selected_option['display']}")
+                    
+                    # Get all items for this specific meal
+                    meal_items = df_meal_db[
+                        (df_meal_db['name'] == selected_option['name']) & 
+                        (df_meal_db['date'] == selected_option['date']) & 
+                        (df_meal_db['time'] == selected_option['time'])
+                    ]
+                    
+                    if not meal_items.empty:
+                        # Show meal composition
+                        st.caption("Meal composition:")
+                        for _, item in meal_items.iterrows():
+                            st.write(f"• {item['livsmedel']} - {item['amount']}g")
+                        
+                        # Parse nutrition from code if available
+                        if 'code' in meal_items.columns and not pd.isna(meal_items['code'].iloc[0]):
+                            code_parts = str(meal_items['code'].iloc[0]).split('/')
+                            if len(code_parts) >= 4:
+                                st.caption(f"Nutrition: {code_parts[0]} kcal, {code_parts[1]}g protein, {code_parts[2]}g carbs, {code_parts[3]}g fat")
+                        
+                        # Copy button
+                        if st.button("Copy This Meal", key="copy_selected_meal"):
+                            # Prepare meal items for copying
+                            copied_items = []
+                            for _, item in meal_items.iterrows():
+                                copied_items.append({
+                                    'Food': item['livsmedel'],
+                                    'Amount (g)': float(item['amount'])
+                                })
+                            
+                            # Store in session state
+                            st.session_state.copied_meal_items = copied_items
+                            st.session_state.selected_previous_meal = {
+                                'name': selected_option['name'],
+                                'date': selected_option['date'],
+                                'time': selected_option['time']
+                            }
+                            
+                            st.success(f"Copied meal: {selected_option['name']}")
+                            st.rerun()
+                    else:
+                        st.warning("No items found for this meal")
+        else:
+            st.info("No previous meals found")
+            
+    except Exception as e:
+        st.error(f"Error loading meal database: {str(e)}")
+        st.caption("Make sure meal_databas.csv exists and is accessible")
+
 def get_copied_meal_items():
-    """Get the copied meal items for integration with existing meal creation - ORIGINAL"""
-    if st.session_state.get('copied_meal_items'):
-        return pd.DataFrame(st.session_state.copied_meal_items)
+    """Get copied meal items from session state"""
+    copied_items = st.session_state.get('copied_meal_items', [])
+    if copied_items:
+        return pd.DataFrame(copied_items)
     return pd.DataFrame()
 
 # Export all form functions - ORIGINAL FUNCTIONALITY
