@@ -110,17 +110,31 @@ def sync_csv_to_database():
         st.error(f"Connection failed: {str(e)}")
         return False
 
+
     def prepare_energy_data(df):
         """Clean and prepare energy_balance data"""
         df_clean = df.copy()
         
-        # Add required user_id (use dummy for CSV import)
-        df_clean['user_id'] = '00000000-0000-0000-0000-000000000000'
+        # Get the current authenticated user ID from Supabase
+        try:
+            conn = get_supabase_connection()
+            # Try to get the current user - this might not work with service key
+            user_response = conn.auth.get_user()
+            if user_response and user_response.user:
+                user_id = user_response.user.id
+            else:
+                # If no authenticated user, you might need to use a specific user ID
+                # that exists in your auth.users table, or create one
+                user_id = '00000000-0000-0000-0000-000000000000'
+        except:
+            # Fallback to dummy user ID
+            user_id = '00000000-0000-0000-0000-000000000000'
         
-        # Convert date strings to proper format
+        df_clean['user_id'] = user_id
+        
+        # Rest of your existing code...
         df_clean['date'] = pd.to_datetime(df_clean['date']).dt.strftime('%Y-%m-%d')
         
-        # Fix time field - this is the key fix
         def fix_time(time_val):
             if pd.isna(time_val) or str(time_val).lower() in ['nan', '']:
                 return '00:00:00'
